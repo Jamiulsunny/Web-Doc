@@ -29,5 +29,5 @@ TechPedia হলো একটি পূর্ণাঙ্গ টেকনিক�
 ```text
 techpedia-project/
 │
-├── index.html        # মূল প্রজেক্ট কোড
-└── README.md         # প্রজেক্ট ডকুমেন্টেশন
+├── Mini-Wikipedia.html        # মূল প্রজেক্ট কোড
+└── README.md                  # প্রজেক্ট ডকুমেন্টেশন
