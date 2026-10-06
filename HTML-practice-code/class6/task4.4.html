@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head><title>Registration Form</title></head>
+<body>
+  <h1>নতুন Account খোলো</h1>
+
+  <form action="/register" method="POST" enctype="multipart/form-data">
+    <fieldset>
+      <legend>Personal Info</legend>
+      <p>
+        <label for="name">পুরো নাম *</label><br />
+        <input type="text" id="name" name="name" required minlength="3" />
+      </p>
+      <p>
+        <label for="email">Email *</label><br />
+        <input type="email" id="email" name="email" required />
+      </p>
+      <p>
+        <label for="phone">ফোন *</label><br />
+        <input type="tel" id="phone" name="phone" required pattern="[0-9]{11}" />
+      </p>
+      <p>
+        <label for="password">Password *</label><br />
+        <input type="password" id="password" name="password" required minlength="6" />
+      </p>
+      <p>
+        <label for="dob">জন্ম তারিখ:</label><br />
+        <input type="date" id="dob" name="dob" />
+      </p>
+    </fieldset>
+
+    <fieldset>
+      <legend>অন্যান্য</legend>
+      <p>
+        লিঙ্গ:<br />
+        <input type="radio" id="m" name="gender" value="male" />
+        <label for="m">পুরুষ</label>
+        <input type="radio" id="f" name="gender" value="female" />
+        <label for="f">মহিলা</label>
+      </p>
+
+      <p>
+        <label for="city">শহর:</label><br />
+        <select id="city" name="city">
+          <option value="">-- বেছে নাও --</option>
+          <option value="dhaka">ঢাকা</option>
+          <option value="ctg">চট্টগ্রাম</option>
+          <option value="syl">সিলেট</option>
+        </select>
+      </p>
+
+      <p>
+        শখ:<br />
+        <input type="checkbox" id="h1" name="hobby" value="reading" />
+        <label for="h1">বই পড়া</label>
+        <input type="checkbox" id="h2" name="hobby" value="coding" />
+        <label for="h2">কোডিং</label>
+        <input type="checkbox" id="h3" name="hobby" value="travel" />
+        <label for="h3">ভ্রমণ</label>
+      </p>
+
+      <p>
+        <label for="pic">Profile Photo:</label><br />
+        <input type="file" id="pic" name="pic" accept="image/*" />
+      </p>
+
+      <p>
+        <label for="exp">Experience (years):</label><br />
+        <input type="range" id="exp" name="exp" min="0" max="20" value="1" />
+      </p>
+
+      <p>
+        <label for="color">Favorite Color:</label>
+        <input type="color" id="color" name="color" />
+      </p>
+
+      <p>
+        <label for="about">নিজের সম্পর্কে:</label><br />
+        <textarea id="about" name="about" rows="4" cols="40"></textarea>
+      </p>
+
+      <p>
+        <input type="checkbox" id="tos" required />
+        <label for="tos">আমি নিয়ম মানি *</label>
+      </p>
+    </fieldset>
+
+    <button type="submit">Register</button>
+    <button type="reset">Clear</button>
+  </form>
+</body>
+</html>
