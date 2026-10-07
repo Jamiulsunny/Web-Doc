@@ -1,0 +1,1873 @@
+/* ==========================================================================
+   AEROSPACE — ADVANCED STYLESHEET
+   1. CSS Variables & Theme Constants
+   2. Reset & Base Typography
+   3. Ambient Cosmic Background (Procedural Stars & Nebulae)
+   4. Glassmorphism & Reusable Components
+   5. Sticky Navigation Bar & Mobile Menu
+   6. Hero Section & Animated Orbital Planet
+   7. Statistics Grid
+   8. Featured Missions Cards
+   9. Solar System Planet Grid
+   10. Mars Exploration & Avionics Mini-Dashboard
+   11. Mission Control Telemetry (Radar + Gauges)
+   12. Space Gallery Grid (CSS Grid Zoom)
+   13. Why Explore Cards
+   14. Glowing Vertical Timeline
+   15. Call To Action & Footer
+   16. Keyframe Animations
+   17. Responsive Media Queries (1200px, 992px, 768px, 576px)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS VARIABLES & THEME CONSTANTS
+   -------------------------------------------------------------------------- */
+:root {
+  /* Color Palette */
+  --space-black: #03040a;
+  --space-navy: #080d21;
+  --space-surface: rgba(13, 20, 48, 0.6);
+  --space-surface-hover: rgba(22, 33, 76, 0.85);
+
+  --neon-cyan: #00f0ff;
+  --neon-purple: #9d4edd;
+  --neon-magenta: #e02694;
+  --neon-blue: #2575fc;
+  --neon-gold: #ffb703;
+  --neon-green: #06d6a0;
+  --mars-red: #ff5722;
+
+  --text-primary: #f0f6fc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-glow-cyan: rgba(0, 240, 255, 0.4);
+
+  /* Fonts */
+  --font-heading: 'Orbitron', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Exo 2', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Layout */
+  --container-max: 1200px;
+  --nav-height: 80px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --trans-fast: 0.25s ease;
+  --trans-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+body.space-theme {
+  background-color: var(--space-black);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--trans-fast);
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Container Utility */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.section-padding {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Section Header Typography */
+.section-header {
+  margin-bottom: 56px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+}
+
+.tag-mars {
+  color: var(--mars-red);
+  background: rgba(255, 87, 34, 0.1);
+  border-color: rgba(255, 87, 34, 0.3);
+}
+
+.tag-cyan {
+  color: var(--neon-cyan);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Gradients */
+.gradient-text {
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 60%, var(--neon-magenta) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-mars-text {
+  background: linear-gradient(135deg, #ff8a65 0%, var(--mars-red) 60%, #b71c1c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Status colors */
+.text-cyan { color: var(--neon-cyan); }
+.text-purple { color: var(--neon-purple); }
+.text-gold { color: var(--neon-gold); }
+.text-green { color: var(--neon-green); }
+.text-mars { color: var(--mars-red); }
+
+/* --------------------------------------------------------------------------
+   3. AMBIENT COSMIC BACKGROUND (PROCEDURAL STARS & NEBULAE)
+   -------------------------------------------------------------------------- */
+.stars-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star-layer-1 {
+  background-image: 
+    radial-gradient(1px 1px at 25px 35px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 120px 80px, #a8d5e5, transparent),
+    radial-gradient(1px 1px at 220px 190px, #fff, transparent),
+    radial-gradient(2px 2px at 340px 290px, var(--neon-cyan), transparent),
+    radial-gradient(1px 1px at 480px 110px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 580px 380px, #d8b4fe, transparent),
+    radial-gradient(1px 1px at 700px 240px, #fff, transparent),
+    radial-gradient(2px 2px at 890px 420px, #fff, transparent);
+  background-size: 900px 500px;
+  animation: starTwinkle 6s infinite alternate ease-in-out;
+  opacity: 0.65;
+}
+
+.star-layer-2 {
+  background-image: 
+    radial-gradient(1.5px 1.5px at 70px 140px, #fff, transparent),
+    radial-gradient(1px 1px at 160px 320px, var(--neon-gold), transparent),
+    radial-gradient(2px 2px at 300px 450px, #fff, transparent),
+    radial-gradient(1px 1px at 430px 80px, #d8b4fe, transparent),
+    radial-gradient(1.5px 1.5px at 620px 220px, #fff, transparent),
+    radial-gradient(1px 1px at 800px 330px, var(--neon-cyan), transparent);
+  background-size: 700px 600px;
+  animation: starTwinkle 9s infinite alternate-reverse ease-in-out;
+  opacity: 0.45;
+}
+
+.nebula-glow {
+  position: fixed;
+  width: 70vw;
+  height: 70vh;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(120px);
+}
+
+.nebula-top {
+  top: -20vh;
+  right: -10vw;
+  background: radial-gradient(circle, rgba(157, 78, 221, 0.18) 0%, rgba(37, 117, 252, 0.08) 50%, transparent 75%);
+}
+
+.nebula-bottom {
+  bottom: 5vh;
+  left: -15vw;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(224, 38, 148, 0.08) 50%, transparent 75%);
+}
+
+/* --------------------------------------------------------------------------
+   4. GLASSMORPHISM & REUSABLE COMPONENTS
+   -------------------------------------------------------------------------- */
+.glass-card {
+  background: var(--space-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  transition: transform var(--trans-smooth), border-color var(--trans-smooth), box-shadow var(--trans-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-glow-cyan);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 240, 255, 0.2);
+}
+
+/* Modern Rounded Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  transition: all var(--trans-smooth);
+  text-transform: uppercase;
+}
+
+.btn-sm {
+  padding: 10px 20px;
+  font-size: 0.8rem;
+}
+
+.btn-lg {
+  padding: 16px 36px;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+  color: var(--space-black);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.7);
+  color: #000;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+}
+
+.btn-outline {
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: var(--neon-cyan);
+  color: var(--space-black);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.btn-mars {
+  background: linear-gradient(135deg, #ff8a65, var(--mars-red));
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 87, 34, 0.4);
+}
+
+.btn-mars:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(255, 87, 34, 0.7);
+}
+
+/* Scroll Reveal Base Class */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   5. STICKY NAVIGATION BAR & MOBILE MENU
+   -------------------------------------------------------------------------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 1000;
+  background: rgba(3, 4, 10, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background var(--trans-fast), box-shadow var(--trans-fast);
+}
+
+.navbar.scrolled {
+  background: rgba(3, 4, 10, 0.92);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(0, 240, 255, 0.15);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.logo-rocket {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 8px var(--neon-cyan));
+}
+
+.accent-cyan {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-link {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  position: relative;
+  padding: 6px 0;
+  transition: color var(--trans-fast);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--trans-smooth);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Mobile Toggle Hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+}
+
+.nav-toggle .bar {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-primary);
+  border-radius: var(--radius-pill);
+  transition: all var(--trans-fast);
+}
+
+.nav-toggle.open .bar:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+  background-color: var(--neon-cyan);
+}
+.nav-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.open .bar:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+  background-color: var(--neon-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   6. HERO SECTION & ANIMATED ORBITAL PLANET
+   -------------------------------------------------------------------------- */
+.hero-section {
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding: 40px 0 80px;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  color: var(--neon-cyan);
+  padding: 6px 16px;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: var(--radius-pill);
+  margin-bottom: 24px;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--neon-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--neon-cyan);
+  animation: pulseLight 1.8s infinite;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 540px;
+  margin-bottom: 36px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* Hero Orbital Planet Graphics */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.planet-stage {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbital-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 240, 255, 0.25);
+  pointer-events: none;
+}
+
+.orbital-ring-1 {
+  width: 380px;
+  height: 380px;
+  transform: rotateX(68deg) rotateY(15deg);
+  animation: orbitSpin 32s linear infinite;
+}
+
+.orbital-ring-2 {
+  width: 440px;
+  height: 440px;
+  transform: rotateX(60deg) rotateY(-25deg);
+  animation: orbitSpin 48s linear infinite reverse;
+}
+
+/* Procedural 3D CSS Sphere */
+.hero-planet {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #5eead4 0%, #0284c7 40%, #0f172a 80%, #020617 100%);
+  box-shadow: 
+    inset -25px -25px 40px rgba(0, 0, 0, 0.9),
+    0 0 50px rgba(0, 240, 255, 0.4),
+    0 0 100px rgba(37, 117, 252, 0.2);
+  position: relative;
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.planet-atmosphere {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Orbiting Moon */
+.hero-moon-orbit {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  animation: orbitSpin 14s linear infinite;
+}
+
+.hero-moon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f1f5f9 0%, #94a3b8 70%, #334155 100%);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+}
+
+/* Floating Spacecraft */
+.hero-shuttle {
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+  font-size: 2.2rem;
+  animation: craftHover 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.8));
+}
+
+.thruster-glow {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 8px;
+  background: radial-gradient(circle, var(--neon-cyan), transparent);
+  border-radius: 50%;
+}
+
+/* --------------------------------------------------------------------------
+   7. STATISTICS GRID
+   -------------------------------------------------------------------------- */
+.stats-section {
+  padding-top: 20px;
+  padding-bottom: 60px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.stat-card {
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.stat-number-id {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.stat-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   8. FEATURED MISSIONS CARDS
+   -------------------------------------------------------------------------- */
+.missions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.mission-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.mission-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.mission-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mission-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(8, 13, 33, 0.95) 0%, rgba(8, 13, 33, 0.2) 60%, transparent 100%);
+}
+
+.mission-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-glass);
+  color: var(--neon-cyan);
+}
+
+.mission-card:hover .mission-img {
+  transform: scale(1.08);
+}
+
+.mission-body {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.mission-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.mission-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+/* --------------------------------------------------------------------------
+   9. SOLAR SYSTEM PLANET GRID
+   -------------------------------------------------------------------------- */
+.planets-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.planet-card {
+  padding: 32px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Procedural Pure CSS Planet Spheres */
+.planet-sphere {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 24px;
+  position: relative;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+.planet-card:hover .planet-sphere {
+  transform: scale(1.15) rotate(15deg);
+}
+
+/* Planet Texture Gradients */
+.planet-mercury {
+  background: radial-gradient(circle at 30% 30%, #e2e8f0 0%, #64748b 50%, #1e293b 100%);
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.8), 0 0 20px rgba(226, 232, 240, 0.3);
+}
+
+.planet-venus {
+  background: radial-gradient(circle at 30% 30%, #fef08a 0%, #ca8a04 50%, #713f12 100%);
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.8), 0 0 25px rgba(234, 179, 8, 0.4);
+}
+
+.planet-earth {
+  background: radial-gradient(circle at 30% 30%, #67e8f9 0%, #2563eb 45%, #0f172a 100%);
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.8), 0 0 25px rgba(56, 189, 248, 0.4);
+}
+
+.planet-mars {
+  background: radial-gradient(circle at 30% 30%, #fca5a5 0%, #ef4444 50%, #7f1d1d 100%);
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.8), 0 0 25px rgba(239, 68, 68, 0.4);
+}
+
+.planet-jupiter {
+  background: repeating-linear-gradient(180deg, #d97706 0px, #b45309 6px, #fef3c7 12px, #92400e 18px);
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.8), 0 0 25px rgba(217, 119, 6, 0.4);
+}
+
+.planet-saturn {
+  background: radial-gradient(circle at 30% 30%, #fde68a 0%, #d97706 60%, #78350f 100%);
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.8);
+}
+
+.saturn-ring-visual {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 30px;
+  border: 4px solid rgba(253, 230, 138, 0.75);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-25deg);
+  pointer-events: none;
+}
+
+.planet-uranus {
+  background: radial-gradient(circle at 30% 30%, #a5f3fc 0%, #06b6d4 50%, #164e63 100%);
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.8), 0 0 25px rgba(6, 182, 212, 0.4);
+}
+
+.planet-neptune {
+  background: radial-gradient(circle at 30% 30%, #93c5fd 0%, #2563eb 55%, #1e1b4b 100%);
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.8), 0 0 25px rgba(37, 99, 235, 0.4);
+}
+
+.planet-name {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.planet-desc {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 18px;
+  flex-grow: 1;
+}
+
+.planet-meta {
+  width: 100%;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-top: 14px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-label {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.meta-val {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  color: var(--neon-cyan);
+  font-weight: 700;
+}
+
+.btn-planet-info {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.05);
+  transition: all var(--trans-fast);
+}
+
+.btn-planet-info:hover {
+  background: var(--neon-cyan);
+  color: var(--space-black);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   10. MARS EXPLORATION & AVIONICS MINI-DASHBOARD
+   -------------------------------------------------------------------------- */
+.mars-section {
+  background: radial-gradient(ellipse at 20% 50%, rgba(255, 87, 34, 0.12) 0%, transparent 65%);
+}
+
+.mars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.mars-visual-side {
+  display: flex;
+  justify-content: center;
+}
+
+.mars-sphere-display {
+  position: relative;
+  width: 380px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbit-trace {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 87, 34, 0.35);
+  animation: orbitSpin 40s linear infinite;
+}
+
+.mars-large-sphere {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff8a65 0%, #e64a19 45%, #871a00 80%, #3e0b00 100%);
+  box-shadow: 
+    inset -25px -25px 40px rgba(0, 0, 0, 0.9),
+    0 0 60px rgba(255, 87, 34, 0.4),
+    0 0 100px rgba(255, 87, 34, 0.15);
+  animation: floatSlow 7s ease-in-out infinite;
+}
+
+.mars-rover-tag {
+  position: absolute;
+  bottom: 45px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(13, 20, 48, 0.85);
+  border: 1px solid rgba(255, 87, 34, 0.4);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(255, 87, 34, 0.3);
+}
+
+.rover-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mars-red);
+  box-shadow: 0 0 10px var(--mars-red);
+  animation: pulseLight 1.5s infinite;
+}
+
+.rover-txt {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.section-desc {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.mars-dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.dashboard-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.d-label {
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.d-value {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   11. MISSION CONTROL TELEMETRY (RADAR + GAUGES)
+   -------------------------------------------------------------------------- */
+.mission-control-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 32px;
+}
+
+/* Simulated Radar Console */
+.radar-console {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.radar-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.radar-title {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  color: var(--text-secondary);
+}
+
+.radar-ping {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: var(--neon-cyan);
+  animation: pulseLight 1.2s infinite;
+}
+
+.radar-display {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 240, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, rgba(3, 4, 10, 0.8) 80%);
+  box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.radar-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 240, 255, 0.25);
+}
+
+.radar-ring-1 { width: 33%; height: 33%; }
+.radar-ring-2 { width: 66%; height: 66%; }
+.radar-ring-3 { width: 98%; height: 98%; border-style: solid; }
+
+.radar-crosshair-x {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(0, 240, 255, 0.2);
+}
+
+.radar-crosshair-y {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: rgba(0, 240, 255, 0.2);
+}
+
+.radar-sweeper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(0, 240, 255, 0.45) 0deg, transparent 60deg, transparent 360deg);
+  animation: radarRotate 4s linear infinite;
+}
+
+.radar-blip {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--neon-magenta);
+  box-shadow: 0 0 8px var(--neon-magenta);
+  animation: blipGlow 2s infinite ease-in-out;
+}
+
+.blip-1 { top: 35%; left: 70%; }
+.blip-2 { top: 68%; left: 32%; animation-delay: 1s; background-color: var(--neon-gold); box-shadow: 0 0 8px var(--neon-gold); }
+
+.radar-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* Telemetry Grid & Circular Gauges */
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.telemetry-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.gauge-card {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.telemetry-label {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.telemetry-content {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.telemetry-value {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.telemetry-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.telemetry-indicator {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.badge-green { background: rgba(6, 214, 160, 0.15); color: var(--neon-green); }
+.badge-cyan  { background: rgba(0, 240, 255, 0.15); color: var(--neon-cyan); }
+.badge-purple{ background: rgba(157, 78, 221, 0.15); color: var(--neon-purple); }
+
+/* Circular Gauge Ring using CSS conic-gradient */
+.circular-progress {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: conic-gradient(var(--color, var(--neon-cyan)) calc(var(--val) * 1%), rgba(255, 255, 255, 0.08) 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.progress-inner {
+  width: 50px;
+  height: 50px;
+  background-color: var(--space-black);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   12. SPACE GALLERY GRID
+   -------------------------------------------------------------------------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  height: 240px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-glass);
+}
+
+.gallery-item.item-large {
+  grid-column: span 2;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px;
+  background: linear-gradient(to top, rgba(3, 4, 10, 0.95) 0%, rgba(3, 4, 10, 0.4) 60%, transparent 100%);
+  transform: translateY(10px);
+  opacity: 0.85;
+  transition: all var(--trans-smooth);
+}
+
+.caption-tag {
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  letter-spacing: 1.5px;
+  color: var(--neon-cyan);
+}
+
+.caption-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  color: #fff;
+  margin-top: 2px;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.1);
+}
+
+.gallery-item:hover .gallery-caption {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   13. WHY EXPLORE CARDS
+   -------------------------------------------------------------------------- */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.why-card {
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.why-icon-wrap {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border: 1px solid var(--border-glass);
+}
+
+.icon-cyan {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+}
+
+.icon-purple {
+  background: rgba(157, 78, 221, 0.1);
+  box-shadow: 0 0 25px rgba(157, 78, 221, 0.3);
+}
+
+.icon-gold {
+  background: rgba(255, 183, 3, 0.1);
+  box-shadow: 0 0 25px rgba(255, 183, 3, 0.3);
+}
+
+.why-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+
+.why-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* --------------------------------------------------------------------------
+   14. GLOWING VERTICAL TIMELINE
+   -------------------------------------------------------------------------- */
+.timeline-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.timeline-center-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--neon-cyan), var(--neon-purple), transparent);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 20px 40px;
+}
+
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-node {
+  position: absolute;
+  top: 36px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--neon-cyan);
+  box-shadow: 0 0 12px var(--neon-cyan);
+  z-index: 5;
+}
+
+.timeline-item.left .timeline-node {
+  right: -7px;
+}
+
+.timeline-item.right .timeline-node {
+  left: -7px;
+}
+
+.node-pulse {
+  background-color: var(--neon-green);
+  box-shadow: 0 0 16px var(--neon-green);
+  animation: pulseLight 1.4s infinite;
+}
+
+.timeline-content {
+  padding: 24px;
+}
+
+.highlight-card {
+  border-color: rgba(6, 214, 160, 0.4);
+}
+
+.timeline-year {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.timeline-event {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.timeline-info {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   15. CALL TO ACTION & FOOTER
+   -------------------------------------------------------------------------- */
+.cta-card {
+  position: relative;
+  padding: 80px 40px;
+  text-align: center;
+  background: radial-gradient(circle at center, rgba(37, 117, 252, 0.25) 0%, rgba(13, 20, 48, 0.8) 75%);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+}
+
+.cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 16px 0 20px;
+}
+
+.cta-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+/* Footer */
+.footer {
+  background-color: #020308;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.footer-tagline {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.footer-links-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.footer-heading {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: var(--neon-cyan);
+  margin-bottom: 20px;
+}
+
+.footer-list li {
+  margin-bottom: 12px;
+}
+
+.footer-list a {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.footer-list a:hover {
+  color: var(--neon-cyan);
+  padding-left: 4px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 24px 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.footer-bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Back to Top Floating Button */
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--space-surface);
+  border: 1px solid var(--border-glow-cyan);
+  color: var(--neon-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  z-index: 900;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all var(--trans-smooth);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--neon-cyan);
+  color: var(--space-black);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+}
+
+/* Planet Modal Dialog */
+.planet-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--trans-smooth);
+}
+
+.planet-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  max-width: 500px;
+  width: 100%;
+  padding: 36px;
+  position: relative;
+  background: rgba(13, 20, 48, 0.95);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  transition: color var(--trans-fast);
+}
+
+.modal-close:hover {
+  color: var(--neon-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   16. KEYFRAME ANIMATIONS
+   -------------------------------------------------------------------------- */
+@keyframes starTwinkle {
+  0% { opacity: 0.35; transform: scale(0.99); }
+  100% { opacity: 0.85; transform: scale(1.01); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes craftHover {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(4deg); }
+}
+
+@keyframes pulseLight {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.75); }
+}
+
+@keyframes radarRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes blipGlow {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+
+/* --------------------------------------------------------------------------
+   17. RESPONSIVE MEDIA QUERIES
+   -------------------------------------------------------------------------- */
+/* Large Desktops / Laptops (1200px) */
+@media screen and (max-width: 1200px) {
+  .planets-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .mission-control-layout {
+    grid-template-columns: 1fr;
+  }
+  .radar-console {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+/* Tablets (992px) */
+@media screen and (max-width: 992px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 60px;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .missions-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .mars-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .mars-info-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Small Tablets & Large Phones (768px) */
+@media screen and (max-width: 768px) {
+  :root {
+    --nav-height: 70px;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--nav-height));
+    background: rgba(3, 4, 10, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    transform: translateX(-100%);
+    transition: transform var(--trans-smooth);
+    z-index: 999;
+  }
+
+  .nav-menu.open {
+    transform: translateX(0);
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+  }
+
+  .planets-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .telemetry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-item.item-large {
+    grid-column: span 2;
+  }
+
+  /* Timeline converts to linear on small screens */
+  .timeline-center-line {
+    left: 20px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    padding-left: 60px;
+    padding-right: 0;
+  }
+
+  .timeline-item.left,
+  .timeline-item.right {
+    left: 0;
+    text-align: left;
+  }
+
+  .timeline-item.left .timeline-node,
+  .timeline-item.right .timeline-node {
+    left: 13px;
+    right: auto;
+  }
+}
+
+/* Small Mobile Devices (576px) */
+@media screen and (max-width: 576px) {
+  .planet-stage {
+    width: 300px;
+    height: 300px;
+  }
+
+  .hero-planet {
+    width: 160px;
+    height: 160px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planets-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-item.item-large {
+    grid-column: span 1;
+  }
+
+  .mars-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links-group {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+}

@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AeroSpace - Explore beyond the limits. Discover planets, deep space missions, and futuristic telemetry." />
+  <title>AeroSpace — Explore Beyond the Limits</title>
+
+  <!-- Google Fonts: Orbitron for Sci-Fi Headings & Exo 2 for Sleek Body Text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="space-theme">
+
+  <!-- Ambient Space Layer: Stars, Nebulae, Cosmic Glow -->
+  <div class="stars-bg star-layer-1" aria-hidden="true"></div>
+  <div class="stars-bg star-layer-2" aria-hidden="true"></div>
+  <div class="nebula-glow nebula-top" aria-hidden="true"></div>
+  <div class="nebula-glow nebula-bottom" aria-hidden="true"></div>
+
+  <!-- ========================================================
+       2. STICKY NAVIGATION BAR
+       ======================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="nav-logo" aria-label="AeroSpace Home">
+        <span class="logo-rocket">🚀</span>
+        <span class="logo-text">AERO<span class="accent-cyan">SPACE</span></span>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Nav Links -->
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#home" class="nav-link active">HOME</a></li>
+          <li class="nav-item"><a href="#missions" class="nav-link">MISSIONS</a></li>
+          <li class="nav-item"><a href="#planets" class="nav-link">PLANETS</a></li>
+          <li class="nav-item"><a href="#mars" class="nav-link">EXPLORATION</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">ABOUT</a></li>
+        </ul>
+        <div class="nav-cta-wrapper">
+          <a href="#dashboard" class="btn btn-primary btn-sm glow-btn">Explore Now</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       3. HERO SECTION
+       ======================================================== -->
+  <section class="hero-section" id="home">
+    <div class="container hero-container">
+      <div class="hero-content reveal">
+        <div class="badge-pill">
+          <span class="pulse-dot"></span> HUMAN DEEP SPACE INITIATIVE
+        </div>
+        <h1 class="hero-title">
+          EXPLORE BEYOND <br />
+          <span class="gradient-text">THE LIMITS</span>
+        </h1>
+        <p class="hero-subtitle">
+          Discover the universe, explore distant worlds, and follow humanity's journey beyond Earth into the cosmic unknown.
+        </p>
+        <div class="hero-buttons">
+          <a href="#missions" class="btn btn-primary glow-btn">🚀 Explore Missions</a>
+          <a href="#planets" class="btn btn-secondary glass-btn">🌌 Discover Space</a>
+        </div>
+      </div>
+
+      <!-- Hero Visuals: Orbital Ring, Procedural Planet, Moon & Craft -->
+      <div class="hero-visual reveal">
+        <div class="planet-stage">
+          <div class="orbital-ring orbital-ring-1" aria-hidden="true"></div>
+          <div class="orbital-ring orbital-ring-2" aria-hidden="true"></div>
+          
+          <!-- Central Glowing Planet -->
+          <div class="hero-planet sphere-glow">
+            <div class="planet-atmosphere"></div>
+          </div>
+
+          <!-- Orbiting Satellite / Moon -->
+          <div class="hero-moon-orbit" aria-hidden="true">
+            <div class="hero-moon"></div>
+          </div>
+
+          <!-- Floating Spacecraft -->
+          <div class="hero-shuttle float-craft" aria-hidden="true">
+            <div class="shuttle-hull">🛸</div>
+            <div class="thruster-glow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       4. SPACE STATISTICS
+       ======================================================== -->
+  <section class="stats-section section-padding">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="glass-card stat-card reveal">
+          <span class="stat-number-id">01</span>
+          <h3 class="stat-value gradient-text">8</h3>
+          <p class="stat-label">MAJOR PLANETS</p>
+          <span class="stat-sub">Sol Planetary System</span>
+        </div>
+
+        <div class="glass-card stat-card reveal">
+          <span class="stat-number-id">02</span>
+          <h3 class="stat-value gradient-text">200+</h3>
+          <p class="stat-label">KNOWN MOONS</p>
+          <span class="stat-sub">Moons Catalogued</span>
+        </div>
+
+        <div class="glass-card stat-card reveal">
+          <span class="stat-number-id">03</span>
+          <h3 class="stat-value gradient-text">1000+</h3>
+          <p class="stat-label">SPACE MISSIONS</p>
+          <span class="stat-sub">Orbital & Interplanetary</span>
+        </div>
+
+        <div class="glass-card stat-card reveal">
+          <span class="stat-number-id">04</span>
+          <h3 class="stat-value gradient-text">∞</h3>
+          <p class="stat-label">EXPLORATION</p>
+          <span class="stat-sub">Endless Horizons</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       5. FEATURED MISSIONS
+       ======================================================== -->
+  <section class="missions-section section-padding" id="missions">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-tag">VOYAGES INTO THE DEEP</span>
+        <h2 class="section-title">FEATURED <span class="gradient-text">MISSIONS</span></h2>
+        <p class="section-subtitle">Humanity's journey into the unknown depths of space.</p>
+      </div>
+
+      <div class="missions-grid">
+        <!-- Mission 01 -->
+        <article class="glass-card mission-card reveal">
+          <div class="mission-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=800&q=80" alt="Mars Exploration Mission Surface" class="mission-img" loading="lazy" />
+            <div class="mission-overlay"></div>
+            <span class="mission-badge">MISSION 01</span>
+          </div>
+          <div class="mission-body">
+            <h3 class="mission-title">MARS EXPLORATION</h3>
+            <p class="mission-desc">
+              Explore the Red Planet and uncover clues about its ancient surface, waterways, and potential biosignatures.
+            </p>
+            <a href="#mars" class="btn btn-outline btn-sm">Explore Mission →</a>
+          </div>
+        </article>
+
+        <!-- Mission 02 -->
+        <article class="glass-card mission-card reveal">
+          <div class="mission-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?auto=format&fit=crop&w=800&q=80" alt="Lunar Exploration Orbiting Moon" class="mission-img" loading="lazy" />
+            <div class="mission-overlay"></div>
+            <span class="mission-badge">MISSION 02</span>
+          </div>
+          <div class="mission-body">
+            <h3 class="mission-title">LUNAR EXPLORATION</h3>
+            <p class="mission-desc">
+              Return to the Moon to establish permanent gateway stations and prepare for humanity's next giant leap.
+            </p>
+            <a href="#dashboard" class="btn btn-outline btn-sm">Explore Mission →</a>
+          </div>
+        </article>
+
+        <!-- Mission 03 -->
+        <article class="glass-card mission-card reveal">
+          <div class="mission-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Deep Space Nebula and Satellite" class="mission-img" loading="lazy" />
+            <div class="mission-overlay"></div>
+            <span class="mission-badge">MISSION 03</span>
+          </div>
+          <div class="mission-body">
+            <h3 class="mission-title">DEEP SPACE</h3>
+            <p class="mission-desc">
+              Travel beyond our solar neighborhood and discover exoplanets, gravitational waves, and distant star clusters.
+            </p>
+            <a href="#dashboard" class="btn btn-outline btn-sm">Explore Mission →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       6. PLANETS SECTION (CSS GRID)
+       ======================================================== -->
+  <section class="planets-section section-padding" id="planets">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-tag">OUR CELESTIAL NEIGHBORHOOD</span>
+        <h2 class="section-title">EXPLORE THE <span class="gradient-text">SOLAR SYSTEM</span></h2>
+        <p class="section-subtitle">Discover the diverse planetary bodies revolving around our star.</p>
+      </div>
+
+      <div class="planets-grid">
+        <!-- Mercury -->
+        <div class="glass-card planet-card reveal" data-planet="Mercury">
+          <div class="planet-sphere planet-mercury"></div>
+          <h3 class="planet-name">Mercury</h3>
+          <p class="planet-desc">Smallest planet with extreme temperature variations between day and night.</p>
+          <div class="planet-meta">
+            <span class="meta-label">DISTANCE FROM SUN</span>
+            <span class="meta-val">57.9M KM</span>
+          </div>
+          <button class="btn btn-planet-info" type="button">Discover</button>
+        </div>
+
+        <!-- Venus -->
+        <div class="glass-card planet-card reveal" data-planet="Venus">
+          <div class="planet-sphere planet-venus"></div>
+          <h3 class="planet-name">Venus</h3>
+          <p class="planet-desc">Toxic atmosphere and runaway greenhouse effect make it the hottest planet.</p>
+          <div class="planet-meta">
+            <span class="meta-label">DISTANCE FROM SUN</span>
+            <span class="meta-val">108.2M KM</span>
+          </div>
+          <button class="btn btn-planet-info" type="button">Discover</button>
+        </div>
+
+        <!-- Earth -->
+        <div class="glass-card planet-card reveal" data-planet="Earth">
+          <div class="planet-sphere planet-earth"></div>
+          <h3 class="planet-name">Earth</h3>
+          <p class="planet-desc">Our oasis of life with liquid water oceans and a protective atmosphere.</p>
+          <div class="planet-meta">
+            <span class="meta-label">DISTANCE FROM SUN</span>
+            <span class="meta-val">149.6M KM</span>
+          </div>
+          <button class="btn btn-planet-info" type="button">Discover</button>
+        </div>
+
+        <!-- Mars -->
+        <div class="glass-card planet-card reveal" data-planet="Mars">
+          <div class="planet-sphere planet-mars"></div>
+          <h3 class="planet-name">Mars</h3>
+          <p class="planet-desc">The Red Planet rich in iron minerals, ancient riverbeds, and towering volcanoes.</p>
+          <div class="planet-meta">
+            <span class="meta-label">DISTANCE FROM SUN</span>
+            <span class="meta-val">227.9M KM</span>
+          </div>
+          <button class="btn btn-planet-info" type="button">Discover</button>
+        </div>
+
+        <!-- Jupiter -->
+        <div class="glass-card planet-card reveal" data-planet="Jupiter">
+          <div class="planet-sphere planet-jupiter"></div>
+          <h3 class="planet-name">Jupiter</h3>
+          <p class="planet-desc">The Solar System's giant world with raging gas storms and dozens of moons.</p>
+          <div class="planet-meta">
+            <span class="meta-label">DISTANCE FROM SUN</span>
+            <span class="meta-val">778.5M KM</span>
+          </div>
+          <button class="btn btn-planet-info" type="button">Discover</button>
+        </div>
+
+        <!-- Saturn -->
+        <div class="glass-card planet-card reveal" data-planet="Saturn">
+          <div class="planet-sphere planet-saturn">
+            <div class="saturn-ring-visual"></div>
+          </div>
+          <h3 class="planet-name">Saturn</h3>
+          <p class="planet-desc">Adorned with an intricate ring system of billions of water ice fragments.</p>
+          <div class="planet-meta">
+            <span class="meta-label">DISTANCE FROM SUN</span>
+            <span class="meta-val">1.43B KM</span>
+          </div>
+          <button class="btn btn-planet-info" type="button">Discover</button>
+        </div>
+
+        <!-- Uranus -->
+        <div class="glass-card planet-card reveal" data-planet="Uranus">
+          <div class="planet-sphere planet-uranus"></div>
+          <h3 class="planet-name">Uranus</h3>
+          <p class="planet-desc">An ice giant spinning on an extreme side tilt with a faint vertical ring system.</p>
+          <div class="planet-meta">
+            <span class="meta-label">DISTANCE FROM SUN</span>
+            <span class="meta-val">2.87B KM</span>
+          </div>
+          <button class="btn btn-planet-info" type="button">Discover</button>
+        </div>
+
+        <!-- Neptune -->
+        <div class="glass-card planet-card reveal" data-planet="Neptune">
+          <div class="planet-sphere planet-neptune"></div>
+          <h3 class="planet-name">Neptune</h3>
+          <p class="planet-desc">Deep azure ice giant enduring the fastest winds recorded in our solar system.</p>
+          <div class="planet-meta">
+            <span class="meta-label">DISTANCE FROM SUN</span>
+            <span class="meta-val">4.50B KM</span>
+          </div>
+          <button class="btn btn-planet-info" type="button">Discover</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       7. MARS EXPLORATION SECTION
+       ======================================================== -->
+  <section class="mars-section section-padding" id="mars">
+    <div class="container">
+      <div class="mars-grid">
+        <!-- Mars Visual Representation -->
+        <div class="mars-visual-side reveal">
+          <div class="mars-sphere-display">
+            <div class="orbit-trace"></div>
+            <div class="mars-large-sphere"></div>
+            <div class="mars-rover-tag">
+              <span class="rover-pulse"></span>
+              <span class="rover-txt">PERSEVERANCE // ACTIVE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mars Narrative & HUD Dashboard -->
+        <div class="mars-info-side reveal">
+          <span class="section-tag tag-mars">DESTINATION PROTOCOL</span>
+          <h2 class="section-title">THE RED PLANET <br /><span class="gradient-mars-text">IS WAITING</span></h2>
+          <p class="section-desc">
+            Mars has fascinated humanity for generations. Explore its ancient rust landscapes, robotic outposts, and the engineering foundation preparing for human habitation.
+          </p>
+
+          <!-- Futuristic Mini Mars Dashboard -->
+          <div class="glass-card mars-dashboard">
+            <div class="dashboard-metric">
+              <span class="d-label">SURFACE TEMP</span>
+              <span class="d-value text-cyan">-63°C</span>
+            </div>
+            <div class="dashboard-metric">
+              <span class="d-label">ATMOSPHERIC PRESSURE</span>
+              <span class="d-value text-purple">6.1 mbar</span>
+            </div>
+            <div class="dashboard-metric">
+              <span class="d-label">MISSION STATUS</span>
+              <span class="d-value text-green">ACTIVE</span>
+            </div>
+            <div class="dashboard-metric">
+              <span class="d-label">LOCATION</span>
+              <span class="d-value text-gold">JEZERO CRATER</span>
+            </div>
+          </div>
+
+          <div class="mars-actions">
+            <a href="#dashboard" class="btn btn-mars glow-mars-btn">Explore Mars</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       8. SPACE EXPLORER DASHBOARD (MISSION CONTROL)
+       ======================================================== -->
+  <section class="dashboard-section section-padding" id="dashboard">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-tag">TELEMETRY &amp; AVIONICS</span>
+        <h2 class="section-title">MISSION <span class="gradient-text">CONTROL</span></h2>
+        <p class="section-subtitle">Real-time deep space probe diagnostics and life support telemetry.</p>
+      </div>
+
+      <div class="mission-control-layout">
+        <!-- Left: Radar / Scanning Visual -->
+        <div class="glass-card radar-console reveal">
+          <div class="radar-header">
+            <span class="radar-title">DEEP RADAR // 360° SWEEP</span>
+            <span class="radar-ping">SCANNING</span>
+          </div>
+          <div class="radar-display">
+            <div class="radar-ring radar-ring-1"></div>
+            <div class="radar-ring radar-ring-2"></div>
+            <div class="radar-ring radar-ring-3"></div>
+            <div class="radar-crosshair-x"></div>
+            <div class="radar-crosshair-y"></div>
+            <div class="radar-sweeper"></div>
+            <div class="radar-blip blip-1" title="Orbital Beacon"></div>
+            <div class="radar-blip blip-2" title="Relay Probe"></div>
+          </div>
+          <div class="radar-footer">
+            <span>SECTOR: 09-X</span>
+            <span>BEARING: 184.2° MK</span>
+          </div>
+        </div>
+
+        <!-- Right: Telemetry Metrics with Circular Progress Indicators -->
+        <div class="telemetry-grid">
+          <!-- Card 1: Status -->
+          <div class="glass-card telemetry-card reveal">
+            <span class="telemetry-label">MISSION STATUS</span>
+            <div class="telemetry-content">
+              <h3 class="telemetry-value text-green" id="telemetryStatus">ACTIVE</h3>
+              <span class="telemetry-indicator badge-green">OPTIMAL</span>
+            </div>
+            <p class="telemetry-sub">All sub-thrusters firing in standard mode.</p>
+          </div>
+
+          <!-- Card 2: Distance -->
+          <div class="glass-card telemetry-card reveal">
+            <span class="telemetry-label">DISTANCE</span>
+            <div class="telemetry-content">
+              <h3 class="telemetry-value text-cyan" id="telemetryDistance">225M KM</h3>
+              <span class="telemetry-indicator badge-cyan">SOL-3 TRANSIT</span>
+            </div>
+            <p class="telemetry-sub">Trajectory aligned to Mars insertion orbit.</p>
+          </div>
+
+          <!-- Card 3: Signal Gauge (98%) -->
+          <div class="glass-card telemetry-card gauge-card reveal">
+            <div class="gauge-meta">
+              <span class="telemetry-label">SIGNAL</span>
+              <h3 class="telemetry-value text-cyan">98%</h3>
+              <p class="telemetry-sub">High-gain photon link</p>
+            </div>
+            <div class="circular-progress" style="--val: 98; --color: var(--neon-cyan);">
+              <div class="progress-inner">98%</div>
+            </div>
+          </div>
+
+          <!-- Card 4: Oxygen Gauge (87%) -->
+          <div class="glass-card telemetry-card gauge-card reveal">
+            <div class="gauge-meta">
+              <span class="telemetry-label">OXYGEN</span>
+              <h3 class="telemetry-value text-green">87%</h3>
+              <p class="telemetry-sub">Life Support Loop B</p>
+            </div>
+            <div class="circular-progress" style="--val: 87; --color: var(--neon-green);">
+              <div class="progress-inner">87%</div>
+            </div>
+          </div>
+
+          <!-- Card 5: Energy Gauge (76%) -->
+          <div class="glass-card telemetry-card gauge-card reveal">
+            <div class="gauge-meta">
+              <span class="telemetry-label">ENERGY</span>
+              <h3 class="telemetry-value text-gold">76%</h3>
+              <p class="telemetry-sub">Fusion & Solar arrays</p>
+            </div>
+            <div class="circular-progress" style="--val: 76; --color: var(--neon-gold);">
+              <div class="progress-inner">76%</div>
+            </div>
+          </div>
+
+          <!-- Card 6: Temperature -->
+          <div class="glass-card telemetry-card reveal">
+            <span class="telemetry-label">TEMPERATURE</span>
+            <div class="telemetry-content">
+              <h3 class="telemetry-value text-purple">-63°C</h3>
+              <span class="telemetry-indicator badge-purple">NOMINAL</span>
+            </div>
+            <p class="telemetry-sub">Cryogenic hull balance active.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       9. SPACE GALLERY (CSS GRID)
+       ======================================================== -->
+  <section class="gallery-section section-padding">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-tag">COSMIC VISIONS</span>
+        <h2 class="section-title">BEYOND <span class="gradient-text">EARTH</span></h2>
+        <p class="section-subtitle">Stunning deep vistas of distant nebulas, planetary surfaces, and human ingenuity.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Item 1: Galaxy -->
+        <figure class="gallery-item item-large reveal">
+          <img src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=1200&q=80" alt="Spiral Galaxy" class="gallery-img" loading="lazy" />
+          <figcaption class="gallery-caption">
+            <span class="caption-tag">DEEP OBSERVATION</span>
+            <h4 class="caption-title">Spiral Galaxy Core</h4>
+          </figcaption>
+        </figure>
+
+        <!-- Item 2: Nebula -->
+        <figure class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?auto=format&fit=crop&w=800&q=80" alt="Stellar Nebula Clouds" class="gallery-img" loading="lazy" />
+          <figcaption class="gallery-caption">
+            <span class="caption-tag">COSMIC EMISSION</span>
+            <h4 class="caption-title">Stellar Nursery Nebula</h4>
+          </figcaption>
+        </figure>
+
+        <!-- Item 3: Earth from space -->
+        <figure class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Planet Earth from Space" class="gallery-img" loading="lazy" />
+          <figcaption class="gallery-caption">
+            <span class="caption-tag">BLUE PLANET</span>
+            <h4 class="caption-title">Earth Horizon at Dawn</h4>
+          </figcaption>
+        </figure>
+
+        <!-- Item 4: Moon -->
+        <figure class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?auto=format&fit=crop&w=800&q=80" alt="Detailed Craters of the Moon" class="gallery-img" loading="lazy" />
+          <figcaption class="gallery-caption">
+            <span class="caption-tag">LUNAR SURFACE</span>
+            <h4 class="caption-title">Moon Crag Shadows</h4>
+          </figcaption>
+        </figure>
+
+        <!-- Item 5: Mars -->
+        <figure class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=800&q=80" alt="Mars Rocky Dune Landscape" class="gallery-img" loading="lazy" />
+          <figcaption class="gallery-caption">
+            <span class="caption-tag">SOL-4 DESERT</span>
+            <h4 class="caption-title">Mars Dune Fields</h4>
+          </figcaption>
+        </figure>
+
+        <!-- Item 6: Saturn -->
+        <figure class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?auto=format&fit=crop&w=800&q=80" alt="Saturn with Ring System" class="gallery-img" loading="lazy" />
+          <figcaption class="gallery-caption">
+            <span class="caption-tag">GAS GIANT</span>
+            <h4 class="caption-title">Saturn &amp; Ice Bands</h4>
+          </figcaption>
+        </figure>
+
+        <!-- Item 7: Spacecraft -->
+        <figure class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1517976487507-5b3a4a0c8b20?auto=format&fit=crop&w=800&q=80" alt="Spacecraft Propulsion in Space" class="gallery-img" loading="lazy" />
+          <figcaption class="gallery-caption">
+            <span class="caption-tag">PROPULSION</span>
+            <h4 class="caption-title">Orbital Transfer Craft</h4>
+          </figcaption>
+        </figure>
+
+        <!-- Item 8: Astronaut -->
+        <figure class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=800&q=80" alt="Astronaut EVA floating in orbit" class="gallery-img" loading="lazy" />
+          <figcaption class="gallery-caption">
+            <span class="caption-tag">EXTRAVEHICULAR ACTIVITY</span>
+            <h4 class="caption-title">Astronaut in Low Earth Orbit</h4>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       10. WHY EXPLORE?
+       ======================================================== -->
+  <section class="why-section section-padding" id="about">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-tag">PURPOSE &amp; PHILOSOPHY</span>
+        <h2 class="section-title">WHY DO WE <span class="gradient-text">EXPLORE?</span></h2>
+        <p class="section-subtitle">The driving human impulses that propel us toward the stars.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="glass-card why-card reveal">
+          <div class="why-icon-wrap icon-cyan">
+            <span>🔭</span>
+          </div>
+          <h3 class="why-title">DISCOVER</h3>
+          <p class="why-desc">
+            Understand worlds beyond our own. Finding answers to the origins of water, organic chemistry, and life itself in the deep cosmos.
+          </p>
+        </div>
+
+        <div class="glass-card why-card reveal">
+          <div class="why-icon-wrap icon-purple">
+            <span>⚡</span>
+          </div>
+          <h3 class="why-title">INNOVATE</h3>
+          <p class="why-desc">
+            Develop technologies that shape tomorrow. Solving extreme thermal, quantum, and life-support constraints transforms society back on Earth.
+          </p>
+        </div>
+
+        <div class="glass-card why-card reveal">
+          <div class="why-icon-wrap icon-gold">
+            <span>🌌</span>
+          </div>
+          <h3 class="why-title">INSPIRE</h3>
+          <p class="why-desc">
+            Inspire the next generation of explorers, engineers, and dreamers to view humanity not as divided nations, but as one planetary crew.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       11. TIMELINE
+       ======================================================== -->
+  <section class="timeline-section section-padding">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-tag">CHRONOLOGY OF DISCOVERY</span>
+        <h2 class="section-title">JOURNEY THROUGH <span class="gradient-text">SPACE</span></h2>
+        <p class="section-subtitle">From humanity's earliest orbital probes to the upcoming frontier on Mars.</p>
+      </div>
+
+      <div class="timeline-wrapper">
+        <div class="timeline-center-line"></div>
+
+        <!-- 1957 -->
+        <div class="timeline-item left reveal">
+          <div class="timeline-node"></div>
+          <div class="glass-card timeline-content">
+            <span class="timeline-year text-cyan">1957</span>
+            <h4 class="timeline-event">First Artificial Satellite</h4>
+            <p class="timeline-info">Sputnik 1 was launched into low Earth orbit, inaugurating the Space Age and human satellite engineering.</p>
+          </div>
+        </div>
+
+        <!-- 1969 -->
+        <div class="timeline-item right reveal">
+          <div class="timeline-node"></div>
+          <div class="glass-card timeline-content">
+            <span class="timeline-year text-gold">1969</span>
+            <h4 class="timeline-event">First Humans on the Moon</h4>
+            <p class="timeline-info">Apollo 11 touches down in the Sea of Tranquility, realizing the historic milestone of human steps on another celestial body.</p>
+          </div>
+        </div>
+
+        <!-- 1990 -->
+        <div class="timeline-item left reveal">
+          <div class="timeline-node"></div>
+          <div class="glass-card timeline-content">
+            <span class="timeline-year text-purple">1990</span>
+            <h4 class="timeline-event">Hubble Space Telescope</h4>
+            <p class="timeline-info">Deployed above Earth's atmospheric distortion, transforming our visual perception of deep galaxies and star nurseries.</p>
+          </div>
+        </div>
+
+        <!-- 1997 -->
+        <div class="timeline-item right reveal">
+          <div class="timeline-node"></div>
+          <div class="glass-card timeline-content">
+            <span class="timeline-year text-cyan">1997</span>
+            <h4 class="timeline-event">Mars Pathfinder</h4>
+            <p class="timeline-info">The Sojourner rover landed on Mars, proving that lightweight semi-autonomous vehicles could navigate planetary terrain.</p>
+          </div>
+        </div>
+
+        <!-- 2021 -->
+        <div class="timeline-item left reveal">
+          <div class="timeline-node"></div>
+          <div class="glass-card timeline-content">
+            <span class="timeline-year text-mars">2021</span>
+            <h4 class="timeline-event">Perseverance on Mars</h4>
+            <p class="timeline-info">Touchdown in Jezero Crater to extract geological samples and test the Ingenuity Mars helicopter in thin atmosphere.</p>
+          </div>
+        </div>
+
+        <!-- FUTURE -->
+        <div class="timeline-item right reveal">
+          <div class="timeline-node node-pulse"></div>
+          <div class="glass-card timeline-content highlight-card">
+            <span class="timeline-year text-green">FUTURE</span>
+            <h4 class="timeline-event">Human Exploration of Mars</h4>
+            <p class="timeline-info">Crewed orbital transfer, permanent habitat domes, and humanity evolving into a multi-planetary species.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       12. CALL TO ACTION
+       ======================================================== -->
+  <section class="cta-section section-padding">
+    <div class="container">
+      <div class="glass-card cta-card reveal">
+        <div class="cta-glow-backdrop" aria-hidden="true"></div>
+        <div class="cta-content">
+          <span class="section-tag tag-cyan">HORIZONS BECKON</span>
+          <h2 class="cta-title">THE UNIVERSE <br /><span class="gradient-text">IS WAITING</span></h2>
+          <p class="cta-desc">
+            The next discovery could begin with you. Join our scientific network, track active space expeditions, and be part of the future.
+          </p>
+          <a href="#home" class="btn btn-primary btn-lg glow-btn">START EXPLORING 🚀</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       13. FOOTER
+       ======================================================== -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="#home" class="footer-logo">
+          <span>🚀</span> AERO<span class="accent-cyan">SPACE</span>
+        </a>
+        <p class="footer-tagline">
+          Exploring the universe. <br />
+          Inspiring the future.
+        </p>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-column">
+          <h4 class="footer-heading">EXPLORE</h4>
+          <ul class="footer-list">
+            <li><a href="#missions">Missions</a></li>
+            <li><a href="#planets">Planets</a></li>
+            <li><a href="#dashboard">Space Gallery</a></li>
+            <li><a href="#mars">Discover Mars</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-heading">COMPANY</h4>
+          <ul class="footer-list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#home">Contact</a></li>
+            <li><a href="#home">Careers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-heading">FOLLOW</h4>
+          <ul class="footer-list">
+            <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a></li>
+            <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://x.com" target="_blank" rel="noopener">X (Twitter)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 AeroSpace. Explore Beyond the Limits. All rights reserved.</p>
+        <p class="footer-credits">Engineered with HTML5, CSS3 &amp; Vanilla JS</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-top Floating Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top of page">↑</button>
+
+  <!-- Interactive Modal for Planets -->
+  <div class="planet-modal" id="planetModal" aria-hidden="true" role="dialog">
+    <div class="glass-card modal-content">
+      <button class="modal-close" id="modalClose" aria-label="Close dialog">✕</button>
+      <div class="modal-body" id="modalBody">
+        <!-- Dynamically injected via script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="js/script.js"></script>
+</body>
+</html>
