@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subscription & Bill Manager</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .header p {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    /* Summary Overview Cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 35px;
+    }
+
+    .summary-card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #334155;
+    }
+
+    .summary-card h4 {
+      font-size: 14px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .summary-card .amount {
+      font-size: 24px;
+      font-weight: 700;
+      margin-top: 8px;
+      color: #38bdf8;
+    }
+
+    /* Bill Cards Container */
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: #e2e8f0;
+    }
+
+    .bills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Individual Subscription Card */
+    .bill-card {
+      background: #1e293b;
+      padding: 18px 24px;
+      border-radius: 12px;
+      border: 1px solid #334155;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .bill-card:hover {
+      transform: translateY(-2px);
+      border-color: #38bdf8;
+    }
+
+    .bill-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .netflix-icon { background: #e50914; color: white; }
+    .wifi-icon { background: #0284c7; color: white; }
+    .gym-icon { background: #16a34a; color: white; }
+    .spotify-icon { background: #1db954; color: white; }
+
+    .bill-info h3 {
+      font-size: 16px;
+      color: #f8fafc;
+    }
+
+    .bill-info p {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+
+    /* Middle Progress Area */
+    .renewal-track {
+      flex: 1;
+      max-width: 200px;
+      margin: 0 25px;
+    }
+
+    .track-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #334155;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    .urgent { background-color: #ef4444; width: 85%; }
+    .warning { background-color: #f59e0b; width: 60%; }
+    .normal { background-color: #10b981; width: 25%; }
+
+    /* Right Price & Status */
+    .bill-right {
+      text-align: right;
+    }
+
+    .price {
+      font-size: 17px;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .status-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 20px;
+      margin-top: 5px;
+    }
+
+    .status-urgent {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+    }
+
+    .status-warning {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+    }
+
+    .status-ok {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+
+    /* Responsive */
+    @media (max-width: 650px) {
+      .bill-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      .renewal-track {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+      }
+      .bill-right {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <h1>Subscription & Bill Manager</h1>
+        <p>Monitor your active plans and renewal deadlines</p>
+      </div>
+    </div>
+
+    <!-- Summary Box -->
+    <div class="summary-grid">
+      <div class="summary-card">
+        <h4>Total Monthly Cost</h4>
+        <div class="amount">৳ 3,850</div>
+      </div>
+      <div class="summary-card">
+        <h4>Active Services</h4>
+        <div class="amount" style="color: #a78bfa;">4 Plans</div>
+      </div>
+      <div class="summary-card">
+        <h4>Expiring This Week</h4>
+        <div class="amount" style="color: #f87171;">1 Bill</div>
+      </div>
+    </div>
+
+    <!-- Bills List -->
+    <h2 class="section-title">Upcoming Renewals</h2>
+    <div class="bills-list">
+
+      <!-- Item 1: Wi-Fi -->
+      <div class="bill-card">
+        <div class="bill-left">
+          <div class="icon-box wifi-icon">🌐</div>
+          <div class="bill-info">
+            <h3>Fiber Internet (50 Mbps)</h3>
+            <p>Renewal: 10th October</p>
+          </div>
+        </div>
+        <div class="renewal-track">
+          <div class="track-meta">
+            <span>Cycle</span>
+            <span>2 days left</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill urgent"></div>
+          </div>
+        </div>
+        <div class="bill-right">
+          <div class="price">৳ 1,000</div>
+          <span class="status-badge status-urgent">Pay Soon</span>
+        </div>
+      </div>
+
+      <!-- Item 2: Netflix -->
+      <div class="bill-card">
+        <div class="bill-left">
+          <div class="icon-box netflix-icon">N</div>
+          <div class="bill-info">
+            <h3>Netflix Standard</h3>
+            <p>Renewal: 18th October</p>
+          </div>
+        </div>
+        <div class="renewal-track">
+          <div class="track-meta">
+            <span>Cycle</span>
+            <span>10 days left</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill warning"></div>
+          </div>
+        </div>
+        <div class="bill-right">
+          <div class="price">৳ 1,200</div>
+          <span class="status-badge status-warning">Upcoming</span>
+        </div>
+      </div>
+
+      <!-- Item 3: Gym -->
+      <div class="bill-card">
+        <div class="bill-left">
+          <div class="icon-box gym-icon">🏋️</div>
+          <div class="bill-info">
+            <h3>Gym Membership</h3>
+            <p>Renewal: 25th October</p>
+          </div>
+        </div>
+        <div class="renewal-track">
+          <div class="track-meta">
+            <span>Cycle</span>
+            <span>17 days left</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill normal"></div>
+          </div>
+        </div>
+        <div class="bill-right">
+          <div class="price">৳ 1,200</div>
+          <span class="status-badge status-ok">Active</span>
+        </div>
+      </div>
+
+      <!-- Item 4: Spotify -->
+      <div class="bill-card">
+        <div class="bill-left">
+          <div class="icon-box spotify-icon">🎧</div>
+          <div class="bill-info">
+            <h3>Spotify Premium</h3>
+            <p>Renewal: 30th October</p>
+          </div>
+        </div>
+        <div class="renewal-track">
+          <div class="track-meta">
+            <span>Cycle</span>
+            <span>22 days left</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill normal"></div>
+          </div>
+        </div>
+        <div class="bill-right">
+          <div class="price">৳ 450</div>
+          <span class="status-badge status-ok">Active</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
