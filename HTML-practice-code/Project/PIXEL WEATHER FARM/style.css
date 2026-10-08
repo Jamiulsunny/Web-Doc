@@ -1,0 +1,1296 @@
+/* ==========================================================================
+   PIXEL WEATHER FARM // 100% PURE HTML & CSS GAME ENGINE
+   Table of Contents:
+   1. CSS Variables (:root)
+   2. Reset, Base & Global Layout
+   3. Box-Shadow Pixel-Art Shorthands & Sprites
+   4. Weather Switch Engine (Sibling & Relational Combinators)
+   5. Dynamic Parallax Layers (Infinite Pixel Loops)
+   6. Sky, Celestials & Atmospheric FX
+   7. Farm Architecture, Nature & Crops
+   8. Pixel Characters & Animated Critters
+   9. Collectibles Engine (Spawn, Float, Catch & Pop)
+   10. Pure CSS Scoring (Counters Engine)
+   11. Win State Modals & Celebration Confetti
+   12. HUD, Buttons & Retro Borders
+   13. Animations & Keyframes
+   14. Responsive Layout (Mobile & Touch)
+   15. Accessibility (Prefers-Reduced-Motion & Focus)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS VARIABLES (:ROOT)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Pixel Grid Scale */
+  --px: clamp(2px, 0.4vmin, 4px);
+  --ui-px: 3px;
+
+  /* 16-Color Retro Palette */
+  --c-sky-sun:     #5c94fc;
+  --c-sky-sun-low: #8cb6fc;
+  --c-sky-rain:    #404c64;
+  --c-sky-rain-low:#586478;
+  --c-sky-night:   #0c1024;
+  --c-sky-night-low:#182048;
+
+  --c-sun-gold:    #fcd800;
+  --c-sun-orange:  #f85800;
+  --c-rain-cyan:   #00e8d8;
+  --c-night-star:  #fcfc54;
+  
+  --c-grass-light: #80d010;
+  --c-grass-mid:   #48a000;
+  --c-grass-dark:  #206800;
+  --c-dirt-light:  #a86420;
+  --c-dirt-dark:   #683800;
+  
+  --c-wood-light:  #d89040;
+  --c-wood-dark:   #904818;
+  --c-barn-red:    #c82020;
+  --c-roof-slate:  #303848;
+  
+  --c-skin:        #fcb088;
+  --c-overalls:    #2858b8;
+  --c-white:       #fcfcfc;
+  --c-black:       #080810;
+  
+  /* Fonts */
+  --font-retro: 'Press Start 2P', 'Courier New', monospace;
+
+  /* Scoring Counters Initialization */
+  counter-reset: totalScore 0 sunScore 0 rainScore 0 nightScore 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET, BASE & GLOBAL LAYOUT
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body.game-body {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--c-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: var(--font-retro);
+  color: var(--c-white);
+}
+
+.game-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Screen-reader accessible hidden inputs: Still focusable for accessibility */
+.sr-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Maintain focus ring on interactive labels when keyboard navigates inputs */
+.sr-input:focus-visible + label,
+.sr-input:focus-visible ~ .game-viewport label[for] {
+  outline: 2px dashed var(--c-sun-gold);
+  outline-offset: 4px;
+}
+
+/* Scaled Viewport Container (16:9 proportion bounded) */
+.game-viewport {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-width: 1400px;
+  max-height: 900px;
+  background-color: var(--c-sky-sun);
+  overflow: hidden;
+  border: calc(var(--ui-px) * 2) solid #282838;
+  box-shadow: 0 0 0 calc(var(--ui-px) * 2) var(--c-black),
+              0 20px 50px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+}
+
+/* CRT Scanlines Overlay */
+.crt-lines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0px,
+    rgba(255, 255, 255, 0) 3px,
+    rgba(0, 0, 0, 0.28) 4px,
+    rgba(0, 0, 0, 0.28) 5px
+  );
+  pointer-events: none;
+  z-index: 99;
+  display: none;
+}
+#toggle-crt:checked ~ .game-viewport .crt-lines {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   3. BOX-SHADOW PIXEL-ART SHORTHANDS & SPRITES
+   Pixel-perfect art generated using single DOM nodes and box-shadow maps
+   -------------------------------------------------------------------------- */
+/* Coin Pixel Sprite: 8x8 matrix */
+.pixel-coin {
+  display: block;
+  width: calc(var(--px) * 2);
+  height: calc(var(--px) * 2);
+  background: transparent;
+  box-shadow:
+    calc(var(--px) * 2) 0 var(--c-black),
+    calc(var(--px) * 4) 0 var(--c-black),
+    calc(var(--px) * 6) 0 var(--c-black),
+    0 calc(var(--px) * 2) var(--c-black),
+    calc(var(--px) * 2) calc(var(--px) * 2) var(--c-sun-gold),
+    calc(var(--px) * 4) calc(var(--px) * 2) var(--c-white),
+    calc(var(--px) * 6) calc(var(--px) * 2) var(--c-sun-gold),
+    calc(var(--px) * 8) calc(var(--px) * 2) var(--c-black),
+    0 calc(var(--px) * 4) var(--c-black),
+    calc(var(--px) * 2) calc(var(--px) * 4) var(--c-sun-gold),
+    calc(var(--px) * 4) calc(var(--px) * 4) var(--c-sun-orange),
+    calc(var(--px) * 6) calc(var(--px) * 4) var(--c-sun-gold),
+    calc(var(--px) * 8) calc(var(--px) * 4) var(--c-black),
+    calc(var(--px) * 2) calc(var(--px) * 6) var(--c-black),
+    calc(var(--px) * 4) calc(var(--px) * 6) var(--c-black),
+    calc(var(--px) * 6) calc(var(--px) * 6) var(--c-black);
+}
+
+/* Raindrop Pixel Sprite: Teardrop shape */
+.pixel-drop {
+  display: block;
+  width: calc(var(--px) * 2);
+  height: calc(var(--px) * 2);
+  background: transparent;
+  box-shadow:
+    calc(var(--px) * 2) 0 var(--c-black),
+    calc(var(--px) * 2) calc(var(--px) * 2) var(--c-white),
+    0 calc(var(--px) * 4) var(--c-black),
+    calc(var(--px) * 2) calc(var(--px) * 4) var(--c-rain-cyan),
+    calc(var(--px) * 4) calc(var(--px) * 4) var(--c-black),
+    calc(var(--px) * 2) calc(var(--px) * 6) var(--c-rain-cyan),
+    calc(var(--px) * 2) calc(var(--px) * 8) var(--c-black);
+}
+
+/* Star / Firefly Pixel Sprite */
+.pixel-star {
+  display: block;
+  width: calc(var(--px) * 2);
+  height: calc(var(--px) * 2);
+  background: transparent;
+  box-shadow:
+    calc(var(--px) * 2) 0 var(--c-white),
+    0 calc(var(--px) * 2) var(--c-white),
+    calc(var(--px) * 2) calc(var(--px) * 2) var(--c-night-star),
+    calc(var(--px) * 4) calc(var(--px) * 2) var(--c-white),
+    calc(var(--px) * 2) calc(var(--px) * 4) var(--c-white);
+}
+
+/* --------------------------------------------------------------------------
+   4. WEATHER SWITCH ENGINE (SIBLING COMBINATOR)
+   Driven purely via #mode-sun, #mode-rain, #mode-night radio elements
+   -------------------------------------------------------------------------- */
+/* ACTIVE BUTTON HIGHLIGHTS */
+#mode-sun:checked ~ .game-viewport .btn--sun,
+#mode-rain:checked ~ .game-viewport .btn--rain,
+#mode-night:checked ~ .game-viewport .btn--night {
+  background-color: var(--c-sun-gold);
+  color: var(--c-black);
+  transform: translateY(calc(var(--ui-px) * 1));
+  box-shadow: inset 0 0 0 calc(var(--ui-px) * 1) var(--c-black);
+}
+
+/* RAIN WEATHER STATE OVERRIDES */
+#mode-rain:checked ~ .game-viewport {
+  background-color: var(--c-sky-rain);
+}
+#mode-rain:checked ~ .game-viewport .pixel-sun {
+  opacity: 0;
+  transform: translateY(-80px);
+}
+#mode-rain:checked ~ .game-viewport .storm-sky-overlay {
+  opacity: 0.7;
+}
+#mode-rain:checked ~ .game-viewport .lightning-strike {
+  animation: lightning 7s infinite ease-in-out;
+}
+#mode-rain:checked ~ .game-viewport .puddle {
+  display: block;
+}
+#mode-rain:checked ~ .game-viewport .farm-ground {
+  filter: brightness(0.85);
+}
+#mode-rain:checked ~ .game-viewport .farmer-umbrella {
+  display: block;
+}
+#mode-rain:checked ~ .game-viewport .frog {
+  animation: frog-hop 2.5s steps(4) infinite;
+}
+
+/* NIGHT WEATHER STATE OVERRIDES */
+#mode-night:checked ~ .game-viewport {
+  background-color: var(--c-sky-night);
+}
+#mode-night:checked ~ .game-viewport .pixel-sun {
+  display: none;
+}
+#mode-night:checked ~ .game-viewport .pixel-moon {
+  display: block;
+  opacity: 1;
+}
+#mode-night:checked ~ .game-viewport .night-stars {
+  display: block;
+}
+#mode-night:checked ~ .game-viewport .shooting-star {
+  display: block;
+}
+#mode-night:checked ~ .game-viewport .farmhouse .window {
+  background-color: var(--c-sun-gold);
+  box-shadow: 0 0 calc(var(--px) * 8) var(--c-sun-gold);
+}
+#mode-night:checked ~ .game-viewport .scarecrow-eye {
+  background-color: var(--c-rain-cyan);
+  box-shadow: 0 0 6px var(--c-rain-cyan);
+}
+#mode-night:checked ~ .game-viewport .pixel-farmer {
+  opacity: 0;
+  transform: translateX(-40px); /* Farmer is sleeping indoors */
+}
+#mode-night:checked ~ .game-viewport .farmhouse .door {
+  background-color: #281000;
+}
+#mode-night:checked ~ .game-viewport .farm-ground {
+  filter: brightness(0.65) contrast(1.15);
+}
+
+/* --------------------------------------------------------------------------
+   5. DYNAMIC PARALLAX LAYERS (INFINITE PIXEL LOOPS)
+   Seamless repeating gradients and step-based horizontal translation
+   -------------------------------------------------------------------------- */
+.scene {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 200%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Far Mountains */
+.layer--mountains {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0px, transparent 30px,
+    #2c4068 30px, #2c4068 70px,
+    transparent 70px, transparent 120px
+  );
+  top: 25%;
+  height: 35%;
+  opacity: 0.6;
+  animation: parallax-slide 60s steps(120) infinite;
+}
+
+/* Mid Hills */
+.layer--hills {
+  background: radial-gradient(circle at 50% 100%, #1e5828 0%, #184820 60%, transparent 70%);
+  background-size: 260px 140px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+  top: 35%;
+  height: 30%;
+  animation: parallax-slide 32s steps(80) infinite;
+}
+
+/* Near Trees / Bushes */
+.layer--trees {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0, transparent 40px,
+    var(--c-grass-dark) 40px, var(--c-grass-dark) 52px,
+    transparent 52px, transparent 110px
+  );
+  top: 48%;
+  height: 20%;
+  animation: parallax-slide 16s steps(40) infinite;
+}
+
+/* --------------------------------------------------------------------------
+   6. SKY, CELESTIALS & ATMOSPHERIC FX
+   -------------------------------------------------------------------------- */
+.sky-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 60%;
+  pointer-events: none;
+}
+
+/* 8-Bit Pixel Sun */
+.pixel-sun {
+  position: absolute;
+  top: calc(var(--px) * 10);
+  right: calc(var(--px) * 20);
+  width: calc(var(--px) * 24);
+  height: calc(var(--px) * 24);
+  transition: all 0.6s steps(6);
+}
+.sun-core {
+  width: 100%;
+  height: 100%;
+  background-color: var(--c-sun-gold);
+  border: calc(var(--px) * 2) solid var(--c-sun-orange);
+  box-shadow: 0 0 0 calc(var(--px) * 2) var(--c-black);
+}
+.sun-rays {
+  position: absolute;
+  top: -15%; left: -15%;
+  width: 130%; height: 130%;
+  border: calc(var(--px) * 2) dashed var(--c-sun-gold);
+  animation: spin-rays 20s steps(16) infinite;
+}
+
+/* Pixel Moon with Craters */
+.pixel-moon {
+  display: none;
+  position: absolute;
+  top: calc(var(--px) * 10);
+  right: calc(var(--px) * 24);
+  width: calc(var(--px) * 20);
+  height: calc(var(--px) * 20);
+  background-color: #e4e8f8;
+  border: calc(var(--px) * 2) solid #a4acc8;
+  box-shadow: 0 0 0 calc(var(--px) * 2) var(--c-black),
+              inset calc(var(--px) * 4) calc(var(--px) * 4) 0 #c0c8e0;
+}
+
+/* Night Stars Backdrop (Generated with Box-Shadows) */
+.night-stars {
+  display: none;
+  position: absolute;
+  width: calc(var(--px) * 2);
+  height: calc(var(--px) * 2);
+  background: var(--c-white);
+  box-shadow:
+    5vw 8vh var(--c-night-star),
+    18vw 15vh var(--c-white),
+    35vw 6vh var(--c-white),
+    48vw 18vh var(--c-night-star),
+    62vw 10vh var(--c-white),
+    78vw 5vh var(--c-night-star),
+    88vw 16vh var(--c-white),
+    22vw 28vh var(--c-night-star),
+    54vw 26vh var(--c-white);
+  animation: twinkle 3s steps(3) infinite;
+}
+
+/* Shooting Star */
+.shooting-star {
+  display: none;
+  position: absolute;
+  top: 10%; left: 30%;
+  width: calc(var(--px) * 20);
+  height: calc(var(--px) * 2);
+  background: linear-gradient(90deg, var(--c-white), transparent);
+  transform: rotate(-30deg);
+  opacity: 0;
+  animation: shoot-star 8s steps(10) infinite 2s;
+}
+
+/* Drifting Pixel Clouds */
+.cloud-drift {
+  position: absolute;
+  width: calc(var(--px) * 40);
+  height: calc(var(--px) * 16);
+  background-color: var(--c-white);
+  border: calc(var(--px) * 2) solid var(--c-black);
+  box-shadow: inset calc(var(--px) * 2) calc(var(--px) * 2) 0 #d8e0f0;
+}
+.cloud-drift::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--px) * -8);
+  left: calc(var(--px) * 8);
+  width: calc(var(--px) * 20);
+  height: calc(var(--px) * 8);
+  background-color: var(--c-white);
+  border-top: calc(var(--px) * 2) solid var(--c-black);
+  border-left: calc(var(--px) * 2) solid var(--c-black);
+  border-right: calc(var(--px) * 2) solid var(--c-black);
+}
+.cloud--1 {
+  top: 12%;
+  animation: cloud-float 26s linear infinite;
+}
+.cloud--2 {
+  top: 24%;
+  transform: scale(0.75);
+  animation: cloud-float 38s linear infinite -14s;
+}
+
+/* Storm Overlays & Lightning */
+.storm-sky-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: #101824;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.lightning-strike {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   7. FARM ARCHITECTURE, NATURE & CROPS
+   -------------------------------------------------------------------------- */
+.farm-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 48%;
+  background: linear-gradient(to bottom, var(--c-grass-light) 0%, var(--c-grass-mid) 14px, var(--c-grass-dark) 24px, var(--c-dirt-light) 30px, var(--c-dirt-dark) 100%);
+  border-top: calc(var(--px) * 2) solid var(--c-black);
+  transition: filter 0.4s ease;
+}
+
+/* Farmhouse */
+.farmhouse {
+  position: absolute;
+  top: calc(var(--px) * -38);
+  left: calc(var(--px) * 16);
+  width: calc(var(--px) * 48);
+  height: calc(var(--px) * 44);
+}
+.roof {
+  width: 0;
+  height: 0;
+  border-left: calc(var(--px) * 26) solid transparent;
+  border-right: calc(var(--px) * 26) solid transparent;
+  border-bottom: calc(var(--px) * 18) solid var(--c-barn-red);
+  margin-left: calc(var(--px) * -2);
+  filter: drop-shadow(0 calc(var(--px) * 2) 0 var(--c-black));
+}
+.house-body {
+  width: calc(var(--px) * 44);
+  height: calc(var(--px) * 26);
+  background-color: var(--c-wood-light);
+  border: calc(var(--px) * 2) solid var(--c-black);
+  margin-left: calc(var(--px) * 2);
+  position: relative;
+}
+.chimney {
+  position: absolute;
+  top: calc(var(--px) * -8);
+  right: calc(var(--px) * 6);
+  width: calc(var(--px) * 8);
+  height: calc(var(--px) * 14);
+  background-color: var(--c-roof-slate);
+  border: calc(var(--px) * 2) solid var(--c-black);
+}
+.smoke {
+  position: absolute;
+  top: calc(var(--px) * -8);
+  width: calc(var(--px) * 4);
+  height: calc(var(--px) * 4);
+  background-color: rgba(220, 220, 220, 0.7);
+  border-radius: 50%;
+  animation: smoke-rise 3s steps(6) infinite;
+}
+.smoke-2 { animation-delay: 1.5s; }
+
+.farmhouse .door {
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--px) * 6);
+  width: calc(var(--px) * 10);
+  height: calc(var(--px) * 16);
+  background-color: var(--c-wood-dark);
+  border: calc(var(--px) * 2) solid var(--c-black);
+  border-bottom: 0;
+}
+.farmhouse .window {
+  position: absolute;
+  top: calc(var(--px) * 4);
+  right: calc(var(--px) * 6);
+  width: calc(var(--px) * 10);
+  height: calc(var(--px) * 10);
+  background-color: #88c8f8;
+  border: calc(var(--px) * 2) solid var(--c-black);
+  transition: background-color 0.4s steps(2);
+}
+
+/* Barn Shed */
+.barn-shed {
+  position: absolute;
+  top: calc(var(--px) * -24);
+  left: calc(var(--px) * 68);
+  width: calc(var(--px) * 26);
+  height: calc(var(--px) * 26);
+  background-color: var(--c-barn-red);
+  border: calc(var(--px) * 2) solid var(--c-black);
+  box-shadow: inset calc(var(--px) * 4) 0 0 #901818;
+}
+
+/* Fence Row */
+.fence-line {
+  position: absolute;
+  top: calc(var(--px) * -12);
+  left: calc(var(--px) * 98);
+  width: 50%;
+  height: calc(var(--px) * 12);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--c-wood-light) 0, var(--c-wood-light) calc(var(--px) * 4),
+    transparent calc(var(--px) * 4), transparent calc(var(--px) * 16)
+  );
+  border-bottom: calc(var(--px) * 2) solid var(--c-wood-dark);
+}
+
+/* Crop Patch Rows */
+.crop-patch {
+  position: absolute;
+  top: calc(var(--px) * 20);
+  left: 28%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--px) * 10);
+}
+.crop-row {
+  display: flex;
+  gap: calc(var(--px) * 14);
+}
+
+/* Base Plant */
+.plant {
+  width: calc(var(--px) * 8);
+  height: calc(var(--px) * 10);
+  background-color: var(--c-grass-dark);
+  position: relative;
+  transition: all 0.5s steps(4);
+}
+.plant::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--px) * -4);
+  left: calc(var(--px) * 2);
+  width: calc(var(--px) * 4);
+  height: calc(var(--px) * 4);
+  background-color: var(--c-grass-light);
+}
+
+/* Plant Evolutions */
+.plant-sunflower::after {
+  background-color: var(--c-sun-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 0 calc(var(--px) * 2) var(--c-sun-orange);
+}
+.plant-flower::after {
+  background-color: #f878a8;
+  box-shadow: 0 0 0 calc(var(--px) * 1) var(--c-white);
+}
+
+/* Weather Growth Responses */
+#mode-rain:checked ~ .game-viewport .plant {
+  transform: scaleY(1.4);
+  filter: brightness(1.2);
+}
+#mode-sun:checked ~ .game-viewport .plant-sunflower {
+  transform: scale(1.3) rotate(5deg);
+}
+
+/* Scarecrow */
+.scarecrow {
+  position: absolute;
+  top: calc(var(--px) * 8);
+  left: 20%;
+  width: calc(var(--px) * 12);
+  height: calc(var(--px) * 24);
+}
+.scarecrow-head {
+  width: calc(var(--px) * 8);
+  height: calc(var(--px) * 8);
+  background-color: #e0d090;
+  border: calc(var(--px) * 1) solid var(--c-black);
+  margin: 0 auto;
+  position: relative;
+}
+.scarecrow-eye {
+  position: absolute;
+  top: calc(var(--px) * 2);
+  width: calc(var(--px) * 2);
+  height: calc(var(--px) * 2);
+  background-color: var(--c-black);
+}
+.eye-left { left: calc(var(--px) * 1); }
+.eye-right { right: calc(var(--px) * 1); }
+.scarecrow-body {
+  width: calc(var(--px) * 14);
+  height: calc(var(--px) * 14);
+  background-color: #5078a0;
+  border: calc(var(--px) * 1) solid var(--c-black);
+  margin-left: calc(var(--px) * -1);
+}
+
+/* Puddles & Ripples */
+.puddle {
+  display: none;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #386888;
+  border: calc(var(--px) * 1) solid #68a0c8;
+}
+.puddle-1 {
+  bottom: calc(var(--px) * 12);
+  left: 45%;
+  width: calc(var(--px) * 24);
+  height: calc(var(--px) * 8);
+}
+.puddle-2 {
+  bottom: calc(var(--px) * 28);
+  left: 70%;
+  width: calc(var(--px) * 32);
+  height: calc(var(--px) * 10);
+}
+
+/* Small Pond with Lilypad */
+.pond {
+  position: absolute;
+  bottom: calc(var(--px) * 10);
+  right: calc(var(--px) * 12);
+  width: calc(var(--px) * 56);
+  height: calc(var(--px) * 28);
+  background-color: #206098;
+  border: calc(var(--px) * 2) solid var(--c-grass-dark);
+  border-radius: 40%;
+}
+.frog {
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  width: calc(var(--px) * 6);
+  height: calc(var(--px) * 4);
+  background-color: var(--c-grass-light);
+  border: calc(var(--px) * 1) solid var(--c-black);
+}
+
+/* Signpost */
+.signpost {
+  position: absolute;
+  top: calc(var(--px) * 14);
+  left: calc(var(--px) * 10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sign-board {
+  font-size: calc(var(--ui-px) * 2.5);
+  background-color: var(--c-wood-light);
+  color: var(--c-black);
+  padding: calc(var(--px) * 2) calc(var(--px) * 4);
+  border: calc(var(--px) * 2) solid var(--c-black);
+}
+.sign-pole {
+  width: calc(var(--px) * 4);
+  height: calc(var(--px) * 14);
+  background-color: var(--c-wood-dark);
+  border: calc(var(--px) * 1) solid var(--c-black);
+}
+
+/* --------------------------------------------------------------------------
+   8. PIXEL CHARACTERS & ANIMATED CRITTERS
+   -------------------------------------------------------------------------- */
+/* Pixel Farmer (Breathing + Patrol Animation) */
+.pixel-farmer {
+  position: absolute;
+  bottom: calc(var(--px) * 14);
+  left: 12%;
+  width: calc(var(--px) * 14);
+  height: calc(var(--px) * 28);
+  z-index: 10;
+  transition: transform 0.6s ease, opacity 0.5s ease;
+  animation: farmer-patrol 18s steps(18) infinite alternate;
+}
+.farmer-hat {
+  width: calc(var(--px) * 14);
+  height: calc(var(--px) * 5);
+  background-color: #d0a040;
+  border: calc(var(--px) * 1) solid var(--c-black);
+}
+.farmer-head {
+  width: calc(var(--px) * 8);
+  height: calc(var(--px) * 8);
+  background-color: var(--c-skin);
+  border: calc(var(--px) * 1) solid var(--c-black);
+  margin: 0 auto;
+}
+.farmer-overalls {
+  width: calc(var(--px) * 10);
+  height: calc(var(--px) * 15);
+  background-color: var(--c-overalls);
+  border: calc(var(--px) * 1) solid var(--c-black);
+  margin: 0 auto;
+}
+.farmer-umbrella {
+  display: none;
+  position: absolute;
+  top: calc(var(--px) * -12);
+  left: calc(var(--px) * 8);
+  width: calc(var(--px) * 20);
+  height: calc(var(--px) * 12);
+  background-color: var(--c-barn-red);
+  border: calc(var(--px) * 1) solid var(--c-black);
+  border-radius: 50% 50% 0 0;
+}
+
+/* Wandering Chicken */
+.pixel-chicken {
+  position: absolute;
+  bottom: calc(var(--px) * 8);
+  left: 60%;
+  width: calc(var(--px) * 8);
+  height: calc(var(--px) * 8);
+  background-color: var(--c-white);
+  border: calc(var(--px) * 1) solid var(--c-black);
+  animation: wander 12s steps(8) infinite alternate;
+}
+.pixel-chicken::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: calc(var(--px) * 3);
+  height: calc(var(--px) * 3);
+  background-color: var(--c-sun-orange);
+}
+
+/* Sleeping/Prowling Cat */
+.pixel-cat {
+  position: absolute;
+  bottom: calc(var(--px) * 16);
+  left: calc(var(--px) * 54);
+  width: calc(var(--px) * 8);
+  height: calc(var(--px) * 6);
+  background-color: #d87020;
+  border: calc(var(--px) * 1) solid var(--c-black);
+}
+
+/* Flying Birds */
+.pixel-bird {
+  position: absolute;
+  width: calc(var(--px) * 6);
+  height: calc(var(--px) * 2);
+  background: var(--c-black);
+  box-shadow: calc(var(--px) * 4) calc(var(--px) * -2) 0 var(--c-black);
+}
+.bird-1 {
+  top: 18%; left: -20px;
+  animation: bird-fly 15s linear infinite;
+}
+.bird-2 {
+  top: 25%; left: -60px;
+  animation: bird-fly 18s linear infinite 5s;
+}
+
+/* --------------------------------------------------------------------------
+   9. COLLECTIBLES ENGINE (SPAWN, FLOAT, CATCH & POP)
+   Labels linked to hidden checkboxes. Active only during their weather.
+   -------------------------------------------------------------------------- */
+.collect-stage {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+/* Collectible Label Base */
+.item {
+  position: absolute;
+  cursor: pointer;
+  pointer-events: auto;
+  padding: calc(var(--px) * 4);
+  margin: calc(var(--px) * -4);
+  display: none; /* Inactive by default */
+  transform-origin: center;
+}
+
+.item:hover, .item:focus {
+  transform: scale(1.3);
+}
+
+/* Reveal Mode-Specific Collectibles */
+#mode-sun:checked ~ .game-viewport .item--coin {
+  display: block;
+}
+#mode-rain:checked ~ .game-viewport .item--drop {
+  display: block;
+}
+#mode-night:checked ~ .game-viewport .item--star {
+  display: block;
+}
+
+/* SUN SPARKLES POSITIONS & BOBBING */
+.coin-pos-1 { top: 38%; left: 16%; animation: bob 2.2s steps(4) infinite; }
+.coin-pos-2 { top: 22%; left: 32%; animation: bob 2.8s steps(4) infinite 0.4s; }
+.coin-pos-3 { top: 46%; left: 42%; animation: bob 1.9s steps(4) infinite 0.8s; }
+.coin-pos-4 { top: 30%; left: 55%; animation: bob 2.5s steps(4) infinite 1.2s; }
+.coin-pos-5 { top: 48%; left: 68%; animation: bob 2.1s steps(4) infinite 0.2s; }
+.coin-pos-6 { top: 26%; left: 78%; animation: bob 2.7s steps(4) infinite 0.6s; }
+.coin-pos-7 { top: 56%; left: 35%; animation: bob 2.0s steps(4) infinite 1.0s; }
+.coin-pos-8 { top: 54%; left: 86%; animation: bob 2.4s steps(4) infinite 1.4s; }
+
+/* RAINDROPS POSITIONS & FALLING LOOPS */
+.drop-pos-1 { left: 12%; animation: drop-fall 3.2s linear infinite 0.1s; }
+.drop-pos-2 { left: 24%; animation: drop-fall 2.8s linear infinite 0.9s; }
+.drop-pos-3 { left: 36%; animation: drop-fall 3.5s linear infinite 1.6s; }
+.drop-pos-4 { left: 48%; animation: drop-fall 2.6s linear infinite 0.4s; }
+.drop-pos-5 { left: 60%; animation: drop-fall 3.1s linear infinite 1.2s; }
+.drop-pos-6 { left: 72%; animation: drop-fall 2.9s linear infinite 2.0s; }
+.drop-pos-7 { left: 84%; animation: drop-fall 3.4s linear infinite 0.7s; }
+.drop-pos-8 { left: 92%; animation: drop-fall 2.7s linear infinite 1.5s; }
+
+/* FIREFLIES POSITIONS & FLOATING SWARM */
+.star-pos-1 { top: 40%; left: 18%; animation: firefly 4.5s ease-in-out infinite; }
+.star-pos-2 { top: 28%; left: 26%; animation: firefly 5.2s ease-in-out infinite 0.8s; }
+.star-pos-3 { top: 45%; left: 46%; animation: firefly 3.8s ease-in-out infinite 1.4s; }
+.star-pos-4 { top: 32%; left: 58%; animation: firefly 4.8s ease-in-out infinite 0.3s; }
+.star-pos-5 { top: 52%; left: 66%; animation: firefly 4.1s ease-in-out infinite 2.1s; }
+.star-pos-6 { top: 35%; left: 76%; animation: firefly 5.5s ease-in-out infinite 1.1s; }
+.star-pos-7 { top: 62%; left: 29%; animation: firefly 3.9s ease-in-out infinite 2.6s; }
+.star-pos-8 { top: 58%; left: 82%; animation: firefly 4.7s ease-in-out infinite 0.6s; }
+
+/* ITEM COLLECTED POP & REMOVAL EFFECT */
+#coin-1:checked ~ .game-viewport label[for="coin-1"],
+#coin-2:checked ~ .game-viewport label[for="coin-2"],
+#coin-3:checked ~ .game-viewport label[for="coin-3"],
+#coin-4:checked ~ .game-viewport label[for="coin-4"],
+#coin-5:checked ~ .game-viewport label[for="coin-5"],
+#coin-6:checked ~ .game-viewport label[for="coin-6"],
+#coin-7:checked ~ .game-viewport label[for="coin-7"],
+#coin-8:checked ~ .game-viewport label[for="coin-8"],
+#drop-1:checked ~ .game-viewport label[for="drop-1"],
+#drop-2:checked ~ .game-viewport label[for="drop-2"],
+#drop-3:checked ~ .game-viewport label[for="drop-3"],
+#drop-4:checked ~ .game-viewport label[for="drop-4"],
+#drop-5:checked ~ .game-viewport label[for="drop-5"],
+#drop-6:checked ~ .game-viewport label[for="drop-6"],
+#drop-7:checked ~ .game-viewport label[for="drop-7"],
+#drop-8:checked ~ .game-viewport label[for="drop-8"],
+#star-1:checked ~ .game-viewport label[for="star-1"],
+#star-2:checked ~ .game-viewport label[for="star-2"],
+#star-3:checked ~ .game-viewport label[for="star-3"],
+#star-4:checked ~ .game-viewport label[for="star-4"],
+#star-5:checked ~ .game-viewport label[for="star-5"],
+#star-6:checked ~ .game-viewport label[for="star-6"],
+#star-7:checked ~ .game-viewport label[for="star-7"],
+#star-8:checked ~ .game-viewport label[for="star-8"] {
+  animation: item-pop 0.3s steps(3) forwards;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   10. PURE CSS SCORING (COUNTERS ENGINE)
+   Increments individual and combined counters for each checked input
+   -------------------------------------------------------------------------- */
+/* Increment Sun Coins */
+#coin-1:checked, #coin-2:checked, #coin-3:checked, #coin-4:checked,
+#coin-5:checked, #coin-6:checked, #coin-7:checked, #coin-8:checked {
+  counter-increment: totalScore 1 sunScore 1;
+}
+
+/* Increment Rain Drops */
+#drop-1:checked, #drop-2:checked, #drop-3:checked, #drop-4:checked,
+#drop-5:checked, #drop-6:checked, #drop-7:checked, #drop-8:checked {
+  counter-increment: totalScore 1 rainScore 1;
+}
+
+/* Increment Night Stars */
+#star-1:checked, #star-2:checked, #star-3:checked, #star-4:checked,
+#star-5:checked, #star-6:checked, #star-7:checked, #star-8:checked {
+  counter-increment: totalScore 1 nightScore 1;
+}
+
+/* Render Counter Values in the HUD */
+.total-score-val::after { content: counter(totalScore); }
+.coin-score-val::after  { content: counter(sunScore); }
+.drop-score-val::after  { content: counter(rainScore); }
+.star-score-val::after  { content: counter(nightScore); }
+
+/* --------------------------------------------------------------------------
+   11. WIN STATE MODALS & CELEBRATION CONFETTI
+   Triggered via pure CSS sibling chains without any JavaScript
+   -------------------------------------------------------------------------- */
+/* Popups Base */
+.banner {
+  display: none;
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--c-black);
+  border: calc(var(--ui-px) * 1) solid var(--c-sun-gold);
+  padding: calc(var(--ui-px) * 4) calc(var(--ui-px) * 6);
+  text-align: center;
+  z-index: 80;
+  animation: modal-drop 0.4s steps(4);
+}
+.banner h3 { font-size: calc(var(--ui-px) * 3); color: var(--c-sun-gold); margin-bottom: 8px; }
+.banner p  { font-size: calc(var(--ui-px) * 2); color: var(--c-white); }
+
+/* 1. SUN MODE COMPLETE (All 8 Sun Coins Checked) */
+#coin-1:checked ~ #coin-2:checked ~ #coin-3:checked ~ #coin-4:checked ~
+#coin-5:checked ~ #coin-6:checked ~ #coin-7:checked ~ #coin-8:checked ~
+.game-viewport .banner--sun-complete {
+  display: block;
+}
+
+/* 2. RAIN MODE COMPLETE (All 8 Rain Drops Checked) */
+#drop-1:checked ~ #drop-2:checked ~ #drop-3:checked ~ #drop-4:checked ~
+#drop-5:checked ~ #drop-6:checked ~ #drop-7:checked ~ #drop-8:checked ~
+.game-viewport .banner--rain-complete {
+  display: block;
+}
+
+/* 3. NIGHT MODE COMPLETE (All 8 Stars Checked) */
+#star-1:checked ~ #star-2:checked ~ #star-3:checked ~ #star-4:checked ~
+#star-5:checked ~ #star-6:checked ~ #star-7:checked ~ #star-8:checked ~
+.game-viewport .banner--night-complete {
+  display: block;
+}
+
+/* 4. ULTIMATE WIN MODAL: FARM MASTER (All 24 Items Checked) */
+#coin-1:checked ~ #coin-2:checked ~ #coin-3:checked ~ #coin-4:checked ~
+#coin-5:checked ~ #coin-6:checked ~ #coin-7:checked ~ #coin-8:checked ~
+#drop-1:checked ~ #drop-2:checked ~ #drop-3:checked ~ #drop-4:checked ~
+#drop-5:checked ~ #drop-6:checked ~ #drop-7:checked ~ #drop-8:checked ~
+#star-1:checked ~ #star-2:checked ~ #star-3:checked ~ #star-4:checked ~
+#star-5:checked ~ #star-6:checked ~ #star-7:checked ~ #star-8:checked ~
+.game-viewport .game-win-modal {
+  display: flex;
+}
+
+.game-win-modal {
+  display: none;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  background-color: var(--c-black);
+  border: calc(var(--ui-px) * 2) solid var(--c-sun-gold);
+  padding: calc(var(--ui-px) * 8);
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 100;
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.85);
+  animation: modal-drop 0.5s steps(5);
+}
+.win-title {
+  font-size: calc(var(--ui-px) * 4);
+  color: var(--c-sun-gold);
+  animation: text-pulse 1s steps(2) infinite;
+  margin-bottom: 12px;
+}
+.win-desc {
+  font-size: calc(var(--ui-px) * 2);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* Pure CSS Confetti Pieces */
+.confetti-container {
+  position: absolute;
+  top: -20px; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+}
+.confetti {
+  position: absolute;
+  width: calc(var(--px) * 3);
+  height: calc(var(--px) * 3);
+  animation: confetti-fall 2.5s steps(8) infinite;
+}
+.c1 { left: 10%; background: var(--c-sun-gold);   animation-delay: 0.2s; }
+.c2 { left: 28%; background: var(--c-rain-cyan);  animation-delay: 0.6s; }
+.c3 { left: 45%; background: var(--c-barn-red);   animation-delay: 1.2s; }
+.c4 { left: 62%; background: var(--c-grass-light);animation-delay: 0.4s; }
+.c5 { left: 80%; background: var(--c-white);      animation-delay: 0.9s; }
+.c6 { left: 92%; background: var(--c-night-star); animation-delay: 1.5s; }
+
+/* --------------------------------------------------------------------------
+   12. HUD, BUTTONS & RETRO BORDERS
+   -------------------------------------------------------------------------- */
+.hud-top {
+  padding: calc(var(--ui-px) * 3) calc(var(--ui-px) * 4);
+  background-color: rgba(8, 8, 16, 0.9);
+  border-bottom: calc(var(--ui-px) * 1) solid var(--c-black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hud-top__title {
+  font-size: calc(var(--ui-px) * 2.8);
+  color: var(--c-sun-gold);
+  letter-spacing: 1px;
+}
+.hud-top__stats {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ui-px) * 3);
+}
+
+.stat-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--c-black);
+  padding: calc(var(--ui-px) * 1.5) calc(var(--ui-px) * 2.5);
+  border: calc(var(--ui-px) * 1) solid #303848;
+  font-size: calc(var(--ui-px) * 2);
+}
+.stat--total { border-color: var(--c-sun-gold); }
+.stat-max   { color: #687890; font-size: 0.8em; }
+
+/* Mini Icons inside HUD */
+.icon-mini {
+  display: inline-block;
+  width: calc(var(--ui-px) * 2.5);
+  height: calc(var(--ui-px) * 2.5);
+}
+.icon-coin { background-color: var(--c-sun-gold); border-radius: 50%; }
+.icon-drop { background-color: var(--c-rain-cyan); }
+.icon-star { background-color: var(--c-night-star); }
+
+/* HUD Bottom Bar */
+.hud-bottom {
+  padding: calc(var(--ui-px) * 2.5) calc(var(--ui-px) * 4);
+  background-color: rgba(8, 8, 16, 0.95);
+  border-top: calc(var(--ui-px) * 1) solid var(--c-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 50;
+}
+.hud-instruction {
+  font-size: calc(var(--ui-px) * 1.6);
+  color: #a8b8d0;
+  letter-spacing: 0.5px;
+}
+.hud-actions {
+  display: flex;
+  gap: calc(var(--ui-px) * 2);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Pixel Button Style */
+.pixel-btn {
+  font-family: var(--font-retro);
+  font-size: calc(var(--ui-px) * 2);
+  padding: calc(var(--ui-px) * 2) calc(var(--ui-px) * 3);
+  background-color: #242c40;
+  color: var(--c-white);
+  border: none;
+  cursor: pointer;
+  box-shadow:
+    inset calc(var(--ui-px) * -1) calc(var(--ui-px) * -1) 0 #0c1018,
+    inset calc(var(--ui-px) * 1) calc(var(--ui-px) * 1) 0 #485878,
+    0 0 0 calc(var(--ui-px) * 1) var(--c-black);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.pixel-btn:hover {
+  background-color: #384460;
+}
+.pixel-btn:active {
+  transform: translateY(calc(var(--ui-px) * 1));
+  box-shadow: inset calc(var(--ui-px) * 1) calc(var(--ui-px) * 1) 0 var(--c-black);
+}
+
+.btn--reset { background-color: #782020; }
+.btn--reset:hover { background-color: #a02828; }
+.btn--reset-win { background-color: var(--c-sun-gold); color: var(--c-black); margin-top: 10px; }
+
+/* --------------------------------------------------------------------------
+   13. ANIMATIONS & KEYFRAMES
+   Using steps() timing for authentic retro game frame rates
+   -------------------------------------------------------------------------- */
+@keyframes parallax-slide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes spin-rays {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes cloud-float {
+  from { transform: translateX(-120px); }
+  to   { transform: translateX(110vw); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(calc(var(--px) * -4)); }
+}
+
+@keyframes drop-fall {
+  0%   { transform: translateY(-40px); opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(65vh); opacity: 0; }
+}
+
+@keyframes firefly {
+  0%, 100% { transform: translate(0, 0); }
+  25%      { transform: translate(calc(var(--px) * 6), calc(var(--px) * -8)); }
+  50%      { transform: translate(calc(var(--px) * -6), calc(var(--px) * -4)); }
+  75%      { transform: translate(calc(var(--px) * 4), calc(var(--px) * 6)); }
+}
+
+@keyframes item-pop {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.8) translateY(-10px); opacity: 0.8; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+@keyframes smoke-rise {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.8; }
+  100% { transform: translate(calc(var(--px) * -8), calc(var(--px) * -20)) scale(2); opacity: 0; }
+}
+
+@keyframes lightning {
+  0%, 94%, 98%, 100% { opacity: 0; }
+  95%, 97%           { opacity: 1; }
+}
+
+@keyframes frog-hop {
+  0%, 80%, 100% { transform: translateY(0); }
+  85%           { transform: translateY(calc(var(--px) * -8)); }
+}
+
+@keyframes farmer-patrol {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(var(--px) * 55)); }
+}
+
+@keyframes wander {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(calc(var(--px) * 16)); }
+  100% { transform: translateX(calc(var(--px) * -10)); }
+}
+
+@keyframes bird-fly {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(110vw, calc(var(--px) * -12)); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
+}
+
+@keyframes shoot-star {
+  0%   { transform: translate(0, 0) rotate(-30deg); opacity: 0; }
+  5%   { opacity: 1; }
+  15%  { transform: translate(150px, 150px) rotate(-30deg); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes modal-drop {
+  from { transform: translate(-50%, -70%); opacity: 0; }
+  to   { transform: translate(-50%, -50%); opacity: 1; }
+}
+
+@keyframes text-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+
+@keyframes confetti-fall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(280px) rotate(360deg); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   14. RESPONSIVE LAYOUT (MOBILE & TOUCH)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  :root {
+    --ui-px: 2px;
+  }
+  .hud-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hud-top__title {
+    font-size: calc(var(--ui-px) * 3);
+  }
+  .hud-top__stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .hud-instruction {
+    display: none; /* Conserve vertical space */
+  }
+  .crop-patch {
+    left: 20%;
+    gap: calc(var(--px) * 6);
+  }
+  .farmhouse {
+    left: calc(var(--px) * 4);
+    transform: scale(0.85);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15. ACCESSIBILITY (PREFERS-REDUCED-MOTION & FOCUS)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .parallax-layer,
+  .cloud-drift,
+  .shooting-star,
+  .pixel-bird {
+    animation: none !important;
+  }
+}

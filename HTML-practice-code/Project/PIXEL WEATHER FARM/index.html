@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel Weather Farm // Pure CSS Game</title>
+  
+  <!-- Retro Pixel Font: Press Start 2P -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="game-body">
+
+  <!-- ===================================================================
+       FORM ENGINE: Wraps all stateful inputs so <button type="reset">
+       can reset all radio buttons & checkboxes without a single line of JS.
+       =================================================================== -->
+  <form class="game-form" id="farmGame">
+
+    <!-- 1. CRT SCANLINE TOGGLE -->
+    <input type="checkbox" id="toggle-crt" class="sr-input" aria-label="Toggle CRT Scanline Overlay" />
+
+    <!-- 2. WEATHER RADIO BUTTONS (Placed early in DOM for Sibling Combinator) -->
+    <input type="radio" name="weather" id="mode-sun" class="sr-input weather-radio" checked aria-label="Sunny Weather Mode" />
+    <input type="radio" name="weather" id="mode-rain" class="sr-input weather-radio" aria-label="Rainy Weather Mode" />
+    <input type="radio" name="weather" id="mode-night" class="sr-input weather-radio" aria-label="Night Starry Mode" />
+
+    <!-- 3. COLLECTIBLE CHECKBOXES: SUN MODE (COINS 1..8) -->
+    <input type="checkbox" id="coin-1" class="sr-input item-check item-sun" aria-label="Sun Sparkle 1" />
+    <input type="checkbox" id="coin-2" class="sr-input item-check item-sun" aria-label="Sun Sparkle 2" />
+    <input type="checkbox" id="coin-3" class="sr-input item-check item-sun" aria-label="Sun Sparkle 3" />
+    <input type="checkbox" id="coin-4" class="sr-input item-check item-sun" aria-label="Sun Sparkle 4" />
+    <input type="checkbox" id="coin-5" class="sr-input item-check item-sun" aria-label="Sun Sparkle 5" />
+    <input type="checkbox" id="coin-6" class="sr-input item-check item-sun" aria-label="Sun Sparkle 6" />
+    <input type="checkbox" id="coin-7" class="sr-input item-check item-sun" aria-label="Sun Sparkle 7" />
+    <input type="checkbox" id="coin-8" class="sr-input item-check item-sun" aria-label="Sun Sparkle 8" />
+
+    <!-- 4. COLLECTIBLE CHECKBOXES: RAIN MODE (DROPS 1..8) -->
+    <input type="checkbox" id="drop-1" class="sr-input item-check item-rain" aria-label="Rain Drop 1" />
+    <input type="checkbox" id="drop-2" class="sr-input item-check item-rain" aria-label="Rain Drop 2" />
+    <input type="checkbox" id="drop-3" class="sr-input item-check item-rain" aria-label="Rain Drop 3" />
+    <input type="checkbox" id="drop-4" class="sr-input item-check item-rain" aria-label="Rain Drop 4" />
+    <input type="checkbox" id="drop-5" class="sr-input item-check item-rain" aria-label="Rain Drop 5" />
+    <input type="checkbox" id="drop-6" class="sr-input item-check item-rain" aria-label="Rain Drop 6" />
+    <input type="checkbox" id="drop-7" class="sr-input item-check item-rain" aria-label="Rain Drop 7" />
+    <input type="checkbox" id="drop-8" class="sr-input item-check item-rain" aria-label="Rain Drop 8" />
+
+    <!-- 5. COLLECTIBLE CHECKBOXES: NIGHT MODE (STARS/FIREFLIES 1..8) -->
+    <input type="checkbox" id="star-1" class="sr-input item-check item-night" aria-label="Firefly Star 1" />
+    <input type="checkbox" id="star-2" class="sr-input item-check item-night" aria-label="Firefly Star 2" />
+    <input type="checkbox" id="star-3" class="sr-input item-check item-night" aria-label="Firefly Star 3" />
+    <input type="checkbox" id="star-4" class="sr-input item-check item-night" aria-label="Firefly Star 4" />
+    <input type="checkbox" id="star-5" class="sr-input item-check item-night" aria-label="Firefly Star 5" />
+    <input type="checkbox" id="star-6" class="sr-input item-check item-night" aria-label="Firefly Star 6" />
+    <input type="checkbox" id="star-7" class="sr-input item-check item-night" aria-label="Firefly Star 7" />
+    <input type="checkbox" id="star-8" class="sr-input item-check item-night" aria-label="Firefly Star 8" />
+
+    <!-- ===================================================================
+         GAME DISPLAY & SCENE CONTAINER
+         =================================================================== -->
+    <div class="game-viewport">
+
+      <!-- CRT Retro Filter Overlay -->
+      <div class="crt-lines" aria-hidden="true"></div>
+
+      <!-- CELEBRATION / WIN OVERLAYS -->
+      <div class="banner banner--sun-complete pixel-box">
+        <h3>SUN MASTERED!</h3>
+        <p>ALL 8 SUN SPARKLES HARVESTED!</p>
+      </div>
+
+      <div class="banner banner--rain-complete pixel-box">
+        <h3>RAIN MASTERED!</h3>
+        <p>ALL 8 RAIN DROPS CAUGHT!</p>
+      </div>
+
+      <div class="banner banner--night-complete pixel-box">
+        <h3>NIGHT MASTERED!</h3>
+        <p>ALL 8 FIREFLIES SECURED!</p>
+      </div>
+
+      <div class="game-win-modal pixel-box">
+        <div class="confetti-container" aria-hidden="true">
+          <span class="confetti c1"></span><span class="confetti c2"></span>
+          <span class="confetti c3"></span><span class="confetti c4"></span>
+          <span class="confetti c5"></span><span class="confetti c6"></span>
+        </div>
+        <h2 class="win-title">★ FARM MASTER! ★</h2>
+        <p class="win-desc">YOU HARVESTED ALL 24 WEATHER BLESSINGS!</p>
+        <button type="reset" class="pixel-btn btn--reset-win">PLAY AGAIN</button>
+      </div>
+
+      <!-- SCENE CANVAS -->
+      <main class="scene" id="gameScene">
+
+        <!-- LAYER 0: SKY, CELESTIALS & WEATHER PRECIPITATION -->
+        <div class="sky-layer">
+          <!-- Sun Element -->
+          <div class="pixel-sun" aria-hidden="true">
+            <div class="sun-core"></div>
+            <div class="sun-rays"></div>
+          </div>
+
+          <!-- Moon & Night Stars -->
+          <div class="pixel-moon" aria-hidden="true"></div>
+          <div class="night-stars" aria-hidden="true"></div>
+          <div class="shooting-star" aria-hidden="true"></div>
+
+          <!-- Clouds -->
+          <div class="cloud-drift cloud--1" aria-hidden="true"></div>
+          <div class="cloud-drift cloud--2" aria-hidden="true"></div>
+
+          <!-- Lightning Flash & Ambient Ambient Darkening -->
+          <div class="storm-sky-overlay" aria-hidden="true"></div>
+          <div class="lightning-strike" aria-hidden="true"></div>
+        </div>
+
+        <!-- LAYER 1: PARALLAX MOUNTAINS (SLOWEST) -->
+        <div class="parallax-layer layer--mountains" aria-hidden="true"></div>
+
+        <!-- LAYER 2: PARALLAX HILLS & SILHOUETTES -->
+        <div class="parallax-layer layer--hills" aria-hidden="true"></div>
+
+        <!-- LAYER 3: PARALLAX TREES & BUSHES -->
+        <div class="parallax-layer layer--trees" aria-hidden="true"></div>
+
+        <!-- LAYER 4: STATIC FARMSTEAD GROUND, CROPS & ARCHITECTURE -->
+        <div class="farm-ground">
+          
+          <!-- Farmhouse with Chimney Smoke & Glowing Window -->
+          <div class="farmhouse" aria-hidden="true">
+            <div class="chimney">
+              <span class="smoke smoke-1"></span>
+              <span class="smoke smoke-2"></span>
+            </div>
+            <div class="roof"></div>
+            <div class="house-body">
+              <div class="door"></div>
+              <div class="window"></div>
+            </div>
+          </div>
+
+          <!-- Barn Silo -->
+          <div class="barn-shed" aria-hidden="true"></div>
+
+          <!-- Wooden Fence Post Rows -->
+          <div class="fence-line" aria-hidden="true"></div>
+
+          <!-- Crop Field Rows -->
+          <div class="crop-patch">
+            <div class="crop-row row-1">
+              <div class="plant plant-sprout p-1"></div>
+              <div class="plant plant-sunflower p-2"></div>
+              <div class="plant plant-sprout p-3"></div>
+              <div class="plant plant-flower p-4"></div>
+              <div class="plant plant-sprout p-5"></div>
+            </div>
+            <div class="crop-row row-2">
+              <div class="plant plant-flower p-6"></div>
+              <div class="plant plant-sprout p-7"></div>
+              <div class="plant plant-sunflower p-8"></div>
+              <div class="plant plant-sprout p-9"></div>
+              <div class="plant plant-flower p-10"></div>
+            </div>
+          </div>
+
+          <!-- Scarecrow -->
+          <div class="scarecrow" aria-hidden="true">
+            <div class="scarecrow-head">
+              <div class="scarecrow-eye eye-left"></div>
+              <div class="scarecrow-eye eye-right"></div>
+            </div>
+            <div class="scarecrow-body"></div>
+          </div>
+
+          <!-- Rain Puddle Ripples -->
+          <div class="puddle puddle-1" aria-hidden="true"></div>
+          <div class="puddle puddle-2" aria-hidden="true"></div>
+
+          <!-- Pond with Jumping Pixel Frog -->
+          <div class="pond" aria-hidden="true">
+            <div class="frog"></div>
+          </div>
+
+          <!-- Wandering Pixel Livestock (Chicken & Cat) -->
+          <div class="pixel-chicken" aria-hidden="true"></div>
+          <div class="pixel-cat" aria-hidden="true"></div>
+
+          <!-- Flying Birds in Sun -->
+          <div class="pixel-bird bird-1" aria-hidden="true"></div>
+          <div class="pixel-bird bird-2" aria-hidden="true"></div>
+
+          <!-- Pixel Farmer Character -->
+          <div class="pixel-farmer" aria-label="Local Farmer">
+            <div class="farmer-hat"></div>
+            <div class="farmer-head"></div>
+            <div class="farmer-overalls"></div>
+            <div class="farmer-umbrella" aria-hidden="true"></div>
+          </div>
+
+          <!-- Signpost -->
+          <div class="signpost" aria-hidden="true">
+            <div class="sign-board">FARM</div>
+            <div class="sign-pole"></div>
+          </div>
+
+        </div> <!-- /.farm-ground -->
+
+        <!-- LAYER 5: COLLECTIBLE SPAWN STAGE (CLICK/TAP LABELS) -->
+        <div class="collect-stage">
+
+          <!-- SUN COLLECTIBLES (8 Golden Sun Sparkles) -->
+          <label for="coin-1" class="item item--coin coin-pos-1" title="Harvest Sun Sparkle 1">
+            <span class="pixel-coin"></span>
+          </label>
+          <label for="coin-2" class="item item--coin coin-pos-2" title="Harvest Sun Sparkle 2">
+            <span class="pixel-coin"></span>
+          </label>
+          <label for="coin-3" class="item item--coin coin-pos-3" title="Harvest Sun Sparkle 3">
+            <span class="pixel-coin"></span>
+          </label>
+          <label for="coin-4" class="item item--coin coin-pos-4" title="Harvest Sun Sparkle 4">
+            <span class="pixel-coin"></span>
+          </label>
+          <label for="coin-5" class="item item--coin coin-pos-5" title="Harvest Sun Sparkle 5">
+            <span class="pixel-coin"></span>
+          </label>
+          <label for="coin-6" class="item item--coin coin-pos-6" title="Harvest Sun Sparkle 6">
+            <span class="pixel-coin"></span>
+          </label>
+          <label for="coin-7" class="item item--coin coin-pos-7" title="Harvest Sun Sparkle 7">
+            <span class="pixel-coin"></span>
+          </label>
+          <label for="coin-8" class="item item--coin coin-pos-8" title="Harvest Sun Sparkle 8">
+            <span class="pixel-coin"></span>
+          </label>
+
+          <!-- RAIN COLLECTIBLES (8 Falling Raindrops) -->
+          <label for="drop-1" class="item item--drop drop-pos-1" title="Catch Raindrop 1">
+            <span class="pixel-drop"></span>
+          </label>
+          <label for="drop-2" class="item item--drop drop-pos-2" title="Catch Raindrop 2">
+            <span class="pixel-drop"></span>
+          </label>
+          <label for="drop-3" class="item item--drop drop-pos-3" title="Catch Raindrop 3">
+            <span class="pixel-drop"></span>
+          </label>
+          <label for="drop-4" class="item item--drop drop-pos-4" title="Catch Raindrop 4">
+            <span class="pixel-drop"></span>
+          </label>
+          <label for="drop-5" class="item item--drop drop-pos-5" title="Catch Raindrop 5">
+            <span class="pixel-drop"></span>
+          </label>
+          <label for="drop-6" class="item item--drop drop-pos-6" title="Catch Raindrop 6">
+            <span class="pixel-drop"></span>
+          </label>
+          <label for="drop-7" class="item item--drop drop-pos-7" title="Catch Raindrop 7">
+            <span class="pixel-drop"></span>
+          </label>
+          <label for="drop-8" class="item item--drop drop-pos-8" title="Catch Raindrop 8">
+            <span class="pixel-drop"></span>
+          </label>
+
+          <!-- NIGHT COLLECTIBLES (8 Glowing Fireflies) -->
+          <label for="star-1" class="item item--star star-pos-1" title="Catch Firefly 1">
+            <span class="pixel-star"></span>
+          </label>
+          <label for="star-2" class="item item--star star-pos-2" title="Catch Firefly 2">
+            <span class="pixel-star"></span>
+          </label>
+          <label for="star-3" class="item item--star star-pos-3" title="Catch Firefly 3">
+            <span class="pixel-star"></span>
+          </label>
+          <label for="star-4" class="item item--star star-pos-4" title="Catch Firefly 4">
+            <span class="pixel-star"></span>
+          </label>
+          <label for="star-5" class="item item--star star-pos-5" title="Catch Firefly 5">
+            <span class="pixel-star"></span>
+          </label>
+          <label for="star-6" class="item item--star star-pos-6" title="Catch Firefly 6">
+            <span class="pixel-star"></span>
+          </label>
+          <label for="star-7" class="item item--star star-pos-7" title="Catch Firefly 7">
+            <span class="pixel-star"></span>
+          </label>
+          <label for="star-8" class="item item--star star-pos-8" title="Catch Firefly 8">
+            <span class="pixel-star"></span>
+          </label>
+
+        </div> <!-- /.collect-stage -->
+
+      </main> <!-- /#gameScene -->
+
+      <!-- ===================================================================
+           HEADS-UP DISPLAY (HUD)
+           Evaluated AFTER checkboxes so counter-increment sums up properly
+           =================================================================== -->
+      <header class="hud-top">
+        <div class="hud-top__title">PIXEL WEATHER FARM</div>
+        <div class="hud-top__stats">
+          <div class="stat-badge stat--total">
+            <span class="stat-label">SCORE:</span>
+            <span class="stat-value total-score-val"></span>
+            <span class="stat-max">/24</span>
+          </div>
+          <div class="stat-badge stat--coin">
+            <span class="icon-mini icon-coin" aria-hidden="true"></span>
+            <span class="stat-value coin-score-val"></span>
+            <span class="stat-max">/8</span>
+          </div>
+          <div class="stat-badge stat--drop">
+            <span class="icon-mini icon-drop" aria-hidden="true"></span>
+            <span class="stat-value drop-score-val"></span>
+            <span class="stat-max">/8</span>
+          </div>
+          <div class="stat-badge stat--star">
+            <span class="icon-mini icon-star" aria-hidden="true"></span>
+            <span class="stat-value star-score-val"></span>
+            <span class="stat-max">/8</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- BOTTOM CONTROL BAR -->
+      <footer class="hud-bottom">
+        <p class="hud-instruction">CHOOSE WEATHER // TAP ACTIVE BLESSINGS TO HARVEST</p>
+        <div class="hud-actions">
+          
+          <label for="mode-sun" class="pixel-btn btn--weather btn--sun" title="Summon Sun">
+            <span class="btn-icon">☼</span> SUN
+          </label>
+
+          <label for="mode-rain" class="pixel-btn btn--weather btn--rain" title="Summon Rain">
+            <span class="btn-icon">☂</span> RAIN
+          </label>
+
+          <label for="mode-night" class="pixel-btn btn--weather btn--night" title="Summon Night">
+            <span class="btn-icon">☾</span> NIGHT
+          </label>
+
+          <!-- Form Reset Button: Clears all collected items & restores default radio -->
+          <button type="reset" class="pixel-btn btn--reset" title="Reset all progress">
+            NEW GAME
+          </button>
+
+          <!-- CRT Filter Toggle Label -->
+          <label for="toggle-crt" class="pixel-btn btn--crt" title="Toggle CRT scanlines">
+            CRT
+          </label>
+
+        </div>
+      </footer>
+
+    </div> <!-- /.game-viewport -->
+
+  </form>
+
+</body>
+</html>
