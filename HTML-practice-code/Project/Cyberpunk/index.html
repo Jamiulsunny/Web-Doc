@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEON-GRID // CONTROL PANEL</title>
+  
+  <!-- Google Fonts: Orbitron for Sci-Fi Headings & Share Tech Mono for Body/Terminal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="cyberpunk-body">
+
+  <!-- Ambient CRT Overlays -->
+  <div class="crt-overlay scanlines" aria-hidden="true"></div>
+  <div class="crt-overlay crt-flicker" aria-hidden="true"></div>
+  <div class="ambient-grid" aria-hidden="true"></div>
+
+  <!-- Pure CSS Mobile Sidebar Toggle Hack -->
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu" />
+
+  <!-- 1. TOP HEADER BAR -->
+  <header class="header">
+    <div class="header__brand">
+      <label for="nav-toggle" class="header__menu-btn" title="Toggle Navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <div class="glitch-wrapper">
+        <h1 class="glitch" data-text="NEON-GRID // CONTROL PANEL">NEON-GRID // CONTROL PANEL</h1>
+      </div>
+    </div>
+
+    <div class="header__meta">
+      <div class="status-indicator">
+        <span class="status-indicator__dot"></span>
+        <span class="status-indicator__text">SYSTEM ONLINE</span>
+      </div>
+      <div class="header__clock">
+        <span class="tag">LOC</span> [ 2026.10.08 // 01:26:22 ]
+      </div>
+    </div>
+  </header>
+
+  <div class="layout-wrapper">
+    <!-- 2. LEFT SIDEBAR NAVIGATION -->
+    <nav class="sidebar" aria-label="Primary Navigation">
+      <div class="sidebar__bracket top-bracket"></div>
+      <ul class="sidebar__menu">
+        <li class="sidebar__item">
+          <a href="#dashboard" class="sidebar__link active">
+            <span class="sidebar__icon">◈</span>
+            <span class="sidebar__label">Dashboard</span>
+            <span class="sidebar__arrow">»</span>
+          </a>
+        </li>
+        <li class="sidebar__item">
+          <a href="#network" class="sidebar__link">
+            <span class="sidebar__icon">☵</span>
+            <span class="sidebar__label">Network</span>
+            <span class="sidebar__arrow">»</span>
+          </a>
+        </li>
+        <li class="sidebar__item">
+          <a href="#security" class="sidebar__link">
+            <span class="sidebar__icon">⛨</span>
+            <span class="sidebar__label">Security</span>
+            <span class="sidebar__arrow">»</span>
+          </a>
+        </li>
+        <li class="sidebar__item">
+          <a href="#core" class="sidebar__link">
+            <span class="sidebar__icon">☢</span>
+            <span class="sidebar__label">Power Core</span>
+            <span class="sidebar__arrow">»</span>
+          </a>
+        </li>
+        <li class="sidebar__item">
+          <a href="#logs" class="sidebar__link">
+            <span class="sidebar__icon">▤</span>
+            <span class="sidebar__label">Logs</span>
+            <span class="sidebar__arrow">»</span>
+          </a>
+        </li>
+        <li class="sidebar__item">
+          <a href="#settings" class="sidebar__link">
+            <span class="sidebar__icon">⚙</span>
+            <span class="sidebar__label">Settings</span>
+            <span class="sidebar__arrow">»</span>
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar__bracket bottom-bracket"></div>
+    </nav>
+
+    <!-- 3. MAIN DASHBOARD GRID -->
+    <main class="dashboard-grid">
+
+      <!-- TOP STAT CARDS -->
+      <!-- Card 1: CPU Load -->
+      <section class="card stat-card cut-corner delay-1">
+        <div class="card__header">
+          <h2 class="card__title">CPU CORE LOAD</h2>
+          <span class="badge badge--cyan">AUTO-SCALED</span>
+        </div>
+        <div class="stat-card__body">
+          <div class="radial-gauge radial-gauge--cpu">
+            <div class="radial-gauge__inner">
+              <span class="radial-gauge__val">84<small>%</small></span>
+            </div>
+          </div>
+          <div class="stat-card__meta">
+            <p class="stat-val stat-val--cyan">3.92 GHz</p>
+            <p class="stat-label">16 CORES ACTIVE // 4.8 THz</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Card 2: Memory -->
+      <section class="card stat-card cut-corner delay-2">
+        <div class="card__header">
+          <h2 class="card__title">NEURAL BUFFER</h2>
+          <span class="badge badge--magenta">HEAVY</span>
+        </div>
+        <div class="stat-card__body">
+          <div class="radial-gauge radial-gauge--mem">
+            <div class="radial-gauge__inner">
+              <span class="radial-gauge__val">68<small>%</small></span>
+            </div>
+          </div>
+          <div class="stat-card__meta">
+            <p class="stat-val stat-val--magenta">87.04 GB</p>
+            <p class="stat-label">ALLOCATED // 128 GB NV-RAM</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Card 3: Network Speed -->
+      <section class="card stat-card cut-corner delay-3">
+        <div class="card__header">
+          <h2 class="card__title">SUB-ETHERNET BANDWIDTH</h2>
+          <span class="badge badge--green">TX/RX HIGH</span>
+        </div>
+        <div class="stat-card__body stat-card__body--linear">
+          <div class="stat-inline">
+            <span class="stat-label">DOWNLINK</span>
+            <span class="stat-val stat-val--green">14.8 Gbps</span>
+          </div>
+          <div class="linear-bar">
+            <div class="linear-bar__fill linear-bar__fill--green" style="--val: 74%;"></div>
+          </div>
+          <div class="stat-inline">
+            <span class="stat-label">UPLINK</span>
+            <span class="stat-val stat-val--green">9.2 Gbps</span>
+          </div>
+          <div class="linear-bar">
+            <div class="linear-bar__fill linear-bar__fill--green" style="--val: 46%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Card 4: Power Level -->
+      <section class="card stat-card cut-corner delay-4">
+        <div class="card__header">
+          <h2 class="card__title">SUB-SYSTEM FLUX</h2>
+          <span class="badge badge--yellow">CRITICAL FLOW</span>
+        </div>
+        <div class="stat-card__body stat-card__body--linear">
+          <div class="stat-inline">
+            <span class="stat-label">RESERVOIR CAPACITY</span>
+            <span class="stat-val stat-val--yellow">92.4%</span>
+          </div>
+          <div class="linear-bar">
+            <div class="linear-bar__fill linear-bar__fill--yellow" style="--val: 92.4%;"></div>
+          </div>
+          <div class="stat-inline">
+            <span class="stat-label">THERMAL LIMIT</span>
+            <span class="stat-val stat-val--yellow">312 K</span>
+          </div>
+          <div class="linear-bar">
+            <div class="linear-bar__fill linear-bar__fill--yellow" style="--val: 38%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MIDDLE CONTENT ROW -->
+      <!-- Threat Radar Card -->
+      <section class="card cut-corner radar-card delay-5">
+        <div class="card__header">
+          <h2 class="card__title">THREAT RADAR // 360° SENSOR</h2>
+          <span class="badge badge--cyan">ACTIVE PING</span>
+        </div>
+        <div class="radar">
+          <div class="radar__grid-ring ring-1"></div>
+          <div class="radar__grid-ring ring-2"></div>
+          <div class="radar__grid-ring ring-3"></div>
+          <div class="radar__crosshair-x"></div>
+          <div class="radar__crosshair-y"></div>
+          <div class="radar__sweep"></div>
+          <div class="radar__blip blip-1" title="Threat [Alpha]"></div>
+          <div class="radar__blip blip-2" title="Unknown Signature"></div>
+          <div class="radar__blip blip-3" title="Ghost Ping"></div>
+        </div>
+        <div class="radar__readout">
+          <span>HOSTILE TARGETS: <strong>02</strong></span>
+          <span>RANGE: <strong>12.4 KM</strong></span>
+        </div>
+      </section>
+
+      <!-- Power Core / Reactor Card -->
+      <section class="card cut-corner reactor-card delay-6">
+        <div class="card__header">
+          <h2 class="card__title">FUSION POWER CORE</h2>
+          <span class="badge badge--purple">OVERCHARGED</span>
+        </div>
+        <div class="reactor-display">
+          <div class="reactor">
+            <div class="reactor__ring ring-outer"></div>
+            <div class="reactor__ring ring-mid"></div>
+            <div class="reactor__ring ring-inner"></div>
+            <div class="reactor__core">
+              <span class="reactor__glow-dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="reactor__stats">
+          <div class="stat-col">
+            <span class="stat-label">CORE OUTPUT</span>
+            <span class="stat-val stat-val--purple">4.82 GW</span>
+          </div>
+          <div class="stat-col">
+            <span class="stat-label">PLASMA STABILITY</span>
+            <span class="stat-val stat-val--green">99.8%</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Telemetry Bar Chart -->
+      <section class="card cut-corner chart-card delay-7">
+        <div class="card__header">
+          <h2 class="card__title">NODE THROUGHPUT HISTOGRAM</h2>
+          <span class="badge badge--cyan">HOURLY (Gb/s)</span>
+        </div>
+        <div class="chart">
+          <div class="chart__axis-y">
+            <span>100</span>
+            <span>75</span>
+            <span>50</span>
+            <span>25</span>
+            <span>0</span>
+          </div>
+          <div class="chart__bars">
+            <div class="chart__bar-wrap">
+              <div class="chart__bar bar-cyan" style="--bar-height: 42%;" data-val="42"></div>
+              <span class="chart__label">00h</span>
+            </div>
+            <div class="chart__bar-wrap">
+              <div class="chart__bar bar-purple" style="--bar-height: 65%;" data-val="65"></div>
+              <span class="chart__label">04h</span>
+            </div>
+            <div class="chart__bar-wrap">
+              <div class="chart__bar bar-magenta" style="--bar-height: 88%;" data-val="88"></div>
+              <span class="chart__label">08h</span>
+            </div>
+            <div class="chart__bar-wrap">
+              <div class="chart__bar bar-cyan" style="--bar-height: 72%;" data-val="72"></div>
+              <span class="chart__label">12h</span>
+            </div>
+            <div class="chart__bar-wrap">
+              <div class="chart__bar bar-green" style="--bar-height: 95%;" data-val="95"></div>
+              <span class="chart__label">16h</span>
+            </div>
+            <div class="chart__bar-wrap">
+              <div class="chart__bar bar-yellow" style="--bar-height: 54%;" data-val="54"></div>
+              <span class="chart__label">20h</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BOTTOM ROW CARDS -->
+      <!-- Terminal Console / System Log -->
+      <section class="card cut-corner terminal-card delay-8">
+        <div class="card__header">
+          <h2 class="card__title">KERNEL TERMINAL STREAM</h2>
+          <span class="badge badge--green">TTY 01 // LIVE</span>
+        </div>
+        <div class="terminal">
+          <div class="terminal__line log-1"><span class="term-dim">[01:25:58]</span> <span class="term-cyan">AUTH_DAEMON:</span> Token validated: root@grid-node-9</div>
+          <div class="terminal__line log-2"><span class="term-dim">[01:26:04]</span> <span class="term-yellow">CORE_TEMP:</span> Sensor 3 spike (310K) compensated</div>
+          <div class="terminal__line log-3"><span class="term-dim">[01:26:10]</span> <span class="term-green">RADAR_SWEEP:</span> Unidentified proxy detected sector 7G</div>
+          <div class="terminal__line log-typing">
+            <span class="term-dim">[01:26:22]</span> <span class="term-magenta">CMD_EXEC:</span> firewall --purge-hostile-syn
+            <span class="cursor" aria-hidden="true">█</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Server Status Table -->
+      <section class="card cut-corner servers-card delay-9">
+        <div class="card__header">
+          <h2 class="card__title">CLUSTER NODE TOPOLOGY</h2>
+          <span class="badge badge--cyan">3/4 SYNCED</span>
+        </div>
+        <div class="table-container">
+          <table class="cyber-table">
+            <thead>
+              <tr>
+                <th>NODE ID</th>
+                <th>CLUSTER ZONE</th>
+                <th>LATENCY</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="node-id">ALPHA-01</td>
+                <td>SECTOR-09 (US-E)</td>
+                <td>12 ms</td>
+                <td><span class="status-pill status-pill--online">ONLINE</span></td>
+              </tr>
+              <tr>
+                <td class="node-id">BETA-04</td>
+                <td>SECTOR-14 (EU-C)</td>
+                <td>48 ms</td>
+                <td><span class="status-pill status-pill--online">ONLINE</span></td>
+              </tr>
+              <tr>
+                <td class="node-id">GAMMA-07</td>
+                <td>SECTOR-22 (AP-S)</td>
+                <td>194 ms</td>
+                <td><span class="status-pill status-pill--warning">DEGRADED</span></td>
+              </tr>
+              <tr>
+                <td class="node-id">OMEGA-99</td>
+                <td>DEEP-UNDERGRID</td>
+                <td>--</td>
+                <td><span class="status-pill status-pill--offline">OFFLINE</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Override Control Panel -->
+      <section class="card cut-corner control-card delay-10">
+        <div class="card__header">
+          <h2 class="card__title">MANUAL OVERRIDE CONTROL</h2>
+          <span class="badge badge--yellow">SECURITY LVL 4</span>
+        </div>
+        <div class="control-grid">
+          
+          <!-- Pure CSS Cyber Toggle 1 -->
+          <div class="toggle-row">
+            <div class="toggle-row__meta">
+              <span class="toggle-name">QUANTUM ENCRYPTION</span>
+              <span class="toggle-desc">2048-bit photonic handshaking</span>
+            </div>
+            <label class="cyber-switch">
+              <input type="checkbox" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <!-- Pure CSS Cyber Toggle 2 -->
+          <div class="toggle-row">
+            <div class="toggle-row__meta">
+              <span class="toggle-name">FIREWALL OVERCLOCK</span>
+              <span class="toggle-desc">Aggressive heuristic packet drop</span>
+            </div>
+            <label class="cyber-switch">
+              <input type="checkbox" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <!-- Pure CSS Cyber Toggle 3 -->
+          <div class="toggle-row">
+            <div class="toggle-row__meta">
+              <span class="toggle-name">STEALTH REFLECTOR</span>
+              <span class="toggle-desc">Electromagnetic wave disruption</span>
+            </div>
+            <label class="cyber-switch">
+              <input type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <!-- Action Sci-Fi Buttons -->
+          <div class="btn-group">
+            <button class="cyber-btn cyber-btn--cyan" type="button">
+              <span class="cyber-btn__content">SYNC NODES</span>
+            </button>
+            <button class="cyber-btn cyber-btn--danger" type="button">
+              <span class="cyber-btn__content">PURGE CACHE</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- 4. FOOTER -->
+  <footer class="footer">
+    <div class="footer__content">
+      <span class="footer__copy">© 2026 NEON-GRID // ALL SYSTEMS NOMINAL</span>
+      <span class="footer__serial">SYS-UUID: 0x994F-B7A2-118E-F001 // SECURE SESSION</span>
+    </div>
+  </footer>
+
+</body>
+</html>

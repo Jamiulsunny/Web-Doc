@@ -1,0 +1,1323 @@
+/* ==========================================================================
+   TABLE OF CONTENTS:
+   1. CSS Variables (:root)
+   2. Reset & Base Typography
+   3. Ambient Effects (Scanlines, CRT, Grid)
+   4. Header & Glitch Text Effect
+   5. Responsive Navigation & Mobile Checkbox Hack
+   6. Cyberpunk Card Shape & Glassmorphism
+   7. Main Layout (CSS Grid)
+   8. Component: Radial Gauges & Linear Shimmer Bars
+   9. Component: Threat Radar (Conic-Gradient & Sweeper)
+   10. Component: Fusion Reactor Rings
+   11. Component: Animated Histogram (Bar Chart)
+   12. Component: Terminal Console Typing & Blinking Cursor
+   13. Component: Server Status Table & Badges
+   14. Component: Cyberpunk Toggles & Glowing Buttons
+   15. Footer Styling
+   16. Keyframe Animations
+   17. Responsive Media Queries
+   18. Accessibility (prefers-reduced-motion)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS VARIABLES (:ROOT)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Neon Palette */
+  --bg-dark: #05060f;
+  --bg-card: rgba(10, 14, 29, 0.72);
+  --bg-card-hover: rgba(15, 23, 42, 0.85);
+  
+  --neon-cyan: #00f0ff;
+  --neon-magenta: #ff2bd6;
+  --neon-purple: #9b5cff;
+  --neon-yellow: #f9f002;
+  --neon-green: #39ff14;
+  --neon-red: #ff003c;
+  
+  --text-primary: #e0f9ff;
+  --text-muted: #5e779c;
+  --border-subtle: rgba(0, 240, 255, 0.22);
+  
+  /* Glow Presets */
+  --cyan-glow-sm: 0 0 8px rgba(0, 240, 255, 0.4);
+  --cyan-glow-lg: 0 0 20px rgba(0, 240, 255, 0.6), 0 0 35px rgba(0, 240, 255, 0.2);
+  --magenta-glow-sm: 0 0 8px rgba(ff, 43, 214, 0.4);
+  --magenta-glow-lg: 0 0 20px rgba(255, 43, 214, 0.6);
+  --green-glow-sm: 0 0 8px rgba(57, 255, 20, 0.5);
+  --yellow-glow-sm: 0 0 8px rgba(249, 240, 2, 0.4);
+
+  /* Fonts */
+  --font-heading: 'Orbitron', 'Courier New', monospace;
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-dark);
+}
+
+body.cyberpunk-body {
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Custom Cyber Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neon-cyan);
+  box-shadow: var(--cyan-glow-sm);
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   3. AMBIENT EFFECTS (SCANLINES, CRT, PERSPECTIVE GRID)
+   -------------------------------------------------------------------------- */
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Full-screen repeating-linear-gradient moving scanlines */
+.scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0px,
+    rgba(255, 255, 255, 0) 2px,
+    rgba(0, 0, 0, 0.35) 3px,
+    rgba(0, 0, 0, 0.35) 4px
+  );
+  animation: scanlines-slide 10s linear infinite;
+  opacity: 0.75;
+}
+
+/* Subtle CRT screen flicker */
+.crt-flicker {
+  background: radial-gradient(circle at center, transparent 65%, rgba(0, 0, 0, 0.65) 100%);
+  animation: crt-flicker-anim 0.15s infinite;
+  opacity: 0.25;
+}
+
+/* Moving 3D Cyber Perspective Floor Grid */
+.ambient-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85) 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.85) 20%, transparent 80%);
+  animation: grid-flow 25s linear infinite;
+}
+
+/* --------------------------------------------------------------------------
+   4. HEADER & GLITCH TEXT EFFECT
+   -------------------------------------------------------------------------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: rgba(5, 6, 15, 0.88);
+  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), var(--cyan-glow-sm);
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header__meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* GLITCH EFFECT: Uses pseudo-elements with clip-path & horizontal offsets */
+.glitch-wrapper {
+  display: inline-block;
+}
+
+.glitch {
+  position: relative;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+  text-shadow: 0 0 5px var(--neon-cyan);
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.glitch::before {
+  left: -2px;
+  text-shadow: 2px 0 var(--neon-magenta);
+  animation: glitch-anim-1 2.8s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: 2px;
+  text-shadow: -2px 0 var(--neon-cyan);
+  animation: glitch-anim-2 3.2s infinite linear alternate-reverse;
+}
+
+/* Header Status Light */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--neon-green);
+  text-shadow: var(--green-glow-sm);
+}
+
+.status-indicator__dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--neon-green);
+  border-radius: 50%;
+  box-shadow: var(--green-glow-sm);
+  animation: pulse-dot 1.5s infinite;
+}
+
+.header__clock {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.header__clock .tag {
+  color: var(--neon-cyan);
+  margin-right: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   5. RESPONSIVE NAVIGATION & MOBILE CHECKBOX HACK
+   -------------------------------------------------------------------------- */
+.nav-toggle {
+  display: none; /* Hidden input used to retain toggle state */
+}
+
+.header__menu-btn {
+  display: none; /* Revealed in mobile media query */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.header__menu-btn span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--neon-cyan);
+  box-shadow: var(--cyan-glow-sm);
+  transition: var(--transition-fast);
+}
+
+.layout-wrapper {
+  display: flex;
+  position: relative;
+  z-index: 10;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  min-height: calc(100vh - 65px);
+  background: rgba(8, 12, 24, 0.65);
+  border-right: 1px solid var(--border-subtle);
+  backdrop-filter: blur(10px);
+  padding: 24px 0;
+  position: relative;
+}
+
+.sidebar__menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  position: relative;
+  transition: color var(--transition-fast);
+  overflow: hidden;
+}
+
+.sidebar__icon {
+  margin-right: 12px;
+  font-size: 1rem;
+  color: var(--neon-cyan);
+}
+
+.sidebar__arrow {
+  margin-left: auto;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all var(--transition-fast);
+  color: var(--neon-cyan);
+}
+
+/* Neon underline slide effect using ::after */
+.sidebar__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-smooth);
+}
+
+.sidebar__link:hover,
+.sidebar__link.active {
+  color: var(--text-primary);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+  background: rgba(0, 240, 255, 0.05);
+}
+
+.sidebar__link:hover::after,
+.sidebar__link.active::after {
+  transform: scaleX(1);
+}
+
+.sidebar__link:hover .sidebar__arrow,
+.sidebar__link.active .sidebar__arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sidebar__link.active {
+  border-left: 3px solid var(--neon-cyan);
+  box-shadow: inset 4px 0 12px rgba(0, 240, 255, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   6. CYBERPUNK CARD SHAPES (CUT CORNERS) & GLASSMORPHISM
+   -------------------------------------------------------------------------- */
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  padding: 20px;
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+  overflow: hidden;
+}
+
+/* Pure CSS Polygon Cut-Corner */
+.cut-corner {
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 15px) 0, 
+    100% 15px, 
+    100% 100%, 
+    15px 100%, 
+    0 calc(100% - 15px)
+  );
+}
+
+/* Sci-fi Decorative Corner Accent Lines */
+.cut-corner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 2px;
+  background: var(--neon-cyan);
+  transform: rotate(45deg) translate(5px, -5px);
+  box-shadow: var(--cyan-glow-sm);
+  pointer-events: none;
+}
+
+/* Card Light Sweep on Hover */
+.card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -150%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg, 
+    transparent 45%, 
+    rgba(0, 240, 255, 0.08) 50%, 
+    transparent 55%
+  );
+  transform: rotate(25deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), var(--cyan-glow-sm);
+}
+
+.card:hover::after {
+  left: 100%;
+}
+
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(0, 240, 255, 0.15);
+}
+
+.card__title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  color: var(--text-primary);
+}
+
+/* Status Badges */
+.badge {
+  font-size: 0.65rem;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.badge--cyan {
+  background: rgba(0, 240, 255, 0.15);
+  color: var(--neon-cyan);
+  border: 1px solid var(--neon-cyan);
+}
+.badge--magenta {
+  background: rgba(255, 43, 214, 0.15);
+  color: var(--neon-magenta);
+  border: 1px solid var(--neon-magenta);
+}
+.badge--yellow {
+  background: rgba(249, 240, 2, 0.15);
+  color: var(--neon-yellow);
+  border: 1px solid var(--neon-yellow);
+}
+.badge--green {
+  background: rgba(57, 255, 20, 0.15);
+  color: var(--neon-green);
+  border: 1px solid var(--neon-green);
+}
+.badge--purple {
+  background: rgba(155, 92, 255, 0.15);
+  color: var(--neon-purple);
+  border: 1px solid var(--neon-purple);
+}
+
+/* --------------------------------------------------------------------------
+   7. MAIN LAYOUT (CSS GRID)
+   -------------------------------------------------------------------------- */
+.dashboard-grid {
+  flex: 1;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+/* Top Stat Cards: Span 3 columns each */
+.stat-card {
+  grid-column: span 3;
+}
+
+/* Middle Rows: Radar (4 cols), Reactor (4 cols), Histogram (4 cols) */
+.radar-card {
+  grid-column: span 4;
+}
+.reactor-card {
+  grid-column: span 4;
+}
+.chart-card {
+  grid-column: span 4;
+}
+
+/* Bottom Rows: Terminal (4 cols), Server Status (5 cols), Controls (3 cols) */
+.terminal-card {
+  grid-column: span 4;
+}
+.servers-card {
+  grid-column: span 5;
+}
+.control-card {
+  grid-column: span 3;
+}
+
+/* Fade/Slide In Animations for Cards on Page Load */
+.delay-1  { animation: card-enter 0.5s ease-out 0.1s both; }
+.delay-2  { animation: card-enter 0.5s ease-out 0.2s both; }
+.delay-3  { animation: card-enter 0.5s ease-out 0.3s both; }
+.delay-4  { animation: card-enter 0.5s ease-out 0.4s both; }
+.delay-5  { animation: card-enter 0.5s ease-out 0.5s both; }
+.delay-6  { animation: card-enter 0.5s ease-out 0.6s both; }
+.delay-7  { animation: card-enter 0.5s ease-out 0.7s both; }
+.delay-8  { animation: card-enter 0.5s ease-out 0.8s both; }
+.delay-9  { animation: card-enter 0.5s ease-out 0.9s both; }
+.delay-10 { animation: card-enter 0.5s ease-out 1.0s both; }
+
+/* --------------------------------------------------------------------------
+   8. COMPONENT: RADIAL GAUGES & LINEAR SHIMMER BARS
+   -------------------------------------------------------------------------- */
+.stat-card__body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-card__body--linear {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+/* Circular Progress Rings using CSS conic-gradient */
+.radial-gauge {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.radial-gauge--cpu {
+  /* 84% filled ring with cyan */
+  background: conic-gradient(var(--neon-cyan) 0% 84%, rgba(0, 240, 255, 0.1) 84% 100%);
+  box-shadow: var(--cyan-glow-sm);
+}
+
+.radial-gauge--mem {
+  /* 68% filled ring with magenta */
+  background: conic-gradient(var(--neon-magenta) 0% 68%, rgba(255, 43, 214, 0.1) 68% 100%);
+  box-shadow: 0 0 10px rgba(255, 43, 214, 0.4);
+}
+
+.radial-gauge__inner {
+  width: 62px;
+  height: 62px;
+  background-color: #0b1021;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radial-gauge__val {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.radial-gauge__val small {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.stat-val {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.stat-val--cyan    { color: var(--neon-cyan); text-shadow: var(--cyan-glow-sm); }
+.stat-val--magenta { color: var(--neon-magenta); text-shadow: 0 0 8px rgba(255, 43, 214, 0.5); }
+.stat-val--green   { color: var(--neon-green); text-shadow: var(--green-glow-sm); }
+.stat-val--yellow  { color: var(--neon-yellow); text-shadow: var(--yellow-glow-sm); }
+.stat-val--purple  { color: var(--neon-purple); text-shadow: 0 0 8px rgba(155, 92, 255, 0.5); }
+
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.stat-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.stat-inline .stat-val {
+  font-size: 0.95rem;
+}
+
+/* Horizontal Progress Bar with Moving Shimmer Gradient */
+.linear-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.linear-bar__fill {
+  height: 100%;
+  width: var(--val, 50%);
+  position: relative;
+  background-size: 200% 100%;
+}
+
+.linear-bar__fill--green {
+  background-image: linear-gradient(90deg, #1fa30a, var(--neon-green), #1fa30a);
+  box-shadow: var(--green-glow-sm);
+  animation: shimmer-flow 2s infinite linear;
+}
+
+.linear-bar__fill--yellow {
+  background-image: linear-gradient(90deg, #b8860b, var(--neon-yellow), #b8860b);
+  box-shadow: var(--yellow-glow-sm);
+  animation: shimmer-flow 2s infinite linear;
+}
+
+/* --------------------------------------------------------------------------
+   9. COMPONENT: THREAT RADAR
+   -------------------------------------------------------------------------- */
+.radar {
+  width: 200px;
+  height: 200px;
+  margin: 10px auto;
+  border-radius: 50%;
+  border: 2px solid var(--neon-cyan);
+  box-shadow: var(--cyan-glow-sm), inset 0 0 15px rgba(0, 240, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, rgba(5, 6, 15, 0.8) 80%);
+}
+
+.radar__grid-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 240, 255, 0.3);
+}
+.ring-1 { width: 33%; height: 33%; }
+.ring-2 { width: 66%; height: 66%; }
+.ring-3 { width: 99%; height: 99%; border-style: solid; }
+
+.radar__crosshair-x,
+.radar__crosshair-y {
+  position: absolute;
+  background: rgba(0, 240, 255, 0.25);
+}
+.radar__crosshair-x { top: 50%; left: 0; width: 100%; height: 1px; }
+.radar__crosshair-y { left: 50%; top: 0; height: 100%; width: 1px; }
+
+/* Rotating Conic Sweeper Line */
+.radar__sweep {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(0, 240, 255, 0.45) 0deg, transparent 65deg, transparent 360deg);
+  animation: radar-sweep-rotate 3.5s linear infinite;
+}
+
+/* Blinking Blips */
+.radar__blip {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--neon-magenta);
+  box-shadow: 0 0 10px var(--neon-magenta);
+  animation: blip-pulse 1.8s infinite ease-in-out;
+}
+.blip-1 { top: 32%; left: 68%; }
+.blip-2 { top: 62%; left: 28%; animation-delay: 0.6s; background: var(--neon-yellow); box-shadow: 0 0 10px var(--neon-yellow); }
+.blip-3 { top: 78%; left: 74%; animation-delay: 1.1s; }
+
+.radar__readout {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.radar__readout strong {
+  color: var(--neon-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   10. COMPONENT: FUSION REACTOR RINGS
+   -------------------------------------------------------------------------- */
+.reactor-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.reactor {
+  width: 170px;
+  height: 170px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reactor__ring {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.ring-outer {
+  width: 160px;
+  height: 160px;
+  border: 2px dashed var(--neon-purple);
+  box-shadow: 0 0 15px rgba(155, 92, 255, 0.4);
+  animation: spin-clockwise 14s linear infinite;
+}
+
+.ring-mid {
+  width: 110px;
+  height: 110px;
+  border: 2px dotted var(--neon-cyan);
+  box-shadow: var(--cyan-glow-sm);
+  animation: spin-counter 8s linear infinite;
+}
+
+.ring-inner {
+  width: 65px;
+  height: 65px;
+  border: 2px solid var(--neon-magenta);
+  border-top-color: transparent;
+  animation: spin-clockwise 3s linear infinite;
+}
+
+.reactor__core {
+  width: 32px;
+  height: 32px;
+  background: radial-gradient(circle, #ffffff 10%, var(--neon-purple) 70%);
+  border-radius: 50%;
+  box-shadow: 0 0 20px #ffffff, 0 0 40px var(--neon-purple);
+  animation: reactor-pulse 1.8s infinite alternate;
+}
+
+.reactor__stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+.stat-col {
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   11. COMPONENT: ANIMATED HISTOGRAM (BAR CHART)
+   -------------------------------------------------------------------------- */
+.chart {
+  display: flex;
+  height: 200px;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.chart__axis-y {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-align: right;
+  padding-bottom: 24px;
+}
+
+.chart__bars {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--border-subtle);
+  border-left: 1px solid var(--border-subtle);
+  padding: 0 10px 24px 10px;
+  position: relative;
+}
+
+.chart__bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  width: 14%;
+  position: relative;
+}
+
+.chart__bar {
+  width: 100%;
+  height: var(--bar-height, 50%);
+  position: relative;
+  transform-origin: bottom;
+  animation: bar-grow 1.2s cubic-bezier(0.17, 0.67, 0.29, 1) forwards;
+}
+
+.chart__bar::before {
+  content: attr(data-val);
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.chart__bar:hover::before {
+  opacity: 1;
+}
+
+.bar-cyan    { background: linear-gradient(to top, rgba(0, 240, 255, 0.2), var(--neon-cyan)); box-shadow: var(--cyan-glow-sm); }
+.bar-purple  { background: linear-gradient(to top, rgba(155, 92, 255, 0.2), var(--neon-purple)); box-shadow: 0 0 8px var(--neon-purple); }
+.bar-magenta { background: linear-gradient(to top, rgba(255, 43, 214, 0.2), var(--neon-magenta)); box-shadow: var(--magenta-glow-sm); }
+.bar-green   { background: linear-gradient(to top, rgba(57, 255, 20, 0.2), var(--neon-green)); box-shadow: var(--green-glow-sm); }
+.bar-yellow  { background: linear-gradient(to top, rgba(249, 240, 2, 0.2), var(--neon-yellow)); box-shadow: var(--yellow-glow-sm); }
+
+.chart__label {
+  position: absolute;
+  bottom: -22px;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   12. COMPONENT: TERMINAL CONSOLE TYPING & BLINKING CURSOR
+   -------------------------------------------------------------------------- */
+.terminal {
+  background: rgba(3, 4, 10, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  padding: 14px;
+  height: 200px;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.term-dim     { color: var(--text-muted); }
+.term-cyan    { color: var(--neon-cyan); }
+.term-magenta { color: var(--neon-magenta); }
+.term-yellow  { color: var(--neon-yellow); }
+.term-green   { color: var(--neon-green); }
+
+/* Static Lines Sequential Reveal */
+.log-1 { animation: line-fade 0.4s ease 0.8s both; }
+.log-2 { animation: line-fade 0.4s ease 1.3s both; }
+.log-3 { animation: line-fade 0.4s ease 1.8s both; }
+
+/* Typing Effect for Active Command Line */
+.log-typing {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: typing-stream 3s steps(34, end) 2.2s both;
+}
+
+.cursor {
+  display: inline-block;
+  color: var(--neon-cyan);
+  animation: blink-caret 0.8s infinite;
+  margin-left: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   13. COMPONENT: SERVER STATUS TABLE & BADGES
+   -------------------------------------------------------------------------- */
+.table-container {
+  overflow-x: auto;
+}
+
+.cyber-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.75rem;
+}
+
+.cyber-table th {
+  font-family: var(--font-heading);
+  letter-spacing: 1px;
+  color: var(--neon-cyan);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(0, 240, 255, 0.03);
+}
+
+.cyber-table td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.cyber-table tbody tr:hover {
+  background: rgba(0, 240, 255, 0.05);
+}
+
+.node-id {
+  font-weight: bold;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+}
+.status-pill--online {
+  background: rgba(57, 255, 20, 0.15);
+  color: var(--neon-green);
+  border: 1px solid var(--neon-green);
+  box-shadow: var(--green-glow-sm);
+}
+.status-pill--warning {
+  background: rgba(249, 240, 2, 0.15);
+  color: var(--neon-yellow);
+  border: 1px solid var(--neon-yellow);
+  box-shadow: var(--yellow-glow-sm);
+}
+.status-pill--offline {
+  background: rgba(255, 0, 60, 0.15);
+  color: var(--neon-red);
+  border: 1px solid var(--neon-red);
+}
+
+/* --------------------------------------------------------------------------
+   14. COMPONENT: CYBERPUNK TOGGLES & GLOWING BUTTONS
+   -------------------------------------------------------------------------- */
+.control-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-name {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.toggle-desc {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* Pure CSS Checkbox Toggle Switch */
+.cyber-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.cyber-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cyber-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #0b1220;
+  border: 1px solid var(--text-muted);
+  transition: var(--transition-fast);
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+}
+
+.cyber-switch .slider::before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--text-muted);
+  transition: var(--transition-fast);
+}
+
+.cyber-switch input:checked + .slider {
+  background-color: rgba(0, 240, 255, 0.15);
+  border-color: var(--neon-cyan);
+  box-shadow: var(--cyan-glow-sm);
+}
+
+.cyber-switch input:checked + .slider::before {
+  transform: translateX(22px);
+  background-color: var(--neon-cyan);
+  box-shadow: var(--cyan-glow-sm);
+}
+
+/* Sci-Fi Styled Action Buttons */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.cyber-btn {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--neon-cyan);
+  padding: 10px;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition: var(--transition-fast);
+}
+
+.cyber-btn--cyan {
+  color: var(--neon-cyan);
+}
+.cyber-btn--cyan:hover {
+  background: var(--neon-cyan);
+  color: var(--bg-dark);
+  box-shadow: var(--cyan-glow-lg);
+}
+
+.cyber-btn--danger {
+  border-color: var(--neon-magenta);
+  color: var(--neon-magenta);
+}
+.cyber-btn--danger:hover {
+  background: var(--neon-magenta);
+  color: #ffffff;
+  box-shadow: var(--magenta-glow-lg);
+}
+
+/* --------------------------------------------------------------------------
+   15. FOOTER STYLING
+   -------------------------------------------------------------------------- */
+.footer {
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(5, 6, 15, 0.95);
+  padding: 16px 24px;
+}
+
+.footer__content {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.footer__copy {
+  color: var(--neon-cyan);
+  text-shadow: var(--cyan-glow-sm);
+  letter-spacing: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   16. KEYFRAME ANIMATIONS
+   -------------------------------------------------------------------------- */
+@keyframes scanlines-slide {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 100vh; }
+}
+
+@keyframes crt-flicker-anim {
+  0%   { opacity: 0.22; }
+  50%  { opacity: 0.26; }
+  100% { opacity: 0.23; }
+}
+
+@keyframes grid-flow {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 800px; }
+}
+
+/* Glitch Slices */
+@keyframes glitch-anim-1 {
+  0%   { clip-path: inset(40% 0 61% 0); transform: skew(0.3deg); }
+  20%  { clip-path: inset(92% 0 1% 0); transform: skew(-0.5deg); }
+  40%  { clip-path: inset(10% 0 75% 0); transform: skew(0.8deg); }
+  60%  { clip-path: inset(65% 0 15% 0); transform: skew(-0.3deg); }
+  80%  { clip-path: inset(25% 0 58% 0); transform: skew(0.5deg); }
+  100% { clip-path: inset(80% 0 5% 0); transform: skew(-0.2deg); }
+}
+
+@keyframes glitch-anim-2 {
+  0%   { clip-path: inset(25% 0 58% 0); transform: skew(-0.5deg); }
+  25%  { clip-path: inset(70% 0 12% 0); transform: skew(0.4deg); }
+  50%  { clip-path: inset(15% 0 65% 0); transform: skew(-0.2deg); }
+  75%  { clip-path: inset(85% 0 2% 0); transform: skew(0.7deg); }
+  100% { clip-path: inset(45% 0 40% 0); transform: skew(-0.4deg); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.3; transform: scale(0.8); }
+}
+
+@keyframes card-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer-flow {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@keyframes radar-sweep-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes blip-pulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%      { opacity: 1; transform: scale(1.4); }
+}
+
+@keyframes spin-clockwise {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes spin-counter {
+  from { transform: rotate(360deg); }
+  to   { transform: rotate(0deg); }
+}
+
+@keyframes reactor-pulse {
+  0%   { transform: scale(0.85); box-shadow: 0 0 15px var(--neon-purple); }
+  100% { transform: scale(1.15); box-shadow: 0 0 35px var(--neon-cyan), 0 0 50px var(--neon-purple); }
+}
+
+@keyframes bar-grow {
+  0%   { transform: scaleY(0); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes line-fade {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes typing-stream {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes blink-caret {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   17. RESPONSIVE MEDIA QUERIES
+   -------------------------------------------------------------------------- */
+/* Tablets (max-width: 1080px) */
+@media screen and (max-width: 1080px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .stat-card {
+    grid-column: span 3;
+  }
+  .radar-card,
+  .reactor-card,
+  .chart-card {
+    grid-column: span 3;
+  }
+  .terminal-card {
+    grid-column: span 6;
+  }
+  .servers-card {
+    grid-column: span 6;
+  }
+  .control-card {
+    grid-column: span 6;
+  }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .header__menu-btn {
+    display: flex;
+  }
+  .header__clock {
+    display: none; /* Conserve header space */
+  }
+  .glitch {
+    font-size: 1rem;
+  }
+
+  /* PURE CSS CHECKBOX HACK COLLAPSIBLE SIDEBAR */
+  .sidebar {
+    position: fixed;
+    top: 57px;
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 57px);
+    z-index: 99;
+    transform: translateX(-100%);
+    transition: transform var(--transition-smooth);
+    background: rgba(5, 6, 15, 0.96);
+  }
+
+  /* When hidden checkbox is checked via hamburger label, slide sidebar in */
+  .nav-toggle:checked ~ .layout-wrapper .sidebar {
+    transform: translateX(0);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.9), var(--cyan-glow-sm);
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .stat-card,
+  .radar-card,
+  .reactor-card,
+  .chart-card,
+  .terminal-card,
+  .servers-card,
+  .control-card {
+    grid-column: span 1;
+  }
+
+  .footer__content {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   18. ACCESSIBILITY (PREFERS-REDUCED-MOTION)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scanlines,
+  .crt-flicker,
+  .ambient-grid {
+    display: none;
+  }
+}
