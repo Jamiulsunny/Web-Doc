@@ -1,0 +1,1130 @@
+/* ==========================================================================
+   SOLAR SYSTEM EXPLORER // ORRERY STYLESHEET
+   1. CSS Variables (:root)
+   2. Reset & Base Typography
+   3. Starfields, Parallax & Ambient Nebulae
+   4. Header & Footer HUD Overlays
+   5. Solar System Canvas & Central Sun
+   6. Orbital Tracks & Planet Positioning
+   7. Planet Shading, Ring Systems & Textures
+   8. Planet Counter-Rotation (Upright Lock)
+   9. Pure CSS Radio Hack & Interaction Logic
+   10. Glassmorphism Info Cards (Telemetry Deck)
+   11. Bottom Planet Selector Dock
+   12. Keyframe Animations
+   13. Responsive Adaptations
+   14. Accessibility (prefers-reduced-motion)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS VARIABLES (:ROOT)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Palette & Brand Tokens */
+  --space-black: #03030a;
+  --space-navy: #060919;
+  --neon-cyan: #00e5ff;
+  --neon-purple: #8a5cff;
+  --sun-gold: #ffb300;
+  --alert-red: #ff3366;
+  --text-primary: #e6f1ff;
+  --text-dim: #7f95b3;
+
+  /* Typography */
+  --font-hud: 'Orbitron', 'Courier New', monospace;
+  --font-data: 'Exo 2', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* System Scale Factor (Scales dynamically on smaller devices) */
+  --system-scale: min(100vw, 100vh);
+  --warp-multiplier: 1;
+
+  /* Orbit Periods (Standard Speed) */
+  --t-mercury: calc(5s * var(--warp-multiplier));
+  --t-venus:   calc(9s * var(--warp-multiplier));
+  --t-earth:   calc(15s * var(--warp-multiplier));
+  --t-moon:    2.2s;
+  --t-mars:    calc(24s * var(--warp-multiplier));
+  --t-jupiter: calc(48s * var(--warp-multiplier));
+  --t-saturn:  calc(72s * var(--warp-multiplier));
+  --t-uranus:  calc(110s * var(--warp-multiplier));
+  --t-neptune: calc(150s * var(--warp-multiplier));
+
+  /* Orbit Radii (Distance from Sun center to track) */
+  --r-mercury: calc(var(--system-scale) * 0.080);
+  --r-venus:   calc(var(--system-scale) * 0.118);
+  --r-earth:   calc(var(--system-scale) * 0.162);
+  --r-mars:    calc(var(--system-scale) * 0.208);
+  --r-jupiter: calc(var(--system-scale) * 0.270);
+  --r-saturn:  calc(var(--system-scale) * 0.340);
+  --r-uranus:  calc(var(--system-scale) * 0.405);
+  --r-neptune: calc(var(--system-scale) * 0.465);
+
+  /* Planet Body Sizes */
+  --sz-sun:     calc(var(--system-scale) * 0.082);
+  --sz-mercury: 9px;
+  --sz-venus:   15px;
+  --sz-earth:   17px;
+  --sz-moon:    4px;
+  --sz-mars:    12px;
+  --sz-jupiter: 36px;
+  --sz-saturn:  30px;
+  --sz-uranus:  22px;
+  --sz-neptune: 21px;
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-deck: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.space-body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: radial-gradient(circle at center, #070c20 0%, var(--space-navy) 45%, var(--space-black) 100%);
+  color: var(--text-primary);
+  font-family: var(--font-data);
+  user-select: none;
+}
+
+/* Hidden inputs driver */
+.state-control {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. STARFIELDS & AMBIENT NEBULAE
+   3 Layers of Box-Shadow Stars generated without images
+   -------------------------------------------------------------------------- */
+.stars-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Layer 1: Small dense twinkling starfield */
+.stars-layer--sm {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 
+    14vw 12vh #fff, 84vw 19vh #fff, 22vw 74vh #fff, 68vw 82vh #bde0fe,
+    42vw 33vh #fff, 93vw 62vh #fff, 51vw 18vh #caf0f8, 33vw 88vh #fff,
+    77vw 41vh #fff, 08vw 49vh #fff, 59vw 65vh #caf0f8, 27vw 25vh #fff,
+    88vw 08vh #fff, 19vw 92vh #fff, 71vw 22vh #caf0f8, 38vw 58vh #fff,
+    62vw 14vh #fff, 95vw 89vh #fff, 47vw 78vh #fff, 12vw 36vh #bde0fe,
+    81vw 73vh #fff, 03vw 69vh #fff, 74vw 94vh #fff, 35vw 09vh #caf0f8;
+  animation: star-pulse 3s infinite alternate ease-in-out;
+}
+
+/* Layer 2: Medium glowing stars */
+.stars-layer--md {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 
+    18vw 28vh #e0aaff, 73vw 15vh #caf0f8, 89vw 77vh #ffd166,
+    31vw 66vh #caf0f8, 64vw 52vh #e0aaff, 11vw 83vh #fff,
+    54vw 29vh #ffd166, 82vw 39vh #caf0f8, 44vw 91vh #fff;
+  animation: star-pulse 4.5s infinite alternate ease-in-out 1.5s;
+}
+
+/* Layer 3: Large distant stellar bodies */
+.stars-layer--lg {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 
+    26vw 19vh rgba(0, 229, 255, 0.8),
+    79vw 68vh rgba(255, 179, 0, 0.7),
+    15vw 61vh rgba(138, 92, 255, 0.8),
+    87vw 24vh rgba(0, 229, 255, 0.7);
+  animation: star-pulse 6s infinite alternate ease-in-out 0.8s;
+}
+
+/* Drifting cosmic cloud */
+.nebula-drift {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90vw;
+  height: 90vh;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at 30% 40%, rgba(138, 92, 255, 0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 65%, rgba(0, 229, 255, 0.06) 0%, transparent 55%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+  animation: nebula-spin 180s linear infinite;
+}
+
+/* Shooting Stars */
+.shooting-star {
+  position: absolute;
+  top: -100px;
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0));
+  transform: rotate(-35deg);
+  opacity: 0;
+  pointer-events: none;
+}
+.star-1 {
+  left: 65vw;
+  animation: shoot 12s infinite ease-in 4s;
+}
+.star-2 {
+  left: 25vw;
+  animation: shoot 18s infinite ease-in 11s;
+}
+
+/* --------------------------------------------------------------------------
+   4. HEADER & FOOTER HUD OVERLAYS
+   -------------------------------------------------------------------------- */
+.hud-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  z-index: 50;
+  background: linear-gradient(to bottom, rgba(3, 3, 10, 0.9) 0%, rgba(3, 3, 10, 0.4) 70%, transparent 100%);
+  backdrop-filter: blur(4px);
+}
+
+.hud-header__title {
+  font-family: var(--font-hud);
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  letter-spacing: 3px;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.2);
+}
+
+.hud-header__subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  margin-top: 3px;
+}
+
+.hud-controls {
+  display: flex;
+  gap: 14px;
+}
+
+.hud-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(10, 15, 35, 0.6);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-hud);
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  transition: all var(--transition-fast);
+}
+
+.hud-switch:hover {
+  border-color: var(--neon-cyan);
+  color: var(--text-primary);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.25);
+}
+
+.hud-switch__pill {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #334155;
+  transition: all var(--transition-fast);
+}
+
+/* Bottom status bar */
+.hud-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 24px;
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  background: linear-gradient(to top, rgba(3, 3, 10, 0.95), transparent);
+  pointer-events: none;
+  z-index: 40;
+}
+
+/* --------------------------------------------------------------------------
+   5. SOLAR SYSTEM CANVAS & CENTRAL SUN
+   -------------------------------------------------------------------------- */
+.solar-stage {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.system-anchor {
+  position: relative;
+  width: 0;
+  height: 0;
+  transform: translateZ(0);
+}
+
+/* Sun Body & Pulsating Corona */
+.sun-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--sz-sun);
+  height: var(--sz-sun);
+  border-radius: 50%;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.sun {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 45% 45%, #ffffff 0%, #fff7a9 18%, #ffb300 48%, #ff4b00 85%, #b31b00 100%);
+  box-shadow: 
+    0 0 20px #ffb300,
+    0 0 45px rgba(255, 120, 0, 0.8),
+    0 0 90px rgba(255, 60, 0, 0.4),
+    inset 0 0 14px #ffffff;
+  animation: sun-pulse 4s infinite alternate ease-in-out;
+}
+
+.sun-corona {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 179, 0, 0.25) 0%, rgba(255, 80, 0, 0.08) 55%, transparent 70%);
+  filter: blur(8px);
+  animation: corona-rotate 25s linear infinite;
+}
+
+/* --------------------------------------------------------------------------
+   6. ORBITAL TRACKS & PLANET POSITIONING
+   Orbits spin indefinitely; planet-slots counter-spin to stay upright
+   -------------------------------------------------------------------------- */
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 229, 255, 0.15);
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* Let clicks pass through track */
+  will-change: transform;
+}
+
+/* Planet-slot: Positioned at right edge (3 o'clock) of each orbit */
+.planet-slot {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(50%, -50%);
+  pointer-events: auto; /* Planet itself is interactive */
+}
+
+/* Tap Target expands clickable perimeter for touch screens */
+.planet-tap-target {
+  display: block;
+  padding: 14px;
+  margin: -14px;
+  cursor: pointer;
+  border-radius: 50%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Individual Orbit Geometries & Durations */
+.orbit--mercury {
+  width: calc(var(--r-mercury) * 2);
+  height: calc(var(--r-mercury) * 2);
+  animation: spin-orbit var(--t-mercury) linear infinite;
+  z-index: 18;
+}
+.orbit--venus {
+  width: calc(var(--r-venus) * 2);
+  height: calc(var(--r-venus) * 2);
+  animation: spin-orbit var(--t-venus) linear infinite;
+  z-index: 17;
+}
+.orbit--earth {
+  width: calc(var(--r-earth) * 2);
+  height: calc(var(--r-earth) * 2);
+  animation: spin-orbit var(--t-earth) linear infinite;
+  z-index: 16;
+}
+.orbit--mars {
+  width: calc(var(--r-mars) * 2);
+  height: calc(var(--r-mars) * 2);
+  animation: spin-orbit var(--t-mars) linear infinite;
+  z-index: 15;
+}
+.orbit--jupiter {
+  width: calc(var(--r-jupiter) * 2);
+  height: calc(var(--r-jupiter) * 2);
+  animation: spin-orbit var(--t-jupiter) linear infinite;
+  z-index: 14;
+}
+.orbit--saturn {
+  width: calc(var(--r-saturn) * 2);
+  height: calc(var(--r-saturn) * 2);
+  animation: spin-orbit var(--t-saturn) linear infinite;
+  z-index: 13;
+}
+.orbit--uranus {
+  width: calc(var(--r-uranus) * 2);
+  height: calc(var(--r-uranus) * 2);
+  animation: spin-orbit var(--t-uranus) linear infinite;
+  z-index: 12;
+}
+.orbit--neptune {
+  width: calc(var(--r-neptune) * 2);
+  height: calc(var(--r-neptune) * 2);
+  animation: spin-orbit var(--t-neptune) linear infinite;
+  z-index: 11;
+}
+
+/* --------------------------------------------------------------------------
+   7. PLANET SHADING, RING SYSTEMS & TEXTURES
+   Rendered with radial-gradients and inset-shadows for 3D sphericity
+   -------------------------------------------------------------------------- */
+.planet {
+  border-radius: 50%;
+  position: relative;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  will-change: transform;
+}
+
+/* Hover Accent on Planet */
+.planet:hover {
+  transform: scale(1.4) !important;
+}
+
+/* 1. Mercury: Cratered Rocky Grey */
+.planet--mercury {
+  width: var(--sz-mercury);
+  height: var(--sz-mercury);
+  background: radial-gradient(circle at 35% 35%, #d5d5d5 0%, #8c8c8c 50%, #404040 100%);
+  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.8), 0 0 6px rgba(200, 200, 200, 0.4);
+}
+
+/* 2. Venus: Golden Sulfuric Cloudpack */
+.planet--venus {
+  width: var(--sz-venus);
+  height: var(--sz-venus);
+  background: radial-gradient(circle at 35% 35%, #fff2cc 0%, #e5b964 55%, #8f601b 100%);
+  box-shadow: inset -3px -3px 5px rgba(0, 0, 0, 0.8), 0 0 10px rgba(229, 185, 100, 0.5);
+}
+
+/* 3. Earth: Azure Oceans & Swirling Atmosphere */
+.planet--earth {
+  width: var(--sz-earth);
+  height: var(--sz-earth);
+  background: radial-gradient(circle at 35% 35%, #8ae9ff 0%, #2b78e4 45%, #0b377b 80%, #031433 100%);
+  box-shadow: inset -3px -3px 5px rgba(0, 0, 0, 0.85), 0 0 12px rgba(43, 120, 228, 0.6);
+}
+
+/* Earth's Orbiting Moon (Luna) */
+.moon-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--sz-earth) * 2.2);
+  height: calc(var(--sz-earth) * 2.2);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dotted rgba(255, 255, 255, 0.15);
+  animation: spin-orbit var(--t-moon) linear infinite;
+  pointer-events: none;
+}
+.moon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--sz-moon);
+  height: var(--sz-moon);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f4f4f4, #666);
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
+}
+
+/* 4. Mars: Rusty Iron Red */
+.planet--mars {
+  width: var(--sz-mars);
+  height: var(--sz-mars);
+  background: radial-gradient(circle at 35% 35%, #f6946d 0%, #c1440e 55%, #5e1c03 100%);
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.85), 0 0 8px rgba(193, 68, 14, 0.5);
+}
+
+/* 5. Jupiter: Banded Gas Giant Storm Belts */
+.planet--jupiter {
+  width: var(--sz-jupiter);
+  height: var(--sz-jupiter);
+  background: repeating-linear-gradient(
+    180deg,
+    #c49e72 0px, #c49e72 3px,
+    #8d5b32 3px, #8d5b32 6px,
+    #e1c7a5 6px, #e1c7a5 9px,
+    #a86d3e 9px, #a86d3e 13px,
+    #cfa87d 13px, #cfa87d 16px
+  );
+  box-shadow: inset -6px -6px 10px rgba(0, 0, 0, 0.85), inset 3px 3px 6px rgba(255, 255, 255, 0.2), 0 0 14px rgba(207, 168, 125, 0.4);
+}
+
+/* 6. Saturn: Cream Sphere with Majestic Angled Rings */
+.planet--saturn {
+  width: var(--sz-saturn);
+  height: var(--sz-saturn);
+  background: radial-gradient(circle at 35% 35%, #ffeaad 0%, #d4b476 55%, #7a5f2e 100%);
+  box-shadow: inset -5px -5px 8px rgba(0, 0, 0, 0.85), 0 0 12px rgba(212, 180, 118, 0.4);
+}
+
+.saturn-rings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--sz-saturn) * 2.6);
+  height: calc(var(--sz-saturn) * 2.6);
+  transform: translate(-50%, -50%) rotateX(72deg) rotateY(15deg);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 2px rgba(60, 45, 20, 0.4),
+    0 0 0 6px rgba(210, 185, 130, 0.8),
+    0 0 0 9px rgba(160, 135, 90, 0.5),
+    0 0 0 14px rgba(230, 210, 160, 0.65),
+    0 0 0 18px rgba(130, 105, 65, 0.3);
+  pointer-events: none;
+}
+
+/* 7. Uranus: Pale Cyan with Tilted Ring */
+.planet--uranus {
+  width: var(--sz-uranus);
+  height: var(--sz-uranus);
+  background: radial-gradient(circle at 35% 35%, #d1fbfb 0%, #68d8d6 55%, #186665 100%);
+  box-shadow: inset -4px -4px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(104, 216, 214, 0.5);
+}
+.uranus-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--sz-uranus) * 2.2);
+  height: calc(var(--sz-uranus) * 2.2);
+  transform: translate(-50%, -50%) rotateY(80deg);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(209, 251, 251, 0.45);
+  pointer-events: none;
+}
+
+/* 8. Neptune: Azure Deep Ice Giant */
+.planet--neptune {
+  width: var(--sz-neptune);
+  height: var(--sz-neptune);
+  background: radial-gradient(circle at 35% 35%, #7ea5ff 0%, #274fd6 55%, #0d1e5e 100%);
+  box-shadow: inset -4px -4px 6px rgba(0, 0, 0, 0.85), 0 0 12px rgba(39, 79, 214, 0.6);
+}
+
+/* --------------------------------------------------------------------------
+   8. PLANET COUNTER-ROTATION (UPRIGHT LOCK)
+   Counter-rotates the planet slot in reverse speed so the planet shading
+   and child elements don't spin upside-down as the orbit revolves.
+   -------------------------------------------------------------------------- */
+.orbit--mercury .planet-slot { animation: counter-spin var(--t-mercury) linear infinite; }
+.orbit--venus   .planet-slot { animation: counter-spin var(--t-venus) linear infinite; }
+.orbit--earth   .planet-slot { animation: counter-spin var(--t-earth) linear infinite; }
+.orbit--mars    .planet-slot { animation: counter-spin var(--t-mars) linear infinite; }
+.orbit--jupiter .planet-slot { animation: counter-spin var(--t-jupiter) linear infinite; }
+.orbit--saturn  .planet-slot { animation: counter-spin var(--t-saturn) linear infinite; }
+.orbit--uranus  .planet-slot { animation: counter-spin var(--t-uranus) linear infinite; }
+.orbit--neptune .planet-slot { animation: counter-spin var(--t-neptune) linear infinite; }
+
+/* --------------------------------------------------------------------------
+   9. PURE CSS RADIO HACK & INTERACTION LOGIC
+   - Hover on planet or slot pauses animation and triggers info card.
+   - Clicking planet tap-target or selector radio highlights and keeps card open.
+   - Using :has() where supported for orchestrating parent state.
+   -------------------------------------------------------------------------- */
+
+/* Pause Orbit On Hover */
+.orbit:has(.planet-slot:hover) {
+  animation-play-state: paused;
+}
+.orbit:has(.planet-slot:hover) .planet-slot {
+  animation-play-state: paused;
+}
+
+/* TOGGLE: HIDE / SHOW ORBITS */
+#toggle-orbits:not(:checked) ~ .solar-stage .orbit {
+  border-color: transparent !important;
+}
+#toggle-orbits:checked ~ .hud-header label[for="toggle-orbits"] .hud-switch__pill {
+  background: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan);
+}
+
+/* TOGGLE: WARP SPEED */
+#toggle-speed:checked ~ * {
+  --warp-multiplier: 0.2; /* Accelerate revolutions by 5x */
+}
+#toggle-speed:checked ~ .hud-header label[for="toggle-speed"] .hud-switch__pill {
+  background: var(--sun-gold);
+  box-shadow: 0 0 8px var(--sun-gold);
+}
+
+/* RADIO HOOKS: CONNECTING RADIOS TO CARDS & PLANET HIGHLIGHTS */
+#select-mercury:checked ~ .solar-stage .orbit--mercury,
+#select-mercury:checked ~ .solar-stage .orbit--mercury .planet-slot {
+  animation-play-state: paused;
+}
+#select-mercury:checked ~ .solar-stage .planet--mercury {
+  transform: scale(1.6);
+  box-shadow: 0 0 20px #fff;
+}
+#select-mercury:checked ~ .telemetry-deck #card-mercury {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+#select-mercury:checked ~ .telemetry-deck .deck-backdrop {
+  display: block;
+}
+#select-mercury:checked ~ .hud-selector #btn-mercury {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 229, 255, 0.15);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+}
+
+/* Venus */
+#select-venus:checked ~ .solar-stage .orbit--venus,
+#select-venus:checked ~ .solar-stage .orbit--venus .planet-slot {
+  animation-play-state: paused;
+}
+#select-venus:checked ~ .solar-stage .planet--venus {
+  transform: scale(1.6);
+  box-shadow: 0 0 20px var(--sun-gold);
+}
+#select-venus:checked ~ .telemetry-deck #card-venus {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+#select-venus:checked ~ .telemetry-deck .deck-backdrop { display: block; }
+#select-venus:checked ~ .hud-selector #btn-venus {
+  border-color: var(--sun-gold);
+  background: rgba(255, 179, 0, 0.15);
+  box-shadow: 0 0 12px rgba(255, 179, 0, 0.4);
+}
+
+/* Earth */
+#select-earth:checked ~ .solar-stage .orbit--earth,
+#select-earth:checked ~ .solar-stage .orbit--earth .planet-slot {
+  animation-play-state: paused;
+}
+#select-earth:checked ~ .solar-stage .planet--earth {
+  transform: scale(1.6);
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+#select-earth:checked ~ .telemetry-deck #card-earth {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+#select-earth:checked ~ .telemetry-deck .deck-backdrop { display: block; }
+#select-earth:checked ~ .hud-selector #btn-earth {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 229, 255, 0.15);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+}
+
+/* Mars */
+#select-mars:checked ~ .solar-stage .orbit--mars,
+#select-mars:checked ~ .solar-stage .orbit--mars .planet-slot {
+  animation-play-state: paused;
+}
+#select-mars:checked ~ .solar-stage .planet--mars {
+  transform: scale(1.6);
+  box-shadow: 0 0 20px var(--alert-red);
+}
+#select-mars:checked ~ .telemetry-deck #card-mars {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+#select-mars:checked ~ .telemetry-deck .deck-backdrop { display: block; }
+#select-mars:checked ~ .hud-selector #btn-mars {
+  border-color: var(--alert-red);
+  background: rgba(255, 51, 102, 0.15);
+  box-shadow: 0 0 12px rgba(255, 51, 102, 0.4);
+}
+
+/* Jupiter */
+#select-jupiter:checked ~ .solar-stage .orbit--jupiter,
+#select-jupiter:checked ~ .solar-stage .orbit--jupiter .planet-slot {
+  animation-play-state: paused;
+}
+#select-jupiter:checked ~ .solar-stage .planet--jupiter {
+  transform: scale(1.4);
+  box-shadow: 0 0 25px rgba(207, 168, 125, 0.8);
+}
+#select-jupiter:checked ~ .telemetry-deck #card-jupiter {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+#select-jupiter:checked ~ .telemetry-deck .deck-backdrop { display: block; }
+#select-jupiter:checked ~ .hud-selector #btn-jupiter {
+  border-color: var(--sun-gold);
+  background: rgba(255, 179, 0, 0.15);
+  box-shadow: 0 0 12px rgba(255, 179, 0, 0.4);
+}
+
+/* Saturn */
+#select-saturn:checked ~ .solar-stage .orbit--saturn,
+#select-saturn:checked ~ .solar-stage .orbit--saturn .planet-slot {
+  animation-play-state: paused;
+}
+#select-saturn:checked ~ .solar-stage .planet--saturn {
+  transform: scale(1.4);
+  box-shadow: 0 0 25px rgba(212, 180, 118, 0.8);
+}
+#select-saturn:checked ~ .telemetry-deck #card-saturn {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+#select-saturn:checked ~ .telemetry-deck .deck-backdrop { display: block; }
+#select-saturn:checked ~ .hud-selector #btn-saturn {
+  border-color: var(--sun-gold);
+  background: rgba(255, 179, 0, 0.15);
+  box-shadow: 0 0 12px rgba(255, 179, 0, 0.4);
+}
+
+/* Uranus */
+#select-uranus:checked ~ .solar-stage .orbit--uranus,
+#select-uranus:checked ~ .solar-stage .orbit--uranus .planet-slot {
+  animation-play-state: paused;
+}
+#select-uranus:checked ~ .solar-stage .planet--uranus {
+  transform: scale(1.5);
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+#select-uranus:checked ~ .telemetry-deck #card-uranus {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+#select-uranus:checked ~ .telemetry-deck .deck-backdrop { display: block; }
+#select-uranus:checked ~ .hud-selector #btn-uranus {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 229, 255, 0.15);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+}
+
+/* Neptune */
+#select-neptune:checked ~ .solar-stage .orbit--neptune,
+#select-neptune:checked ~ .solar-stage .orbit--neptune .planet-slot {
+  animation-play-state: paused;
+}
+#select-neptune:checked ~ .solar-stage .planet--neptune {
+  transform: scale(1.5);
+  box-shadow: 0 0 20px var(--neon-purple);
+}
+#select-neptune:checked ~ .telemetry-deck #card-neptune {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+#select-neptune:checked ~ .telemetry-deck .deck-backdrop { display: block; }
+#select-neptune:checked ~ .hud-selector #btn-neptune {
+  border-color: var(--neon-purple);
+  background: rgba(138, 92, 255, 0.15);
+  box-shadow: 0 0 12px rgba(138, 92, 255, 0.4);
+}
+
+/* DESKTOP HOVER TRIGGER (via :has support) */
+body:has(.orbit--mercury .planet-slot:hover) .telemetry-deck #card-mercury,
+body:has(.orbit--venus .planet-slot:hover)   .telemetry-deck #card-venus,
+body:has(.orbit--earth .planet-slot:hover)   .telemetry-deck #card-earth,
+body:has(.orbit--mars .planet-slot:hover)    .telemetry-deck #card-mars,
+body:has(.orbit--jupiter .planet-slot:hover) .telemetry-deck #card-jupiter,
+body:has(.orbit--saturn .planet-slot:hover)  .telemetry-deck #card-saturn,
+body:has(.orbit--uranus .planet-slot:hover)  .telemetry-deck #card-uranus,
+body:has(.orbit--neptune .planet-slot:hover) .telemetry-deck #card-neptune {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* --------------------------------------------------------------------------
+   10. GLASSMORPHISM INFO CARDS (TELEMETRY DECK)
+   -------------------------------------------------------------------------- */
+.telemetry-deck {
+  position: fixed;
+  top: 80px;
+  right: 28px;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.deck-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 90;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  pointer-events: auto;
+}
+
+.info-card {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 360px;
+  max-width: calc(100vw - 40px);
+  background: rgba(6, 12, 28, 0.88);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 24px;
+  border-radius: 4px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 229, 255, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(40px);
+  transition: all var(--transition-deck);
+  pointer-events: auto;
+}
+
+/* Cut-corner polygon */
+.cut-corner {
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 16px) 0, 
+    100% 16px, 
+    100% 100%, 
+    16px 100%, 
+    0 calc(100% - 16px)
+  );
+}
+
+.info-card__close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  transition: color var(--transition-fast);
+}
+.info-card__close:hover {
+  color: var(--neon-cyan);
+}
+
+.info-card__header {
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+  padding-bottom: 10px;
+}
+
+.info-card__tag {
+  font-family: var(--font-hud);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+}
+
+.info-card__title {
+  font-family: var(--font-hud);
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin: 2px 0;
+}
+
+.info-card__type {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.glow--cyan   { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
+.glow--gold   { color: var(--sun-gold);  text-shadow: 0 0 10px rgba(255, 179, 0, 0.5); }
+.glow--red    { color: var(--alert-red); text-shadow: 0 0 10px rgba(255, 51, 102, 0.5); }
+.glow--purple { color: var(--neon-purple); text-shadow: 0 0 10px rgba(138, 92, 255, 0.5); }
+
+/* Telemetry Key-Value Grid */
+.info-card__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+  margin-bottom: 18px;
+}
+
+.data-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.data-lbl {
+  font-family: var(--font-hud);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  letter-spacing: 0.8px;
+}
+
+.data-val {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+.info-card__fact {
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: #c9daf8;
+  padding: 10px;
+  background: rgba(0, 229, 255, 0.05);
+  border-left: 2px solid var(--neon-cyan);
+}
+.fact-tag {
+  color: var(--neon-cyan);
+  font-family: var(--font-hud);
+  font-size: 0.65rem;
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   11. BOTTOM PLANET SELECTOR DOCK
+   -------------------------------------------------------------------------- */
+.hud-selector {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  max-width: 90vw;
+}
+
+.hud-selector__scroll {
+  display: flex;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(6, 10, 24, 0.75);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.hud-selector__scroll::-webkit-scrollbar { display: none; }
+
+.selector-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.selector-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 229, 255, 0.3);
+}
+
+.selector-disc {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.disc--mercury { background: #9e9e9e; }
+.disc--venus   { background: #e5b964; }
+.disc--earth   { background: #2b78e4; box-shadow: 0 0 6px #2b78e4; }
+.disc--mars    { background: #c1440e; }
+.disc--jupiter { background: #cfa87d; }
+.disc--saturn  { background: #d4b476; }
+.disc--uranus  { background: #68d8d6; }
+.disc--neptune { background: #274fd6; }
+
+.selector-name {
+  font-family: var(--font-hud);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+/* --------------------------------------------------------------------------
+   12. KEYFRAME ANIMATIONS
+   -------------------------------------------------------------------------- */
+@keyframes spin-orbit {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes counter-spin {
+  from { transform: translate(50%, -50%) rotate(0deg); }
+  to   { transform: translate(50%, -50%) rotate(-360deg); }
+}
+
+@keyframes sun-pulse {
+  0% {
+    transform: scale(0.97);
+    box-shadow: 0 0 20px #ffb300, 0 0 45px rgba(255, 120, 0, 0.8), 0 0 80px rgba(255, 60, 0, 0.4);
+  }
+  100% {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px #ffca28, 0 0 65px rgba(255, 140, 0, 0.95), 0 0 115px rgba(255, 70, 0, 0.55);
+  }
+}
+
+@keyframes corona-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes star-pulse {
+  0%   { opacity: 0.3; }
+  100% { opacity: 0.9; }
+}
+
+@keyframes nebula-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes shoot {
+  0% {
+    transform: translate(0, 0) rotate(-35deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  15% {
+    transform: translate(-300px, 300px) rotate(-35deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-300px, 300px) rotate(-35deg);
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. RESPONSIVE ADAPTATIONS
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 900px) {
+  :root {
+    --system-scale: min(100vw, 85vh);
+  }
+  
+  .telemetry-deck {
+    top: auto;
+    bottom: 85px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .info-card {
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, 40px);
+    width: 90vw;
+    padding: 18px;
+  }
+
+  #select-mercury:checked ~ .telemetry-deck #card-mercury,
+  #select-venus:checked ~ .telemetry-deck #card-venus,
+  #select-earth:checked ~ .telemetry-deck #card-earth,
+  #select-mars:checked ~ .telemetry-deck #card-mars,
+  #select-jupiter:checked ~ .telemetry-deck #card-jupiter,
+  #select-saturn:checked ~ .telemetry-deck #card-saturn,
+  #select-uranus:checked ~ .telemetry-deck #card-uranus,
+  #select-neptune:checked ~ .telemetry-deck #card-neptune {
+    transform: translate(-50%, 0);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .hud-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+
+  .hud-controls {
+    align-self: flex-end;
+  }
+
+  .hud-footer__coords {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. ACCESSIBILITY (PREFERS-REDUCED-MOTION)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+
+  .shooting-star,
+  .nebula-drift {
+    display: none;
+  }
+}
