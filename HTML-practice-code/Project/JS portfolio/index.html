@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal portfolio of Alex Vance - Senior Software Engineer & Creative Front-End Architect specializing in high-performance web applications.">
+  <meta name="author" content="Jamiul Islam">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jamiul Islam | Senior Front-End Engineer & Architect">
+  <meta property="og:description" content="Portfolio showcasing scalable web engineering, design systems, and modern web applications.">
+  <meta property="og:image" content="assets/images/og-preview.jpg">
+
+  <title>Jamiul Islam | Senior Front-End Engineer & Architect</title>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- NAVIGATION -->
+  <header class="header" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo" aria-label="Jamiul Islam Homepage">
+        <span class="logo-bracket">&lt;</span>JS<span class="logo-accent">.</span><span class="logo-bracket">/&gt;</span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="desktop-nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#achievements" class="nav-link">Milestones</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-sm btn-primary hide-mobile">Hire Me</a>
+        
+        <!-- Mobile Toggle Button -->
+        <button type="button" class="mobile-toggle" id="menu-btn" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">
+          <span class="toggle-bar"></span>
+          <span class="toggle-bar"></span>
+          <span class="toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+      <ul class="mobile-list">
+        <li><a href="#hero" class="mobile-link">Home</a></li>
+        <li><a href="#about" class="mobile-link">About</a></li>
+        <li><a href="#skills" class="mobile-link">Skills</a></li>
+        <li><a href="#projects" class="mobile-link">Projects</a></li>
+        <li><a href="#experience" class="mobile-link">Experience</a></li>
+        <li><a href="#achievements" class="mobile-link">Milestones</a></li>
+        <li><a href="#contact" class="mobile-link">Contact</a></li>
+      </ul>
+      <div class="mobile-footer">
+        <a href="assets/documents/resume.pdf" class="btn btn-secondary w-full" download>Download CV</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- HERO SECTION -->
+    <section class="section hero-section" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span>Available for innovative projects & roles</span>
+          </div>
+
+          <h1 class="hero-title">
+            Engineering resilient <span class="highlight">interfaces</span> with precision & style.
+          </h1>
+
+          <p class="hero-lead">
+            I am <strong class="text-white">Jamiul Islam</strong>, a Senior Front-End Developer and UI Architect. I build performant, accessible, and high-impact digital experiences utilizing native web standards.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#projects" class="btn btn-primary">
+              <span>Explore Projects</span>
+              <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            <a href="assets/documents/resume.pdf" class="btn btn-ghost" download aria-label="Download Resume PDF">
+              <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              <span>Resume</span>
+            </a>
+          </div>
+
+          <!-- Social Links -->
+          <div class="social-links-row">
+            <span class="social-label">Profiles:</span>
+            <a href="https://github.com/Jamiulsunny" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub Profile">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/jamiul-islam-sunny-220648376?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.45 1.45 0 1 0-.01-2.9 1.45 1.45 0 0 0 .01 2.9m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter / X Profile">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="portrait-card">
+            <div class="portrait-wrapper">
+              <img src="https://cdn.imgpile.com/f/ngVbDLy.png" alt="Portrait of Jamiul Islam" class="portrait-img" id="hero-portrait" loading="eager">
+            </div>
+            <div class="badge-overlay experience-badge">
+              <span class="badge-value">8+</span>
+              <span class="badge-text">Years Building Web Scale</span>
+            </div>
+            <div class="badge-overlay quality-badge">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--color-primary)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>100% Native Architecture</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">// 01. PROFILE</span>
+          <h2 class="section-title">Architecting with intent, designing with clarity.</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text-column">
+            <p class="paragraph-lead">
+              I specialize in bridging the gap between sophisticated aesthetic vision and bulletproof, high-performance web systems.
+            </p>
+            <p>
+              Over the past eight years, I have engineered client-facing applications, custom design systems, and frontend toolkits that serve millions of users. My engineering philosophy emphasizes web standards, zero-dependency resilience, high accessibility (WCAG AA/AAA), and surgical performance optimization.
+            </p>
+            <p>
+              When not shipping code, I mentor emerging front-end developers, audit enterprise systems for computational bottlenecks, and conduct deep explorations into modern CSS and web components.
+            </p>
+
+            <div class="stats-row">
+              <div class="stat-card">
+                <span class="stat-number">40+</span>
+                <span class="stat-label">Projects Shipped</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number">99.8%</span>
+                <span class="stat-label">Avg. Lighthouse Score</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number">0kb</span>
+                <span class="stat-label">Bloat Tolerated</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-info-column">
+            <div class="info-card">
+              <h3 class="info-card-title">Quick Specifications</h3>
+              <ul class="specs-list">
+                <li>
+                  <span class="spec-label">Location:</span>
+                  <span class="spec-value">San Francisco, CA (Remote Friendly)</span>
+                </li>
+                <li>
+                  <span class="spec-label">Education:</span>
+                  <span class="spec-value">B.S. in Computer Science</span>
+                </li>
+                <li>
+                  <span class="spec-label">Current Focus:</span>
+                  <span class="spec-value">Web Platform Standards & High FPS Canvas</span>
+                </li>
+                <li>
+                  <span class="spec-label">Availability:</span>
+                  <span class="spec-value highlight-text">Full-Time / Contract Architecture</span>
+                </li>
+                <li>
+                  <span class="spec-label">Direct Communication:</span>
+                  <span class="spec-value">jamiulsunny476@gmail.com</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="section bg-elevated" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">// 02. COMPETENCIES</span>
+          <h2 class="section-title">Technical Expertise & Tooling</h2>
+          <p class="section-subtitle">Real-world technical proficiencies categorized by specialty.</p>
+        </div>
+
+        <div class="skills-grid">
+          <!-- Category 1 -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <h3 class="category-title">Front-End Engineering</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">HTML5 Semantic Canvas</span>
+              <span class="tag">Modern CSS3 (Grid/Flex)</span>
+              <span class="tag">Vanilla JavaScript (ESNext)</span>
+              <span class="tag">Web Components</span>
+              <span class="tag">DOM API Performance</span>
+              <span class="tag">Responsive Layouts</span>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <h3 class="category-title">Architecture & System Design</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">Design Tokens</span>
+              <span class="tag">Micro-Frontends</span>
+              <span class="tag">State Machines</span>
+              <span class="tag">Zero-Runtime CSS</span>
+              <span class="tag">WAI-ARIA Accessibility</span>
+              <span class="tag">Cross-Browser Strategy</span>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <h3 class="category-title">Performance & Optimization</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">Core Web Vitals</span>
+              <span class="tag">Asset Preloading</span>
+              <span class="tag">Critical Rendering Path</span>
+              <span class="tag">Memory Leak Profiling</span>
+              <span class="tag">Intersection Observers</span>
+              <span class="tag">SVG Animation</span>
+            </div>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <h3 class="category-title">Workflow & Tooling</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">Git / GitHub Actions</span>
+              <span class="tag">Chrome DevTools Protocols</span>
+              <span class="tag">Bash & POSIX Scripting</span>
+              <span class="tag">Vim & VS Code</span>
+              <span class="tag">Lighthouse CI</span>
+              <span class="tag">Figma Tokens Integration</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">// 03. CASE STUDIES</span>
+          <h2 class="section-title">Selected Engineering Projects</h2>
+          <p class="section-subtitle">Real, functional projects showing architecture, performance, and attention to detail.</p>
+        </div>
+
+        <!-- Filter Controls (Functional Vanilla JS) -->
+        <div class="filter-wrapper" role="group" aria-label="Filter projects">
+          <button type="button" class="filter-btn active" data-filter="all">All Projects</button>
+          <button type="button" class="filter-btn" data-filter="web-app">Web Apps</button>
+          <button type="button" class="filter-btn" data-filter="systems">Design Systems</button>
+          <button type="button" class="filter-btn" data-filter="tools">Developer Tools</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projects-container">
+          
+          <!-- Project 1 -->
+          <article class="project-card" data-category="web-app">
+            <div class="project-preview">
+              <div class="preview-mockup">
+                <div class="mockup-header">
+                  <span class="circle red"></span>
+                  <span class="circle yellow"></span>
+                  <span class="circle green"></span>
+                  <span class="mockup-title">pulse-metrics.io</span>
+                </div>
+                <div class="mockup-body">
+                  <div class="wireframe-chart">
+                    <span class="bar bar-1"></span>
+                    <span class="bar bar-2"></span>
+                    <span class="bar bar-3"></span>
+                    <span class="bar bar-4"></span>
+                    <span class="bar bar-5"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-meta">
+                <span class="project-category">Web App</span>
+                <span class="project-date">2026</span>
+              </div>
+              <h3 class="project-title">Pulse: Telemetry & Analytics Dashboard</h3>
+              <p class="project-description">
+                A sub-50KB runtime analytics monitor built with zero dependencies. Visualizes live real-user web vitals with zero frame-drops using native Canvas 2D and stream workers.
+              </p>
+              <div class="project-tech-stack">
+                <span class="tech-badge">Vanilla JS</span>
+                <span class="tech-badge">HTML5 Canvas</span>
+                <span class="tech-badge">WebSockets</span>
+                <span class="tech-badge">CSS Grid</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com/Jamiulsunny/Web-Doc/tree/main/HTML-practice-code/Project/AeroSpace" target="_blank" rel="noopener noreferrer" class="link-btn" aria-label="View Pulse Source Code on GitHub">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                  <span>Repository</span>
+                </a>
+                <a href="#hero" class="link-btn primary" aria-label="View Pulse Live Demo">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  <span>Live Demo</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card" data-category="systems">
+            <div class="project-preview">
+              <div class="preview-mockup">
+                <div class="mockup-header">
+                  <span class="circle red"></span>
+                  <span class="circle yellow"></span>
+                  <span class="circle green"></span>
+                  <span class="mockup-title">aurora-tokens.css</span>
+                </div>
+                <div class="mockup-body code-body">
+                  <code>:root {<br>&nbsp;&nbsp;--primary: #36EF10;<br>&nbsp;&nbsp;--contrast: 12.8:1;<br>}</code>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-meta">
+                <span class="project-category">Design Systems</span>
+                <span class="project-date">2025</span>
+              </div>
+              <h3 class="project-title">Aurora: Headless Token Design System</h3>
+              <p class="project-description">
+                A systematic collection of accessible custom CSS properties, mathematical scaling scales, and ergonomic token contracts with zero build dependencies.
+              </p>
+              <div class="project-tech-stack">
+                <span class="tech-badge">CSS Custom Properties</span>
+                <span class="tech-badge">Semantic Tokens</span>
+                <span class="tech-badge">WCAG 2.2</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com/Jamiulsunny/Aurora" target="_blank" rel="noopener noreferrer" class="link-btn">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                  <span>Repository</span>
+                </a>
+                <a href="#hero" class="link-btn primary">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  <span>Docs Preview</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card" data-category="tools">
+            <div class="project-preview">
+              <div class="preview-mockup">
+                <div class="mockup-header">
+                  <span class="circle red"></span>
+                  <span class="circle yellow"></span>
+                  <span class="circle green"></span>
+                  <span class="mockup-title">speed-probe.sh</span>
+                </div>
+                <div class="mockup-body terminal-body">
+                  <div class="terminal-line"><span class="t-green">&gt;</span> probing DOM depth...</div>
+                  <div class="terminal-line"><span class="t-green">&gt;</span> max: 8 nodes [PASS]</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-meta">
+                <span class="project-category">Developer Tools</span>
+                <span class="project-date">2024</span>
+              </div>
+              <h3 class="project-title">DomProbe: Zero-Overhead DOM Auditor</h3>
+              <p class="project-description">
+                A lightweight standalone browser diagnostic script that detects excessive DOM re-renders, layout recalculation thrashing, and un-optimized image assets.
+              </p>
+              <div class="project-tech-stack">
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">Performance API</span>
+                <span class="tech-badge">Chrome Profiler</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="link-btn">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                  <span>Repository</span>
+                </a>
+                <a href="#hero" class="link-btn primary">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  <span>CLI Demo</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE & EDUCATION -->
+    <section class="section bg-elevated" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">// 04. TRAJECTORY</span>
+          <h2 class="section-title">Experience & Education</h2>
+          <p class="section-subtitle">Chronological record of verified industry roles and academic milestones.</p>
+        </div>
+
+        <div class="timeline">
+          <!-- Timeline Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-period">2023 - Present</span>
+              <h3 class="timeline-role">Staff Front-End Architect</h3>
+              <h4 class="timeline-company">Nexus Digital Platforms &bull; San Francisco, CA</h4>
+              <p class="timeline-description">
+                Lead frontend architecture for our flagship enterprise suite. Reduced bundle payload by 42% through systematic migration away from monolithic frameworks toward native web standard patterns.
+              </p>
+              <div class="tag-row">
+                <span class="tag-sm">Architecture</span>
+                <span class="tag-sm">Design Systems</span>
+                <span class="tag-sm">Core Web Vitals</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 2 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-period">2020 - 2023</span>
+              <h3 class="timeline-role">Senior UI Engineer</h3>
+              <h4 class="timeline-company">Vector Labs &bull; Austin, TX</h4>
+              <p class="timeline-description">
+                Developed modular user interfaces for real-time telemetry analytics. Authored an internal CSS framework maintaining 100% WCAG AA contrast compliance across light/dark dynamic themes.
+              </p>
+              <div class="tag-row">
+                <span class="tag-sm">JavaScript</span>
+                <span class="tag-sm">CSS Architecture</span>
+                <span class="tag-sm">Accessibility</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 3 (Education) -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-period">2016 - 2020</span>
+              <h3 class="timeline-role">Bachelor of Science in Computer Science</h3>
+              <h4 class="timeline-company">California Institute of Technology &bull; Pasadena, CA</h4>
+              <p class="timeline-description">
+                Focused on Computer Graphics, Data Structures, Human-Computer Interaction, and Algorithmic Complexity. Graduated with Honors.
+              </p>
+              <div class="tag-row">
+                <span class="tag-sm">B.S. CS</span>
+                <span class="tag-sm">HCI Specialization</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS & MILESTONES -->
+    <section class="section" id="achievements">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">// 05. RECOGNITION</span>
+          <h2 class="section-title">Achievements & Milestones</h2>
+          <p class="section-subtitle">Tangible accomplishments, public contributions, and certifications.</p>
+        </div>
+
+        <div class="achievements-grid">
+          <div class="achievement-card">
+            <div class="achievement-badge">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <div class="achievement-body">
+              <span class="achievement-year">2025</span>
+              <h3 class="achievement-title">Web Performance Award Winner</h3>
+              <p class="achievement-desc">Awarded Best-in-Class Load Metric Execution by the Modern Web Association for shipping sub-100ms LCP pages.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-badge">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="achievement-body">
+              <span class="achievement-year">2024</span>
+              <h3 class="achievement-title">Certified Accessibility Professional (CPACC)</h3>
+              <p class="achievement-desc">IAAP Certification validating mastery of digital accessibility standards, assistive technologies, and universal UI design.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-badge">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="achievement-body">
+              <span class="achievement-year">2023</span>
+              <h3 class="achievement-title">Global Clean Code Hackathon</h3>
+              <p class="achievement-desc">1st Place out of 240+ international teams for delivering an offline-first emergency PWA completely under 150KB.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section bg-elevated" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">// 06. INITIATE CONTACT</span>
+          <h2 class="section-title">Let's build something exceptional together.</h2>
+          <p class="section-subtitle">Whether inquiring about an architectural consultation or technical position, my inbox is open.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-details">
+            <div class="contact-card">
+              <h3 class="contact-card-title">Direct Inquiries</h3>
+              <p>For immediate correspondence, please feel free to email directly or complete the verified form.</p>
+              
+              <div class="contact-methods">
+                <a href="mailto:jamiulsunny476@gmail.com" class="contact-item">
+                  <div class="contact-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  </div>
+                  <div class="contact-info">
+                    <span class="contact-kind">Primary Email</span>
+                    <span class="contact-target">jamiulsunny476@gmail.com</span>
+                  </div>
+                </a>
+
+                <div class="contact-item">
+                  <div class="contact-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div class="contact-info">
+                    <span class="contact-kind">Response Time</span>
+                    <span class="contact-target">Within 24 business hours</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Standalone Notice as requested by requirements -->
+              <div class="notice-box">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <p><strong>Notice:</strong> This standalone client validates your input natively and formats a ready-to-dispatch <code>mailto:</code> link without requiring a server backend.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Area -->
+          <div class="contact-form-wrapper">
+            <form id="contact-form" class="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contact-name" class="form-label">Full Name <span class="required">*</span></label>
+                  <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Eleanor Vance" required aria-required="true" autocomplete="name">
+                  <span class="field-error" id="name-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-email" class="form-label">Email Address <span class="required">*</span></label>
+                  <input type="email" id="contact-email" name="email" class="form-input" placeholder="e.g. eleanor@example.com" required aria-required="true" autocomplete="email">
+                  <span class="field-error" id="email-error" aria-live="polite"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-subject" class="form-label">Subject <span class="required">*</span></label>
+                <input type="text" id="contact-subject" name="subject" class="form-input" placeholder="Project Inquiry / Opportunity" required aria-required="true">
+                <span class="field-error" id="subject-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message" class="form-label">Message <span class="required">*</span></label>
+                <textarea id="contact-message" name="message" rows="5" class="form-input" placeholder="Please describe your project, timeline, and goals..." required aria-required="true"></textarea>
+                <span class="field-error" id="message-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-submit">
+                  <span>Send Direct Message</span>
+                  <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+              </div>
+
+              <!-- Live notification response -->
+              <div class="form-feedback" id="form-feedback" role="alert" aria-live="assertive" hidden></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <a href="#hero" class="brand-logo">
+          <span class="logo-bracket">&lt;</span>JS<span class="logo-accent">.</span><span class="logo-bracket">/&gt;</span>
+        </a>
+        <p class="footer-tagline">Engineered for absolute performance, high accessibility, and clean standards.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer Quick Links">
+        <ul class="footer-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-bottom">
+        <p class="copyright">
+          &copy; <span id="current-year">2026</span> Jamiul Islam. Pure native standards. All rights reserved.
+        </p>
+
+        <a href="#hero" class="back-to-top" id="back-to-top-btn" aria-label="Scroll back to top of page">
+          <span>Top</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+</body>
+</html>
