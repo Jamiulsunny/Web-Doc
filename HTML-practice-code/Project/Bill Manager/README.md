@@ -1,31 +1,34 @@
 # 💳 Subscription & Bill Manager UI
 
-Modern, clean ebong responsive ekta Monthly Renewal Tracker dashboard ja shudhumatro **HTML5** ebong **CSS3** bebohar kore toiri kora hoyeche. Eiti bebohar kore protidin o protimasher bivinno subscription ebong bill-er hisab shohojei track kora jay.
+A modern, clean, and responsive **Monthly Renewal Tracker Dashboard** built using only **HTML5 and CSS3**. It helps users easily track their daily and monthly subscriptions, bills, and recurring expenses.
 
 ---
 
 ## 📸 Key Features
 
-- **Monthly Overview Cards:** Total khoroch, active subscription sonkha ebong current week-e expire hote jawya bill-er summary.
-- **Visual Renewal Progress:** Kon bill-er date koto kache chole esheche ta bujhar jonno dynamic color-coded cycle progress bar (Urgent, Warning, Normal).
-- **Status Indicators:** Proti bill-er sathe status badge (`Pay Soon`, `Upcoming`, `Active`).
-- **Modern Dark Interface:** Chokher jonne aaramdayok dark-mode inspired clean dashboard layout.
-- **Fully Responsive:** Mobile phone, tablet ebong desktop shob dhoroner screen size-e perfectly adjust hoy.
+- **Monthly Overview Cards:** Summary of total expenses, number of active subscriptions, and bills due within the current week.
+- **Visual Renewal Progress:** Color-coded cycle progress bars (Urgent, Warning, Normal) to help users understand how close each bill is to its renewal date.
+- **Status Indicators:** Each bill includes a status badge such as `Pay Soon`, `Upcoming`, or `Active`.
+- **Modern Dark Interface:** A clean, dark-mode-inspired dashboard layout designed for a comfortable viewing experience.
+- **Fully Responsive:** Adapts seamlessly to mobile phones, tablets, and desktop screens.
 
 ---
 
 ## 🛠️ Built With
 
-- **HTML5:** Semantic element ebong structure-er jonno (`<section>`, `<div>`, `<h3>`, etc.).
-- **CSS3:** 
-  - CSS Flexbox (Navigation, header & card alignment)
-  - CSS Grid (Top overview summary cards)
-  - CSS Media Queries (Mobile responsive styling)
-  - CSS Transitions & Pseudo-classes (Hover effects)
+- **HTML5:** Used to create the semantic structure and layout with elements such as `<section>`, `<div>`, and `<h3>`.
+- **CSS3:** Used for styling and responsive design, including:
+  - **CSS Flexbox:** Navigation, header, and card alignment.
+  - **CSS Grid:** Overview summary cards.
+  - **CSS Media Queries:** Responsive styling for different screen sizes.
+  - **CSS Transitions & Pseudo-classes:** Hover effects and interactive visual feedback.
 
 ---
 
-   📁 File Structure
+## 📁 File Structure
 
-   ├── index.html        # HTML structure ebong inline/embedded CSS styling
-└── README.md         # Project documentation
+```text
+├── index.html   # HTML structure with embedded CSS styling
+└── README.md    # Project documentation
+```
+
