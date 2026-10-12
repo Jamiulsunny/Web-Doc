@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserve Your Table | Table by Bruno Verjus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/booking.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-to-content">Skip to Main Content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-link">
+        <span class="brand-title">Table</span>
+        <span class="brand-sub">Bruno Verjus &bull; Paris</span>
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+      <label for="nav-toggle" class="nav-toggle-label"><span></span><span></span><span></span></label>
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="story.html" class="nav-link">Our Story</a>
+        <a href="chef.html" class="nav-link">The Chef</a>
+        <a href="menu.html" class="nav-link">Our Menu</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="index.html" class="btn btn-outline nav-cta">&larr; Back to Main Site</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="booking-page-wrap">
+    <div class="booking-container">
+      
+      <div class="booking-header">
+        <span class="section-subtitle">Private Allocation</span>
+        <h1 class="hero-title" style="font-size: clamp(2.2rem, 5vw, 3.8rem);">Reserve Your Table</h1>
+        <div class="gold-divider"></div>
+        <p class="lead-p">
+          "Twenty-four seats along the pewter curve. An evening orchestrated for your senses."
+        </p>
+      </div>
+
+      <!-- Reservation Policy Guidelines -->
+      <div class="booking-policy-banner">
+        <div class="policy-icon">&iexcl;</div>
+        <div class="policy-text">
+          <strong>Important Dining Guidelines:</strong> Given our daily purchase of fresh, wild, and living ingredients, all bookings require confirmation with a credit guarantee. Cancellations must be provided at least 48 hours in advance. Menus are served Carte Blanche at €400 per person.
+        </div>
+      </div>
+
+      <!-- Reservation Form -->
+      <div class="booking-form-card">
+        <!-- 
+          Form Submission Strategy:
+          Action points to the internal anchor #booking-confirmed.
+          Upon submission, the browser scrolls to this anchor and activates the CSS :target modal.
+        -->
+        <form action="#booking-confirmed" method="get">
+          <div class="form-grid">
+            
+            <!-- Full Name -->
+            <div class="form-group">
+              <label for="guest-name" class="form-label">
+                Full Name <span class="required-mark">*</span>
+              </label>
+              <input type="text" 
+                     id="guest-name" 
+                     name="name" 
+                     class="form-control" 
+                     placeholder="e.g. Eleanor Vance" 
+                     required 
+                     autocomplete="name">
+            </div>
+
+            <!-- Email Address -->
+            <div class="form-group">
+              <label for="guest-email" class="form-label">
+                Email Address <span class="required-mark">*</span>
+              </label>
+              <input type="email" 
+                     id="guest-email" 
+                     name="email" 
+                     class="form-control" 
+                     placeholder="eleanor@domain.com" 
+                     required 
+                     autocomplete="email">
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+              <label for="guest-phone" class="form-label">
+                Telephone Number <span class="required-mark">*</span>
+              </label>
+              <input type="tel" 
+                     id="guest-phone" 
+                     name="phone" 
+                     class="form-control" 
+                     placeholder="+33 6 12 34 56 78" 
+                     required 
+                     autocomplete="tel">
+            </div>
+
+            <!-- Number of Guests -->
+            <div class="form-group">
+              <label for="guest-count" class="form-label">
+                Number of Guests <span class="required-mark">*</span>
+              </label>
+              <select id="guest-count" name="guests" class="form-control" required>
+                <option value="" disabled selected>Select Party Size</option>
+                <option value="1">1 Guest (Counter View)</option>
+                <option value="2">2 Guests (Counter View)</option>
+                <option value="3">3 Guests (Counter View)</option>
+                <option value="4">4 Guests (Counter View)</option>
+                <option value="privatization">5 to 8 Guests (Private Bay / Request)</option>
+              </select>
+            </div>
+
+            <!-- Date -->
+            <div class="form-group">
+              <label for="guest-date" class="form-label">
+                Preferred Date <span class="required-mark">*</span>
+              </label>
+              <input type="date" 
+                     id="guest-date" 
+                     name="date" 
+                     class="form-control" 
+                     required>
+            </div>
+
+            <!-- Time -->
+            <div class="form-group">
+              <label for="guest-time" class="form-label">
+                Preferred Service <span class="required-mark">*</span>
+              </label>
+              <select id="guest-time" name="time" class="form-control" required>
+                <option value="" disabled selected>Select Service Time</option>
+                <option value="lunch-1230">Lunch &bull; 12:30 PM</option>
+                <option value="lunch-1300">Lunch &bull; 1:00 PM</option>
+                <option value="dinner-1930">Dinner &bull; 7:30 PM (First Seating)</option>
+                <option value="dinner-2030">Dinner &bull; 8:30 PM (Second Seating)</option>
+              </select>
+            </div>
+
+            <!-- Dietary Checklist -->
+            <div class="form-group full-width">
+              <span class="form-label">Dietary Considerations</span>
+              <div class="checkbox-options">
+                <label class="checkbox-pill">
+                  <input type="checkbox" name="dietary" value="shellfish">
+                  No Shellfish / Crustaceans
+                </label>
+                <label class="checkbox-pill">
+                  <input type="checkbox" name="dietary" value="gluten">
+                  Gluten Intolerance
+                </label>
+                <label class="checkbox-pill">
+                  <input type="checkbox" name="dietary" value="dairy">
+                  Lactose / Dairy-Free
+                </label>
+              </div>
+            </div>
+
+            <!-- Special Requests Text Area -->
+            <div class="form-group full-width">
+              <label for="guest-notes" class="form-label">
+                Special Requests or Celebrations
+              </label>
+              <textarea id="guest-notes" 
+                        name="notes" 
+                        class="form-control" 
+                        placeholder="Please inform us of anniversaries, preferred wine pairings, or specific accessibility requests..."></textarea>
+            </div>
+
+          </div>
+
+          <div class="form-submit-wrap">
+            <button type="submit" class="btn btn-primary" style="padding: 1.2rem 3.5rem;">
+              Request Booking Allocation
+            </button>
+            <p class="submit-disclaimer">
+              By clicking "Request Booking Allocation", you agree to our 48-hour cancellation policy. You will receive an immediate reservation summary.
+            </p>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- PURE CSS CONFIRMATION MODAL (:TARGET DRIVEN) -->
+    <div id="booking-confirmed" class="booking-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-dialog">
+        <div class="modal-icon">&check;</div>
+        <span class="section-subtitle">Allocation Request Received</span>
+        <h2 id="modal-title" class="modal-title">Thank You for Your Request</h2>
+        <div class="gold-divider"></div>
+        
+        <p class="modal-message">
+          Your reservation request has been registered in the Table by Bruno Verjus scheduling queue. Our concierge team reviews each seating allocation personally to balance the counter service.
+        </p>
+
+        <!-- Technical Integration Disclaimer Required by Brief -->
+        <div class="technical-api-notice">
+          <strong>Technical Clarification (Static Prototype):</strong>
+          This interface is built with pure HTML5 and CSS3. Real-world bookings require a live backend service (Node.js/Python), database lock, or reservation platform API (such as SevenRooms or ZenChef) to check live covers and securely process payment guarantees.
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="index.html" class="modal-close-btn">Return to Homepage</a>
+          <a href="booking.html" class="btn btn-outline" style="font-size: 0.75rem;">Modify Request</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container text-center">
+      <span class="brand-title">Table</span>
+      <div class="gold-divider"></div>
+      <p style="color: var(--color-muted); font-size: 0.85rem; margin-bottom: 2rem;">
+        3 Rue de Prague, 75012 Paris &bull; concierge@table.paris
+      </p>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Table by Bruno Verjus.</p>
+        <p><a href="index.html" style="color: var(--color-gold);">Back to Main Site</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

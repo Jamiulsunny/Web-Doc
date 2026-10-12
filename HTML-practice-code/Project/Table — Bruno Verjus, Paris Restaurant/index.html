@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Table by Bruno Verjus — Two Michelin-Starred restaurant in Paris. Ranked among the World's 50 Best Restaurants. Experience instinctive, ingredient-led fine dining.">
+  <title>Table by Bruno Verjus <JS> | Two Michelin Stars — Paris</title>
+  
+  <!-- Typography Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-to-content">Skip to Main Content</a>
+
+  <!-- Global Header & Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-link" aria-label="Table by Bruno Verjus Home">
+        <span class="brand-title">Table</span>
+        <span class="brand-sub">Bruno Verjus &bull; Paris (JS) </span>
+      </a>
+
+      <!-- CSS-Only Hamburger Menu Mechanism -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle Navigation Menu">
+      <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="nav-menu" aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="story.html" class="nav-link">Our Story</a>
+        <a href="chef.html" class="nav-link">The Chef</a>
+        <a href="menu.html" class="nav-link">Our Menu</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="booking.html" class="btn btn-primary nav-cta">Book a Table</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-background-wrapper">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1920&q=80" 
+             alt="Culinary creation at Table by Bruno Verjus" 
+             class="hero-bg-img">
+        <div class="hero-overlay"></div>
+      </div>
+      
+      <div class="container hero-content">
+        <span class="hero-accolade">Two Michelin Stars &bull; Ranked No. 3 Worldwide 2024</span>
+        <h1 class="hero-title">The Art of the Living Food</h1>
+        <p class="lead-p">
+          "I cook what I see, what I feel, and the people who nourish us. No recipes, only daily encounters with nature."
+        </p>
+        <div class="gold-divider"></div>
+        <div class="hero-actions">
+          <a href="booking.html" class="btn btn-primary">Reserve a Table</a>
+          <a href="menu.html" class="btn btn-outline">Discover the Menu</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Narrative Section -->
+    <section class="section-pad">
+      <div class="container">
+        <div class="editorial-grid">
+          <div class="editorial-text">
+            <span class="section-subtitle">Culinary Philosophy</span>
+            <h2 class="section-title">An Instinctive Dialogue With Nature</h2>
+            <div class="gold-divider left"></div>
+            <p>
+              Located at 3 Rue de Prague in the 12th arrondissement of Paris, Table is not a conventional restaurant. It is a wave-shaped sanctuary where the division between chef and guest dissolves entirely.
+            </p>
+            <p>
+              Bruno Verjus crafts an ephemeral menu determined exclusively by daily deliveries from artisanal growers, free divers, and regenerative farmers. Ingredients arrive still vibrating with life.
+            </p>
+            <div style="margin-top: 1.5rem;">
+              <a href="story.html" class="btn btn-outline">Read Our Full Story</a>
+            </div>
+          </div>
+          <div class="editorial-image-wrap">
+            <div class="editorial-img-frame">
+              <span class="img-accent-border"></span>
+              <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=800&q=80" 
+                   alt="Plated dish with wild asparagus and edible flowers">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Pillars -->
+    <section class="section-pad" style="background: var(--color-anthracite);">
+      <div class="container text-center">
+        <span class="section-subtitle">The Pillars of Table</span>
+        <h2 class="section-title">Pure Ingredient Sourcing</h2>
+        <div class="gold-divider"></div>
+        <p class="lead-p container-narrow">
+          Every morning, produce arrives from micro-terroirs across France and Europe.
+        </p>
+
+        <div class="pillars-grid">
+          <article class="pillar-card">
+            <div class="pillar-num">01</div>
+            <h3 class="pillar-title">Immediate Cooking</h3>
+            <p>Dishes are conceived minutes prior to service, respecting the moisture and core state of each ingredient.</p>
+          </article>
+          <article class="pillar-card">
+            <div class="pillar-num">02</div>
+            <h3 class="pillar-title">Direct Alliances</h3>
+            <p>No intermediaries. We partner directly with coastal line-fishers, forage masters, and organic herders.</p>
+          </article>
+          <article class="pillar-card">
+            <div class="pillar-num">03</div>
+            <h3 class="pillar-title">The Curved Counter</h3>
+            <p>Guests dine along a sculpted pewter counter, viewing every fire, slice, and plating in real-time clarity.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chef Teaser -->
+    <section class="section-pad">
+      <div class="container">
+        <div class="editorial-grid reversed">
+          <div class="editorial-text">
+            <span class="section-subtitle">Visionary Craftsman</span>
+            <h2 class="section-title">Bruno Verjus</h2>
+            <div class="gold-divider left"></div>
+            <p>
+              Physician, food critic, and author, Bruno Verjus chose to step into the professional kitchen at age 54. He brought with him a profound biological understanding of digestion, terroir, and the raw poetry of real sustenance.
+            </p>
+            <p class="lead-p" style="font-size: 1.15rem; margin-bottom: 1.5rem;">
+              "Cooking is not transforming. It is liberating the inner essence of what has grown under the sun."
+            </p>
+            <div>
+              <a href="chef.html" class="btn btn-outline">Meet Bruno Verjus</a>
+            </div>
+          </div>
+          <div class="editorial-image-wrap">
+            <div class="editorial-img-frame">
+              <span class="img-accent-border"></span>
+              <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" 
+                   alt="Chef meticulously garnishing a dish at the counter">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reservation Call to Action -->
+    <section class="section-pad text-center" style="background: radial-gradient(circle at center, #1f1f1a 0%, var(--color-noir) 100%); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+      <div class="container container-narrow">
+        <span class="section-subtitle">An Intimate Experience</span>
+        <h2 class="section-title">Securing Your Place</h2>
+        <div class="gold-divider"></div>
+        <p class="lead-p" style="margin-bottom: 2rem;">
+          With seating limited to 24 guests per service, reservations are opened on a rolling 90-day calendar.
+        </p>
+        <a href="booking.html" class="btn btn-primary" style="padding: 1.2rem 3rem;">Request Reservation</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="brand-title">Table</span>
+          <span class="brand-sub">Bruno Verjus</span>
+          <p>
+            An ode to life, seasonal terroir, and honest human interaction. Two Michelin Stars, Paris.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer-heading">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="story.html">Our Story</a></li>
+            <li><a href="chef.html">The Chef</a></li>
+            <li><a href="menu.html">Our Menu</a></li>
+            <li><a href="experience.html">Experience</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Reservations</h4>
+          <ul class="footer-links">
+            <li><a href="booking.html">Book a Table</a></li>
+            <li><a href="contact.html">Hours & Directions</a></li>
+            <li><a href="gallery.html">Visual Journey</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Location</h4>
+          <p style="font-size: 0.82rem; color: var(--color-muted); line-height: 1.7;">
+            3 Rue de Prague<br>
+            75012 Paris, France<br>
+            Tél: +33 1 43 43 12 26<br>
+            contact@table.paris
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Table by Bruno Verjus. All rights reserved.</p>
+        <p>A Gastronomic Web Presentation &bull; Pure HTML5 & CSS3</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
