@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="University of Oxford educational concept website showcasing world-class collegiate study, multidisciplinary research, student life, and global academic heritage.">
+  <title>University of Oxford | Excellence in Education and Research</title>
+
+  <!-- Typography: Playfair Display (Serif) & Inter (Sans-Serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Skip to Main Content Link for Keyboard & Screen Reader Users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Global University Header -->
+  <header class="site-header" id="top">
+    <!-- Utility Banner -->
+    <div class="top-bar">
+      <div class="container top-bar__inner">
+        <span class="top-bar__tagline">Collegiate University of Oxford &bull; Founded c. 1096</span>
+        <div class="top-bar__actions">
+          <a href="#at-a-glance" class="top-bar__link">At a Glance</a>
+          <a href="#news" class="top-bar__link">Gazette &amp; Updates</a>
+          <a href="#study" class="top-bar__link">Admissions Portal</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="main-header">
+      <div class="container main-header__inner">
+        <!-- University Typographic Mark -->
+        <a href="#top" class="brand" aria-label="University of Oxford Home">
+          <span class="brand__shield" aria-hidden="true">&#9670;</span>
+          <div class="brand__text">
+            <span class="brand__title">UNIVERSITY OF OXFORD</span>
+            <span class="brand__subtitle">Excellence in Education and Research</span>
+          </div>
+        </a>
+
+        <!-- CSS-Only Accessible Mobile Menu Toggle -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle main menu">
+        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </label>
+
+        <!-- Navigation Menu -->
+        <nav class="site-nav" aria-label="Main Navigation">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="#top" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="#study" class="nav-link">Study</a></li>
+            <li class="nav-item"><a href="#research" class="nav-link">Research</a></li>
+            <li class="nav-item"><a href="#life" class="nav-link">Life at Oxford</a></li>
+            <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#news" class="nav-link">News</a></li>
+          </ul>
+
+          <!-- Stylized Visual Search Placeholder (No Fake Logic) -->
+          <div class="header-search" role="search" aria-label="Website search filter">
+            <span class="search-icon" aria-hidden="true">&#9906;</span>
+            <span class="search-placeholder-text">Search courses, research...</span>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero__image-wrapper">
+        <img 
+          src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1920&q=80" 
+          alt="Historic Radcliffe Camera and Oxford collegiate spires beneath a twilight sky" 
+          class="hero__image"
+          loading="eager"
+        >
+        <div class="hero__overlay"></div>
+      </div>
+      <div class="container hero__content">
+        <div class="hero__badge">An Independent Educational Concept</div>
+        <h1 id="hero-heading" class="hero__headline">
+          A World of Knowledge.<br>
+          <span class="gold-accent-text">A Lifetime of Possibility.</span>
+        </h1>
+        <p class="hero__lead">
+          For over nine centuries, the University of Oxford has nurtured pioneering minds, preserved universal heritage, and addressed humanity’s most vital academic and scientific inquiries.
+        </p>
+        <div class="hero__cta-group">
+          <a href="#study" class="btn btn--primary">Explore Study</a>
+          <a href="#about" class="btn btn--outline">Discover Oxford</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introduction to Oxford -->
+    <section class="section section--light intro" id="about" aria-labelledby="intro-heading">
+      <div class="container">
+        <div class="editorial-grid">
+          <div class="editorial-grid__text">
+            <span class="section-eyebrow">Centuries of Discovery</span>
+            <h2 id="intro-heading" class="section-title">Where Ancient Tradition Meets Groundbreaking Inquiry</h2>
+            <div class="gold-divider" aria-hidden="true"></div>
+            <p class="lead-text">
+              Oxford is a distinctive collegiate university comprising more than thirty self-governing colleges and halls, alongside academic faculties unified across disciplines.
+            </p>
+            <p>
+              From individual tutorial dialogues inside historic quadrangles to state-of-the-art laboratory discoveries, education here encourages independent thinking, rigorous debate, and transformative scholarship. Our scholars continue to pioneer discoveries across humanities, sciences, medicine, and social theory.
+            </p>
+            <div class="action-link-wrapper">
+              <a href="#at-a-glance" class="editorial-link">
+                <span>Examine institutional traditions &amp; governance</span>
+                <span class="editorial-link__arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </div>
+          <div class="editorial-grid__media">
+            <figure class="media-frame">
+              <img 
+                src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1000&q=80" 
+                alt="Cobblestone courtyard framed by historic limestone gothic collegiate architecture at Oxford" 
+                class="media-frame__image"
+                loading="lazy"
+              >
+              <figcaption class="media-frame__caption">
+                The collegiate system integrates living, dining, and academic debate within historic quadrangles.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Academic Highlights -->
+    <section class="section section--ivory" id="study" aria-labelledby="academic-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Academic Divisions</span>
+          <h2 id="academic-heading" class="section-title">World-Leading Academic Foundations</h2>
+          <div class="gold-divider gold-divider--centered" aria-hidden="true"></div>
+          <p class="section-subtitle">
+            Study within our four specialized academic divisions, each committed to high-calibre tutorials, interdisciplinary research, and academic liberty.
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <!-- Card 1 -->
+          <article class="academic-card">
+            <div class="academic-card__media">
+              <img 
+                src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=800&q=80" 
+                alt="Row of classical philosophy and literature manuscripts" 
+                class="academic-card__img" 
+                loading="lazy"
+              >
+            </div>
+            <div class="academic-card__body">
+              <span class="card-division-tag">Division I</span>
+              <h3 class="academic-card__title">Humanities</h3>
+              <p class="academic-card__desc">
+                Encompassing history, philosophy, languages, literature, theology, and the arts, interrogating cultural legacies and human thought across epochs.
+              </p>
+              <a href="#cta" class="card-link">View undergraduate &amp; postgraduate degrees <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="academic-card">
+            <div class="academic-card__media">
+              <img 
+                src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80" 
+                alt="Scientist in laboratory examining chemical and biological samples" 
+                class="academic-card__img" 
+                loading="lazy"
+              >
+            </div>
+            <div class="academic-card__body">
+              <span class="card-division-tag">Division II</span>
+              <h3 class="academic-card__title">Medical Sciences</h3>
+              <p class="academic-card__desc">
+                Internationally renowned for pioneering translational discoveries in genomics, clinical medicine, vaccine design, neurology, and patient therapies.
+              </p>
+              <a href="#cta" class="card-link">Discover biomedical faculties <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="academic-card">
+            <div class="academic-card__media">
+              <img 
+                src="https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=800&q=80" 
+                alt="Abstract computational data and physical sciences equipment" 
+                class="academic-card__img" 
+                loading="lazy"
+              >
+            </div>
+            <div class="academic-card__body">
+              <span class="card-division-tag">Division III</span>
+              <h3 class="academic-card__title">Mathematical, Physical &amp; Life Sciences</h3>
+              <p class="academic-card__desc">
+                Investigating fundamental physics, computational models, mathematical proofs, climate dynamics, and the complexities of evolutionary ecology.
+              </p>
+              <a href="#cta" class="card-link">Explore STEM disciplines <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="academic-card">
+            <div class="academic-card__media">
+              <img 
+                src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80" 
+                alt="International law library books and academic conference lectern" 
+                class="academic-card__img" 
+                loading="lazy"
+              >
+            </div>
+            <div class="academic-card__body">
+              <span class="card-division-tag">Division IV</span>
+              <h3 class="academic-card__title">Social Sciences</h3>
+              <p class="academic-card__desc">
+                Shaping public policy, economics, international jurisprudence, governance, and sociological understandings of complex human civil societies.
+              </p>
+              <a href="#cta" class="card-link">Read faculty frameworks <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research and Innovation -->
+    <section class="section section--dark" id="research" aria-labelledby="research-heading">
+      <div class="container">
+        <div class="section-header section-header--light">
+          <span class="section-eyebrow section-eyebrow--gold">Scholarly Impact</span>
+          <h2 id="research-heading" class="section-title">Research Addressing Global Imperatives</h2>
+          <div class="gold-divider gold-divider--centered" aria-hidden="true"></div>
+          <p class="section-subtitle section-subtitle--light">
+            Our researchers collaborate across borders to solve existential climate challenges, advance artificial intelligence responsibly, and preserve historical identity.
+          </p>
+        </div>
+
+        <div class="research-showcase">
+          <!-- Feature Item 1 -->
+          <div class="research-panel">
+            <div class="research-panel__content">
+              <span class="research-tag">Global Health &amp; Immunology</span>
+              <h3 class="research-panel__title">Vaccine Innovation &amp; Translational Medicine</h3>
+              <p>
+                From rapid epidemic responses to targeted oncological treatments, Oxford clinicians link clinical trials directly with laboratory biosciences to accelerate life-saving interventions worldwide.
+              </p>
+              <ul class="research-highlights">
+                <li>Bench-to-bedside translational therapy pipelines</li>
+                <li>Global epidemiology and infectious containment frameworks</li>
+                <li>Equitable therapeutic distribution partnerships</li>
+              </ul>
+            </div>
+            <div class="research-panel__media">
+              <img 
+                src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=900&q=80" 
+                alt="Laboratory researcher calibrating biomedical instruments" 
+                class="research-panel__img" 
+                loading="lazy"
+              >
+            </div>
+          </div>
+
+          <!-- Feature Item 2 -->
+          <div class="research-panel research-panel--reversed">
+            <div class="research-panel__content">
+              <span class="research-tag">Planetary Sustainability</span>
+              <h3 class="research-panel__title">Environmental Transition &amp; Renewable Systems</h3>
+              <p>
+                Interdisciplinary teams at the Environmental Change Institute evaluate sustainable agriculture, global carbon budgeting, ocean biodiversity, and legal frameworks for ecological stewardship.
+              </p>
+              <ul class="research-highlights">
+                <li>Empirical climate modeling and atmospheric measurement</li>
+                <li>Clean energy transition and battery chemistry</li>
+                <li>International water governance and biodiversity metrics</li>
+              </ul>
+            </div>
+            <div class="research-panel__media">
+              <img 
+                src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80" 
+                alt="Earth view displaying cloud patterns and atmospheric horizon" 
+                class="research-panel__img" 
+                loading="lazy"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Life at Oxford -->
+    <section class="section section--light" id="life" aria-labelledby="life-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">The Student Journey</span>
+          <h2 id="life-heading" class="section-title">Life Within the Collegiate Community</h2>
+          <div class="gold-divider gold-divider--centered" aria-hidden="true"></div>
+          <p class="section-subtitle">
+            Experience an intellectual atmosphere where historic libraries, competitive sports clubs, musical societies, and college dining halls form enduring lifelong bonds.
+          </p>
+        </div>
+
+        <div class="life-grid">
+          <!-- Story 1 -->
+          <article class="life-card life-card--featured">
+            <img 
+              src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1000&q=80" 
+              alt="Students walking together across the sunlit historic university grounds" 
+              class="life-card__img" 
+              loading="lazy"
+            >
+            <div class="life-card__overlay">
+              <span class="life-card__tag">Colleges &amp; Communities</span>
+              <h3 class="life-card__title">The Collegiate Experience</h3>
+              <p class="life-card__snippet">
+                Each college provides an inclusive home base offering welfare support, accommodation, pastoral care, and scholarly interaction among students and fellows.
+              </p>
+            </div>
+          </article>
+
+          <!-- Story 2 -->
+          <article class="life-card">
+            <img 
+              src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80" 
+              alt="Historic Bodleian Library interior filled with wooden bookshelves and reading desks" 
+              class="life-card__img" 
+              loading="lazy"
+            >
+            <div class="life-card__overlay">
+              <span class="life-card__tag">Bodleian Libraries</span>
+              <h3 class="life-card__title">World-Class Archive Collections</h3>
+              <p class="life-card__snippet">
+                Over 13 million printed items and historic codices available in quiet, majestic reading rooms.
+              </p>
+            </div>
+          </article>
+
+          <!-- Story 3 -->
+          <article class="life-card">
+            <img 
+              src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?auto=format&fit=crop&w=800&q=80" 
+              alt="Sunlit Oxford riverway where rowing crews train in early morning light" 
+              class="life-card__img" 
+              loading="lazy"
+            >
+            <div class="life-card__overlay">
+              <span class="life-card__tag">Clubs, Sport &amp; Music</span>
+              <h3 class="life-card__title">Enrichment Beyond the Study Desk</h3>
+              <p class="life-card__snippet">
+                From competitive rowing on the Isis to world-class debating societies and college chamber choirs.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Oxford at a Glance (Non-Fabricated Highlights) -->
+    <section class="section section--ivory glance" id="at-a-glance" aria-labelledby="glance-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Institutional Character</span>
+          <h2 id="glance-heading" class="section-title">Oxford at a Glance</h2>
+          <div class="gold-divider gold-divider--centered" aria-hidden="true"></div>
+          <p class="section-subtitle">
+            Enduring structural hallmarks defining the character and international reputation of the university.
+          </p>
+        </div>
+
+        <div class="glance-grid">
+          <!-- Metric 1 -->
+          <div class="glance-card">
+            <div class="glance-card__icon" aria-hidden="true">&#9671;</div>
+            <h3 class="glance-card__title">Collegiate Model</h3>
+            <p class="glance-card__text">
+              Dozens of autonomous colleges fostering intimate tutorial supervision, close inter-year mentorship, and dedicated dining halls.
+            </p>
+          </div>
+
+          <!-- Metric 2 -->
+          <div class="glance-card">
+            <div class="glance-card__icon" aria-hidden="true">&#9672;</div>
+            <h3 class="glance-card__title">Global Research Reach</h3>
+            <p class="glance-card__text">
+              Active collaborative scientific and humanitarian research undertakings spanning every continent and ocean basin.
+            </p>
+          </div>
+
+          <!-- Metric 3 -->
+          <div class="glance-card">
+            <div class="glance-card__icon" aria-hidden="true">&#9673;</div>
+            <h3 class="glance-card__title">Bodleian Legal Deposit</h3>
+            <p class="glance-card__text">
+              One of the oldest libraries in continuous operation, holding centuries of cultural records and legal deposit rights.
+            </p>
+          </div>
+
+          <!-- Metric 4 -->
+          <div class="glance-card">
+            <div class="glance-card__icon" aria-hidden="true">&#9674;</div>
+            <h3 class="glance-card__title">Tutorial Tradition</h3>
+            <p class="glance-card__text">
+              Small-group weekly academic dialogues with active scholars, cultivating rigorous critical deduction and rhetorical clarity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News and Discoveries (Sample Editorial Articles) -->
+    <section class="section section--light" id="news" aria-labelledby="news-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Scholarly Gazette</span>
+          <h2 id="news-heading" class="section-title">News, Papers &amp; Discoveries</h2>
+          <div class="gold-divider gold-divider--centered" aria-hidden="true"></div>
+          <p class="section-subtitle">
+            Recent perspectives and interdisciplinary breakthroughs from across the collegiate faculties.
+          </p>
+        </div>
+
+        <div class="news-grid">
+          <!-- Article 1 -->
+          <article class="news-card">
+            <div class="news-card__media">
+              <img 
+                src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=700&q=80" 
+                alt="Complex astronomical telescope data and stellar mapping models" 
+                class="news-card__img" 
+                loading="lazy"
+              >
+              <span class="news-card__category">Astrophysics</span>
+            </div>
+            <div class="news-card__body">
+              <time datetime="2026-10-01" class="news-card__date">October 2026 &bull; Faculty Gazette</time>
+              <h3 class="news-card__title">Mapping Far Cosmic Structures via Deep Space Interferometry</h3>
+              <p class="news-card__excerpt">
+                Theoretical physicists detail new observational findings shedding light on galactic formation in the infant universe.
+              </p>
+              <a href="#cta" class="news-card__link">Read full paper synopsis <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </article>
+
+          <!-- Article 2 -->
+          <article class="news-card">
+            <div class="news-card__media">
+              <img 
+                src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=700&q=80" 
+                alt="Scholars examining antique rare book in historic archive room" 
+                class="news-card__img" 
+                loading="lazy"
+              >
+              <span class="news-card__category">Manuscript Studies</span>
+            </div>
+            <div class="news-card__body">
+              <time datetime="2026-09-24" class="news-card__date">September 2026 &bull; Humanities Report</time>
+              <h3 class="news-card__title">Multispectral Imaging Recovers Lost Medieval Marginalia</h3>
+              <p class="news-card__excerpt">
+                Archival curators employ optical frequencies to decipher faded marginal commentaries in classical manuscripts.
+              </p>
+              <a href="#cta" class="news-card__link">Read full paper synopsis <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </article>
+
+          <!-- Article 3 -->
+          <article class="news-card">
+            <div class="news-card__media">
+              <img 
+                src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=700&q=80" 
+                alt="Computational biology test tubes and protein model renders" 
+                class="news-card__img" 
+                loading="lazy"
+              >
+              <span class="news-card__category">Biophysics</span>
+            </div>
+            <div class="news-card__body">
+              <time datetime="2026-09-12" class="news-card__date">September 2026 &bull; Scientific Dispatch</time>
+              <h3 class="news-card__title">Protein Folding Algorithms Unveil Novel Cellular Targets</h3>
+              <p class="news-card__excerpt">
+                Biomedical scientists validate a deep machine-learning model predicting previously unmapped enzymatic reactions.
+              </p>
+              <a href="#cta" class="news-card__link">Read full paper synopsis <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="section cta-section" id="cta" aria-labelledby="cta-heading">
+      <div class="container cta-section__inner">
+        <span class="section-eyebrow section-eyebrow--gold">Join an Intellectual Tradition</span>
+        <h2 id="cta-heading" class="cta-section__title">Shape Your Academic Future at Oxford</h2>
+        <div class="gold-divider gold-divider--centered" aria-hidden="true"></div>
+        <p class="cta-section__lead">
+          Applications for undergraduate and postgraduate study invite intellectual candidates from every region and walk of life. Explore courses, admission timelines, and student funding options.
+        </p>
+        <div class="cta-section__actions">
+          <a href="#study" class="btn btn--primary">Explore Courses &amp; Subjects</a>
+          <a href="#about" class="btn btn--outline">Colleges &amp; Visiting Information</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global University Footer -->
+  <footer class="site-footer">
+    <div class="container site-footer__main">
+      <div class="footer-grid">
+        <!-- Col 1: Brand & Disclaimer -->
+        <div class="footer-col footer-col--brand">
+          <div class="brand brand--footer">
+            <span class="brand__shield" aria-hidden="true">&#9670;</span>
+            <div class="brand__text">
+              <span class="brand__title">UNIVERSITY OF OXFORD</span>
+              <span class="brand__subtitle">Wellington Square, Oxford, United Kingdom</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            This digital platform represents an independent educational web design concept showcasing front-end craftsmanship. Official information, degree admissions, and governance are maintained by the University of Oxford.
+          </p>
+          <div class="footer-badge">
+            Educational Concept &bull; Pure HTML5 &amp; CSS3
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div class="footer-col">
+          <h4 class="footer-col__title">Study at Oxford</h4>
+          <ul class="footer-links">
+            <li><a href="#study">Undergraduate Admissions</a></li>
+            <li><a href="#study">Postgraduate Courses</a></li>
+            <li><a href="#study">Colleges &amp; Halls Directory</a></li>
+            <li><a href="#study">Scholarships &amp; Funding</a></li>
+            <li><a href="#study">International Applicants</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Research Links -->
+        <div class="footer-col">
+          <h4 class="footer-col__title">Research &amp; Innovation</h4>
+          <ul class="footer-links">
+            <li><a href="#research">Academic Divisions</a></li>
+            <li><a href="#research">Interdisciplinary Centres</a></li>
+            <li><a href="#research">Bodleian Libraries</a></li>
+            <li><a href="#research">Museums &amp; Botanical Gardens</a></li>
+            <li><a href="#research">Research Integrity &amp; Ethics</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: About & Governance -->
+        <div class="footer-col">
+          <h4 class="footer-col__title">About the University</h4>
+          <ul class="footer-links">
+            <li><a href="#about">Heritage &amp; History</a></li>
+            <li><a href="#at-a-glance">Collegiate Governance</a></li>
+            <li><a href="#news">News &amp; Events</a></li>
+            <li><a href="#top">Visiting the City</a></li>
+            <li><a href="#top">Accessibility Statement</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub Footer Bar -->
+    <div class="site-footer__bottom">
+      <div class="container site-footer__bottom-inner">
+        <p class="copyright-text">
+          &copy; 2026 Independent University of Oxford Digital Concept. Designed with semantic HTML5 and clean CSS3.
+        </p>
+        <div class="bottom-legal-links">
+          <a href="#top">Privacy Policy</a>
+          <a href="#top">Terms of Use</a>
+          <a href="#top">Freedom of Information</a>
+          <a href="#top" class="back-to-top" aria-label="Back to top of page">&uarr; Top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
