@@ -1,0 +1,38 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Types</title>
+</head>
+<body>
+
+    <pre id="out" style="font: 24px/2.0 monospace; padding: 16px; background: #19a72c; color: white;"></pre>
+
+    <script>
+        const log = (m) => document.getElementById("out").textContent += m + "\n";
+
+        const name = "John Doe";
+        const age = 29;
+        const isActive = true;
+
+        const fruits = ["Apple", "Banana", "Mango"];
+
+        const user = {
+            name: "Karim",
+            age: 25
+        };
+
+        log("String: " + name + " (Typeof: " + typeof name + ")");
+        log("Number: " + age + " (Typeof: " + typeof age + ")");
+        log("Boolean: " + isActive + " (Typeof: " + typeof isActive + ")");
+        log("Array: " + fruits.join(", "));
+        log("Object: " + JSON.stringify(user));
+
+        log(`Template: Hello ${name} is ${age} years old and is ${isActive ? "active" : "inactive"}`);
+    </script>
+
+</body>
+</html>
+```

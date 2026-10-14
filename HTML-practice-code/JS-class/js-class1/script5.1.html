@@ -1,0 +1,61 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JavaScript If Else, Loops and Functions</title>
+</head>
+<body>
+
+    <h2>JavaScript Output</h2>
+
+    <pre id="out" style="font-family: system-ui; padding: 16px;"></pre>
+
+    <script>
+        // 1. If / Else If / Else
+        const age = 18;
+        let label;
+
+        if (age >= 18) {
+            label = "Adult";
+        } else if (age >= 13) {
+            label = "Teen";
+        } else {
+            label = "Child";
+        }
+
+        // 2. Output function
+        const log = (m) => {
+            document.getElementById("out").textContent += m + "\n";
+        };
+
+        log("Age " + age + " -> " + label);
+
+        // 3. For loop
+        for (let i = 1; i <= 5; i++) {
+            log("for: " + i);
+        }
+
+        // 4. forEach loop
+        ["a", "b", "c"].forEach((x, i) => {
+            log("forEach[" + i + "]: " + x);
+        });
+
+        // 5. Function
+        function greet(name) {
+            return "Hello " + name;
+        }
+
+        log(greet("Rahim"));
+
+        // 6. Arrow function
+        const add = (a, b) => a + b;
+
+        log("5 + 3 = " + add(5, 3));
+    </script>
+
+</body>
+</html>
+```
