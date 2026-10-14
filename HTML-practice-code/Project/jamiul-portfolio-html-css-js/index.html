@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jamiul Islam Sunny's personal portfolio, projects, skills, and contact information.">
+  <meta name="author" content="Jamiul Islam">
+  <meta name="theme-color" content="#0b1020">
+  <title>Jamiul Islam Sunny | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="header" id="navbar">
+    <div class="nav-container container">
+      <a class="brand-logo" href="#hero" aria-label="Jamiul Islam home">
+        <!-- Logo area: replace JS. with an image if desired -->
+        <span class="logo-mark">JS<span>.</span></span><span class="logo-caption">JAMIUL ISLAM</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a class="nav-link active" href="#hero">Home</a></li><li><a class="nav-link" href="#about">About</a></li><li><a class="nav-link" href="#skills">Skills</a></li><li><a class="nav-link" href="#projects">Projects</a></li><li><a class="nav-link" href="#journey">Journey</a></li><li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <div class="theme-switcher" role="group" aria-label="Choose accent color">
+          <button class="theme-choice active" type="button" data-theme-choice="blue" aria-label="Blue theme" aria-pressed="true"><span class="theme-dot blue"></span></button>
+          <button class="theme-choice" type="button" data-theme-choice="amber" aria-label="Amber theme" aria-pressed="false"><span class="theme-dot amber"></span></button>
+          <button class="theme-choice" type="button" data-theme-choice="violet" aria-label="Violet theme" aria-pressed="false"><span class="theme-dot violet"></span></button>
+        </div>
+        <a class="button button-small button-primary hire-button" href="#contact">Let's Talk ↗</a>
+        <button class="mobile-toggle" id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+      <a class="mobile-link" href="#hero">Home</a><a class="mobile-link" href="#about">About</a><a class="mobile-link" href="#skills">Skills</a><a class="mobile-link" href="#projects">Projects</a><a class="mobile-link" href="#journey">Journey</a><a class="mobile-link" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero section" id="hero"><div class="container hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow"><span class="status-dot"></span> CSE STUDENT · ASPIRING WEB DEVELOPER</div>
+        <p class="hero-kicker">Hello, I'm</p><h1>Jamiul Islam <span class="gradient-text">Sunny</span><span class="title-period">.</span></h1>
+        <h2 class="hero-subtitle">I build thoughtful digital experiences.</h2>
+        <p class="hero-description">I’m a Computer Science and Engineering student who enjoys creating clean, responsive websites and learning how great user experiences are built.</p>
+        <div class="hero-buttons"><a class="button button-primary" href="#projects">Explore my work ↗</a><a class="button button-secondary" href="#contact">Contact me</a></div>
+        <div class="social-row"><span>FIND ME ON</span><a href="https://github.com/Jamiulsunny" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/jamiul-islam-sunny-220648376/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
+      </div>
+      <div class="hero-visual"><div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div><div class="visual-grid"></div>
+        <div class="portrait-card">
+          <!-- Replace this image URL with assets/images/profile.jpg for a local photo -->
+          <img class="portrait-img" src="https://cdn.imgpile.com/f/ngVbDLy.png" alt="Portrait of Jamiul Islam Sunny" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+          <div class="portrait-fallback" aria-hidden="true">JS<span>.</span></div>
+          <div class="portrait-caption"><span class="caption-line"></span><div><strong>Jamiul Islam Sunny</strong><small>Student · Developer</small></div></div>
+        </div>
+        <div class="floating-chip chip-top"><span class="chip-icon">⌘</span> Learning by building</div><div class="floating-chip chip-bottom"><span class="chip-pulse"></span> Always improving</div>
+      </div>
+    </div><a class="scroll-cue" href="#about"><span></span> SCROLL TO EXPLORE</a></section>
+
+    <section class="section" id="about"><div class="container"><div class="section-heading"><p class="section-label">01 / ABOUT ME</p><h2>Curious mind. <span class="gradient-text">Practical builder.</span></h2><p class="section-intro">A little about my interests, approach, and what I’m working toward.</p></div>
+      <div class="about-grid"><article class="about-card glass-card"><div class="card-symbol">✳</div><h3>Learning by building</h3><p>I believe the best way to learn technology is to use it. I practice by creating projects, solving problems, and improving my code step by step.</p><p>My current focus is strengthening HTML, CSS, JavaScript, programming fundamentals, and UI design.</p></article>
+        <div class="facts-grid"><div class="fact-card"><span class="fact-number">01</span><strong>Responsive Design</strong><p>Interfaces for mobile, tablet, and desktop.</p></div><div class="fact-card"><span class="fact-number">02</span><strong>Clean Structure</strong><p>Readable code that is easier to maintain.</p></div><div class="fact-card"><span class="fact-number">03</span><strong>Problem Solving</strong><p>Breaking complex tasks into clear steps.</p></div><div class="fact-card"><span class="fact-number">04</span><strong>Teamwork</strong><p>Sharing ideas and learning with others.</p></div></div>
+      </div></div></section>
+
+    <section class="section section-muted" id="skills"><div class="container"><div class="section-heading"><p class="section-label">02 / TOOLKIT</p><h2>Skills I’m <span class="gradient-text">growing.</span></h2><p class="section-intro">A practical toolkit I continue to develop through coursework and projects.</p></div>
+      <div class="skills-grid"><article class="skill-card"><div class="skill-icon">&lt;/&gt;</div><h3>Web Development</h3><p>Building the structure and style of the web.</p><div class="tag-list"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Responsive UI</span></div></article><article class="skill-card"><div class="skill-icon">⌘</div><h3>Programming</h3><p>Developing logical thinking and coding habits.</p><div class="tag-list"><span>C</span><span>Java</span><span>Problem Solving</span></div></article><article class="skill-card"><div class="skill-icon">✧</div><h3>Tools & Workflow</h3><p>Organizing projects and improving workflow.</p><div class="tag-list"><span>VS Code</span><span>Git</span><span>GitHub</span><span>DevTools</span></div></article></div>
+    </div></section>
+
+    <section class="section" id="projects"><div class="container"><div class="section-heading"><p class="section-label">03 / SELECTED WORK</p><h2>Projects with a <span class="gradient-text">purpose.</span></h2><p class="section-intro">Update these sample cards with your real projects, repositories, and live demos.</p></div>
+      <div class="filter-row" role="group" aria-label="Filter projects"><button class="filter-btn active" type="button" data-filter="all">All projects</button><button class="filter-btn" type="button" data-filter="web">Web</button><button class="filter-btn" type="button" data-filter="robotics">Robotics</button><button class="filter-btn" type="button" data-filter="space">Space tech</button></div>
+      <div class="projects-grid" id="projects-container">
+        <article class="project-card" data-category="web"><div class="project-art art-blue"><span class="art-label">WEB / 001</span><div class="browser-art"><div class="browser-top"><i></i><i></i><i></i></div><div class="browser-content"><span></span><b></b><b></b><b></b></div></div><span class="art-code">HTML · CSS · JS</span></div><div class="project-info"><div class="project-meta"><span>WEB DEVELOPMENT</span><span>01</span></div><h3>Personal Portfolio</h3><p>A responsive portfolio to present my background, skills, projects, and contact information.</p><div class="tag-list"><span>HTML</span><span>CSS</span><span>JavaScript</span></div><div class="project-links"><a href="https://github.com/Jamiulsunny" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#contact">Discuss project ↗</a></div></div></article>
+        <article class="project-card" data-category="robotics"><div class="project-art art-violet"><span class="art-label">ROBOTICS / 002</span><div class="robot-art"><div class="robot-eye"></div><div class="robot-body"></div><div class="robot-wheel left"></div><div class="robot-wheel right"></div><div class="robot-line"></div></div><span class="art-code">SENSORS · CONTROL</span></div><div class="project-info"><div class="project-meta"><span>ROBOTICS</span><span>02</span></div><h3>Line Following Robot</h3><p>A robotics practice project focused on sensor readings, motor control, and line tracking.</p><div class="tag-list"><span>Arduino</span><span>C/C++</span><span>Sensors</span></div><div class="project-links"><a href="https://github.com/Jamiulsunny" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#contact">Discuss project ↗</a></div></div></article>
+        <article class="project-card" data-category="space"><div class="project-art art-amber"><span class="art-label">SPACE TECH / 003</span><div class="planet-art"><div class="planet"></div><div class="planet-ring"></div><i></i><i></i><i></i></div><span class="art-code">DATA · EXPLORATION</span></div><div class="project-info"><div class="project-meta"><span>RESEARCH & LEARNING</span><span>03</span></div><h3>Marswalk Planner Concept</h3><p>A concept for exploring Mars surface data and planning informative routes for future explorers.</p><div class="tag-list"><span>NASA Data</span><span>Mapping</span><span>UI Concept</span></div><div class="project-links"><a href="https://github.com/Jamiulsunny" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#contact">Discuss project ↗</a></div></div></article>
+      </div></div></section>
+
+    <section class="section section-muted" id="journey"><div class="container"><div class="section-heading"><p class="section-label">04 / MY JOURNEY</p><h2>Learning, contributing, <span class="gradient-text">moving forward.</span></h2><p class="section-intro">Education, community involvement, and project experience.</p></div>
+      <div class="timeline"><article class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">EDUCATION</div><div class="timeline-card"><h3>B.Sc. in Computer Science & Engineering</h3><p class="timeline-place">Pundra University of Science & Technology</p><p>Studying core computing concepts while building practical skills in programming, web development, and problem-solving.</p></div></article><article class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">COMMUNITY</div><div class="timeline-card"><h3>Computer & Programming Club</h3><p class="timeline-place">PUB Chapter · Executive Member</p><p>Contributing to student activities, collaboration, and a stronger programming community.</p></div></article><article class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">PROJECTS</div><div class="timeline-card"><h3>Robotics & Space-Tech Challenges</h3><p class="timeline-place">Teamwork · Research · Prototyping</p><p>Exploring robotics, sensor-based systems, and data-driven ideas through hands-on projects.</p></div></article></div>
+    </div></section>
+
+    <section class="section contact-section" id="contact"><div class="container"><div class="contact-panel"><div class="contact-copy"><p class="section-label">05 / GET IN TOUCH</p><h2>Have an idea? <span class="gradient-text">Let’s build it.</span></h2><p>Have a project, collaboration idea, or learning opportunity? Send me a message.</p><a class="contact-email" href="mailto:jamiulsunny476@gmail.com">jamiulsunny476@gmail.com ↗</a></div>
+      <form class="contact-form" id="contact-form"><label for="contact-name">Your name</label><input id="contact-name" name="name" type="text" placeholder="Enter your name" required><label for="contact-email">Email address</label><input id="contact-email" name="email" type="email" placeholder="you@example.com" required><label for="contact-message">Message</label><textarea id="contact-message" name="message" rows="4" placeholder="Tell me about your idea..." required></textarea><button class="button button-primary" type="submit">Prepare email ↗</button><p class="form-note" id="form-feedback" aria-live="polite">This form opens your email application; it does not send data to a server.</p></form>
+    </div></div></section>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><a class="footer-logo" href="#hero">JS<span>.</span></a><p>Designed with HTML, CSS & JavaScript.</p><p>© <span id="current-year">2026</span> Jamiul Islam Sunny</p><a class="back-top" href="#hero" aria-label="Back to top">↑</a></div></footer>
+</body>
+</html>
