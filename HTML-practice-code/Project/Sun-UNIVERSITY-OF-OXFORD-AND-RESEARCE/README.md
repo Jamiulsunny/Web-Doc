@@ -1,13 +1,13 @@
 # University of Oxford — Digital Campus & Academic Portal
 
-An institutional digital platform concept for the **University of Oxford**, featuring a primary campus website and a dedicated Academic & Research Foundations Portal. Built strictly with semantic **HTML5** and modern **CSS3**, completely free of JavaScript runtime dependencies, CSS frameworks, or external preprocessors.
+An institutional digital platform concept for the **University of Oxford**, featuring a primary campus website and a dedicated Academic & Research Foundations Portal. Built strictly with semantic **HTML5** and modern **CSS3**, completely free of JavaScript runtime dependencies, CSS frameworks, or external preprocessors...
 
----
+----------------------------------------------------
 
 ## 🏛️ Project Overview
 
 This project implements a multi-page editorial web presence designed to showcase academic heritage, scholarly research, collegiate student life, and structured institutional dossiers.
-
+---------------------------------
 ### Core Architecture Highlights
 - **Multi-Page Interconnected Architecture:**
   - `index.html`: Public-facing institutional portal featuring the campus overview, divisional previews, life at Oxford, and the Academic Explorer Gateway.
