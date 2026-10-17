@@ -1,0 +1,93 @@
+/* ===== Design tokens — রং বদলাতে শুধু এখানে বদলাও ===== */
+:root{
+  --primary:#16c05a;      /* মূল সবুজ (আসল সাইটের সাথে মিলিয়ে নাও) */
+  --primary-dark:#00bfff;
+  --accent:#f4b400;
+  --bg:#f3f5f4; --card:#fff; --text:#1d2a24; --muted:#5a6b63; --line:#d9e2dd;
+  --pass:#0b6b3a; --fail:#b3261e;
+  --radius:4px; --w:1140px;
+  --font:"Noto Sans Bengali","SolaimanLipi",Kalpurush,"Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--primary)} a:hover{color:var(--primary-dark)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 16px}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:99}
+
+.topbar{background:var(--primary-dark);color:#fff;font-size:.85rem}
+.topbar .wrap{display:flex;justify-content:space-between;gap:12px;padding-top:6px;padding-bottom:6px;flex-wrap:wrap}
+.topbar a{color:#fff;margin-left:14px;text-decoration:none}.topbar a:hover{text-decoration:underline}
+
+.site-header{background:#fff;border-bottom:3px solid var(--primary)}
+.head-inner{display:flex;align-items:center;gap:16px;padding-top:12px;padding-bottom:12px}
+.logo{height:80px;width:auto}
+.site-header h1{margin:0;color:var(--primary);font-size:clamp(1.3rem,3.5vw,2.2rem)}
+
+.navbar{background:var(--primary);position:sticky;top:0;z-index:50}
+.menu,.sub{list-style:none;margin:0;padding:0}
+.menu{display:flex;flex-wrap:wrap}
+.menu>li{position:relative}
+.menu a{display:block;color:#fff;text-decoration:none;padding:12px 14px;transition:background .2s}
+.menu>li>a:hover,.menu>li:focus-within>a{background:var(--primary-dark)}
+.calc-link{background:var(--accent);color:#222!important;font-weight:700}
+.sub{display:none;position:absolute;left:0;top:100%;min-width:230px;max-height:70vh;overflow:auto;background:#fff;border:1px solid var(--line);box-shadow:0 4px 10px rgba(0,0,0,.15)}
+.sub a{color:var(--text);padding:8px 14px;border-bottom:1px solid var(--line)}
+.sub a:hover{background:var(--bg)}
+.sub .grp{background:var(--primary);color:#fff;padding:6px 14px;font-weight:700;font-size:.9rem}
+.has-sub:hover>.sub,.has-sub:focus-within>.sub{display:block}
+.menu-btn{display:none;width:100%;background:none;border:0;color:#fff;font:inherit;padding:12px;text-align:left;cursor:pointer}
+
+.banner{margin-top:16px}
+.banner img{width:100%;max-height:380px;object-fit:cover;display:block;border:1px solid var(--line)}
+.banner.no-img img{display:none}
+.ticker{margin:0;background:#fff;border:1px solid var(--line);border-top:0;padding:8px 12px;font-size:.95rem}
+
+.layout{display:grid;grid-template-columns:1fr 300px;gap:16px;margin-top:16px;margin-bottom:24px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:0 0 14px;margin-bottom:16px}
+.panel h2{margin:0 0 12px;background:var(--primary);color:#fff;font-size:1.1rem;padding:9px 14px;border-radius:var(--radius) var(--radius) 0 0}
+.panel>*:not(h2){margin-left:14px;margin-right:14px}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.people article{border:1px solid var(--line);padding:10px;border-radius:var(--radius)}
+.people h3{margin:0 0 4px;color:var(--primary)}
+.table-scroll{overflow-x:auto}
+table{width:calc(100% - 0px);border-collapse:collapse;min-width:420px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+th{background:var(--bg)}
+.more{text-align:right;margin-bottom:0}
+.links{list-style:none;padding:0}.links li{border-bottom:1px dashed var(--line);padding:6px 0}
+
+/* ===== Grade calculator ===== */
+.calc{border-top:3px solid var(--accent)}
+.hint{color:var(--muted);margin-top:0}
+.row{display:grid;grid-template-columns:1fr 130px 44px;gap:8px;margin-bottom:8px;align-items:end}
+.row label{display:block;font-size:.85rem;color:var(--muted)}
+.row input{width:100%;padding:10px;font:inherit;border:1px solid var(--line);border-radius:var(--radius)}
+.row input.bad{border-color:var(--fail);background:#fdf1f0}
+.rm{height:42px;border:1px solid var(--line);background:#fff;border-radius:var(--radius);cursor:pointer;font-size:1.1rem}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 14px}
+.btn{padding:10px 18px;font:inherit;font-weight:600;border:1px solid var(--primary);background:var(--primary);color:#fff;border-radius:var(--radius);cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--primary-dark)}
+.btn.alt{background:#fff;color:var(--primary)}.btn.alt:hover{background:var(--bg)}
+.btn.ghost{background:#fff;color:var(--muted);border-color:var(--line)}
+.result{min-height:1.5em;padding:10px 12px;border-radius:var(--radius);font-weight:600}
+.result.pass{background:#e6f4ec;color:var(--pass);border:1px solid #b7dcc6}
+.result.fail{background:#fdecea;color:var(--fail);border:1px solid #f1c0bc}
+.result ul{margin:8px 0 0;padding-left:20px;font-weight:400}
+
+.site-footer{background:var(--primary-dark);color:#fff;padding-top:20px}
+.site-footer a{color:#fff}.site-footer h2{font-size:1.1rem;border-bottom:2px solid var(--accent);display:inline-block}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.site-footer ul{list-style:none;padding:0}
+.copy{text-align:center;margin:0;padding:12px;background:#000;font-size:.85rem}
+
+@media(max-width:860px){
+  .layout{grid-template-columns:1fr}
+  .menu-btn{display:block}
+  .menu{display:none;flex-direction:column}.menu.open{display:flex}
+  .sub{position:static;display:block;max-height:none;box-shadow:none;border:0;background:rgba(0,0,0,.15)}
+  .sub a{color:#fff;border-color:rgba(255,255,255,.15)}.sub a:hover{background:rgba(0,0,0,.2)}
+  .logo{height:56px}
+}
+@media(max-width:480px){.row{grid-template-columns:1fr 90px 40px}.btn{flex:1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
