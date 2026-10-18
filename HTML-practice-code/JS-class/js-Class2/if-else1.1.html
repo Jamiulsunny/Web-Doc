@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>if /else / else if</title>
+</head>
+<body>
+    <pre id="out" style="font:14px/1.5 monospace; padding: 16px; background: skyblue"></pre>
+    <script>
+        let x = 10;
+        let y = 20;
+        let z = 30;
+
+        if (x > y) {
+            document.getElementById("out").innerHTML = "x is greater than y";
+        } else if (x < y) {
+            document.getElementById("out").innerHTML = "x is less than y";
+        } else {
+            document.getElementById("out").innerHTML = "x is equal to y";
+        }
+        const log =m=> document.getElementById("out").innerHTML += m + "\n";
+        log ("5==5 : " + (5==5));
+        log ("5===5 : " + (5===5));
+        log ("(3<5 && 10>2) : " + (3<5 && 10>2));
+            log ("(false || true) : " + (false || true));
+            log("! true : " + (! true));
+    </script>
+</body>
+</html>

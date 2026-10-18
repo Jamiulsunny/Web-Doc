@@ -1,0 +1,49 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ternary Operator & Switch</title>
+</head>
+<body>
+
+    <h2 id="out" style="font-family: system-ui; padding: 16px; white-space: pre-line;"></h2>
+
+    <script>
+        // Ternary Operator
+        const age = 20;
+
+        const msg = age >= 18
+            ? "You are an adult"
+            : "You are a minor";
+
+        document.getElementById("out").textContent =
+            "Age " + age + ": " + msg + "\n";
+
+        // Output function
+        const log = m => {
+            document.getElementById("out").textContent += m + "\n";
+        };
+
+        // Switch Statement
+        ["sat", "mon", "fri", "sun"].forEach(day => {
+            let type;
+
+            switch (day) {
+                case "sat":
+                case "sun":
+                    type = "Weekend";
+                    break;
+
+                default:
+                    type = "Weekday";
+            }
+
+            log(day + " -> " + type);
+        });
+    </script>
+
+</body>
+</html>
+```

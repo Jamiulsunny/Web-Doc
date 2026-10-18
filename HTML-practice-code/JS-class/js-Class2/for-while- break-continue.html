@@ -1,0 +1,69 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Loops</title>
+</head>
+<body>
+
+    <h1>JavaScript Loops</h1>
+    <pre id="output"></pre>
+
+    <script>
+        const output = document.getElementById("output");
+
+        // 1. for loop
+        output.textContent += "1. FOR LOOP\n";
+
+        for (let i = 1; i <= 5; i++) {
+            output.textContent += i + "\n";
+        }
+
+        // 2. while loop
+        output.textContent += "\n2. WHILE LOOP\n";
+
+        let j = 1;
+
+        while (j <= 5) {
+            output.textContent += j + "\n";
+            j++;
+        }
+
+        // 3. do...while loop
+        output.textContent += "\n3. DO...WHILE LOOP\n";
+
+        let k = 1;
+
+        do {
+            output.textContent += k + "\n";
+            k++;
+        } while (k <= 5);
+
+        // 4. break statement
+        output.textContent += "\n4. BREAK STATEMENT\n";
+
+        for (let i = 1; i <= 10; i++) {
+            if (i === 5) {
+                break;
+            }
+
+            output.textContent += i + "\n";
+        }
+
+        // 5. continue statement
+        output.textContent += "\n5. CONTINUE STATEMENT\n";
+
+        for (let i = 1; i <= 10; i++) {
+            if (i === 5) {
+                continue;
+            }
+
+            output.textContent += i + "\n";
+        }
+    </script>
+
+</body>
+</html>
+```
