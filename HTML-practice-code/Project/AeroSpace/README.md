@@ -2,7 +2,7 @@
 
 A modern, responsive space exploration website built using **HTML5, CSS3, and Vanilla JavaScript**. Designed with a futuristic dark space aesthetic, glassmorphism UI, interactive mission controls, procedural planet spheres, and smooth scroll effects.
 
----
+---------------------------------------------------------------------------------------------------
 
 ## 🛠️ Step-by-Step VS Code Guide
 
