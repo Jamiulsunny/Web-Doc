@@ -9,7 +9,7 @@ The **Pundra University Website Recreation** project aims to recreate the univer
 This project is developed for educational purposes to practice frontend web development and recreate a university website using core web technologies.
 
 ## ✨ Key Features
-
+----------------------------------------------------------------------------------------------------
 - 🏠 **Homepage:** Image slider, notice board, academic programs, university messages, and events.
 - 🏛️ **About University:** University overview, vision, mission, Board of Trustees, and Syndicate.
 - 👨‍💼 **Administration:** Chancellor, Vice-Chancellor, Registrar, and Proctorial Body.
