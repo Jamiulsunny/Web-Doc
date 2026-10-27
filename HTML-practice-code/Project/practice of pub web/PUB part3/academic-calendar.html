@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Academic Calendar | Pundra University of Science &amp; Technology</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Academic Calendar Specific Styling */
+    .calendar-header {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      color: #fff;
+      padding: 30px 24px;
+      border-radius: 8px;
+      margin-bottom: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .calendar-header h2 {
+      color: #fff;
+      margin: 0 0 6px 0;
+      font-size: 1.5rem;
+    }
+    .calendar-header p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 16px;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .calendar-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    .calendar-table th {
+      background-color: #f1f5f9;
+      color: var(--secondary);
+      padding: 14px 16px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .calendar-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .calendar-table tbody tr:hover {
+      background-color: #f8fafc;
+    }
+    .calendar-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-admission { background: #e0f2fe; color: #0369a1; }
+    .badge-exam { background: #fee2e2; color: #b91c1c; }
+    .badge-class { background: #dcfce7; color: #15803d; }
+    .badge-holiday { background: #fef3c7; color: #b45309; }
+    .badge-result { background: #f3e8ff; color: #7e22ce; }
+    
+    .note-box {
+      margin-top: 24px;
+      padding: 16px 20px;
+      background: #fffbeb;
+      border-left: 4px solid var(--accent);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: #92400e;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <div class="wrap">
+      <span>
+        <a href="tel:+8801713377033">+880 1713 377 033</a> &middot;
+        <a href="mailto:admission@pundrauniversity.edu.bd">admission@pundrauniversity.edu.bd</a>
+      </span>
+      <span class="ext">
+        <a href="https://students.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Students &#8599;</a>
+        <a href="https://uims.pundrauniversity.ac.bd/" target="_blank" rel="noopener">UIMS &#8599;</a>
+        <a href="https://library.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Library &#8599;</a>
+        <a href="https://journal.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Journals &#8599;</a>
+        <a href="iqac.html">IQAC</a>
+      </span>
+    </div>
+  </div>
+  <header class="site">
+    <div class="wrap bar">
+      <a class="brand" href="index.html">
+        <img class="logo" src="assets/images/logo.png" alt="PUB Logo" width="48" height="48">
+        <span>Pundra University<small>of Science &amp; Technology</small></span>
+      </a>
+      <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">&#9776;</button>
+      <nav id="nav" aria-label="Main">
+        <ul class="menu">
+          <li class=""><a href="index.html">Home</a></li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">About Us</button>
+            <ul class="sub">
+              <li><a href="about-the-university.html">About the University</a></li>
+              <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+              <li><a href="university-approval.html">University Approval</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Messages</button>
+                <ul class="sub">
+                  <li><a href="message/chairman-bot.html">Chairman's Message</a></li>
+                  <li><a href="message/vice-chancellor.html">Vice-Chancellor's Message</a></li>
+                  <li><a href="message/treasurer.html">Treasurer's Message</a></li>
+                </ul>
+              </li>
+              <li><a href="photo-gallery.html">Photo Gallery</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Administrations</button>
+            <ul class="sub">
+              <li><a href="chairman-bot.html">Chairman, BoT</a></li>
+              <li><a href="advisor-bot.html">Advisor, BoT</a></li>
+              <li><a href="offices.html">Offices</a></li>
+              <li><a href="complaints.html">Complaint Committees</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Management</button>
+                <ul class="sub">
+                  <li><a href="board-of-trustees.html">Board of Trustees</a></li>
+                  <li><a href="syndicate.html">Syndicate</a></li>
+                  <li><a href="academic-council.html">Academic Council</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Admission</button>
+            <ul class="sub">
+              <li><a href="programs/undergraduate.html">Undergraduate Programs</a></li>
+              <li><a href="programs/postgraduate.html">Postgraduate Programs</a></li>
+              <li><a href="tuition-fees.html">Tuition Fees</a></li>
+              <li><a href="fee-calculator.html">Tuition Fee Calculator</a></li>
+              <li><a href="admission-requirements.html">Admission Requirements</a></li>
+              <li><a href="scholarship.html">Scholarship</a></li>
+              <li><a href="facilities.html">Facilities</a></li>
+            </ul>
+          </li>
+          <li class="has-sub active">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Academics</button>
+            <ul class="sub">
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Faculty</button>
+                <ul class="sub">
+                  <li><a href="faculty/business-studies.html">Business Studies</a></li>
+                  <li><a href="faculty/science-and-engineering.html">Science &amp; Engineering</a></li>
+                  <li><a href="faculty/humanities-and-social-sciences.html">Humanities &amp; Social Sciences</a></li>
+                  <li><a href="faculty/faculty-of-law.html">Law</a></li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Departments</button>
+                <ul class="sub">
+                  <li><a href="departments/business-administration.html">Business Administration</a></li>
+                  <li><a href="departments/computer-science-and-engineering.html">Computer Science &amp; Engineering</a></li>
+                  <li><a href="departments/electrical-and-electronic-engineering.html">Electrical &amp; Electronic Engineering</a></li>
+                  <li><a href="departments/civil-engineering.html">Civil Engineering</a></li>
+                  <li><a href="departments/public-health.html">Public Health</a></li>
+                  <li><a href="departments/islamic-studies.html">Islamic Studies</a></li>
+                  <li><a href="departments/english.html">English</a></li>
+                  <li><a href="departments/education.html">Education</a></li>
+                  <li><a href="departments/law.html">Law</a></li>
+                  <li><a href="departments/journalism.html">Journalism &amp; Media Studies</a></li>
+                  <li><a href="departments/bangla.html">Bangla</a></li>
+                  <li><a href="departments/development-studies.html">Development Studies</a></li>
+                </ul>
+              </li>
+              <li><a href="programs.html">Programs</a></li>
+              <li><a href="academic-calendar.html">Academic Calendar</a></li>
+              <li><a href="syllabus.html">OBE Curriculum</a></li>
+              <li><a href="semester-result.html">Semester Result</a></li>
+              <li><a href="result-verification.html">Result Verification</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Notice</button>
+            <ul class="sub">
+              <li><a href="notice.html">Notice</a></li>
+              <li><a href="events.html">Events</a></li>
+              <li><a href="seminar.html">Seminar</a></li>
+              <li><a href="news-letter.html">News Letter</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a class="btn" href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" rel="noopener">Online Admission &#8599;</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a> / <span>Academic Calendar</span>
+    </nav>
+    
+    <h1>Academic Calendar</h1>
+    
+    <div class="calendar-header">
+      <div>
+        <h2>Academic Year 2026 - 2027</h2>
+        <p>Official Schedule of Academic Activities, Examinations and Holidays</p>
+      </div>
+      <div>
+        <a href="#" onclick="window.print(); return false;" class="btn alt" style="font-size:0.88rem; padding:8px 16px;">Print Calendar &#128438;</a>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div role="tablist">
+        <button role="tab" aria-selected="true" aria-controls="cal-spring" id="tab-spring">Spring 2027</button>
+        <button role="tab" aria-selected="false" aria-controls="cal-summer" id="tab-summer" tabindex="-1">Summer 2026</button>
+        <button role="tab" aria-selected="false" aria-controls="cal-fall" id="tab-fall" tabindex="-1">Fall 2026</button>
+        <button role="tab" aria-selected="false" aria-controls="cal-holidays" id="tab-holidays" tabindex="-1">Holidays List</button>
+      </div>
+
+      <!-- Spring 2027 Tab -->
+      <div role="tabpanel" id="cal-spring" aria-labelledby="tab-spring">
+        <div class="table-responsive">
+          <table class="calendar-table">
+            <thead>
+              <tr>
+                <th style="width: 25%;">Date &amp; Day</th>
+                <th style="width: 55%;">Event / Academic Activity</th>
+                <th style="width: 20%;">Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>01 Jan 2027 - 15 Jan 2027</strong></td>
+                <td>Course Registration &amp; Admission for Spring-2027</td>
+                <td><span class="badge badge-admission">Admission</span></td>
+              </tr>
+              <tr>
+                <td><strong>18 Jan 2027 (Monday)</strong></td>
+                <td>Orientation Program for Newly Enrolled Students</td>
+                <td><span class="badge badge-class">Academic</span></td>
+              </tr>
+              <tr>
+                <td><strong>19 Jan 2027 (Tuesday)</strong></td>
+                <td>Commencement of Regular Classes</td>
+                <td><span class="badge badge-class">Classes</span></td>
+              </tr>
+              <tr>
+                <td><strong>21 Feb 2027 (Sunday)</strong></td>
+                <td>Shahid Day &amp; International Mother Language Day</td>
+                <td><span class="badge badge-holiday">Holiday</span></td>
+              </tr>
+              <tr>
+                <td><strong>08 Mar 2027 - 16 Mar 2027</strong></td>
+                <td>Midterm Examinations (Spring-2027)</td>
+                <td><span class="badge badge-exam">Examination</span></td>
+              </tr>
+              <tr>
+                <td><strong>26 Mar 2027 (Friday)</strong></td>
+                <td>Independence &amp; National Day</td>
+                <td><span class="badge badge-holiday">Holiday</span></td>
+              </tr>
+              <tr>
+                <td><strong>14 Apr 2027 (Wednesday)</strong></td>
+                <td>Bangla Noboborsho (Pohela Boishakh 1434)</td>
+                <td><span class="badge badge-holiday">Holiday</span></td>
+              </tr>
+              <tr>
+                <td><strong>02 May 2027 - 14 May 2027</strong></td>
+                <td>Semester Final Examinations</td>
+                <td><span class="badge badge-exam">Examination</span></td>
+              </tr>
+              <tr>
+                <td><strong>22 May 2027 (Saturday)</strong></td>
+                <td>Publication of Semester Results (Spring-2027)</td>
+                <td><span class="badge badge-result">Results</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Summer 2026 Tab -->
+      <div role="tabpanel" id="cal-summer" aria-labelledby="tab-summer" hidden>
+        <div class="table-responsive">
+          <table class="calendar-table">
+            <thead>
+              <tr>
+                <th style="width: 25%;">Date &amp; Day</th>
+                <th style="width: 55%;">Event / Academic Activity</th>
+                <th style="width: 20%;">Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>25 May 2026 - 05 Jun 2026</strong></td>
+                <td>Course Advising &amp; Semester Registration</td>
+                <td><span class="badge badge-admission">Admission</span></td>
+              </tr>
+              <tr>
+                <td><strong>07 Jun 2026 (Sunday)</strong></td>
+                <td>Classes Begin for Summer-2026</td>
+                <td><span class="badge badge-class">Classes</span></td>
+              </tr>
+              <tr>
+                <td><strong>16 Jun 2026 - 21 Jun 2026</strong></td>
+                <td>Holy Eid-ul-Adha Vacation</td>
+                <td><span class="badge badge-holiday">Holiday</span></td>
+              </tr>
+              <tr>
+                <td><strong>19 Jul 2026 - 27 Jul 2026</strong></td>
+                <td>Midterm Examinations (Summer-2026)</td>
+                <td><span class="badge badge-exam">Examination</span></td>
+              </tr>
+              <tr>
+                <td><strong>15 Aug 2026 (Saturday)</strong></td>
+                <td>National Mourning Day Observance</td>
+                <td><span class="badge badge-holiday">Holiday</span></td>
+              </tr>
+              <tr>
+                <td><strong>05 Sep 2026 - 17 Sep 2026</strong></td>
+                <td>Final Examinations (Summer-2026)</td>
+                <td><span class="badge badge-exam">Examination</span></td>
+              </tr>
+              <tr>
+                <td><strong>24 Sep 2026 (Thursday)</strong></td>
+                <td>Publication of Summer-2026 Semester Results</td>
+                <td><span class="badge badge-result">Results</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Fall 2026 Tab -->
+      <div role="tabpanel" id="cal-fall" aria-labelledby="tab-fall" hidden>
+        <div class="table-responsive">
+          <table class="calendar-table">
+            <thead>
+              <tr>
+                <th style="width: 25%;">Date &amp; Day</th>
+                <th style="width: 55%;">Event / Academic Activity</th>
+                <th style="width: 20%;">Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>26 Sep 2026 - 08 Oct 2026</strong></td>
+                <td>Fall-2026 Admission &amp; Course Registration</td>
+                <td><span class="badge badge-admission">Admission</span></td>
+              </tr>
+              <tr>
+                <td><strong>11 Oct 2026 (Sunday)</strong></td>
+                <td>Fall Semester Classes Commence</td>
+                <td><span class="badge badge-class">Classes</span></td>
+              </tr>
+              <tr>
+                <td><strong>18 Oct 2026 - 20 Oct 2026</strong></td>
+                <td>Durga Puja Vacation</td>
+                <td><span class="badge badge-holiday">Holiday</span></td>
+              </tr>
+              <tr>
+                <td><strong>22 Nov 2026 - 30 Nov 2026</strong></td>
+                <td>Midterm Examinations (Fall-2026)</td>
+                <td><span class="badge badge-exam">Examination</span></td>
+              </tr>
+              <tr>
+                <td><strong>16 Dec 2026 (Wednesday)</strong></td>
+                <td>Victory Day Celebrations</td>
+                <td><span class="badge badge-holiday">Holiday</span></td>
+              </tr>
+              <tr>
+                <td><strong>25 Dec 2026 (Friday)</strong></td>
+                <td>Christmas Day</td>
+                <td><span class="badge badge-holiday">Holiday</span></td>
+              </tr>
+              <tr>
+                <td><strong>03 Jan 2027 - 14 Jan 2027</strong></td>
+                <td>Fall-2026 Semester Final Examinations</td>
+                <td><span class="badge badge-exam">Examination</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Holidays Tab -->
+      <div role="tabpanel" id="cal-holidays" aria-labelledby="tab-holidays" hidden>
+        <div class="table-responsive">
+          <table class="calendar-table">
+            <thead>
+              <tr>
+                <th style="width: 25%;">Date</th>
+                <th style="width: 50%;">Occasion</th>
+                <th style="width: 25%;">Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>21 February 2027</strong></td>
+                <td>Shahid Day &amp; International Mother Language Day</td>
+                <td>1 Day</td>
+              </tr>
+              <tr>
+                <td><strong>26 March 2027</strong></td>
+                <td>Independence &amp; National Day</td>
+                <td>1 Day</td>
+              </tr>
+              <tr>
+                <td><strong>14 April 2027</strong></td>
+                <td>Bangla New Year (Pohela Boishakh)</td>
+                <td>1 Day</td>
+              </tr>
+              <tr>
+                <td><strong>01 May 2027</strong></td>
+                <td>May Day</td>
+                <td>1 Day</td>
+              </tr>
+              <tr>
+                <td><strong>18 - 20 October 2026</strong></td>
+                <td>Durga Puja Holidays</td>
+                <td>3 Days</td>
+              </tr>
+              <tr>
+                <td><strong>16 December 2026</strong></td>
+                <td>Victory Day</td>
+                <td>1 Day</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <strong>* Special Note:</strong> Dates related to religious festivals (Eid-ul-Fitr, Eid-ul-Adha, Shab-e-Qadr, etc.) are subject to the sighting of the moon. University management reserves the right to make modifications to the calendar if necessary.
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap fgrid">
+      <div>
+        <h3>About Us</h3>
+        <p>The first Private University in North Bengal.</p>
+        <p><a href="https://www.facebook.com/pundrauniversitybogura/" target="_blank" rel="noopener">Facebook &#8599;</a> &middot; <a href="https://www.youtube.com/@pundrauniversity" target="_blank" rel="noopener">YouTube &#8599;</a></p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="faculty.html">Faculty</a></li>
+          <li><a href="departments.html">Departments</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="semester-result.html">Semester Result</a></li>
+          <li><a href="result-verification.html">Result Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>More</h3>
+        <ul>
+          <li><a href="faculty-members.html">Faculty Members</a></li>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="career.html">Career</a></li>
+          <li><a href="clubs.html">Clubs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="iqac.html">IQAC</a></li>
+          <li><a href="why-choose-us.html">Why Choose Us</a></li>
+          <li><a href="photo-gallery.html">Photo Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Useful Links (external)</h3>
+        <ul>
+          <li><a href="https://ugc.gov.bd/" target="_blank" rel="noopener">UGC &#8599;</a></li>
+          <li><a href="https://moedu.gov.bd/" target="_blank" rel="noopener">Ministry of Education &#8599;</a></li>
+          <li><a href="https://banbeis.gov.bd/" target="_blank" rel="noopener">Banbeis &#8599;</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p>+88 01713 377 037<br>+88 01713 377 033<br>info@pundrauniversity.edu.bd<br>Rangpur Road, Baghopara, Gokul, Bogura</p>
+      </div>
+    </div>
+    <p class="copy">&copy; 2026 Educational recreation &mdash; Pundra University of Science &amp; Technology.</p>
+  </footer>
+  <button id="top" aria-label="Back to top" hidden>&uarr;</button>
+  <script src="js/main.js"></script>
+</body>
+</html>

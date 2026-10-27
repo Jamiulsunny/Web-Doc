@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semester Result | Pundra University of Science &amp; Technology</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Semester Result Portal Custom Styling */
+    .portal-banner {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      color: #fff;
+      padding: 30px 24px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+    .portal-banner h2 {
+      color: #fff;
+      margin: 0 0 6px 0;
+      font-size: 1.5rem;
+    }
+    .portal-banner p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+
+    .search-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+    .search-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      align-items: end;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 6px;
+    }
+    .form-group select,
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font: inherit;
+      background: #fff;
+    }
+    .form-group select:focus,
+    .form-group input:focus {
+      outline: 2px solid var(--primary);
+    }
+
+    /* Result Sheet Styling */
+    #resultBoard {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      margin-bottom: 30px;
+    }
+    .result-header {
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .result-header h3 {
+      margin: 0;
+      color: var(--secondary);
+      font-size: 1.3rem;
+    }
+    .student-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px 24px;
+      background: #f8fafc;
+      padding: 18px 20px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+    }
+    .student-details div strong {
+      color: var(--secondary);
+      display: inline-block;
+      min-width: 110px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      margin-bottom: 24px;
+    }
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    .result-table th {
+      background-color: #f1f5f9;
+      color: var(--secondary);
+      padding: 12px 14px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .result-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .result-table tbody tr:hover {
+      background-color: #f8fafc;
+    }
+    
+    .gpa-summary {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background: #eef6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .gpa-box {
+      font-size: 1.1rem;
+      color: var(--secondary);
+    }
+    .gpa-box span {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-left: 6px;
+    }
+    .status-badge {
+      display: inline-block;
+      background: #22c55e;
+      color: #fff;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    .grading-scale {
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px dashed var(--border);
+      padding-top: 14px;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <div class="wrap">
+      <span>
+        <a href="tel:+8801713377033">+880 1713 377 033</a> &middot;
+        <a href="mailto:admission@pundrauniversity.edu.bd">admission@pundrauniversity.edu.bd</a>
+      </span>
+      <span class="ext">
+        <a href="https://students.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Students &#8599;</a>
+        <a href="https://uims.pundrauniversity.ac.bd/" target="_blank" rel="noopener">UIMS &#8599;</a>
+        <a href="https://library.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Library &#8599;</a>
+        <a href="https://journal.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Journals &#8599;</a>
+        <a href="iqac.html">IQAC</a>
+      </span>
+    </div>
+  </div>
+  <header class="site">
+    <div class="wrap bar">
+      <a class="brand" href="index.html">
+        <img class="logo" src="assets/images/logo.png" alt="PUB Logo" width="48" height="48">
+        <span>Pundra University<small>of Science &amp; Technology</small></span>
+      </a>
+      <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">&#9776;</button>
+      <nav id="nav" aria-label="Main">
+        <ul class="menu">
+          <li class=""><a href="index.html">Home</a></li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">About Us</button>
+            <ul class="sub">
+              <li><a href="about-the-university.html">About the University</a></li>
+              <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+              <li><a href="university-approval.html">University Approval</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Messages</button>
+                <ul class="sub">
+                  <li><a href="message/chairman-bot.html">Chairman's Message</a></li>
+                  <li><a href="message/vice-chancellor.html">Vice-Chancellor's Message</a></li>
+                  <li><a href="message/treasurer.html">Treasurer's Message</a></li>
+                </ul>
+              </li>
+              <li><a href="photo-gallery.html">Photo Gallery</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Administrations</button>
+            <ul class="sub">
+              <li><a href="chairman-bot.html">Chairman, BoT</a></li>
+              <li><a href="advisor-bot.html">Advisor, BoT</a></li>
+              <li><a href="offices.html">Offices</a></li>
+              <li><a href="complaints.html">Complaint Committees</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Management</button>
+                <ul class="sub">
+                  <li><a href="board-of-trustees.html">Board of Trustees</a></li>
+                  <li><a href="syndicate.html">Syndicate</a></li>
+                  <li><a href="academic-council.html">Academic Council</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Admission</button>
+            <ul class="sub">
+              <li><a href="programs/undergraduate.html">Undergraduate Programs</a></li>
+              <li><a href="programs/postgraduate.html">Postgraduate Programs</a></li>
+              <li><a href="tuition-fees.html">Tuition Fees</a></li>
+              <li><a href="fee-calculator.html">Tuition Fee Calculator</a></li>
+              <li><a href="admission-requirements.html">Admission Requirements</a></li>
+              <li><a href="scholarship.html">Scholarship</a></li>
+              <li><a href="facilities.html">Facilities</a></li>
+            </ul>
+          </li>
+          <li class="has-sub active">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Academics</button>
+            <ul class="sub">
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Faculty</button>
+                <ul class="sub">
+                  <li><a href="faculty/business-studies.html">Business Studies</a></li>
+                  <li><a href="faculty/science-and-engineering.html">Science &amp; Engineering</a></li>
+                  <li><a href="faculty/humanities-and-social-sciences.html">Humanities &amp; Social Sciences</a></li>
+                  <li><a href="faculty/faculty-of-law.html">Law</a></li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Departments</button>
+                <ul class="sub">
+                  <li><a href="departments/business-administration.html">Business Administration</a></li>
+                  <li><a href="departments/computer-science-and-engineering.html">Computer Science &amp; Engineering</a></li>
+                  <li><a href="departments/electrical-and-electronic-engineering.html">Electrical &amp; Electronic Engineering</a></li>
+                  <li><a href="departments/civil-engineering.html">Civil Engineering</a></li>
+                  <li><a href="departments/public-health.html">Public Health</a></li>
+                  <li><a href="departments/islamic-studies.html">Islamic Studies</a></li>
+                  <li><a href="departments/english.html">English</a></li>
+                  <li><a href="departments/education.html">Education</a></li>
+                  <li><a href="departments/law.html">Law</a></li>
+                  <li><a href="departments/journalism.html">Journalism &amp; Media Studies</a></li>
+                  <li><a href="departments/bangla.html">Bangla</a></li>
+                  <li><a href="departments/development-studies.html">Development Studies</a></li>
+                </ul>
+              </li>
+              <li><a href="programs.html">Programs</a></li>
+              <li><a href="academic-calendar.html">Academic Calendar</a></li>
+              <li><a href="syllabus.html">OBE Curriculum</a></li>
+              <li><a href="semester-result.html">Semester Result</a></li>
+              <li><a href="result-verification.html">Result Verification</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Notice</button>
+            <ul class="sub">
+              <li><a href="notice.html">Notice</a></li>
+              <li><a href="events.html">Events</a></li>
+              <li><a href="seminar.html">Seminar</a></li>
+              <li><a href="news-letter.html">News Letter</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a class="btn" href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" rel="noopener">Online Admission &#8599;</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a> / <span>Semester Result</span>
+    </nav>
+    
+    <h1>Semester Result Portal</h1>
+
+    <div class="portal-banner">
+      <h2>Online Academic Grade Sheet</h2>
+      <p>Check and download your official term-end semester examination results &amp; SGPA statement.</p>
+    </div>
+
+    <!-- Search Form -->
+    <div class="search-card">
+      <form id="resultSearchForm" onsubmit="handleSearch(event);">
+        <div class="search-grid">
+          <div class="form-group">
+            <label for="deptSelect">Department</label>
+            <select id="deptSelect" required>
+              <option value="CSE">Computer Science &amp; Engineering (CSE)</option>
+              <option value="EEE">Electrical &amp; Electronic Engineering (EEE)</option>
+              <option value="CE">Civil Engineering (CE)</option>
+              <option value="BBA">Business Administration (BBA)</option>
+              <option value="LAW">Department of Law (LL.B)</option>
+              <option value="IS">Islamic Studies</option>
+              <option value="ENG">English</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="semesterSelect">Semester Exam</label>
+            <select id="semesterSelect" required>
+              <option value="Spring 2026">Spring 2026</option>
+              <option value="Summer 2026" selected>Summer 2026</option>
+              <option value="Fall 2025">Fall 2025</option>
+              <option value="Spring 2025">Spring 2025</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="studentId">Student ID</label>
+            <input type="text" id="studentId" placeholder="e.g. 03225105101002" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn" style="width:100%; min-height:45px;">Find Result &#128269;</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Result Board (Visible on Search) -->
+    <div id="resultBoard">
+      <div class="result-header">
+        <div>
+          <h3 id="resUniTitle">Pundra University of Science &amp; Technology</h3>
+          <span style="color:var(--muted); font-size:0.9rem;">Office of the Controller of Examinations</span>
+        </div>
+        <div>
+          <button onclick="window.print();" class="btn alt" style="padding:8px 16px; font-size:0.85rem;">Print Grade Sheet &#128438;</button>
+        </div>
+      </div>
+
+      <!-- Student Profile Card -->
+      <div class="student-details">
+        <div><strong>Student Name:</strong> <span id="resName">Md. Jamiul Islam Sunny</span></div>
+        <div><strong>Student ID:</strong> <span id="resId">03225105101002</span></div>
+        <div><strong>Program:</strong> <span id="resProgram">B.Sc. in Computer Science &amp; Engineering</span></div>
+        <div><strong>Semester:</strong> <span id="resSem">Summer 2026</span></div>
+        <div><strong>Academic Year:</strong> 2025 - 2026</div>
+        <div><strong>Exam Roll:</strong> PUB-26-1002</div>
+      </div>
+
+      <!-- Result Table -->
+      <div class="table-responsive">
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th style="width: 15%;">Course Code</th>
+              <th style="width: 45%;">Course Title</th>
+              <th style="width: 12%;">Credits</th>
+              <th style="width: 14%;">Letter Grade</th>
+              <th style="width: 14%;">Grade Point</th>
+            </tr>
+          </thead>
+          <tbody id="resultTableBody">
+            <tr>
+              <td><strong>CSE-311</strong></td>
+              <td>Database Management Systems</td>
+              <td>3.00</td>
+              <td><strong>A+</strong></td>
+              <td>4.00</td>
+            </tr>
+            <tr>
+              <td><strong>CSE-312</strong></td>
+              <td>Database Management Systems Sessional</td>
+              <td>1.50</td>
+              <td><strong>A+</strong></td>
+              <td>4.00</td>
+            </tr>
+            <tr>
+              <td><strong>CSE-313</strong></td>
+              <td>Operating Systems &amp; System Programming</td>
+              <td>3.00</td>
+              <td><strong>A</strong></td>
+              <td>3.75</td>
+            </tr>
+            <tr>
+              <td><strong>CSE-314</strong></td>
+              <td>Operating Systems Lab</td>
+              <td>1.50</td>
+              <td><strong>A+</strong></td>
+              <td>4.00</td>
+            </tr>
+            <tr>
+              <td><strong>CSE-315</strong></td>
+              <td>Software Engineering &amp; Information System Design</td>
+              <td>3.00</td>
+              <td><strong>A+</strong></td>
+              <td>4.00</td>
+            </tr>
+            <tr>
+              <td><strong>MATH-301</strong></td>
+              <td>Numerical Methods &amp; Statistics</td>
+              <td>3.00</td>
+              <td><strong>A</strong></td>
+              <td>3.75</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- GPA Summary Box -->
+      <div class="gpa-summary">
+        <div class="gpa-box">Total Credit Earned: <strong>15.00</strong></div>
+        <div class="gpa-box">Semester GPA (SGPA): <span id="resGpa">3.90</span></div>
+        <div>Result Status: <span class="status-badge">PASSED</span></div>
+      </div>
+
+      <!-- Grading Scale Reference -->
+      <div class="grading-scale">
+        <strong>UGC Standard Grading System:</strong> 
+        80% and above = A+ (4.00) &middot; 
+        75% to &lt;80% = A (3.75) &middot; 
+        70% to &lt;75% = A- (3.50) &middot; 
+        65% to &lt;70% = B+ (3.25) &middot; 
+        60% to &lt;65% = B (3.00) &middot; 
+        55% to &lt;60% = B- (2.75) &middot; 
+        50% to &lt;55% = C+ (2.50) &middot; 
+        45% to &lt;50% = C (2.25) &middot; 
+        40% to &lt;45% = D (2.00) &middot; 
+        &lt;40% = F (0.00)
+      </div>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap fgrid">
+      <div>
+        <h3>About Us</h3>
+        <p>The first Private University in North Bengal.</p>
+        <p><a href="https://www.facebook.com/pundrauniversitybogura/" target="_blank" rel="noopener">Facebook &#8599;</a> &middot; <a href="https://www.youtube.com/@pundrauniversity" target="_blank" rel="noopener">YouTube &#8599;</a></p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="faculty.html">Faculty</a></li>
+          <li><a href="departments.html">Departments</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="semester-result.html">Semester Result</a></li>
+          <li><a href="result-verification.html">Result Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>More</h3>
+        <ul>
+          <li><a href="faculty-members.html">Faculty Members</a></li>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="career.html">Career</a></li>
+          <li><a href="clubs.html">Clubs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="iqac.html">IQAC</a></li>
+          <li><a href="why-choose-us.html">Why Choose Us</a></li>
+          <li><a href="photo-gallery.html">Photo Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Useful Links (external)</h3>
+        <ul>
+          <li><a href="https://ugc.gov.bd/" target="_blank" rel="noopener">UGC &#8599;</a></li>
+          <li><a href="https://moedu.gov.bd/" target="_blank" rel="noopener">Ministry of Education &#8599;</a></li>
+          <li><a href="https://banbeis.gov.bd/" target="_blank" rel="noopener">Banbeis &#8599;</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p>+88 01713 377 037<br>+88 01713 377 033<br>info@pundrauniversity.edu.bd<br>Rangpur Road, Baghopara, Gokul, Bogura</p>
+      </div>
+    </div>
+    <p class="copy">&copy; 2026 Educational recreation &mdash; Pundra University of Science &amp; Technology.</p>
+  </footer>
+  <button id="top" aria-label="Back to top" hidden>&uarr;</button>
+  <script src="js/main.js"></script>
+
+  <script>
+    // Search Handler Function
+    function handleSearch(e) {
+      e.preventDefault();
+      const id = document.getElementById('studentId').value.trim();
+      const sem = document.getElementById('semesterSelect').value;
+      const dept = document.getElementById('deptSelect').value;
+
+      document.getElementById('resId').textContent = id || '03225105101002';
+      document.getElementById('resSem').textContent = sem;
+      
+      const deptNames = {
+        'CSE': 'B.Sc. in Computer Science & Engineering',
+        'EEE': 'B.Sc. in Electrical & Electronic Engineering',
+        'CE': 'B.Sc. in Civil Engineering',
+        'BBA': 'Bachelor of Business Administration',
+        'LAW': 'Bachelor of Laws (LL.B)',
+        'IS': 'B.A. in Islamic Studies',
+        'ENG': 'B.A. in English'
+      };
+      document.getElementById('resProgram').textContent = deptNames[dept] || dept;
+
+      const board = document.getElementById('resultBoard');
+      board.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

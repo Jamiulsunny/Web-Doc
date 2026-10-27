@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Postgraduate Programs | Pundra University of Science &amp; Technology</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Postgraduate Programs Page Styles */
+    .pg-hero {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      color: #fff;
+      padding: 38px 28px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    .pg-hero h2 {
+      color: #fff;
+      margin: 0 0 10px 0;
+      font-size: 1.65rem;
+    }
+    .pg-hero p {
+      margin: 0;
+      opacity: 0.92;
+      font-size: 0.96rem;
+      max-width: 880px;
+      line-height: 1.6;
+    }
+
+    .highlights-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+    .highlight-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .highlight-item h3 {
+      font-size: 1.1rem;
+      margin: 0 0 4px 0;
+      color: var(--secondary);
+    }
+    .highlight-item p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .pg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 26px;
+      margin-bottom: 40px;
+    }
+    .pg-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .pg-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    .pg-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+    }
+    .pg-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .pg-badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .pg-body h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.25rem;
+      color: var(--secondary);
+    }
+    .pg-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 10px;
+    }
+    .pg-meta span strong {
+      color: var(--text);
+    }
+    .pg-body p {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.55;
+      margin: 0 0 18px 0;
+      flex-grow: 1;
+    }
+    .pg-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+    .pg-actions .btn {
+      flex: 1;
+      text-align: center;
+      padding: 9px 12px;
+      font-size: 0.85rem;
+    }
+
+    .admit-cta-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .admit-cta-box h3 {
+      margin: 0 0 6px 0;
+      color: var(--secondary);
+    }
+    .admit-cta-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <div class="wrap">
+      <span>
+        <a href="tel:+8801713377033">+880 1713 377 033</a> &middot;
+        <a href="mailto:admission@pundrauniversity.edu.bd">admission@pundrauniversity.edu.bd</a>
+      </span>
+      <span class="ext">
+        <a href="https://students.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Students &#8599;</a>
+        <a href="https://uims.pundrauniversity.ac.bd/" target="_blank" rel="noopener">UIMS &#8599;</a>
+        <a href="https://library.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Library &#8599;</a>
+        <a href="https://journal.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Journals &#8599;</a>
+        <a href="../iqac.html">IQAC</a>
+      </span>
+    </div>
+  </div>
+  <header class="site">
+    <div class="wrap bar">
+      <a class="brand" href="../index.html">
+        <img class="logo" src="../assets/images/logo.png" alt="PUB Logo" width="48" height="48">
+        <span>Pundra University<small>of Science &amp; Technology</small></span>
+      </a>
+      <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">&#9776;</button>
+      <nav id="nav" aria-label="Main">
+        <ul class="menu">
+          <li class=""><a href="../index.html">Home</a></li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">About Us</button>
+            <ul class="sub">
+              <li><a href="../about-the-university.html">About the University</a></li>
+              <li><a href="../vision-mission.html">Vision &amp; Mission</a></li>
+              <li><a href="../university-approval.html">University Approval</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Messages</button>
+                <ul class="sub">
+                  <li><a href="../message/chairman-bot.html">Chairman's Message</a></li>
+                  <li><a href="../message/vice-chancellor.html">Vice-Chancellor's Message</a></li>
+                  <li><a href="../message/treasurer.html">Treasurer's Message</a></li>
+                </ul>
+              </li>
+              <li><a href="../photo-gallery.html">Photo Gallery</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Administrations</button>
+            <ul class="sub">
+              <li><a href="../chairman-bot.html">Chairman, BoT</a></li>
+              <li><a href="../advisor-bot.html">Advisor, BoT</a></li>
+              <li><a href="../offices.html">Offices</a></li>
+              <li><a href="../complaints.html">Complaint Committees</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Management</button>
+                <ul class="sub">
+                  <li><a href="../board-of-trustees.html">Board of Trustees</a></li>
+                  <li><a href="../syndicate.html">Syndicate</a></li>
+                  <li><a href="../academic-council.html">Academic Council</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="has-sub active">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Admission</button>
+            <ul class="sub">
+              <li><a href="../programs/undergraduate.html">Undergraduate Programs</a></li>
+              <li class="active"><a href="../programs/postgraduate.html">Postgraduate Programs</a></li>
+              <li><a href="../tuition-fees.html">Tuition Fees</a></li>
+              <li><a href="../fee-calculator.html">Tuition Fee Calculator</a></li>
+              <li><a href="../admission-requirements.html">Admission Requirements</a></li>
+              <li><a href="../scholarship.html">Scholarship</a></li>
+              <li><a href="../facilities.html">Facilities</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Academics</button>
+            <ul class="sub">
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Faculty</button>
+                <ul class="sub">
+                  <li><a href="../faculty/business-studies.html">Business Studies</a></li>
+                  <li><a href="../faculty/science-and-engineering.html">Science &amp; Engineering</a></li>
+                  <li><a href="../faculty/humanities-and-social-sciences.html">Humanities &amp; Social Sciences</a></li>
+                  <li><a href="../faculty/faculty-of-law.html">Law</a></li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Departments</button>
+                <ul class="sub">
+                  <li><a href="../departments/business-administration.html">Business Administration</a></li>
+                  <li><a href="../departments/computer-science-and-engineering.html">Computer Science &amp; Engineering</a></li>
+                  <li><a href="../departments/electrical-and-electronic-engineering.html">Electrical &amp; Electronic Engineering</a></li>
+                  <li><a href="../departments/civil-engineering.html">Civil Engineering</a></li>
+                  <li><a href="../departments/public-health.html">Public Health</a></li>
+                  <li><a href="../departments/islamic-studies.html">Islamic Studies</a></li>
+                  <li><a href="../departments/english.html">English</a></li>
+                  <li><a href="../departments/education.html">Education</a></li>
+                  <li><a href="../departments/law.html">Law</a></li>
+                  <li><a href="../departments/journalism.html">Journalism &amp; Media Studies</a></li>
+                  <li><a href="../departments/bangla.html">Bangla</a></li>
+                  <li><a href="../departments/development-studies.html">Development Studies</a></li>
+                </ul>
+              </li>
+              <li><a href="../programs.html">Programs</a></li>
+              <li><a href="../academic-calendar.html">Academic Calendar</a></li>
+              <li><a href="../syllabus.html">OBE Curriculum</a></li>
+              <li><a href="../semester-result.html">Semester Result</a></li>
+              <li><a href="../result-verification.html">Result Verification</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Notice</button>
+            <ul class="sub">
+              <li><a href="../notice.html">Notice</a></li>
+              <li><a href="../events.html">Events</a></li>
+              <li><a href="../seminar.html">Seminar</a></li>
+              <li><a href="../news-letter.html">News Letter</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a class="btn" href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" rel="noopener">Online Admission &#8599;</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a> / <a href="../programs.html">Programs</a> / <span>Postgraduate Programs</span>
+    </nav>
+
+    <div class="pg-hero">
+      <h2>Postgraduate Academic Programs (Master's Degrees)</h2>
+      <p>Elevate your professional career and analytical leadership through our UGC-approved Master's degrees, tailored with flexible weekend and evening schedules for working professionals and graduates.</p>
+    </div>
+
+    <!-- Highlights -->
+    <div class="highlights-bar">
+      <div class="highlight-item">
+        <h3>Weekend &amp; Evening</h3>
+        <p>Friday-Saturday classes designed for service holders.</p>
+      </div>
+      <div class="highlight-item">
+        <h3>Experienced Faculty</h3>
+        <p>Professors &amp; PhD holders from public universities.</p>
+      </div>
+      <div class="highlight-item">
+        <h3>Affordable Fees</h3>
+        <p>Easy semester installment facility &amp; special waivers.</p>
+      </div>
+      <div class="highlight-item">
+        <h3>OBE Research Focus</h3>
+        <p>Practical thesis, case studies &amp; field analytics.</p>
+      </div>
+    </div>
+
+    <h1>Available Graduate Degrees</h1>
+
+    <!-- Postgraduate Programs Grid -->
+    <div class="pg-grid">
+
+      <!-- 1. MBA Regular -->
+      <article class="pg-card">
+        <img src="https://cdn.imgpile.com/f/PHWJdfE.webp" alt="Master of Business Administration">
+        <div class="pg-body">
+          <span class="pg-badge">Business Administration</span>
+          <h3>Master of Business Administration (MBA)</h3>
+          <div class="pg-meta">
+            <span><strong>Duration:</strong> 2 Years</span>
+            <span><strong>Credits:</strong> 60</span>
+            <span><strong>Shift:</strong> Evening/Friday</span>
+          </div>
+          <p>Designed for non-business graduates seeking foundational and strategic business acumen in Marketing, Finance, Accounting, and HRM.</p>
+          <div class="pg-actions">
+            <a href="../departments/business-administration.html" class="btn alt">Curriculum</a>
+            <a href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" class="btn">Apply Now</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. MBA 1-Year -->
+      <article class="pg-card">
+        <img src="https://cdn.imgpile.com/f/PHWJdfE.webp" alt="MBA 1 Year Program">
+        <div class="pg-body">
+          <span class="pg-badge">Accelerated Track</span>
+          <h3>MBA (1-Year Program)</h3>
+          <div class="pg-meta">
+            <span><strong>Duration:</strong> 1 Year</span>
+            <span><strong>Credits:</strong> 36</span>
+            <span><strong>Eligibility:</strong> 4-Year BBA Holders</span>
+          </div>
+          <p>Accelerated advanced business management degree for BBA graduates looking to specialize in corporate finance, strategic marketing, or leadership.</p>
+          <div class="pg-actions">
+            <a href="../departments/business-administration.html" class="btn alt">Curriculum</a>
+            <a href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" class="btn">Apply Now</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. EMBA -->
+      <article class="pg-card">
+        <img src="https://cdn.imgpile.com/f/rguwWd2.webp" alt="Executive MBA">
+        <div class="pg-body">
+          <span class="pg-badge">Executive Track</span>
+          <h3>Executive MBA (EMBA)</h3>
+          <div class="pg-meta">
+            <span><strong>Duration:</strong> 16 Months</span>
+            <span><strong>Credits:</strong> 48</span>
+            <span><strong>Shift:</strong> Fridays Only</span>
+          </div>
+          <p>Specially curated for working corporate executives, bankers, NGO managers, and government officials to sharpen strategic decision-making.</p>
+          <div class="pg-actions">
+            <a href="../departments/business-administration.html" class="btn alt">Curriculum</a>
+            <a href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" class="btn">Apply Now</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. MPH -->
+      <article class="pg-card">
+        <img src="https://cdn.imgpile.com/f/T3hGhjt.webp" alt="Master of Public Health">
+        <div class="pg-body">
+          <span class="pg-badge">Public Health</span>
+          <h3>Master of Public Health (MPH)</h3>
+          <div class="pg-meta">
+            <span><strong>Duration:</strong> 1.5 - 2 Years</span>
+            <span><strong>Credits:</strong> 51</span>
+            <span><strong>Shift:</strong> Weekend</span>
+          </div>
+          <p>Empowering medical practitioners, nurses, and healthcare executives in epidemiology, hospital management, healthcare policy, and biostatistics.</p>
+          <div class="pg-actions">
+            <a href="../departments/public-health.html" class="btn alt">Curriculum</a>
+            <a href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" class="btn">Apply Now</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. M.A in Islamic Studies (1Y & 2Y) -->
+      <article class="pg-card">
+        <img src="https://cdn.imgpile.com/f/RwNCUce.webp" alt="M.A in Islamic Studies">
+        <div class="pg-body">
+          <span class="pg-badge">Faculty of Humanities</span>
+          <h3>M.A. in Islamic Studies (1Y &amp; 2Y)</h3>
+          <div class="pg-meta">
+            <span><strong>Duration:</strong> 1 / 2 Years</span>
+            <span><strong>Credits:</strong> 36 / 64</span>
+            <span><strong>Shift:</strong> Flexible</span>
+          </div>
+          <p>Advanced studies in Quranic hermeneutics, Islamic jurisprudence (Fiqh), ethical philosophy, and comparative theological history.</p>
+          <div class="pg-actions">
+            <a href="../departments/islamic-studies.html" class="btn alt">Curriculum</a>
+            <a href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" class="btn">Apply Now</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. LL.M -->
+      <article class="pg-card">
+        <img src="https://cdn.imgpile.com/f/9RQCN9O.webp" alt="Master of Laws LLM">
+        <div class="pg-body">
+          <span class="pg-badge">Faculty of Law</span>
+          <h3>Master of Laws (LL.M)</h3>
+          <div class="pg-meta">
+            <span><strong>Duration:</strong> 1 Year (General)</span>
+            <span><strong>Credits:</strong> 36</span>
+            <span><strong>Shift:</strong> Evening/Friday</span>
+          </div>
+          <p>Advanced legal analysis, constitutional rights, international corporate law, cyber law, and judicial service training for law graduates.</p>
+          <div class="pg-actions">
+            <a href="../departments/law.html" class="btn alt">Curriculum</a>
+            <a href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" class="btn">Apply Now</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7. M.A in English -->
+      <article class="pg-card">
+        <img src="https://cdn.imgpile.com/f/xzHxlXp.webp" alt="M.A in English">
+        <div class="pg-body">
+          <span class="pg-badge">Faculty of Humanities</span>
+          <h3>M.A. in English (ELT &amp; Literature)</h3>
+          <div class="pg-meta">
+            <span><strong>Duration:</strong> 1 / 2 Years</span>
+            <span><strong>Credits:</strong> 36 / 64</span>
+            <span><strong>Shift:</strong> Weekend/Evening</span>
+          </div>
+          <p>Comprehensive graduate focus in English Language Teaching (ELT), applied linguistics, critical theory, and world literary history.</p>
+          <div class="pg-actions">
+            <a href="../departments/english.html" class="btn alt">Curriculum</a>
+            <a href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" class="btn">Apply Now</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Call to Action Banner -->
+    <div class="admit-cta-box">
+      <div>
+        <h3>Ready to Take the Next Step in Your Career?</h3>
+        <p>Admissions are open for upcoming Spring and Summer semesters with special waiver options.</p>
+      </div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="../fee-calculator.html" class="btn alt">Calculate Fees</a>
+        <a href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" class="btn">Online Admission Form &#8599;</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap fgrid">
+      <div>
+        <h3>About Us</h3>
+        <p>The first Private University in North Bengal.</p>
+        <p><a href="https://www.facebook.com/pundrauniversitybogura/" target="_blank" rel="noopener">Facebook &#8599;</a> &middot; <a href="https://www.youtube.com/@pundrauniversity" target="_blank" rel="noopener">YouTube &#8599;</a></p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../faculty.html">Faculty</a></li>
+          <li><a href="../departments.html">Departments</a></li>
+          <li><a href="../programs.html">Programs</a></li>
+          <li><a href="../semester-result.html">Semester Result</a></li>
+          <li><a href="../result-verification.html">Result Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>More</h3>
+        <ul>
+          <li><a href="../faculty-members.html">Faculty Members</a></li>
+          <li><a href="../alumni.html">Alumni</a></li>
+          <li><a href="../career.html">Career</a></li>
+          <li><a href="../clubs.html">Clubs</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="../iqac.html">IQAC</a></li>
+          <li><a href="../why-choose-us.html">Why Choose Us</a></li>
+          <li><a href="../photo-gallery.html">Photo Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Useful Links (external)</h3>
+        <ul>
+          <li><a href="https://ugc.gov.bd/" target="_blank" rel="noopener">UGC &#8599;</a></li>
+          <li><a href="https://moedu.gov.bd/" target="_blank" rel="noopener">Ministry of Education &#8599;</a></li>
+          <li><a href="https://banbeis.gov.bd/" target="_blank" rel="noopener">Banbeis &#8599;</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p>+88 01713 377 037<br>+88 01713 377 033<br>info@pundrauniversity.edu.bd<br>Rangpur Road, Baghopara, Gokul, Bogura</p>
+      </div>
+    </div>
+    <p class="copy">&copy; 2026 Educational recreation &mdash; Pundra University of Science &amp; Technology.</p>
+  </footer>
+  <button id="top" aria-label="Back to top" hidden>&uarr;</button>
+  <script src="../js/main.js"></script>
+</body>
+</html>

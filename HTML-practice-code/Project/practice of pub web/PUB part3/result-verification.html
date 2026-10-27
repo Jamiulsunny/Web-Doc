@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Result Verification | Pundra University of Science &amp; Technology</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Result Verification Portal Styles */
+    .verify-banner {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      color: #fff;
+      padding: 32px 24px;
+      border-radius: 8px;
+      margin-bottom: 28px;
+    }
+    .verify-banner h2 {
+      color: #fff;
+      margin: 0 0 8px 0;
+      font-size: 1.55rem;
+    }
+    .verify-banner p {
+      margin: 0;
+      opacity: 0.92;
+      font-size: 0.95rem;
+    }
+
+    .verify-form-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      margin-bottom: 32px;
+    }
+    .verify-form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      align-items: end;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 6px;
+    }
+    .form-group select,
+    .form-group input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font: inherit;
+      background: #fff;
+      box-sizing: border-box;
+    }
+    .form-group select:focus,
+    .form-group input:focus {
+      outline: 2px solid var(--primary);
+      border-color: transparent;
+    }
+
+    /* Verification Report Card */
+    #verifyReportCard {
+      background: #fff;
+      border: 2px solid #22c55e;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .report-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      gap: 14px;
+    }
+    .report-top h3 {
+      margin: 0;
+      color: var(--secondary);
+      font-size: 1.35rem;
+    }
+    .status-pill {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-pill::before {
+      content: "✔";
+      font-size: 0.95rem;
+    }
+
+    .record-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px 28px;
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      font-size: 0.93rem;
+    }
+    .record-item strong {
+      color: var(--secondary);
+      display: inline-block;
+      min-width: 140px;
+    }
+
+    .academic-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 0.92rem;
+    }
+    .academic-summary-table th {
+      background-color: #f1f5f9;
+      color: var(--secondary);
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    .academic-summary-table td {
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .report-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .security-stamp {
+      font-family: monospace;
+      font-weight: bold;
+      color: var(--primary);
+      background: #e0f2fe;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <div class="wrap">
+      <span>
+        <a href="tel:+8801713377033">+880 1713 377 033</a> &middot;
+        <a href="mailto:admission@pundrauniversity.edu.bd">admission@pundrauniversity.edu.bd</a>
+      </span>
+      <span class="ext">
+        <a href="https://students.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Students &#8599;</a>
+        <a href="https://uims.pundrauniversity.ac.bd/" target="_blank" rel="noopener">UIMS &#8599;</a>
+        <a href="https://library.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Library &#8599;</a>
+        <a href="https://journal.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Journals &#8599;</a>
+        <a href="iqac.html">IQAC</a>
+      </span>
+    </div>
+  </div>
+  <header class="site">
+    <div class="wrap bar">
+      <a class="brand" href="index.html">
+        <img class="logo" src="assets/images/logo.png" alt="PUB Logo" width="48" height="48">
+        <span>Pundra University<small>of Science &amp; Technology</small></span>
+      </a>
+      <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">&#9776;</button>
+      <nav id="nav" aria-label="Main">
+        <ul class="menu">
+          <li class=""><a href="index.html">Home</a></li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">About Us</button>
+            <ul class="sub">
+              <li><a href="about-the-university.html">About the University</a></li>
+              <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+              <li><a href="university-approval.html">University Approval</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Messages</button>
+                <ul class="sub">
+                  <li><a href="message/chairman-bot.html">Chairman's Message</a></li>
+                  <li><a href="message/vice-chancellor.html">Vice-Chancellor's Message</a></li>
+                  <li><a href="message/treasurer.html">Treasurer's Message</a></li>
+                </ul>
+              </li>
+              <li><a href="photo-gallery.html">Photo Gallery</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Administrations</button>
+            <ul class="sub">
+              <li><a href="chairman-bot.html">Chairman, BoT</a></li>
+              <li><a href="advisor-bot.html">Advisor, BoT</a></li>
+              <li><a href="offices.html">Offices</a></li>
+              <li><a href="complaints.html">Complaint Committees</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Management</button>
+                <ul class="sub">
+                  <li><a href="board-of-trustees.html">Board of Trustees</a></li>
+                  <li><a href="syndicate.html">Syndicate</a></li>
+                  <li><a href="academic-council.html">Academic Council</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Admission</button>
+            <ul class="sub">
+              <li><a href="programs/undergraduate.html">Undergraduate Programs</a></li>
+              <li><a href="programs/postgraduate.html">Postgraduate Programs</a></li>
+              <li><a href="tuition-fees.html">Tuition Fees</a></li>
+              <li><a href="fee-calculator.html">Tuition Fee Calculator</a></li>
+              <li><a href="admission-requirements.html">Admission Requirements</a></li>
+              <li><a href="scholarship.html">Scholarship</a></li>
+              <li><a href="facilities.html">Facilities</a></li>
+            </ul>
+          </li>
+          <li class="has-sub active">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Academics</button>
+            <ul class="sub">
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Faculty</button>
+                <ul class="sub">
+                  <li><a href="faculty/business-studies.html">Business Studies</a></li>
+                  <li><a href="faculty/science-and-engineering.html">Science &amp; Engineering</a></li>
+                  <li><a href="faculty/humanities-and-social-sciences.html">Humanities &amp; Social Sciences</a></li>
+                  <li><a href="faculty/faculty-of-law.html">Law</a></li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Departments</button>
+                <ul class="sub">
+                  <li><a href="departments/business-administration.html">Business Administration</a></li>
+                  <li><a href="departments/computer-science-and-engineering.html">Computer Science &amp; Engineering</a></li>
+                  <li><a href="departments/electrical-and-electronic-engineering.html">Electrical &amp; Electronic Engineering</a></li>
+                  <li><a href="departments/civil-engineering.html">Civil Engineering</a></li>
+                  <li><a href="departments/public-health.html">Public Health</a></li>
+                  <li><a href="departments/islamic-studies.html">Islamic Studies</a></li>
+                  <li><a href="departments/english.html">English</a></li>
+                  <li><a href="departments/education.html">Education</a></li>
+                  <li><a href="departments/law.html">Law</a></li>
+                  <li><a href="departments/journalism.html">Journalism &amp; Media Studies</a></li>
+                  <li><a href="departments/bangla.html">Bangla</a></li>
+                  <li><a href="departments/development-studies.html">Development Studies</a></li>
+                </ul>
+              </li>
+              <li><a href="programs.html">Programs</a></li>
+              <li><a href="academic-calendar.html">Academic Calendar</a></li>
+              <li><a href="syllabus.html">OBE Curriculum</a></li>
+              <li><a href="semester-result.html">Semester Result</a></li>
+              <li><a href="result-verification.html">Result Verification</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Notice</button>
+            <ul class="sub">
+              <li><a href="notice.html">Notice</a></li>
+              <li><a href="events.html">Events</a></li>
+              <li><a href="seminar.html">Seminar</a></li>
+              <li><a href="news-letter.html">News Letter</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a class="btn" href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" rel="noopener">Online Admission &#8599;</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a> / <span>Result Verification</span>
+    </nav>
+    
+    <h1>Online Result &amp; Certificate Verification</h1>
+
+    <div class="verify-banner">
+      <h2>Academic Credential Verification System</h2>
+      <p>Verify the authenticity of provisional certificates, academic transcripts, and official degree records issued by Pundra University of Science &amp; Technology.</p>
+    </div>
+
+    <!-- Verification Input Form -->
+    <div class="verify-form-card">
+      <form id="verifyForm" onsubmit="verifyResult(event);">
+        <div class="verify-form-grid">
+          <div class="form-group">
+            <label for="docType">Document Type</label>
+            <select id="docType" required>
+              <option value="Provisional Certificate">Provisional Certificate</option>
+              <option value="Official Transcript" selected>Official Academic Transcript</option>
+              <option value="Main Degree Certificate">Main Degree Certificate</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="vStudentId">Student ID / Roll No</label>
+            <input type="text" id="vStudentId" placeholder="e.g. 03225105101002" required>
+          </div>
+          <div class="form-group">
+            <label for="serialNo">Certificate / Transcript Serial No</label>
+            <input type="text" id="serialNo" placeholder="e.g. PUB-TR-2026-8941" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn" style="width:100%; min-height:45px;">Verify Credential &#128269;</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Verification Output Report -->
+    <div id="verifyReportCard">
+      <div class="report-top">
+        <div>
+          <h3>Verification Status: <span class="status-pill">AUTHENTIC &amp; VERIFIED</span></h3>
+          <p style="margin:4px 0 0; color:var(--muted); font-size:0.88rem;">Records verified against Central Exam Database</p>
+        </div>
+        <div>
+          <button onclick="window.print();" class="btn alt" style="padding:8px 16px; font-size:0.85rem;">Print Verification Slip &#128438;</button>
+        </div>
+      </div>
+
+      <div class="record-grid">
+        <div class="record-item"><strong>Student Name:</strong> <span id="vName">Md. Jamiul Islam Sunny</span></div>
+        <div class="record-item"><strong>Student ID:</strong> <span id="vDispId">03225105101002</span></div>
+        <div class="record-item"><strong>Program:</strong> <span id="vProgram">B.Sc. in Computer Science &amp; Engineering</span></div>
+        <div class="record-item"><strong>Department:</strong> Department of CSE</div>
+        <div class="record-item"><strong>Document Type:</strong> <span id="vDoc">Official Academic Transcript</span></div>
+        <div class="record-item"><strong>Document Serial:</strong> <span id="vDispSerial">PUB-TR-2026-8941</span></div>
+        <div class="record-item"><strong>Academic Status:</strong> Regular (Active)</div>
+        <div class="record-item"><strong>Verification Date:</strong> <span id="vCurrentDate"></span></div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="academic-summary-table">
+          <thead>
+            <tr>
+              <th>Total Required Credits</th>
+              <th>Credits Completed</th>
+              <th>Cumulative CGPA</th>
+              <th>Grading System</th>
+              <th>Result Award Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>160.00</td>
+              <td><strong>160.00</strong></td>
+              <td><strong style="color:var(--primary); font-size:1.1rem;">3.88 / 4.00</strong></td>
+              <td>4.00 Scale (UGC)</td>
+              <td><span style="color:#15803d; font-weight:bold;">First Class with Distinction</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="report-footer">
+        <div>
+          <span>Verification Code: </span>
+          <span class="security-stamp" id="securityCode">PUB-SEC-99281-AUTH</span>
+        </div>
+        <div>
+          <em>Issued under authority of Controller of Examinations, PUB</em>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap fgrid">
+      <div>
+        <h3>About Us</h3>
+        <p>The first Private University in North Bengal.</p>
+        <p><a href="https://www.facebook.com/pundrauniversitybogura/" target="_blank" rel="noopener">Facebook &#8599;</a> &middot; <a href="https://www.youtube.com/@pundrauniversity" target="_blank" rel="noopener">YouTube &#8599;</a></p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="faculty.html">Faculty</a></li>
+          <li><a href="departments.html">Departments</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="semester-result.html">Semester Result</a></li>
+          <li><a href="result-verification.html">Result Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>More</h3>
+        <ul>
+          <li><a href="faculty-members.html">Faculty Members</a></li>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="career.html">Career</a></li>
+          <li><a href="clubs.html">Clubs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="iqac.html">IQAC</a></li>
+          <li><a href="why-choose-us.html">Why Choose Us</a></li>
+          <li><a href="photo-gallery.html">Photo Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Useful Links (external)</h3>
+        <ul>
+          <li><a href="https://ugc.gov.bd/" target="_blank" rel="noopener">UGC &#8599;</a></li>
+          <li><a href="https://moedu.gov.bd/" target="_blank" rel="noopener">Ministry of Education &#8599;</a></li>
+          <li><a href="https://banbeis.gov.bd/" target="_blank" rel="noopener">Banbeis &#8599;</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p>+88 01713 377 037<br>+88 01713 377 033<br>info@pundrauniversity.edu.bd<br>Rangpur Road, Baghopara, Gokul, Bogura</p>
+      </div>
+    </div>
+    <p class="copy">&copy; 2026 Educational recreation &mdash; Pundra University of Science &amp; Technology.</p>
+  </footer>
+  <button id="top" aria-label="Back to top" hidden>&uarr;</button>
+  <script src="js/main.js"></script>
+
+  <script>
+    // Set dynamic current date on load
+    document.addEventListener("DOMContentLoaded", () => {
+      const today = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('vCurrentDate').textContent = today.toLocaleDateString('en-US', options);
+    });
+
+    // Verification Form Handler
+    function verifyResult(e) {
+      e.preventDefault();
+      const sId = document.getElementById('vStudentId').value.trim();
+      const serial = document.getElementById('serialNo').value.trim();
+      const docType = document.getElementById('docType').value;
+
+      document.getElementById('vDispId').textContent = sId || '03225105101002';
+      document.getElementById('vDispSerial').textContent = serial || 'PUB-TR-2026-8941';
+      document.getElementById('vDoc').textContent = docType;
+
+      // Random verification token generator for realism
+      const randomHex = Math.floor(Math.random() * 0xFFFFFF).toString(16).toUpperCase();
+      document.getElementById('securityCode').textContent = `PUB-SEC-${randomHex}-AUTH`;
+
+      const card = document.getElementById('verifyReportCard');
+      card.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

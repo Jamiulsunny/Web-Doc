@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chairman's Message | Pundra University of Science &amp; Technology</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Executive Message Specific Styling */
+    .message-hero {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      color: #fff;
+      padding: 36px 28px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    .message-hero h2 {
+      color: #fff;
+      margin: 0 0 8px 0;
+      font-size: 1.6rem;
+    }
+    .message-hero p {
+      margin: 0;
+      opacity: 0.92;
+      font-size: 0.95rem;
+    }
+
+    .message-container {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 36px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+    .leader-sidebar {
+      text-align: center;
+      background: #f8fafc;
+      padding: 24px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .profile-photo {
+      width: 200px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 3px solid var(--primary);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      margin: 0 auto 16px auto;
+      display: block;
+      background: #e2e8f0;
+    }
+    .leader-sidebar h3 {
+      margin: 0 0 6px 0;
+      font-size: 1.2rem;
+      color: var(--secondary);
+    }
+    .leader-sidebar .desig {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.88rem;
+      display: block;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .leader-sidebar .meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    .message-content {
+      line-height: 1.8;
+      color: var(--text);
+      font-size: 0.96rem;
+    }
+    .message-content h3 {
+      color: var(--secondary);
+      margin-top: 0;
+      font-size: 1.35rem;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 8px;
+      display: inline-block;
+    }
+    .message-content p {
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+    .quote-callout {
+      background: #f0f7ff;
+      border-left: 4px solid var(--primary);
+      padding: 14px 20px;
+      margin: 20px 0;
+      font-style: italic;
+      color: var(--secondary);
+      border-radius: 0 6px 6px 0;
+    }
+    .signature-block {
+      margin-top: 30px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border);
+    }
+    .signature-block strong {
+      font-size: 1.05rem;
+      color: var(--secondary);
+    }
+
+    /* Quick Links to Other Messages */
+    .other-messages {
+      margin-top: 30px;
+    }
+    .other-messages h3 {
+      color: var(--secondary);
+      margin-bottom: 16px;
+    }
+    .other-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .nav-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    }
+    .nav-card img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+      flex-shrink: 0;
+    }
+    .nav-card h4 {
+      margin: 0 0 4px 0;
+      font-size: 1rem;
+      color: var(--secondary);
+    }
+    .nav-card span {
+      font-size: 0.82rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 8px;
+    }
+    .nav-card a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 820px) {
+      .message-container {
+        grid-template-columns: 1fr;
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <div class="wrap">
+      <span>
+        <a href="tel:+8801713377033">+880 1713 377 033</a> &middot;
+        <a href="mailto:admission@pundrauniversity.edu.bd">admission@pundrauniversity.edu.bd</a>
+      </span>
+      <span class="ext">
+        <a href="https://students.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Students &#8599;</a>
+        <a href="https://uims.pundrauniversity.ac.bd/" target="_blank" rel="noopener">UIMS &#8599;</a>
+        <a href="https://library.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Library &#8599;</a>
+        <a href="https://journal.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Journals &#8599;</a>
+        <a href="../iqac.html">IQAC</a>
+      </span>
+    </div>
+  </div>
+  <header class="site">
+    <div class="wrap bar">
+      <a class="brand" href="../index.html">
+        <img class="logo" src="../assets/images/logo.png" alt="PUB Logo" width="48" height="48">
+        <span>Pundra University<small>of Science &amp; Technology</small></span>
+      </a>
+      <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">&#9776;</button>
+      <nav id="nav" aria-label="Main">
+        <ul class="menu">
+          <li class=""><a href="../index.html">Home</a></li>
+          <li class="has-sub active">
+            <button type="button" aria-expanded="false" aria-haspopup="true">About Us</button>
+            <ul class="sub">
+              <li><a href="../about-the-university.html">About the University</a></li>
+              <li><a href="../vision-mission.html">Vision &amp; Mission</a></li>
+              <li><a href="../university-approval.html">University Approval</a></li>
+              <li class="has-sub active">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Messages</button>
+                <ul class="sub">
+                  <li class="active"><a href="../message/chairman-bot.html">Chairman's Message</a></li>
+                  <li><a href="../message/vice-chancellor.html">Vice-Chancellor's Message</a></li>
+                  <li><a href="../message/treasurer.html">Treasurer's Message</a></li>
+                </ul>
+              </li>
+              <li><a href="../photo-gallery.html">Photo Gallery</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Administrations</button>
+            <ul class="sub">
+              <li><a href="../chairman-bot.html">Chairman, BoT</a></li>
+              <li><a href="../advisor-bot.html">Advisor, BoT</a></li>
+              <li><a href="../offices.html">Offices</a></li>
+              <li><a href="../complaints.html">Complaint Committees</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Management</button>
+                <ul class="sub">
+                  <li><a href="../board-of-trustees.html">Board of Trustees</a></li>
+                  <li><a href="../syndicate.html">Syndicate</a></li>
+                  <li><a href="../academic-council.html">Academic Council</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Admission</button>
+            <ul class="sub">
+              <li><a href="../programs/undergraduate.html">Undergraduate Programs</a></li>
+              <li><a href="../programs/postgraduate.html">Postgraduate Programs</a></li>
+              <li><a href="../tuition-fees.html">Tuition Fees</a></li>
+              <li><a href="../fee-calculator.html">Tuition Fee Calculator</a></li>
+              <li><a href="../admission-requirements.html">Admission Requirements</a></li>
+              <li><a href="../scholarship.html">Scholarship</a></li>
+              <li><a href="../facilities.html">Facilities</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Academics</button>
+            <ul class="sub">
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Faculty</button>
+                <ul class="sub">
+                  <li><a href="../faculty/business-studies.html">Business Studies</a></li>
+                  <li><a href="../faculty/science-and-engineering.html">Science &amp; Engineering</a></li>
+                  <li><a href="../faculty/humanities-and-social-sciences.html">Humanities &amp; Social Sciences</a></li>
+                  <li><a href="../faculty/faculty-of-law.html">Law</a></li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Departments</button>
+                <ul class="sub">
+                  <li><a href="../departments/business-administration.html">Business Administration</a></li>
+                  <li><a href="../departments/computer-science-and-engineering.html">Computer Science &amp; Engineering</a></li>
+                  <li><a href="../departments/electrical-and-electronic-engineering.html">Electrical &amp; Electronic Engineering</a></li>
+                  <li><a href="../departments/civil-engineering.html">Civil Engineering</a></li>
+                  <li><a href="../departments/public-health.html">Public Health</a></li>
+                  <li><a href="../departments/islamic-studies.html">Islamic Studies</a></li>
+                  <li><a href="../departments/english.html">English</a></li>
+                  <li><a href="../departments/education.html">Education</a></li>
+                  <li><a href="../departments/law.html">Law</a></li>
+                  <li><a href="../departments/journalism.html">Journalism &amp; Media Studies</a></li>
+                  <li><a href="../departments/bangla.html">Bangla</a></li>
+                  <li><a href="../departments/development-studies.html">Development Studies</a></li>
+                </ul>
+              </li>
+              <li><a href="../programs.html">Programs</a></li>
+              <li><a href="../academic-calendar.html">Academic Calendar</a></li>
+              <li><a href="../syllabus.html">OBE Curriculum</a></li>
+              <li><a href="../semester-result.html">Semester Result</a></li>
+              <li><a href="../result-verification.html">Result Verification</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Notice</button>
+            <ul class="sub">
+              <li><a href="../notice.html">Notice</a></li>
+              <li><a href="../events.html">Events</a></li>
+              <li><a href="../seminar.html">Seminar</a></li>
+              <li><a href="../news-letter.html">News Letter</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a class="btn" href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" rel="noopener">Online Admission &#8599;</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a> / <a href="../about-the-university.html">About Us</a> / <span>Chairman's Message</span>
+    </nav>
+
+    <div class="message-hero">
+      <h2>Inspiring Vision, Transforming Lives</h2>
+      <p>A message of dedication, academic excellence, and societal contribution from the desk of the Chairman, Board of Trustees.</p>
+    </div>
+
+    <!-- Main Message Layout -->
+    <div class="message-container">
+      <!-- Sidebar with Portrait Photo -->
+      <aside class="leader-sidebar">
+        <!-- Replace src with Chairman's actual photo URL if available -->
+        <img class="profile-photo" 
+             src="https://cdn.imgpile.com/f/FgZio8T_wm.webp" 
+             alt="Prof. Dr. Hosne-Ara Begum">
+        <h3>Prof. Dr. Hosne-Ara Begum</h3>
+        <span class="desig">Chairman, Board of Trustees (BoT)<br>Pundra University of Science &amp; Technology</span>
+        <div class="meta">
+          <strong>Ashoka Fellow &amp; PHF</strong><br>
+          Founder &amp; Executive Director, TMSS
+        </div>
+      </aside>
+
+      <!-- Message Text -->
+      <article class="message-content">
+        <h3>Message from the Chairman</h3>
+        
+        <p>
+          It gives me immense pleasure and gratification to welcome you all to Pundra University of Science &amp; Technology (PUB). Established as the pioneer private university in northern Bangladesh, our institution was founded with a noble vision: to democratize higher education and bring cutting-edge learning in science, technology, business, and humanities within reach of every aspiring student.
+        </p>
+
+        <div class="quote-callout">
+          “Education is not merely the acquisition of a certificate; it is the ignition of ethical intellect, compassionate service, and creative innovation to uplift humankind.”
+        </div>
+
+        <p>
+          Over the years, PUB has grown exponentially, setting benchmark standards in curriculum design, faculty recruitment, modern laboratory infrastructure, and research environment. We strongly adhere to the Outcome-Based Education (OBE) system approved by the University Grants Commission (UGC) of Bangladesh, ensuring that our graduates step into the global arena as competent professionals, critical thinkers, and ethical citizens.
+        </p>
+
+        <p>
+          I am proud to see our students excel in competitive programming, innovation fairs, moot-court exercises, and extracurricular initiatives nationwide. As you step into this sacred precinct of knowledge, remember that you are the architects of the future. The university community stands fully committed to providing you with unconditional mentorship and support.
+        </p>
+
+        <p>
+          I pray for the boundless success of all our students, faculty members, and patrons. May Pundra University continue to illuminate minds and serve Bangladesh with pride and distinction.
+        </p>
+
+        <div class="signature-block">
+          <strong>Prof. Dr. Hosne-Ara Begum</strong><br>
+          <span style="color:var(--muted); font-size:0.9rem;">Chairman, Board of Trustees<br>Pundra University of Science &amp; Technology, Bogura</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Other Executive Messages -->
+    <div class="other-messages">
+      <h3>Other Executive Messages</h3>
+      <div class="other-grid">
+        <div class="nav-card">
+          <!-- Replace src with Vice-Chancellor photo -->
+          <img src="https://cdn.imgpile.com/f/iFQxHFD_wm.webp" alt="Prof. Dr. Chitta Ranjan Misra">
+          <div>
+            <h4>Prof. Dr. Chitta Ranjan Misra</h4>
+            <span>Vice-Chancellor, PUB</span>
+            <a href="vice-chancellor.html">Read VC's Message &rarr;</a>
+          </div>
+        </div>
+
+        <div class="nav-card">
+          <!-- Replace src with Treasurer photo -->
+          <img src="https://cdn.imgpile.com/f/IotmApY_wm.webp" alt="Md. Aminul Islam Sarker">
+          <div>
+            <h4>Md. Aminul Islam Sarker</h4>
+            <span>Treasurer, PUB</span>
+            <a href="treasurer.html">Read Treasurer's Message &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap fgrid">
+      <div>
+        <h3>About Us</h3>
+        <p>The first Private University in North Bengal.</p>
+        <p><a href="https://www.facebook.com/pundrauniversitybogura/" target="_blank" rel="noopener">Facebook &#8599;</a> &middot; <a href="https://www.youtube.com/@pundrauniversity" target="_blank" rel="noopener">YouTube &#8599;</a></p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../faculty.html">Faculty</a></li>
+          <li><a href="../departments.html">Departments</a></li>
+          <li><a href="../programs.html">Programs</a></li>
+          <li><a href="../semester-result.html">Semester Result</a></li>
+          <li><a href="../result-verification.html">Result Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>More</h3>
+        <ul>
+          <li><a href="../faculty-members.html">Faculty Members</a></li>
+          <li><a href="../alumni.html">Alumni</a></li>
+          <li><a href="../career.html">Career</a></li>
+          <li><a href="../clubs.html">Clubs</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="../iqac.html">IQAC</a></li>
+          <li><a href="../why-choose-us.html">Why Choose Us</a></li>
+          <li><a href="../photo-gallery.html">Photo Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Useful Links (external)</h3>
+        <ul>
+          <li><a href="https://ugc.gov.bd/" target="_blank" rel="noopener">UGC &#8599;</a></li>
+          <li><a href="https://moedu.gov.bd/" target="_blank" rel="noopener">Ministry of Education &#8599;</a></li>
+          <li><a href="https://banbeis.gov.bd/" target="_blank" rel="noopener">Banbeis &#8599;</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p>+88 01713 377 037<br>+88 01713 377 033<br>info@pundrauniversity.edu.bd<br>Rangpur Road, Baghopara, Gokul, Bogura</p>
+      </div>
+    </div>
+    <p class="copy">&copy; 2026 Educational recreation &mdash; Pundra University of Science &amp; Technology.</p>
+  </footer>
+  <button id="top" aria-label="Back to top" hidden>&uarr;</button>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OBE Curriculum &amp; Syllabus | Pundra University of Science &amp; Technology</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* OBE Curriculum Specific Styles */
+    .obe-banner {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      color: #fff;
+      padding: 32px 24px;
+      border-radius: 8px;
+      margin-bottom: 28px;
+    }
+    .obe-banner h2 {
+      color: #fff;
+      margin: 0 0 8px 0;
+      font-size: 1.55rem;
+    }
+    .obe-banner p {
+      margin: 0;
+      opacity: 0.92;
+      font-size: 0.95rem;
+      max-width: 900px;
+      line-height: 1.6;
+    }
+
+    .obe-principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+    .principle-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      border-top: 4px solid var(--primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .principle-box h3 {
+      font-size: 1.1rem;
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: var(--secondary);
+    }
+    .principle-box p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .syllabus-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .filter-group label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--secondary);
+    }
+    .filter-group select, 
+    .filter-group input {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font: inherit;
+    }
+
+    .program-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .program-card:hover {
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+    .prog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+    .prog-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: var(--secondary);
+    }
+    .badge-ugc {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .meta-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .meta-tags span strong {
+      color: var(--secondary);
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      margin-bottom: 16px;
+    }
+    .curriculum-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .curriculum-table th {
+      background: #f8fafc;
+      color: var(--secondary);
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--border);
+      text-align: left;
+    }
+    .curriculum-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .curriculum-table tbody tr:hover {
+      background: #fdfdfd;
+    }
+
+    .download-action {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <div class="wrap">
+      <span>
+        <a href="tel:+8801713377033">+880 1713 377 033</a> &middot;
+        <a href="mailto:admission@pundrauniversity.edu.bd">admission@pundrauniversity.edu.bd</a>
+      </span>
+      <span class="ext">
+        <a href="https://students.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Students &#8599;</a>
+        <a href="https://uims.pundrauniversity.ac.bd/" target="_blank" rel="noopener">UIMS &#8599;</a>
+        <a href="https://library.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Library &#8599;</a>
+        <a href="https://journal.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Journals &#8599;</a>
+        <a href="iqac.html">IQAC</a>
+      </span>
+    </div>
+  </div>
+  <header class="site">
+    <div class="wrap bar">
+      <a class="brand" href="index.html">
+        <img class="logo" src="assets/images/logo.png" alt="PUB Logo" width="48" height="48">
+        <span>Pundra University<small>of Science &amp; Technology</small></span>
+      </a>
+      <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">&#9776;</button>
+      <nav id="nav" aria-label="Main">
+        <ul class="menu">
+          <li class=""><a href="index.html">Home</a></li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">About Us</button>
+            <ul class="sub">
+              <li><a href="about-the-university.html">About the University</a></li>
+              <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+              <li><a href="university-approval.html">University Approval</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Messages</button>
+                <ul class="sub">
+                  <li><a href="message/chairman-bot.html">Chairman's Message</a></li>
+                  <li><a href="message/vice-chancellor.html">Vice-Chancellor's Message</a></li>
+                  <li><a href="message/treasurer.html">Treasurer's Message</a></li>
+                </ul>
+              </li>
+              <li><a href="photo-gallery.html">Photo Gallery</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Administrations</button>
+            <ul class="sub">
+              <li><a href="chairman-bot.html">Chairman, BoT</a></li>
+              <li><a href="advisor-bot.html">Advisor, BoT</a></li>
+              <li><a href="offices.html">Offices</a></li>
+              <li><a href="complaints.html">Complaint Committees</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Management</button>
+                <ul class="sub">
+                  <li><a href="board-of-trustees.html">Board of Trustees</a></li>
+                  <li><a href="syndicate.html">Syndicate</a></li>
+                  <li><a href="academic-council.html">Academic Council</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Admission</button>
+            <ul class="sub">
+              <li><a href="programs/undergraduate.html">Undergraduate Programs</a></li>
+              <li><a href="programs/postgraduate.html">Postgraduate Programs</a></li>
+              <li><a href="tuition-fees.html">Tuition Fees</a></li>
+              <li><a href="fee-calculator.html">Tuition Fee Calculator</a></li>
+              <li><a href="admission-requirements.html">Admission Requirements</a></li>
+              <li><a href="scholarship.html">Scholarship</a></li>
+              <li><a href="facilities.html">Facilities</a></li>
+            </ul>
+          </li>
+          <li class="has-sub active">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Academics</button>
+            <ul class="sub">
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Faculty</button>
+                <ul class="sub">
+                  <li><a href="faculty/business-studies.html">Business Studies</a></li>
+                  <li><a href="faculty/science-and-engineering.html">Science &amp; Engineering</a></li>
+                  <li><a href="faculty/humanities-and-social-sciences.html">Humanities &amp; Social Sciences</a></li>
+                  <li><a href="faculty/faculty-of-law.html">Law</a></li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Departments</button>
+                <ul class="sub">
+                  <li><a href="departments/business-administration.html">Business Administration</a></li>
+                  <li><a href="departments/computer-science-and-engineering.html">Computer Science &amp; Engineering</a></li>
+                  <li><a href="departments/electrical-and-electronic-engineering.html">Electrical &amp; Electronic Engineering</a></li>
+                  <li><a href="departments/civil-engineering.html">Civil Engineering</a></li>
+                  <li><a href="departments/public-health.html">Public Health</a></li>
+                  <li><a href="departments/islamic-studies.html">Islamic Studies</a></li>
+                  <li><a href="departments/english.html">English</a></li>
+                  <li><a href="departments/education.html">Education</a></li>
+                  <li><a href="departments/law.html">Law</a></li>
+                  <li><a href="departments/journalism.html">Journalism &amp; Media Studies</a></li>
+                  <li><a href="departments/bangla.html">Bangla</a></li>
+                  <li><a href="departments/development-studies.html">Development Studies</a></li>
+                </ul>
+              </li>
+              <li><a href="programs.html">Programs</a></li>
+              <li><a href="academic-calendar.html">Academic Calendar</a></li>
+              <li><a href="syllabus.html">OBE Curriculum</a></li>
+              <li><a href="semester-result.html">Semester Result</a></li>
+              <li><a href="result-verification.html">Result Verification</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Notice</button>
+            <ul class="sub">
+              <li><a href="notice.html">Notice</a></li>
+              <li><a href="events.html">Events</a></li>
+              <li><a href="seminar.html">Seminar</a></li>
+              <li><a href="news-letter.html">News Letter</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a class="btn" href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" rel="noopener">Online Admission &#8599;</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a> / <span>OBE Curriculum &amp; Syllabus</span>
+    </nav>
+    
+    <h1>OBE Curriculum &amp; Academic Syllabus</h1>
+
+    <div class="obe-banner">
+      <h2>Outcome-Based Education (OBE) Framework</h2>
+      <p>
+        In accordance with the guidelines of the University Grants Commission (UGC) of Bangladesh and the Board of Accreditation for Engineering and Technical Education (BAETE), Pundra University has implemented a learner-centric Outcome-Based Education (OBE) curriculum across all undergraduate and postgraduate programs.
+      </p>
+    </div>
+
+    <!-- Core Pillars of OBE -->
+    <div class="obe-principles">
+      <div class="principle-box">
+        <h3>1. PEOs (Program Educational Objectives)</h3>
+        <p>Broad statements describing career and professional accomplishments that graduates achieve within a few years after graduation.</p>
+      </div>
+      <div class="principle-box">
+        <h3>2. PLOs / POs (Program Outcomes)</h3>
+        <p>Specific knowledge, analytical skills, and ethical values students possess upon successful completion of the academic degree.</p>
+      </div>
+      <div class="principle-box">
+        <h3>3. CLOs (Course Learning Outcomes)</h3>
+        <p>Measurable learning outcomes that students are expected to demonstrate at the end of each specific course unit.</p>
+      </div>
+      <div class="principle-box">
+        <h3>4. Continuous Assessment</h3>
+        <p>Formative rubrics, projects, presentations, and lab viva verifying progressive achievement of competencies.</p>
+      </div>
+    </div>
+
+    <!-- Search & Filter Bar -->
+    <div class="syllabus-filter-bar">
+      <div class="filter-group">
+        <label for="filterFaculty">Faculty:</label>
+        <select id="filterFaculty" onchange="filterPrograms();">
+          <option value="all">All Faculties</option>
+          <option value="eng">Science &amp; Engineering</option>
+          <option value="bus">Business Studies</option>
+          <option value="law">Faculty of Law</option>
+          <option value="hum">Humanities &amp; Social Sciences</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="searchQuery">Search Program:</label>
+        <input type="text" id="searchQuery" placeholder="Search by name..." onkeyup="filterPrograms();">
+      </div>
+    </div>
+
+    <!-- Programs Repository -->
+    <div id="programsContainer">
+      <!-- CSE -->
+      <div class="program-card" data-faculty="eng" data-title="computer science engineering cse">
+        <div class="prog-header">
+          <div>
+            <h3>B.Sc. in Computer Science &amp; Engineering (CSE)</h3>
+            <span style="font-size:0.85rem; color:var(--muted);">Department of Computer Science &amp; Engineering</span>
+          </div>
+          <span class="badge-ugc">BAETE &amp; UGC Compliant</span>
+        </div>
+        <div class="meta-tags">
+          <span><strong>Total Credits:</strong> 160.00</span>
+          <span><strong>Duration:</strong> 4 Years (8 Semesters)</span>
+          <span><strong>Degree Awarded:</strong> Bachelor of Science</span>
+        </div>
+        <p style="font-size:0.9rem; margin-bottom:12px;">Covers Data Structures, Algorithms, Software Engineering, AI &amp; Machine Learning, Database Systems, Computer Networks, and Cloud Architecture.</p>
+        <div class="table-responsive">
+          <table class="curriculum-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Course Examples</th>
+                <th>Total Credits</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Core Computing &amp; Engineering</td>
+                <td>Data Structures, Operating Systems, OOP, Compilers, DBMS</td>
+                <td>84.00</td>
+              </tr>
+              <tr>
+                <td>Basic Sciences &amp; Math</td>
+                <td>Calculus, Differential Equations, Physics, Linear Algebra</td>
+                <td>21.00</td>
+              </tr>
+              <tr>
+                <td>Humanities &amp; Social Sc.</td>
+                <td>English Communication, Society &amp; Technology, Economics</td>
+                <td>15.00</td>
+              </tr>
+              <tr>
+                <td>Capstone Project / Thesis</td>
+                <td>Design Project, Industry Internship &amp; Research Thesis</td>
+                <td>6.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="download-action">
+          <a href="#" onclick="alert('Downloading B.Sc. in CSE OBE Syllabus PDF...'); return false;" class="btn" style="padding:8px 18px; font-size:0.85rem;">Download Full Syllabus (PDF) &#128196;</a>
+        </div>
+      </div>
+
+      <!-- EEE -->
+      <div class="program-card" data-faculty="eng" data-title="electrical electronic engineering eee">
+        <div class="prog-header">
+          <div>
+            <h3>B.Sc. in Electrical &amp; Electronic Engineering (EEE)</h3>
+            <span style="font-size:0.85rem; color:var(--muted);">Department of Electrical &amp; Electronic Engineering</span>
+          </div>
+          <span class="badge-ugc">UGC Approved</span>
+        </div>
+        <div class="meta-tags">
+          <span><strong>Total Credits:</strong> 160.00</span>
+          <span><strong>Duration:</strong> 4 Years (8 Semesters)</span>
+          <span><strong>Degree Awarded:</strong> Bachelor of Science</span>
+        </div>
+        <p style="font-size:0.9rem; margin-bottom:12px;">Specializations in Power Systems, Electronics, Telecommunications, and Renewable Green Energy Systems.</p>
+        <div class="download-action">
+          <a href="#" onclick="alert('Downloading B.Sc. in EEE OBE Syllabus PDF...'); return false;" class="btn" style="padding:8px 18px; font-size:0.85rem;">Download Full Syllabus (PDF) &#128196;</a>
+        </div>
+      </div>
+
+      <!-- Civil -->
+      <div class="program-card" data-faculty="eng" data-title="civil engineering ce">
+        <div class="prog-header">
+          <div>
+            <h3>B.Sc. in Civil Engineering (CE)</h3>
+            <span style="font-size:0.85rem; color:var(--muted);">Department of Civil Engineering</span>
+          </div>
+          <span class="badge-ugc">UGC Approved</span>
+        </div>
+        <div class="meta-tags">
+          <span><strong>Total Credits:</strong> 162.00</span>
+          <span><strong>Duration:</strong> 4 Years (8 Semesters)</span>
+          <span><strong>Degree Awarded:</strong> Bachelor of Science</span>
+        </div>
+        <p style="font-size:0.9rem; margin-bottom:12px;">Focuses on Structural Engineering, Geotechnical Engineering, Transportation, and Environmental Water Management.</p>
+        <div class="download-action">
+          <a href="#" onclick="alert('Downloading B.Sc. in Civil Engineering OBE Syllabus PDF...'); return false;" class="btn" style="padding:8px 18px; font-size:0.85rem;">Download Full Syllabus (PDF) &#128196;</a>
+        </div>
+      </div>
+
+      <!-- BBA -->
+      <div class="program-card" data-faculty="bus" data-title="bachelor of business administration bba">
+        <div class="prog-header">
+          <div>
+            <h3>Bachelor of Business Administration (BBA)</h3>
+            <span style="font-size:0.85rem; color:var(--muted);">Department of Business Administration</span>
+          </div>
+          <span class="badge-ugc">UGC Approved</span>
+        </div>
+        <div class="meta-tags">
+          <span><strong>Total Credits:</strong> 126.00</span>
+          <span><strong>Duration:</strong> 4 Years (8 Semesters)</span>
+          <span><strong>Degree Awarded:</strong> Bachelor of Business Administration</span>
+        </div>
+        <p style="font-size:0.9rem; margin-bottom:12px;">Majors offered: Accounting &amp; Information Systems, Finance &amp; Banking, Marketing, and Human Resource Management.</p>
+        <div class="download-action">
+          <a href="#" onclick="alert('Downloading BBA OBE Syllabus PDF...'); return false;" class="btn" style="padding:8px 18px; font-size:0.85rem;">Download Full Syllabus (PDF) &#128196;</a>
+        </div>
+      </div>
+
+      <!-- Law -->
+      <div class="program-card" data-faculty="law" data-title="bachelor of laws llb law">
+        <div class="prog-header">
+          <div>
+            <h3>Bachelor of Laws (LL.B Hons)</h3>
+            <span style="font-size:0.85rem; color:var(--muted);">Department of Law</span>
+          </div>
+          <span class="badge-ugc">Bangladesh Bar Council Recognized</span>
+        </div>
+        <div class="meta-tags">
+          <span><strong>Total Credits:</strong> 132.00</span>
+          <span><strong>Duration:</strong> 4 Years (8 Semesters)</span>
+          <span><strong>Degree Awarded:</strong> LL.B (Honours)</span>
+        </div>
+        <p style="font-size:0.9rem; margin-bottom:12px;">Rigorous legal scholarship, jurisprudence, constitutional law, criminal law, and practical moot-court advocacy training.</p>
+        <div class="download-action">
+          <a href="#" onclick="alert('Downloading LL.B OBE Syllabus PDF...'); return false;" class="btn" style="padding:8px 18px; font-size:0.85rem;">Download Full Syllabus (PDF) &#128196;</a>
+        </div>
+      </div>
+
+      <!-- Islamic Studies -->
+      <div class="program-card" data-faculty="hum" data-title="islamic studies ma ba">
+        <div class="prog-header">
+          <div>
+            <h3>B.A. (Hons) in Islamic Studies</h3>
+            <span style="font-size:0.85rem; color:var(--muted);">Department of Islamic Studies</span>
+          </div>
+          <span class="badge-ugc">UGC Approved</span>
+        </div>
+        <div class="meta-tags">
+          <span><strong>Total Credits:</strong> 124.00</span>
+          <span><strong>Duration:</strong> 4 Years (8 Semesters)</span>
+          <span><strong>Degree Awarded:</strong> Bachelor of Arts (Honours)</span>
+        </div>
+        <p style="font-size:0.9rem; margin-bottom:12px;">Deep study of Quranic Sciences, Hadith literature, Islamic jurisprudence (Fiqh), Islamic history, and ethical civilization.</p>
+        <div class="download-action">
+          <a href="#" onclick="alert('Downloading Islamic Studies OBE Syllabus PDF...'); return false;" class="btn" style="padding:8px 18px; font-size:0.85rem;">Download Full Syllabus (PDF) &#128196;</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap fgrid">
+      <div>
+        <h3>About Us</h3>
+        <p>The first Private University in North Bengal.</p>
+        <p><a href="https://www.facebook.com/pundrauniversitybogura/" target="_blank" rel="noopener">Facebook &#8599;</a> &middot; <a href="https://www.youtube.com/@pundrauniversity" target="_blank" rel="noopener">YouTube &#8599;</a></p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="faculty.html">Faculty</a></li>
+          <li><a href="departments.html">Departments</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="semester-result.html">Semester Result</a></li>
+          <li><a href="result-verification.html">Result Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>More</h3>
+        <ul>
+          <li><a href="faculty-members.html">Faculty Members</a></li>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="career.html">Career</a></li>
+          <li><a href="clubs.html">Clubs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="iqac.html">IQAC</a></li>
+          <li><a href="why-choose-us.html">Why Choose Us</a></li>
+          <li><a href="photo-gallery.html">Photo Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Useful Links (external)</h3>
+        <ul>
+          <li><a href="https://ugc.gov.bd/" target="_blank" rel="noopener">UGC &#8599;</a></li>
+          <li><a href="https://moedu.gov.bd/" target="_blank" rel="noopener">Ministry of Education &#8599;</a></li>
+          <li><a href="https://banbeis.gov.bd/" target="_blank" rel="noopener">Banbeis &#8599;</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p>+88 01713 377 037<br>+88 01713 377 033<br>info@pundrauniversity.edu.bd<br>Rangpur Road, Baghopara, Gokul, Bogura</p>
+      </div>
+    </div>
+    <p class="copy">&copy; 2026 Educational recreation &mdash; Pundra University of Science &amp; Technology.</p>
+  </footer>
+  <button id="top" aria-label="Back to top" hidden>&uarr;</button>
+  <script src="js/main.js"></script>
+
+  <script>
+    // Real-time Dynamic Filter Function
+    function filterPrograms() {
+      const selectedFaculty = document.getElementById('filterFaculty').value;
+      const query = document.getElementById('searchQuery').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('#programsContainer .program-card');
+
+      cards.forEach(card => {
+        const faculty = card.getAttribute('data-faculty');
+        const title = card.getAttribute('data-title');
+
+        const matchFaculty = (selectedFaculty === 'all' || faculty === selectedFaculty);
+        const matchQuery = (!query || title.includes(query));
+
+        if (matchFaculty && matchQuery) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

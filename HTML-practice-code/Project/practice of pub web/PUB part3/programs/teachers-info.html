@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teachers Info &amp; Faculty Directory | Pundra University of Science &amp; Technology</title>
+  
+  <style>
+    /* ============================================================
+       1. GLOBAL RESET & BASE STYLES
+       ============================================================ */
+    :root {
+      --primary: #0f4c81;
+      --secondary: #0a2d4f;
+      --accent: #e9a820;
+      --bg: #f5f7fa;
+      --text: #1f2937;
+      --muted: #5b6675;
+      --border: #dde3ea;
+      --w: 1200px;
+      --nav-h: 64px;
+      --gap: 24px;
+      --font: "Segoe UI", Roboto, "Noto Sans Bengali", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--secondary);
+      line-height: 1.25;
+    }
+
+    .wrap {
+      max-width: var(--w);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .skip {
+      position: absolute;
+      left: -999px;
+    }
+
+    /* ============================================================
+       2. TOPBAR & NAVIGATION
+       ============================================================ */
+    .topbar {
+      background: var(--secondary);
+      color: #fff;
+      font-size: .85rem;
+    }
+
+    .topbar .wrap {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+
+    .topbar a {
+      color: #fff;
+      margin-right: 10px;
+      text-decoration: none;
+    }
+
+    .topbar a:hover {
+      text-decoration: underline;
+    }
+
+    header.site {
+      background: #fff;
+      border-bottom: 3px solid var(--primary);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: var(--nav-h);
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .brand img.logo {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .brand small {
+      display: block;
+      font-weight: 400;
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    nav#nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 2px;
+    }
+
+    .menu > li {
+      position: relative;
+    }
+
+    .menu a,
+    .menu button {
+      display: block;
+      font: inherit;
+      background: none;
+      border: 0;
+      padding: 20px 10px;
+      color: var(--secondary);
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .menu > li.active > a,
+    .menu > li.active > button,
+    .menu a:hover,
+    .menu button:hover {
+      color: var(--primary);
+      box-shadow: inset 0 -3px var(--accent);
+    }
+
+    .sub {
+      display: none;
+      list-style: none;
+      margin: 0;
+      padding: 6px 0;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      background: #fff;
+      min-width: 240px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      border-radius: 0 0 6px 6px;
+      z-index: 110;
+    }
+
+    .sub .sub {
+      left: 100%;
+      top: 0;
+    }
+
+    .sub a,
+    .sub button {
+      padding: 9px 16px;
+      width: 100%;
+      text-align: left;
+    }
+
+    .sub li {
+      position: relative;
+    }
+
+    .has-sub.open > .sub,
+    .has-sub:hover > .sub {
+      display: block;
+    }
+
+    .has-sub > button::after {
+      content: " ▾";
+    }
+
+    .sub .has-sub > button::after {
+      content: " ▸";
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff !important;
+      padding: 9px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 0;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      line-height: 22px;
+      text-align: center;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--secondary);
+      text-decoration: none;
+    }
+
+    .btn.alt {
+      background: var(--accent);
+      color: #1b1b1b !important;
+    }
+
+    .btn.alt:hover {
+      background: #d49514;
+    }
+
+    .burger {
+      display: none;
+      font-size: 1.6rem;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      min-width: 44px;
+      min-height: 44px;
+      cursor: pointer;
+    }
+
+    .page {
+      padding-top: 24px;
+      padding-bottom: 48px;
+    }
+
+    .crumbs {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    /* ============================================================
+       3. TEACHERS DIRECTORY SPECIFIC STYLING
+       ============================================================ */
+    .teachers-hero {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      color: #fff;
+      padding: 34px 26px;
+      border-radius: 8px;
+      margin-bottom: 26px;
+    }
+    .teachers-hero h2 {
+      color: #fff;
+      margin: 0 0 8px 0;
+      font-size: 1.6rem;
+    }
+    .teachers-hero p {
+      margin: 0;
+      opacity: 0.92;
+      font-size: 0.95rem;
+      max-width: 850px;
+      line-height: 1.6;
+    }
+
+    .faculty-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .stat-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      text-align: center;
+    }
+    .stat-box b {
+      display: block;
+      font-size: 2rem;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+    .stat-box span {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .control-panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .control-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+    .control-item label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 6px;
+    }
+    .control-item input,
+    .control-item select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font: inherit;
+      background: #fff;
+      box-sizing: border-box;
+    }
+    .control-item input:focus,
+    .control-item select:focus {
+      outline: 2px solid var(--primary);
+      border-color: transparent;
+    }
+    .results-count-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .faculty-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .faculty-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .faculty-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      border-color: #cbd5e1;
+    }
+
+    .card-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.05rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border: 2px solid #fff;
+    }
+    .card-info {
+      flex-grow: 1;
+    }
+    .faculty-sl {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+      position: absolute;
+      top: 14px;
+      right: 16px;
+    }
+    .faculty-name {
+      margin: 0 0 6px 0;
+      font-size: 1.05rem;
+      color: var(--secondary);
+      line-height: 1.35;
+      padding-right: 24px;
+    }
+    .badge-tag {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .badge-head { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .badge-prof { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+    .badge-assoc { background: #ede9fe; color: #5b21b6; border: 1px solid #ddd6fe; }
+    .badge-asst { background: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
+    .badge-lecturer { background: #f1f5f9; color: #334155; border: 1px solid #e2e8f0; }
+    .badge-adjunct { background: #fdf4ff; color: #86198f; border: 1px solid #f5d0fe; }
+
+    .faculty-dept {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .badge-leave {
+      display: inline-block;
+      margin-top: 6px;
+      background: #fff7ed;
+      color: #c2410c;
+      border: 1px solid #fed7aa;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      grid-column: 1 / -1;
+      display: none;
+    }
+
+    /* ============================================================
+       4. FOOTER & BACK TO TOP
+       ============================================================ */
+    footer.site {
+      background: #081d31;
+      color: #d1d5db;
+      padding: 48px 0 24px;
+      margin-top: 60px;
+    }
+
+    footer.site a {
+      color: #93c5fd;
+    }
+
+    footer.site h3 {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-top: 0;
+    }
+
+    footer.site ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    footer.site li {
+      margin-bottom: 8px;
+    }
+
+    .fgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 28px;
+    }
+
+    .copy {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: .85rem;
+      color: #9ca3af;
+    }
+
+    #top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      border: 0;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 99;
+    }
+
+    @media (max-width: 1024px) {
+      .burger {
+        display: block;
+      }
+      nav#nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        padding: 16px;
+        border-bottom: 2px solid var(--border);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+      nav#nav.open {
+        display: flex;
+      }
+      .menu {
+        flex-direction: column;
+        width: 100%;
+      }
+      .menu a, .menu button {
+        padding: 12px 8px;
+        width: 100%;
+        text-align: left;
+      }
+      .sub {
+        position: static;
+        box-shadow: none;
+        border: none;
+        padding-left: 16px;
+      }
+      .control-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <div class="wrap">
+      <span>
+        <a href="tel:+8801713377033">+880 1713 377 033</a> &middot;
+        <a href="mailto:admission@pundrauniversity.edu.bd">admission@pundrauniversity.edu.bd</a>
+      </span>
+      <span class="ext">
+        <a href="https://students.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Students &#8599;</a>
+        <a href="https://uims.pundrauniversity.ac.bd/" target="_blank" rel="noopener">UIMS &#8599;</a>
+        <a href="https://library.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Library &#8599;</a>
+        <a href="https://journal.pundrauniversity.ac.bd/" target="_blank" rel="noopener">Journals &#8599;</a>
+        <a href="iqac.html">IQAC</a>
+      </span>
+    </div>
+  </div>
+  <header class="site">
+    <div class="wrap bar">
+      <a class="brand" href="index.html">
+        <img class="logo" src="https://cdn.imgpile.com/f/cjImrid_wm.webp" alt="PUB Logo" width="48" height="48" onerror="this.src='../assets/images/logo.png'">
+        <span>Pundra University<small>of Science &amp; Technology</small></span>
+      </a>
+      <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">&#9776;</button>
+      <nav id="nav" aria-label="Main">
+        <ul class="menu">
+          <li><a href="index.html">Home</a></li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">About Us</button>
+            <ul class="sub">
+              <li><a href="about-the-university.html">About the University</a></li>
+              <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+              <li><a href="university-approval.html">University Approval</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Messages</button>
+                <ul class="sub">
+                  <li><a href="message/chairman-bot.html">Chairman's Message</a></li>
+                  <li><a href="message/vice-chancellor.html">Vice-Chancellor's Message</a></li>
+                  <li><a href="message/treasurer.html">Treasurer's Message</a></li>
+                </ul>
+              </li>
+              <li><a href="photo-gallery.html">Photo Gallery</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Administrations</button>
+            <ul class="sub">
+              <li><a href="chairman-bot.html">Chairman, BoT</a></li>
+              <li><a href="advisor-bot.html">Advisor, BoT</a></li>
+              <li><a href="offices.html">Offices</a></li>
+              <li><a href="complaints.html">Complaint Committees</a></li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Management</button>
+                <ul class="sub">
+                  <li><a href="board-of-trustees.html">Board of Trustees</a></li>
+                  <li><a href="syndicate.html">Syndicate</a></li>
+                  <li><a href="academic-council.html">Academic Council</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Admission</button>
+            <ul class="sub">
+              <li><a href="programs/undergraduate.html">Undergraduate Programs</a></li>
+              <li><a href="programs/postgraduate.html">Postgraduate Programs</a></li>
+              <li><a href="tuition-fees.html">Tuition Fees</a></li>
+              <li><a href="fee-calculator.html">Tuition Fee Calculator</a></li>
+              <li><a href="admission-requirements.html">Admission Requirements</a></li>
+              <li><a href="scholarship.html">Scholarship</a></li>
+              <li><a href="facilities.html">Facilities</a></li>
+            </ul>
+          </li>
+          <li class="has-sub active">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Academics</button>
+            <ul class="sub">
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Faculty</button>
+                <ul class="sub">
+                  <li><a href="faculty/business-studies.html">Business Studies</a></li>
+                  <li><a href="faculty/science-and-engineering.html">Science &amp; Engineering</a></li>
+                  <li><a href="faculty/humanities-and-social-sciences.html">Humanities &amp; Social Sciences</a></li>
+                  <li><a href="faculty/faculty-of-law.html">Law</a></li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <button type="button" aria-expanded="false" aria-haspopup="true">Departments</button>
+                <ul class="sub">
+                  <li><a href="departments/business-administration.html">Business Administration</a></li>
+                  <li><a href="departments/computer-science-and-engineering.html">Computer Science &amp; Engineering</a></li>
+                  <li><a href="departments/electrical-and-electronic-engineering.html">Electrical &amp; Electronic Engineering</a></li>
+                  <li><a href="departments/civil-engineering.html">Civil Engineering</a></li>
+                  <li><a href="departments/public-health.html">Public Health</a></li>
+                  <li><a href="departments/islamic-studies.html">Islamic Studies</a></li>
+                  <li><a href="departments/english.html">English</a></li>
+                  <li><a href="departments/education.html">Education</a></li>
+                  <li><a href="departments/law.html">Law</a></li>
+                  <li><a href="departments/journalism.html">Journalism &amp; Media Studies</a></li>
+                  <li><a href="departments/bangla.html">Bangla</a></li>
+                  <li><a href="departments/development-studies.html">Development Studies</a></li>
+                </ul>
+              </li>
+              <li><a href="programs.html">Programs</a></li>
+              <li class="active"><a href="teachers-info.html">Teachers Info</a></li>
+              <li><a href="academic-calendar.html">Academic Calendar</a></li>
+              <li><a href="syllabus.html">OBE Curriculum</a></li>
+              <li><a href="semester-result.html">Semester Result</a></li>
+              <li><a href="result-verification.html">Result Verification</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-haspopup="true">Notice</button>
+            <ul class="sub">
+              <li><a href="notice.html">Notice</a></li>
+              <li><a href="events.html">Events</a></li>
+              <li><a href="seminar.html">Seminar</a></li>
+              <li><a href="news-letter.html">News Letter</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a class="btn" href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission" target="_blank" rel="noopener">Online Admission &#8599;</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a> / <a href="faculty.html">Academics</a> / <span>Teachers Info</span>
+    </nav>
+    
+    <h1>Teachers Information &amp; Faculty Directory</h1>
+
+    <div class="teachers-hero">
+      <h2>Distinguished Faculty Members</h2>
+      <p>Meet our dedicated professors, researchers, and lecturers across all 11 academic departments committed to shaping the next generation of engineers, managers, legal minds, and scholars.</p>
+    </div>
+
+    <div class="faculty-stats">
+      <div class="stat-box">
+        <b>100</b>
+        <span>Total Faculty Members</span>
+      </div>
+      <div class="stat-box">
+        <b>11</b>
+        <span>Academic Departments</span>
+      </div>
+      <div class="stat-box">
+        <b>11</b>
+        <span>Department Heads</span>
+      </div>
+      <div class="stat-box">
+        <b>7</b>
+        <span>Adjunct Professors</span>
+      </div>
+    </div>
+
+    <div class="control-panel">
+      <div class="control-grid">
+        <div class="control-item">
+          <label for="teacherSearch">Search Teacher</label>
+          <input type="text" id="teacherSearch" placeholder="Type teacher's name (e.g. Dr., Hasan, Rahman)..." onkeyup="filterTeachers();">
+        </div>
+        <div class="control-item">
+          <label for="deptFilter">Filter by Department</label>
+          <select id="deptFilter" onchange="filterTeachers();">
+            <option value="all">All Departments (100)</option>
+            <option value="cse">Computer Science &amp; Engineering (18)</option>
+            <option value="eee">Electrical &amp; Electronic Engineering (19)</option>
+            <option value="ce">Civil Engineering (17)</option>
+            <option value="bba">Business Administration (12)</option>
+            <option value="eng">English (13)</option>
+            <option value="is">Islamic Studies (5)</option>
+            <option value="law">Law (4)</option>
+            <option value="edu">Education (4)</option>
+            <option value="bangla">Bangla (4)</option>
+            <option value="ph">Public Health (2)</option>
+            <option value="dev">Development Studies (2)</option>
+          </select>
+        </div>
+        <div class="control-item">
+          <label for="desigFilter">Filter by Designation</label>
+          <select id="desigFilter" onchange="filterTeachers();">
+            <option value="all">All Designations</option>
+            <option value="head">Department Head</option>
+            <option value="professor">Professor</option>
+            <option value="associate">Associate Professor</option>
+            <option value="asst">Assistant Professor</option>
+            <option value="lecturer">Lecturer</option>
+            <option value="adjunct">Adjunct Faculty</option>
+          </select>
+        </div>
+      </div>
+      <div class="results-count-bar">
+        <span>Showing <strong id="visibleCount" style="color:var(--primary);">100</strong> of 100 teachers</span>
+        <button class="btn alt" onclick="resetFilters();" style="padding:4px 12px; font-size:0.8rem; min-height:auto;">Reset Filters &#8634;</button>
+      </div>
+    </div>
+
+    <!-- 100 Faculty Cards -->
+    <div class="faculty-cards-grid" id="facultyGrid">
+      <article class="faculty-card" data-dept="bba" data-name="md. ali hasan" data-desig="asst. professor & head"><div class="card-avatar">AH</div><div class="card-info"><span class="faculty-sl">#1</span><h3 class="faculty-name">Md. Ali Hasan</h3><span class="badge-tag badge-head">Asst. Professor & Head</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="bba" data-name="brazendra nath roy" data-desig="asst. professor"><div class="card-avatar">BN</div><div class="card-info"><span class="faculty-sl">#2</span><h3 class="faculty-name">Brazendra Nath Roy</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="bba" data-name="mosa. shely khatun" data-desig="asst. professor"><div class="card-avatar">MS</div><div class="card-info"><span class="faculty-sl">#3</span><h3 class="faculty-name">Mosa. Shely Khatun</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="bba" data-name="tanzila rahman" data-desig="asst. professor"><div class="card-avatar">TR</div><div class="card-info"><span class="faculty-sl">#4</span><h3 class="faculty-name">Tanzila Rahman</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="bba" data-name="md. atiqur rahman" data-desig="asst. professor"><div class="card-avatar">AR</div><div class="card-info"><span class="faculty-sl">#5</span><h3 class="faculty-name">Md. Atiqur Rahman</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="bba" data-name="purbasha dash" data-desig="lecturer"><div class="card-avatar">PD</div><div class="card-info"><span class="faculty-sl">#6</span><h3 class="faculty-name">Purbasha Dash</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="bba" data-name="md. abu shamim" data-desig="lecturer"><div class="card-avatar">AS</div><div class="card-info"><span class="faculty-sl">#7</span><h3 class="faculty-name">Md. Abu Shamim</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="bba" data-name="mst. ummey habiba" data-desig="lecturer"><div class="card-avatar">UH</div><div class="card-info"><span class="faculty-sl">#8</span><h3 class="faculty-name">Mst. Ummey Habiba</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="bba" data-name="sadia tasnim" data-desig="lecturer"><div class="card-avatar">ST</div><div class="card-info"><span class="faculty-sl">#9</span><h3 class="faculty-name">Sadia Tasnim</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="bba" data-name="ovi ghosh" data-desig="lecturer"><div class="card-avatar">OG</div><div class="card-info"><span class="faculty-sl">#10</span><h3 class="faculty-name">Ovi Ghosh</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="bba" data-name="jannatul rafia" data-desig="lecturer"><div class="card-avatar">JR</div><div class="card-info"><span class="faculty-sl">#11</span><h3 class="faculty-name">Jannatul Rafia</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="bba" data-name="asma khatun" data-desig="lecturer"><div class="card-avatar">AK</div><div class="card-info"><span class="faculty-sl">#12</span><h3 class="faculty-name">Asma Khatun</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Business Administration</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="md. habib ehsanul  hoque" data-desig="asst. professor & head"><div class="card-avatar">HE</div><div class="card-info"><span class="faculty-sl">#13</span><h3 class="faculty-name">Md. Habib Ehsanul  Hoque</h3><span class="badge-tag badge-head">Asst. Professor & Head</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="moslema jahan" data-desig="asst. professor"><div class="card-avatar">MJ</div><div class="card-info"><span class="faculty-sl">#14</span><h3 class="faculty-name">Moslema Jahan</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="mrs. rehena khatun" data-desig="asst. professor"><div class="card-avatar">RK</div><div class="card-info"><span class="faculty-sl">#15</span><h3 class="faculty-name">Mrs. Rehena Khatun</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="mrittika mahbub" data-desig="asst. professor"><div class="card-avatar">MM</div><div class="card-info"><span class="faculty-sl">#16</span><h3 class="faculty-name">Mrittika Mahbub</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="indraneel misra" data-desig="asst. professor"><div class="card-avatar">IM</div><div class="card-info"><span class="faculty-sl">#17</span><h3 class="faculty-name">Indraneel Misra</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="md. riadul islam chowdhury" data-desig="asst. professor"><div class="card-avatar">RI</div><div class="card-info"><span class="faculty-sl">#18</span><h3 class="faculty-name">Md. Riadul Islam Chowdhury</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="md. ataur rahman" data-desig="lecturer"><div class="card-avatar">AR</div><div class="card-info"><span class="faculty-sl">#19</span><h3 class="faculty-name">Md. Ataur Rahman</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="radha rani paul" data-desig="lecturer"><div class="card-avatar">RR</div><div class="card-info"><span class="faculty-sl">#20</span><h3 class="faculty-name">Radha Rani Paul</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="mst. sahela rahman" data-desig="lecturer"><div class="card-avatar">SR</div><div class="card-info"><span class="faculty-sl">#21</span><h3 class="faculty-name">Mst. Sahela Rahman</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="nahid hasan" data-desig="lecturer"><div class="card-avatar">NH</div><div class="card-info"><span class="faculty-sl">#22</span><h3 class="faculty-name">Nahid Hasan</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="m. z. i. juwel" data-desig="lecturer"><div class="card-avatar">JU</div><div class="card-info"><span class="faculty-sl">#23</span><h3 class="faculty-name">M. Z. I. Juwel</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="md. forhan shahriar fahim" data-desig="lecturer"><div class="card-avatar">FS</div><div class="card-info"><span class="faculty-sl">#24</span><h3 class="faculty-name">Md. Forhan Shahriar Fahim</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="nafiu rahman" data-desig="lecturer"><div class="card-avatar">NR</div><div class="card-info"><span class="faculty-sl">#25</span><h3 class="faculty-name">Nafiu Rahman</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="ankar kumar saha" data-desig="lecturer"><div class="card-avatar">AK</div><div class="card-info"><span class="faculty-sl">#26</span><h3 class="faculty-name">Ankar Kumar Saha</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="sri apurbo saha" data-desig="lecturer"><div class="card-avatar">SA</div><div class="card-info"><span class="faculty-sl">#27</span><h3 class="faculty-name">Sri Apurbo Saha</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="syed jahin jarif" data-desig="lecturer"><div class="card-avatar">SJ</div><div class="card-info"><span class="faculty-sl">#28</span><h3 class="faculty-name">Syed Jahin Jarif</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="dr. dipankar das" data-desig="adjunct faculty"><div class="card-avatar">DD</div><div class="card-info"><span class="faculty-sl">#29</span><h3 class="faculty-name">Dr. Dipankar Das</h3><span class="badge-tag badge-adjunct">Adjunct Faculty</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="cse" data-name="dr. aurangzib md. abdur rahman" data-desig="adjunct faculty"><div class="card-avatar">AA</div><div class="card-info"><span class="faculty-sl">#30</span><h3 class="faculty-name">Dr. Aurangzib Md. Abdur Rahman</h3><span class="badge-tag badge-adjunct">Adjunct Faculty</span><p class="faculty-dept">Computer Science & Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="prof. dr. md. rafiqul ahsan" data-desig="professor & head"><div class="card-avatar">RA</div><div class="card-info"><span class="faculty-sl">#31</span><h3 class="faculty-name">Prof. Dr. Md. Rafiqul Ahsan</h3><span class="badge-tag badge-head">Professor & Head</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="dr. md. saidur rahman" data-desig="associate professor"><div class="card-avatar">SR</div><div class="card-info"><span class="faculty-sl">#32</span><h3 class="faculty-name">Dr. Md. Saidur Rahman</h3><span class="badge-tag badge-assoc">Associate Professor</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="shariful islam" data-desig="asst. professor"><div class="card-avatar">SI</div><div class="card-info"><span class="faculty-sl">#33</span><h3 class="faculty-name">Shariful Islam</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="md. rakibul islam" data-desig="asst. professor"><div class="card-avatar">RI</div><div class="card-info"><span class="faculty-sl">#34</span><h3 class="faculty-name">Md. Rakibul Islam</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="md. abdur rouf" data-desig="lecturer"><div class="card-avatar">AR</div><div class="card-info"><span class="faculty-sl">#35</span><h3 class="faculty-name">Md. Abdur Rouf</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="mst. aysha siddika" data-desig="lecturer"><div class="card-avatar">AS</div><div class="card-info"><span class="faculty-sl">#36</span><h3 class="faculty-name">Mst. Aysha Siddika</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="md. sadik hossain" data-desig="lecturer"><div class="card-avatar">SH</div><div class="card-info"><span class="faculty-sl">#37</span><h3 class="faculty-name">Md. Sadik Hossain</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p><span class="badge-leave">On Study Leave</span></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="sheikh shafaet islam" data-desig="lecturer"><div class="card-avatar">SS</div><div class="card-info"><span class="faculty-sl">#38</span><h3 class="faculty-name">Sheikh Shafaet Islam</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="md. rakibul islam" data-desig="lecturer"><div class="card-avatar">RI</div><div class="card-info"><span class="faculty-sl">#39</span><h3 class="faculty-name">Md. Rakibul Islam</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p><span class="badge-leave">On Study Leave</span></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="md. hasibur rahman" data-desig="lecturer"><div class="card-avatar">HR</div><div class="card-info"><span class="faculty-sl">#40</span><h3 class="faculty-name">Md. Hasibur Rahman</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="md. shajol al mamun" data-desig="lecturer"><div class="card-avatar">SA</div><div class="card-info"><span class="faculty-sl">#41</span><h3 class="faculty-name">Md. Shajol Al Mamun</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p><span class="badge-leave">On Study Leave</span></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="md. mahmudul hasan" data-desig="lecturer"><div class="card-avatar">MH</div><div class="card-info"><span class="faculty-sl">#42</span><h3 class="faculty-name">Md. Mahmudul Hasan</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p><span class="badge-leave">On Study Leave</span></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="rakibul hasan" data-desig="lecturer"><div class="card-avatar">RH</div><div class="card-info"><span class="faculty-sl">#43</span><h3 class="faculty-name">Rakibul Hasan</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="sabbir ahmed sayeem" data-desig="lecturer"><div class="card-avatar">SA</div><div class="card-info"><span class="faculty-sl">#44</span><h3 class="faculty-name">Sabbir Ahmed Sayeem</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="helal uzzaman hasib" data-desig="lecturer"><div class="card-avatar">HU</div><div class="card-info"><span class="faculty-sl">#45</span><h3 class="faculty-name">Helal Uzzaman Hasib</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="adittya podder" data-desig="lecturer"><div class="card-avatar">AP</div><div class="card-info"><span class="faculty-sl">#46</span><h3 class="faculty-name">Adittya Podder</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="md. anamul haque sayem" data-desig="lecturer"><div class="card-avatar">AH</div><div class="card-info"><span class="faculty-sl">#47</span><h3 class="faculty-name">Md. Anamul Haque Sayem</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="dr. md. julkarnain" data-desig="professor (adjunct faculty)"><div class="card-avatar">JU</div><div class="card-info"><span class="faculty-sl">#48</span><h3 class="faculty-name">Dr. Md. Julkarnain</h3><span class="badge-tag badge-adjunct">Professor (Adjunct Faculty)</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="eee" data-name="dr. g.k.m. hasanuzzaman" data-desig="professor (adjunct faculty)"><div class="card-avatar">HA</div><div class="card-info"><span class="faculty-sl">#49</span><h3 class="faculty-name">Dr. G.K.M. Hasanuzzaman</h3><span class="badge-tag badge-adjunct">Professor (Adjunct Faculty)</span><p class="faculty-dept">Electrical & Electronic Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="mahbub hassan khan" data-desig="asst. professor & head"><div class="card-avatar">MH</div><div class="card-info"><span class="faculty-sl">#50</span><h3 class="faculty-name">Mahbub Hassan Khan</h3><span class="badge-tag badge-head">Asst. Professor & Head</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="md. shakil mostofa" data-desig="lecturer"><div class="card-avatar">SM</div><div class="card-info"><span class="faculty-sl">#51</span><h3 class="faculty-name">Md. Shakil Mostofa</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p><span class="badge-leave">On Study Leave</span></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="md. mahbur rahman" data-desig="lecturer"><div class="card-avatar">MR</div><div class="card-info"><span class="faculty-sl">#52</span><h3 class="faculty-name">Md. Mahbur Rahman</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="md. maruf hasan" data-desig="lecturer"><div class="card-avatar">MH</div><div class="card-info"><span class="faculty-sl">#53</span><h3 class="faculty-name">Md. Maruf Hasan</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="md. harun ar rashid" data-desig="lecturer"><div class="card-avatar">HA</div><div class="card-info"><span class="faculty-sl">#54</span><h3 class="faculty-name">Md. Harun Ar Rashid</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="md. emran ali" data-desig="lecturer"><div class="card-avatar">EA</div><div class="card-info"><span class="faculty-sl">#55</span><h3 class="faculty-name">Md. Emran Ali</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="sheikh hayath mahmud" data-desig="lecturer"><div class="card-avatar">SH</div><div class="card-info"><span class="faculty-sl">#56</span><h3 class="faculty-name">Sheikh Hayath Mahmud</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="md. abu sayed" data-desig="lecturer"><div class="card-avatar">AS</div><div class="card-info"><span class="faculty-sl">#57</span><h3 class="faculty-name">Md. Abu Sayed</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="engr. zakia sultana" data-desig="lecturer"><div class="card-avatar">ZS</div><div class="card-info"><span class="faculty-sl">#58</span><h3 class="faculty-name">Engr. Zakia Sultana</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="sm istiak murtuza nur" data-desig="lecturer"><div class="card-avatar">IM</div><div class="card-info"><span class="faculty-sl">#59</span><h3 class="faculty-name">SM Istiak Murtuza Nur</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="nazmus sakib" data-desig="lecturer"><div class="card-avatar">NS</div><div class="card-info"><span class="faculty-sl">#60</span><h3 class="faculty-name">Nazmus Sakib</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="md. saleh sadik" data-desig="lecturer"><div class="card-avatar">SS</div><div class="card-info"><span class="faculty-sl">#61</span><h3 class="faculty-name">Md. Saleh Sadik</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="ms. afsana mimi" data-desig="lecturer"><div class="card-avatar">MA</div><div class="card-info"><span class="faculty-sl">#62</span><h3 class="faculty-name">Ms. Afsana Mimi</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="rijuan rahman rodro" data-desig="lecturer"><div class="card-avatar">RR</div><div class="card-info"><span class="faculty-sl">#63</span><h3 class="faculty-name">Rijuan Rahman Rodro</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="md. badal sarkar" data-desig="lecturer"><div class="card-avatar">BS</div><div class="card-info"><span class="faculty-sl">#64</span><h3 class="faculty-name">Md. Badal Sarkar</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="dr. s.m. zahurul islam" data-desig="professor (adjunct faculty)"><div class="card-avatar">ZI</div><div class="card-info"><span class="faculty-sl">#65</span><h3 class="faculty-name">Dr. S.M. Zahurul Islam</h3><span class="badge-tag badge-adjunct">Professor (Adjunct Faculty)</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ce" data-name="dr. bulbul ahmed" data-desig="professor (adjunct faculty)"><div class="card-avatar">BA</div><div class="card-info"><span class="faculty-sl">#66</span><h3 class="faculty-name">Dr. Bulbul Ahmed</h3><span class="badge-tag badge-adjunct">Professor (Adjunct Faculty)</span><p class="faculty-dept">Civil Engineering</p></div></article>
+      <article class="faculty-card" data-dept="ph" data-name="dr. shamima begum" data-desig="asst. professor & head"><div class="card-avatar">SB</div><div class="card-info"><span class="faculty-sl">#67</span><h3 class="faculty-name">Dr. Shamima Begum</h3><span class="badge-tag badge-head">Asst. Professor & Head</span><p class="faculty-dept">Public Health</p></div></article>
+      <article class="faculty-card" data-dept="ph" data-name="prof. dr. raghib ahsan" data-desig="professor"><div class="card-avatar">RA</div><div class="card-info"><span class="faculty-sl">#68</span><h3 class="faculty-name">Prof. Dr. Raghib Ahsan</h3><span class="badge-tag badge-prof">Professor</span><p class="faculty-dept">Public Health</p></div></article>
+      <article class="faculty-card" data-dept="is" data-name="dr. istiaqul alam mamdood" data-desig="asst. professor & head"><div class="card-avatar">IA</div><div class="card-info"><span class="faculty-sl">#69</span><h3 class="faculty-name">Dr. Istiaqul Alam Mamdood</h3><span class="badge-tag badge-head">Asst. Professor & Head</span><p class="faculty-dept">Islamic Studies</p></div></article>
+      <article class="faculty-card" data-dept="is" data-name="dr. imtiazul alam mahfuz" data-desig="asst. professor"><div class="card-avatar">IA</div><div class="card-info"><span class="faculty-sl">#70</span><h3 class="faculty-name">Dr. Imtiazul Alam Mahfuz</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Islamic Studies</p></div></article>
+      <article class="faculty-card" data-dept="is" data-name="md. sabbir hasan" data-desig="asst. professor"><div class="card-avatar">SH</div><div class="card-info"><span class="faculty-sl">#71</span><h3 class="faculty-name">Md. Sabbir Hasan</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">Islamic Studies</p></div></article>
+      <article class="faculty-card" data-dept="is" data-name="shahidullah" data-desig="lecturer"><div class="card-avatar">SH</div><div class="card-info"><span class="faculty-sl">#72</span><h3 class="faculty-name">Shahidullah</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Islamic Studies</p></div></article>
+      <article class="faculty-card" data-dept="is" data-name="aysha siddika" data-desig="lecturer"><div class="card-avatar">AS</div><div class="card-info"><span class="faculty-sl">#73</span><h3 class="faculty-name">Aysha Siddika</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Islamic Studies</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="md. atiqur rahman" data-desig="asst. professor & head"><div class="card-avatar">AR</div><div class="card-info"><span class="faculty-sl">#74</span><h3 class="faculty-name">Md. Atiqur Rahman</h3><span class="badge-tag badge-head">Asst. Professor & Head</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="mrs. umme atia khatun" data-desig="asst. professor"><div class="card-avatar">UA</div><div class="card-info"><span class="faculty-sl">#75</span><h3 class="faculty-name">Mrs. Umme Atia Khatun</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="md. mahmud hasan chowdhury" data-desig="asst. professor"><div class="card-avatar">MH</div><div class="card-info"><span class="faculty-sl">#76</span><h3 class="faculty-name">Md. Mahmud Hasan Chowdhury</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="md. nazmul haque" data-desig="asst. professor"><div class="card-avatar">NH</div><div class="card-info"><span class="faculty-sl">#77</span><h3 class="faculty-name">Md. Nazmul Haque</h3><span class="badge-tag badge-asst">Asst. Professor</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="md. mir sakib ahnaf" data-desig="lecturer"><div class="card-avatar">MS</div><div class="card-info"><span class="faculty-sl">#78</span><h3 class="faculty-name">Md. Mir Sakib Ahnaf</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="md. naeem imtiaz" data-desig="lecturer"><div class="card-avatar">NI</div><div class="card-info"><span class="faculty-sl">#79</span><h3 class="faculty-name">Md. Naeem Imtiaz</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">English</p><span class="badge-leave">On Study Leave</span></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="md. fazle rabbi" data-desig="lecturer"><div class="card-avatar">FR</div><div class="card-info"><span class="faculty-sl">#80</span><h3 class="faculty-name">Md. Fazle Rabbi</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="fahim faysal nibirh" data-desig="lecturer"><div class="card-avatar">FF</div><div class="card-info"><span class="faculty-sl">#81</span><h3 class="faculty-name">Fahim Faysal Nibirh</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="anindita paul" data-desig="lecturer"><div class="card-avatar">AP</div><div class="card-info"><span class="faculty-sl">#82</span><h3 class="faculty-name">Anindita Paul</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="kaniz fatema" data-desig="lecturer"><div class="card-avatar">KF</div><div class="card-info"><span class="faculty-sl">#83</span><h3 class="faculty-name">Kaniz Fatema</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="apurba roy" data-desig="lecturer"><div class="card-avatar">AR</div><div class="card-info"><span class="faculty-sl">#84</span><h3 class="faculty-name">Apurba Roy</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="md. abdullah al mamun" data-desig="lecturer"><div class="card-avatar">AA</div><div class="card-info"><span class="faculty-sl">#85</span><h3 class="faculty-name">Md. Abdullah Al Mamun</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="eng" data-name="sadia islam" data-desig="lecturer"><div class="card-avatar">SI</div><div class="card-info"><span class="faculty-sl">#86</span><h3 class="faculty-name">Sadia Islam</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">English</p></div></article>
+      <article class="faculty-card" data-dept="edu" data-name="dr. md. shahidul islam sarker" data-desig="asst. professor & head"><div class="card-avatar">SI</div><div class="card-info"><span class="faculty-sl">#87</span><h3 class="faculty-name">Dr. Md. Shahidul Islam Sarker</h3><span class="badge-tag badge-head">Asst. Professor & Head</span><p class="faculty-dept">Education</p></div></article>
+      <article class="faculty-card" data-dept="edu" data-name="md. golam mostafa" data-desig="lecturer"><div class="card-avatar">GM</div><div class="card-info"><span class="faculty-sl">#88</span><h3 class="faculty-name">Md. Golam Mostafa</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Education</p></div></article>
+      <article class="faculty-card" data-dept="edu" data-name="imran ali zehadi" data-desig="lecturer"><div class="card-avatar">IA</div><div class="card-info"><span class="faculty-sl">#89</span><h3 class="faculty-name">Imran Ali Zehadi</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Education</p></div></article>
+      <article class="faculty-card" data-dept="edu" data-name="md. masud rana" data-desig="lecturer"><div class="card-avatar">MR</div><div class="card-info"><span class="faculty-sl">#90</span><h3 class="faculty-name">Md. Masud Rana</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Education</p></div></article>
+      <article class="faculty-card" data-dept="law" data-name="md. jakir hossain" data-desig="asst. professor & head"><div class="card-avatar">JH</div><div class="card-info"><span class="faculty-sl">#91</span><h3 class="faculty-name">Md. Jakir Hossain</h3><span class="badge-tag badge-head">Asst. Professor & Head</span><p class="faculty-dept">Law</p></div></article>
+      <article class="faculty-card" data-dept="law" data-name="shormili mustafi" data-desig="lecturer"><div class="card-avatar">SM</div><div class="card-info"><span class="faculty-sl">#92</span><h3 class="faculty-name">Shormili Mustafi</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Law</p></div></article>
+      <article class="faculty-card" data-dept="law" data-name="md. kaowsar ibne rokib" data-desig="lecturer"><div class="card-avatar">KI</div><div class="card-info"><span class="faculty-sl">#93</span><h3 class="faculty-name">Md. Kaowsar Ibne Rokib</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Law</p></div></article>
+      <article class="faculty-card" data-dept="law" data-name="fouzia momtaj" data-desig="lecturer"><div class="card-avatar">FM</div><div class="card-info"><span class="faculty-sl">#94</span><h3 class="faculty-name">Fouzia Momtaj</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Law</p></div></article>
+      <article class="faculty-card" data-dept="bangla" data-name="prof. dr. md. shahidur rahman" data-desig="professor & head"><div class="card-avatar">SR</div><div class="card-info"><span class="faculty-sl">#95</span><h3 class="faculty-name">Prof. Dr. Md. Shahidur Rahman</h3><span class="badge-tag badge-head">Professor & Head</span><p class="faculty-dept">Bangla</p></div></article>
+      <article class="faculty-card" data-dept="bangla" data-name="md. nazrul islam" data-desig="adjunct faculty"><div class="card-avatar">NI</div><div class="card-info"><span class="faculty-sl">#96</span><h3 class="faculty-name">Md. Nazrul Islam</h3><span class="badge-tag badge-adjunct">Adjunct Faculty</span><p class="faculty-dept">Bangla</p></div></article>
+      <article class="faculty-card" data-dept="bangla" data-name="mst. shima akter" data-desig="lecturer"><div class="card-avatar">SA</div><div class="card-info"><span class="faculty-sl">#97</span><h3 class="faculty-name">Mst. Shima Akter</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Bangla</p></div></article>
+      <article class="faculty-card" data-dept="bangla" data-name="md. abdullah al loman" data-desig="lecturer"><div class="card-avatar">AA</div><div class="card-info"><span class="faculty-sl">#98</span><h3 class="faculty-name">Md. Abdullah Al Loman</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Bangla</p></div></article>
+      <article class="faculty-card" data-dept="dev" data-name="dr. md. isahaque ali" data-desig="asst. professor & head"><div class="card-avatar">IA</div><div class="card-info"><span class="faculty-sl">#99</span><h3 class="faculty-name">Dr. Md. Isahaque Ali</h3><span class="badge-tag badge-head">Asst. Professor & Head</span><p class="faculty-dept">Development Studies</p></div></article>
+      <article class="faculty-card" data-dept="dev" data-name="sonia aktar" data-desig="lecturer"><div class="card-avatar">SA</div><div class="card-info"><span class="faculty-sl">#100</span><h3 class="faculty-name">Sonia Aktar</h3><span class="badge-tag badge-lecturer">Lecturer</span><p class="faculty-dept">Development Studies</p></div></article>
+      <div class="no-results" id="noResultsMsg">
+        <h3>No teachers found matching your criteria.</h3>
+        <p>Please try searching with a different name, department, or designation.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap fgrid">
+      <div>
+        <h3>About Us</h3>
+        <p>The first Private University in North Bengal.</p>
+        <p><a href="https://www.facebook.com/pundrauniversitybogura/" target="_blank" rel="noopener">Facebook &#8599;</a> &middot; <a href="https://www.youtube.com/@pundrauniversity" target="_blank" rel="noopener">YouTube &#8599;</a></p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="faculty.html">Faculty</a></li>
+          <li><a href="departments.html">Departments</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="semester-result.html">Semester Result</a></li>
+          <li><a href="result-verification.html">Result Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>More</h3>
+        <ul>
+          <li><a href="faculty-members.html">Faculty Members</a></li>
+          <li><a href="teachers-info.html">Teachers Info</a></li>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="career.html">Career</a></li>
+          <li><a href="clubs.html">Clubs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="iqac.html">IQAC</a></li>
+          <li><a href="why-choose-us.html">Why Choose Us</a></li>
+          <li><a href="photo-gallery.html">Photo Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Useful Links (external)</h3>
+        <ul>
+          <li><a href="https://ugc.gov.bd/" target="_blank" rel="noopener">UGC &#8599;</a></li>
+          <li><a href="https://moedu.gov.bd/" target="_blank" rel="noopener">Ministry of Education &#8599;</a></li>
+          <li><a href="https://banbeis.gov.bd/" target="_blank" rel="noopener">Banbeis &#8599;</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p>+88 01713 377 037<br>+88 01713 377 033<br>info@pundrauniversity.edu.bd<br>Rangpur Road, Baghopara, Gokul, Bogura</p>
+      </div>
+    </div>
+    <p class="copy">&copy; 2026 Educational recreation &mdash; Pundra University of Science &amp; Technology.</p>
+  </footer>
+
+  <button id="top" aria-label="Back to top" hidden>&uarr;</button>
+
+  <script>
+    // ============================================================
+    // INTEGRATED JAVASCRIPT: MENU, SCROLL & FACULTY FILTER
+    // ============================================================
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Mobile Menu Toggle
+      const burger = document.querySelector(".burger");
+      const nav = document.getElementById("nav");
+      if (burger && nav) {
+        burger.addEventListener("click", () => {
+          const isOpen = nav.classList.toggle("open");
+          burger.setAttribute("aria-expanded", isOpen);
+        });
+      }
+
+      // 2. Dropdown Menu for Sub-items
+      document.querySelectorAll(".has-sub > button").forEach(btn => {
+        const li = btn.parentElement;
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const isOpen = !li.classList.contains("open");
+          document.querySelectorAll(".has-sub.open").forEach(other => {
+            if (other !== li) other.classList.remove("open");
+          });
+          li.classList.toggle("open", isOpen);
+          btn.setAttribute("aria-expanded", isOpen);
+        });
+      });
+
+      document.addEventListener("click", () => {
+        document.querySelectorAll(".has-sub.open").forEach(openItem => {
+          openItem.classList.remove("open");
+          const b = openItem.querySelector("button");
+          if (b) b.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      // 3. Back to Top Button
+      const topBtn = document.getElementById("top");
+      if (topBtn) {
+        window.addEventListener("scroll", () => {
+          topBtn.hidden = window.scrollY < 400;
+        });
+        topBtn.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+    });
+
+    // 4. Faculty Filter & Search Logic
+    function filterTeachers() {
+      const query = document.getElementById('teacherSearch').value.toLowerCase().trim();
+      const selectedDept = document.getElementById('deptFilter').value;
+      const selectedDesig = document.getElementById('desigFilter').value;
+      const cards = document.querySelectorAll('.faculty-card');
+      let visible = 0;
+
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name');
+        const dept = card.getAttribute('data-dept');
+        const desig = card.getAttribute('data-desig');
+
+        const matchQuery = !query || name.includes(query) || desig.includes(query);
+        const matchDept = (selectedDept === 'all' || dept === selectedDept);
+        
+        let matchDesig = true;
+        if (selectedDesig === 'head') {
+          matchDesig = desig.includes('head');
+        } else if (selectedDesig === 'professor') {
+          matchDesig = desig.includes('professor') && !desig.includes('asst') && !desig.includes('associate');
+        } else if (selectedDesig === 'associate') {
+          matchDesig = desig.includes('associate');
+        } else if (selectedDesig === 'asst') {
+          matchDesig = desig.includes('asst');
+        } else if (selectedDesig === 'lecturer') {
+          matchDesig = desig.includes('lecturer');
+        } else if (selectedDesig === 'adjunct') {
+          matchDesig = desig.includes('adjunct');
+        }
+
+        if (matchQuery && matchDept && matchDesig) {
+          card.style.display = 'flex';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('visibleCount').textContent = visible;
+      document.getElementById('noResultsMsg').style.display = (visible === 0) ? 'block' : 'none';
+    }
+
+    function resetFilters() {
+      document.getElementById('teacherSearch').value = '';
+      document.getElementById('deptFilter').value = 'all';
+      document.getElementById('desigFilter').value = 'all';
+      filterTeachers();
+    }
+  </script>
+</body>
+</html>
