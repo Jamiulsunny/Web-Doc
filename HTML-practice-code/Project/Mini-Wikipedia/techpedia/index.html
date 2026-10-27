@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechPedia – ওয়েব ডেভেলপমেন্ট নলেজ পোর্টাল</title>
+  
+  <!-- গুগল ফন্টস -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- এক্সটার্নাল সিএসএস -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- স্ক্রল প্রগ্রেস বার -->
+  <div id="scroll-progress"></div>
+
+  <!-- মূল হেডার -->
+  <header id="top">
+    <div class="container header-content">
+      <div class="header-top">
+        <div>
+          <h1>🌐 TechPedia: ওয়েব বেসিক্স নলেজ হাব</h1>
+          <p class="header-sub"><em>আধুনিক এইচটিএমএল, সিএসএস ও জাভাস্ক্রিপ্ট সমৃদ্ধ ডকুমেন্টেশন পোর্টাল</em></p>
+        </div>
+        <!-- থিম টগল বাটন -->
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="থিম পরিবর্তন করুন">
+          <span id="themeIcon">🌙</span> <span id="themeText">ডার্ক মোড</span>
+        </button>
+      </div>
+      
+      <!-- দ্রুত নেভিগেশন (Table of Contents) -->
+      <nav aria-label="সূচিপত্র">
+        <h3>📌 দ্রুত সূচিপত্র:</h3>
+        <ul>
+          <li><a href="#about">টুল পরিচিতি</a></li>
+          <li><a href="#comparison">প্রযুক্তির তুলনা তালিকা</a></li>
+          <li><a href="#media-lab">মিডিয়া ও ইন্টারেক্টিভ ল্যাব</a></li>
+          <li><a href="#faq">সচরাচর জিজ্ঞাসিত প্রশ্ন (FAQ)</a></li>
+          <li><a href="#contribute">কন্টেন্ট সাবমিশন ফর্ম</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- সেকশন ১: পরিচিতি -->
+    <section id="about">
+      <h2>১. ওয়েব ডেভেলপমেন্টের তিনটি মূল স্তম্ভ</h2>
+      <div class="card-grid">
+        <article>
+          <h3>HTML (HyperText Markup Language)</h3>
+          <p>ওয়েবসাইটের মূল <strong>কঙ্কাল বা ভিত্তি</strong> তৈরি করে। এটি নির্ধারণ করে পৃষ্ঠায় কোথায় টেক্সট, বাটন বা ছবি থাকবে।</p>
+          <blockquote>
+            "HTML হলো ওয়েবের ভিত্তি—কন্টেন্টকে অর্থবহ ও অ্যাক্সেসিবল করতে সেমান্টিক ট্যাগ অপরিহার্য।"
+          </blockquote>
+        </article>
+
+        <article>
+          <h3>CSS ও JavaScript</h3>
+          <p><strong>CSS:</strong> রঙের ছোঁয়া ও রেসপনসিভ লেআউট নিশ্চিত করে।<br>
+          <strong>JavaScript:</strong> ইন্টারেক্টিভ লজিক ও ডায়নামিক ফিচার যুক্ত করে।</p>
+          
+          <p class="sample-label">স্যাম্পল কোড:</p>
+          <pre><code>&lt;h1&gt;হ্যালো বাংলাদেশ!&lt;/h1&gt;</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <!-- সেকশন ২: বিস্তারিত তুলনা টেবিল -->
+    <section id="comparison">
+      <h2>২. প্রযুক্তিগত তুলনা তালিকা</h2>
+      <div class="table-responsive">
+        <table border="0">
+          <caption>ওয়েব ট্রিনিটি (Web Trinity) তুলনা</caption>
+          <thead>
+            <tr>
+              <th scope="col">প্রযুক্তি</th>
+              <th scope="col">ভূমিকা</th>
+              <th scope="col">শেখার ধাপ</th>
+              <th scope="col">ফাইল এক্সটেনশন</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">HTML</th>
+              <td>কন্টেন্ট ও স্ট্রাকচার</td>
+              <td>১ম ধাপ (সহজ)</td>
+              <td><code>.html</code></td>
+            </tr>
+            <tr>
+              <th scope="row">CSS</th>
+              <td>ডিজাইন ও রেসপনসিভনেস</td>
+              <td>২য় ধাপ (মাঝারি)</td>
+              <td><code>.css</code></td>
+            </tr>
+            <tr>
+              <th scope="row">JavaScript</th>
+              <td>ফাংশনালিটি ও ডাটা হ্যান্ডলিং</td>
+              <td>৩য় ধাপ (উন্নত)</td>
+              <td><code>.js</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- সেকশন ৩: মিডিয়া ও ইন্টারেক্টিভ এলিমেন্টস -->
+    <section id="media-lab">
+      <h2>৩. অডিও, ভিডিও ও প্রগ্রেস ল্যাব</h2>
+      <div class="card-grid">
+        <!-- অডিও প্লেয়ার -->
+        <article>
+          <h3>অডিও লেকচার স্যাম্পল</h3>
+          <audio controls>
+            <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+            আপনার ব্রাউজার অডিও ট্যাগ সাপোর্ট করে না।
+          </audio>
+        </article>
+
+        <!-- ভিডিও প্লেয়ার -->
+        <article>
+          <h3>ভিডিও ডেমো স্যাম্পল</h3>
+          <video width="320" height="240" controls poster="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=640&q=80">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            আপনার ব্রাউজার ভিডিও ট্যাগ সাপোর্ট করে না।
+          </video>
+        </article>
+
+        <!-- প্রগ্রেস বার ও মিটার -->
+        <article>
+          <h3>কোর্স সমাপ্তির অগ্রগতি</h3>
+          <p><strong>HTML শেখার অগ্রগতি:</strong></p>
+          <progress value="85" max="100">85%</progress>
+          
+          <p><strong>সার্ভার স্পেস স্টোরেজ:</strong></p>
+          <meter value="0.6" min="0" max="1">৬০% ব্যবহৃত</meter>
+        </article>
+      </div>
+    </section>
+
+    <!-- সেকশন ৪: পিওর HTML অ্যাকর্ডিয়ন (FAQ) -->
+    <section id="faq">
+      <h2>৪. সচরাচর জিজ্ঞাসিত প্রশ্নাবলী (FAQ)</h2>
+      <p class="faq-hint"><em>(প্রশ্নগুলোর ওপর ক্লিক করলে বিস্তারিত উত্তর প্রদর্শিত হবে)</em></p>
+
+      <details>
+        <summary>শুধু HTML দিয়ে কি ফুল ওয়েবসাইট তৈরি করা সম্ভব?</summary>
+        <p>হ্যাঁ, তথ্যবহুল ও ডকুমেন্টেশন সাইট শুধু HTML দিয়েই বানানো সম্ভব। তবে আধুনিক ও রেসপনসিভ ভিজ্যুয়ালের জন্য পরবর্তীতে CSS ও JavaScript দরকার হয়।</p>
+      </details>
+
+      <details>
+        <summary>সেমান্টিক ট্যাগ (Semantic Tags) কী এবং কেন দরকার?</summary>
+        <p><code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;article&gt;</code> ইত্যাদি হলো সেমান্টিক ট্যাগ। এগুলো সার্চ ইঞ্জিন (SEO) এবং স্ক্রিন রিডারের জন্য ওয়েবসাইটের অর্থ পরিষ্কার করে তোলে।</p>
+      </details>
+
+      <details>
+        <summary>কোড রান করতে কী কী সফটওয়্যার লাগবে?</summary>
+        <p>যেকোনো কোড এডিটর (যেমন: VS Code) এবং যেকোনো ব্রাউজার (যেমন: Chrome, Edge, Safari)।</p>
+      </details>
+    </section>
+
+    <!-- সেকশন ৫: অ্যাডভান্সড ফর্ম ও ইউজার ইনপুট -->
+    <section id="contribute">
+      <h2>৫. কন্টেন্ট জমা বা ফিডব্যাক ফর্ম</h2>
+      <form id="submissionForm" action="#" method="post">
+        <fieldset>
+          <legend>কন্ট্রিবিউটর তথ্য</legend>
+
+          <div class="form-group">
+            <label for="uname">পূর্ণ নাম: <span class="required-star">*</span></label>
+            <input type="text" id="uname" name="uname" placeholder="আপনার নাম লিখুন" required>
+          </div>
+
+          <div class="form-group">
+            <label for="uemail">ইমেইল ঠিকানা: <span class="required-star">*</span></label>
+            <input type="email" id="uemail" name="uemail" placeholder="example@mail.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="category">আপনার পছন্দের বিভাগ:</label>
+            <input list="categories" id="category" name="category" placeholder="টাইপ করুন বা তালিকা থেকে বেছে নিন">
+            <datalist id="categories">
+              <option value="HTML5">
+              <option value="CSS3">
+              <option value="JavaScript">
+              <option value="ওয়েব ডিজাইন">
+            </datalist>
+          </div>
+
+          <div class="form-group">
+            <label>অভিজ্ঞতার স্তর:</label>
+            <div class="radio-group">
+              <label class="radio-label" for="beginner">
+                <input type="radio" id="beginner" name="level" value="beginner" checked> বিগিনার
+              </label>
+              <label class="radio-label" for="intermediate">
+                <input type="radio" id="intermediate" name="level" value="intermediate"> ইন্টারমিডিয়েট
+              </label>
+              <label class="radio-label" for="pro">
+                <input type="radio" id="pro" name="level" value="pro"> অ্যাডভান্সড
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="topic-date">প্রস্তাবিত প্রকাশের তারিখ:</label>
+            <input type="date" id="topic-date" name="topic-date">
+          </div>
+
+          <div class="form-group">
+            <label for="article-text">আপনার আর্টিকেল বা মেসেজ:</label>
+            <textarea id="article-text" name="article-text" rows="4" placeholder="বিস্তারিত এখানে লিখুন..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label" for="terms">
+              <input type="checkbox" id="terms" name="terms" required> আমি সাইটের শর্তাবলী মেনে নিচ্ছি। <span class="required-star">*</span>
+            </label>
+          </div>
+
+          <div class="btn-group">
+            <button type="submit">জমা দিন 🚀</button>
+            <button type="reset">মুছে ফেলুন 🔄</button>
+          </div>
+
+          <!-- ফিডব্যাক মেসেজ -->
+          <div id="form-feedback">ধন্যবাদ! আপনার কন্টেন্ট সফলভাবে পাঠানো হয়েছে।</div>
+        </fieldset>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="#top">⬆ পৃষ্ঠার শুরুতে ফিরে যান</a></p>
+      <p>&copy; 2026 TechPedia. সর্বস্বত্ব সংরক্ষিত।</p>
+      <p><small>প্রজেক্ট নির্মাতা: TechPedia Team</small></p>
+    </div>
+  </footer>
+
+  <!-- এক্সটার্নাল স্ক্রিপ্ট -->
+  <script src="script.js"></script>
+</body>
+</html>
