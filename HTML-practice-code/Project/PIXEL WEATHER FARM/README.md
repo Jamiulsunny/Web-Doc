@@ -2,7 +2,7 @@
 
 A charming, playable retro browser game built using **100% Pure HTML5 & CSS3** — absolutely **zero JavaScript**, **no external image files/sprites/SVGs**, and **no canvas**. Every pixel, character, animation, and game loop is drawn and orchestrated solely through CSS techniques.
 
----
+---------------------------------------
 
 ## 🎮 Game Concept & Rules
 
