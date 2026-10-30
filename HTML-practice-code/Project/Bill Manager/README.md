@@ -2,7 +2,7 @@
 
 A modern, clean, and responsive **Monthly Renewal Tracker Dashboard** built using only **HTML5 and CSS3**. It helps users easily track their daily and monthly subscriptions, bills, and recurring expenses.
 
----
+-----------------------------
 
 ## 📸 Key Features
 
