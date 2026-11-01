@@ -2,7 +2,7 @@
 
 An interactive, realistic-looking, and responsive 3D-shaded Solar System model built with **100% Pure HTML5 & CSS3** — absolutely **zero JavaScript**, **zero external images**, and **no third-party dependencies**.
 
----
+---------------------------------------
 
 ## 🌌 Key Highlights
 
