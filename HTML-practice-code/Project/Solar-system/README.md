@@ -37,7 +37,7 @@ Configured globally within `:root` in `style.css`:
 | `--text-primary` | `#e6f1ff` | High-contrast readable typography |
 | `--system-scale` | `min(100vw, 100vh)` | Dynamic viewport scale factor |
 
----
+---------------------------------------
 
 ## 🛠️ Built With
 
