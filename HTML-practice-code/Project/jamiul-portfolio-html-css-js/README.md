@@ -1,4 +1,4 @@
-# Jamiul Islam Sunny — HTML, CSS & JavaScript Portfolio
+# Jamiul Islam Sunny — HTML, CSS & JavaScript Portfolio.
 
 This version does not need React, Next.js, Tailwind, npm, or any build process.
 
@@ -15,3 +15,4 @@ This version does not need React, Next.js, Tailwind, npm, or any build process.
 - **Theme:** Use the blue, amber, and violet circles in the navbar.
 
 The contact form is front-end only. It prepares an email through the visitor's default mail app; it does not send email through a server. Google Fonts and the example profile image require internet access.
+                                                    --------------
