@@ -43,7 +43,7 @@ export default function Topbar({ setMobileOpen }) {
               <User size={16} color="var(--primary-green)" />
             </div>
           )}
-          <span style={{ fontSize: '0.85rem', fontWeight: 500 }}>Md.Jamiul Islam Sunny</span>
+          <span style={{ fontSize: '0.85rem', fontWeight: 500 }}>CEO : Md.Jamiul Islam Sunny</span>
         </div>
       </div>
     </header>

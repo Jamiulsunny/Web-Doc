@@ -5,24 +5,30 @@ import {
   ArrowRight,
   ShieldCheck,
   Activity,
-  Layers,
   Scale,
   Search,
   BarChart3,
-  CheckCircle2,
-  AlertTriangle,
-  FileSpreadsheet,
-  Clock,
-  Sparkles,
-  ChevronRight,
-  Play
+  Sparkles
 } from 'lucide-react';
 import '../styles/landing-page.css';
+
+// =========================================================
+// ১. ছবির লিংক ও CEO-এর তথ্য (এখানে আপনার লিংক পরিবর্তন করতে পারবেন)
+// =========================================================
+const HERO_BG_IMAGE = "https://cdn.imgpile.com/f/BNQzYsV_wm.jpg";
+const SOLUTION_CATTLE_IMAGE = "https://cdn.imgpile.com/f/ClgahP6_wm.webp";
+
+const CEO_PROFILE = {
+  imageUrl: "https://cdn.imgpile.com/f/ngVbDLy_wm.png",
+  name: "Md. Jamiul Islam Sunny",
+  designation: "Founder & Chief Executive Officer, Agri Farm",
+  quote: "Modern agriculture is no longer about guesswork—it is about precision, compassion for livestock, and data-driven stewardship. At Agri Farm, we empower farmers to protect every life in their herd while building a resilient, profitable future.",
+  subNote: "Dedicated to transforming our nation's farms and empowering every farmer with smart technology for a modern life."
+};
 
 export default function LandingPage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isNavScrolled, setIsNavScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Dynamic Scroll Progress and Viewport Interceptor
   useEffect(() => {
@@ -32,7 +38,7 @@ export default function LandingPage() {
       setScrollProgress(progress);
       setIsNavScrolled(window.scrollY > 40);
 
-      // Parallax hero background scaling
+      // Parallax hero background scaling (সম্পূর্ণ এরর মুক্ত)
       const heroBg = document.getElementById('heroBgImage');
       if (heroBg) {
         heroBg.style.transform = `scale(${1.05 + window.scrollY * 0.0003}) translateY(${window.scrollY * 0.15}px)`;
@@ -74,14 +80,14 @@ export default function LandingPage() {
             <div className="lp-brand-badge">
               <PawPrint size={20} color="#0a1f16" />
             </div>
-            <span>AgriFarm<span style={{ color: 'var(--lp-fresh)' }}>.js</span></span>
+            <span>AgriFarm<span style={{ color: 'var(--lp-fresh)' }}>.BD</span></span>
           </Link>
 
           <nav className="lp-nav-links">
             <a href="#features" className="lp-nav-link">Features</a>
             <a href="#challenges" className="lp-nav-link">Why AgriFarm</a>
             <a href="#showcase" className="lp-nav-link">Console</a>
-            <a href="#telemetry" className="lp-nav-link">Telemetry</a>
+            <a href="#leadership" className="lp-nav-link">Leadership</a>
           </nav>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
@@ -98,7 +104,7 @@ export default function LandingPage() {
         <div className="lp-hero-bg">
           <img
             id="heroBgImage"
-            src="https://cdn.imgpile.com/f/BNQzYsV_wm.jpg"
+            src={HERO_BG_IMAGE}
             alt="Cattle grazing in lush green pastures at dawn"
             className="lp-hero-bg-img"
           />
@@ -107,8 +113,8 @@ export default function LandingPage() {
 
         <div className="lp-hero-content">
           <div className="lp-badge-reveal anim-target in-view">
-            <Sparkles size={14} />
-            <span>Agri Farm by Sunny Enterprise</span>
+            
+            <span>Md. Jamiul Islam Sunny</span>
           </div>
 
           <h1 className="lp-hero-title anim-target delay-1 in-view">
@@ -144,14 +150,10 @@ export default function LandingPage() {
           <div className="lp-section-header anim-target">
             <span className="lp-eyebrow">The Operational Cost of Fragmentation</span>
             <h2 className="lp-heading">Paper Records Are Costing Your Farm Daily</h2>
-            <p className="lp-subtext">
-              Traditional ledgers, loose spreadsheets, and fragmented clipboards create catastrophic blindspots in animal health and biomass yield.
-            </p>
           </div>
 
           <div className="lp-problem-grid">
             <div className="lp-problem-card anim-target delay-1">
-              
               <h3 className="lp-card-title">Lost Medical Context</h3>
               <p className="lp-card-desc">
                 Antibiotic withdrawal times, vaccination dates, and recurring quarantine alerts fall through the cracks of manual paper logs.
@@ -159,7 +161,6 @@ export default function LandingPage() {
             </div>
 
             <div className="lp-problem-card anim-target delay-2">
-             
               <h3 className="lp-card-title">Stale Weight Diagnostics</h3>
               <p className="lp-card-desc">
                 Without real-time biomass calculations, underperforming livestock remain undetected until point-of-sale weighing.
@@ -167,7 +168,6 @@ export default function LandingPage() {
             </div>
 
             <div className="lp-problem-card anim-target delay-3">
-             
               <h3 className="lp-card-title">Data Inconsistency</h3>
               <p className="lp-card-desc">
                 Duplicate ear tags, conflicting birth records, and unverified data entries ruin regulatory veterinary audits.
@@ -188,41 +188,43 @@ export default function LandingPage() {
                 Agri Farm replaces ad-hoc spreadsheets with a structured, verified digital records ledger designed for the realities of field operations.
               </p>
 
-             <ul style={{ listStyleType: 'disc', paddingLeft: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-  <li style={{ color: 'var(--lp-fresh)' }}>
-    <h4 style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 4, color: 'var(--lp-cream)' }}>
-      Invariant Animal Identifiers
-    </h4>
-    <p style={{ color: 'rgba(248, 248, 241, 0.7)', fontSize: '0.9rem' }}>
-      Every animal receives a permanent system ID and unique tag number that persists even through archival states.
-    </p>
-  </li>
+              <ul style={{ listStyleType: 'disc', paddingLeft: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <li style={{ color: 'var(--lp-fresh)' }}>
+                  <h4 style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 4, color: 'var(--lp-cream)' }}>
+                    Invariant Animal Identifiers
+                  </h4>
+                  <p style={{ color: 'rgba(248, 248, 241, 0.7)', fontSize: '0.9rem' }}>
+                    Every animal receives a permanent system ID and unique tag number that persists even through archival states.
+                  </p>
+                </li>
 
-  <li style={{ color: 'var(--lp-fresh)' }}>
-    <h4 style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 4, color: 'var(--lp-cream)' }}>
-      Medical Observation Logs
-    </h4>
-    <p style={{ color: 'rgba(248, 248, 241, 0.7)', fontSize: '0.9rem' }}>
-      Track status transitions from Healthy to Sick, Under Treatment, and Recovering with sequential event notes.
-    </p>
-  </li>
+                <li style={{ color: 'var(--lp-fresh)' }}>
+                  <h4 style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 4, color: 'var(--lp-cream)' }}>
+                    Medical Observation Logs
+                  </h4>
+                  <p style={{ color: 'rgba(248, 248, 241, 0.7)', fontSize: '0.9rem' }}>
+                    Track status transitions from Healthy to Sick, Under Treatment, and Recovering with sequential event notes.
+                  </p>
+                </li>
 
-  <li style={{ color: 'var(--lp-fresh)' }}>
-    <h4 style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 4, color: 'var(--lp-cream)' }}>
-      Real-Time Biomass Aggregation
-    </h4>
-    <p style={{ color: 'rgba(248, 248, 241, 0.7)', fontSize: '0.9rem' }}>
-      Instant mathematical calculation of herd totals, average weight, and extreme weight variances across species.
-    </p>
-  </li>
-</ul>
+                <li style={{ color: 'var(--lp-fresh)' }}>
+                  <h4 style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 4, color: 'var(--lp-cream)' }}>
+                    Real-Time Biomass Aggregation
+                  </h4>
+                  <p style={{ color: 'rgba(248, 248, 241, 0.7)', fontSize: '0.9rem' }}>
+                    Instant mathematical calculation of herd totals, average weight, and extreme weight variances across species.
+                  </p>
+                </li>
+              </ul>
             </div>
 
+            {/* ডান পাশের গরুর ছবি */}
             <div className="anim-target delay-2">
               <div className="lp-media-frame">
                 <img
-                  src="https://images.unsplash.com/photo-1546445317-29f4545e9d53?auto=format&fit=crop&w=1200&q=80"
-                  alt="Highland cattle in mist"
+                  src={SOLUTION_CATTLE_IMAGE}
+                  alt="Healthy livestock in modern farm"
+                  style={{ width: '100%', height: '440px', objectFit: 'cover' }}
                 />
               </div>
             </div>
@@ -236,9 +238,6 @@ export default function LandingPage() {
           <div className="lp-section-header anim-target">
             <span className="lp-eyebrow">Engineered For Production</span>
             <h2 className="lp-heading">Six Core Pillars of Modern Farm Management</h2>
-            <p className="lp-subtext">
-              Comprehensive operational tools designed specifically for commercial livestock and dairy stations.
-            </p>
           </div>
 
           <div className="lp-features-grid">
@@ -305,15 +304,12 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* SCENE 05: DASHBOARD SHOWCASE (3D PERSPECTIVE PREVIEW) */}
+      {/* SCENE 05: DASHBOARD SHOWCASE */}
       <section className="lp-scene-pad" id="showcase">
         <div className="lp-container">
           <div className="lp-section-header anim-target">
             <span className="lp-eyebrow">Real-Time Operational Console</span>
             <h2 className="lp-heading">Tactile Control Over Every Acre</h2>
-            <p className="lp-subtext">
-              The high-density operations dashboard provides immediate visibility into your herd's telemetry.
-            </p>
           </div>
 
           <div className="lp-showcase-wrapper anim-target delay-1">
@@ -399,7 +395,105 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* SCENE 07: CALL TO ACTION */}
+      {/* SCENE 07: CEO & LEADERSHIP VISION (সর্বোত্তম পজিশন) */}
+      <section className="lp-scene-pad" id="leadership">
+        <div className="lp-container">
+          <div 
+            className="anim-target" 
+            style={{ 
+              padding: '48px',
+              borderRadius: '24px',
+              background: 'linear-gradient(145deg, rgba(18, 59, 42, 0.45) 0%, rgba(10, 31, 22, 0.85) 100%)',
+              border: '1px solid rgba(114, 199, 138, 0.22)',
+              boxShadow: '0 25px 50px rgba(0, 0, 0, 0.5)',
+              backdropFilter: 'blur(12px)'
+            }}
+          >
+            <div 
+              className="lp-solution-wrap" 
+              style={{ gridTemplateColumns: '0.85fr 1.15fr', gap: '48px', alignItems: 'center' }}
+            >
+              {/* বাম পাশে: CEO-এর ছবি */}
+              <div>
+                <div 
+                  className="lp-media-frame" 
+                  style={{ 
+                    borderRadius: '18px', 
+                    border: '2px solid rgba(114, 199, 138, 0.35)',
+                    boxShadow: '0 15px 35px rgba(0, 0, 0, 0.4)',
+                    background: 'rgba(18, 59, 42, 0.3)'
+                  }}
+                >
+                  <img
+                    src={CEO_PROFILE.imageUrl}
+                    alt={CEO_PROFILE.name}
+                    style={{ 
+                      width: '100%', 
+                      aspectRatio: '4 / 4.5', 
+                      objectFit: 'cover',
+                      objectPosition: 'top center',
+                      display: 'block'
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* ডান পাশে: CEO-এর মূল্যবান বক্তব্য */}
+              <div>
+                <span className="lp-eyebrow" style={{ marginBottom: '10px' }}>
+                  From The Desk of Leadership
+                </span>
+                
+                <h3 
+                  style={{ 
+                    fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', 
+                    fontWeight: 700, 
+                    color: 'var(--lp-cream)', 
+                    marginBottom: '20px',
+                    lineHeight: 1.25
+                  }}
+                >
+                  A Vision Built for Sustainable Livestock Excellence
+                </h3>
+
+                <blockquote 
+                  style={{ 
+                    fontSize: 'clamp(1.05rem, 1.5vw, 1.25rem)', 
+                    fontStyle: 'italic', 
+                    lineHeight: 1.75, 
+                    color: 'var(--lp-cream)',
+                    borderLeft: '4px solid var(--lp-fresh)',
+                    paddingLeft: '20px',
+                    marginBottom: '24px',
+                    background: 'rgba(114, 199, 138, 0.05)',
+                    paddingTop: '14px',
+                    paddingBottom: '14px',
+                    paddingRight: '16px',
+                    borderRadius: '0 12px 12px 0'
+                  }}
+                >
+                  "{CEO_PROFILE.quote}"
+                </blockquote>
+
+                <p style={{ color: 'rgba(248, 248, 241, 0.7)', fontSize: '0.92rem', marginBottom: '24px' }}>
+                  {CEO_PROFILE.subNote}
+                </p>
+
+                <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '18px' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--lp-fresh)' }}>
+                    {CEO_PROFILE.name}
+                  </div>
+                  <div style={{ fontSize: '0.88rem', color: 'rgba(248, 248, 241, 0.65)', marginTop: '2px' }}>
+                    {CEO_PROFILE.designation}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SCENE 08: CALL TO ACTION */}
       <section className="lp-scene-cta">
         <div className="lp-container anim-target">
           <span className="lp-eyebrow">Ready For Modern Farm Operations?</span>
