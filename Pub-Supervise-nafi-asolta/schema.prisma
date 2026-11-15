@@ -1,0 +1,282 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  STUDENT
+  SUPERVISOR
+  BOARD_MEMBER
+  COORDINATOR
+}
+
+enum UserStatus {
+  PENDING_APPROVAL
+  ACTIVE
+  DEACTIVATED
+  REJECTED
+}
+
+enum ProposalStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  REVISION_REQUESTED
+  APPROVED
+  REJECTED
+}
+
+enum MilestoneStatus {
+  PENDING
+  SUBMITTED
+  APPROVED
+  REVISION_REQUESTED
+}
+
+enum JournalStatus {
+  SUBMITTED
+  REVISION_REQUESTED
+  SUPERVISOR_APPROVED
+  PUBLISHED
+  REJECTED
+}
+
+model User {
+  id                 String           @id @default(cuid())
+  name               String
+  email              String
+  username           String?          @unique
+  phone              String?
+  studentId          String?          @unique
+  passwordHash       String
+  roles              Role[]
+  status             UserStatus       @default(PENDING_APPROVAL)
+  mustChangePassword Boolean          @default(false)
+  maxGroups          Int              @default(4)
+  createdAt          DateTime         @default(now())
+  groups             GroupMember[]
+  supervised         ProjectGroup[]   @relation("Supervisor")
+  sentMessages       Message[]
+  notifications      Notification[]
+  evaluations        Evaluation[]
+  facultyProfile     FacultyDirectory?
+
+  @@index([email])
+}
+
+// Registration data is held here until the email OTP is verified; no User row exists before that.
+model PendingRegistration {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  phone        String
+  studentId    String
+  passwordHash String
+  otpHash      String
+  expiresAt    DateTime
+  attempts     Int      @default(0)
+  createdAt    DateTime @default(now())
+}
+
+model ProjectGroup {
+  id           String              @id @default(cuid())
+  title        String
+  abstract     String
+  supervisorId String?
+  supervisor   User?               @relation("Supervisor", fields: [supervisorId], references: [id])
+  members      GroupMember[]
+  proposals    Proposal[]
+  milestones   Milestone[]
+  messages     Message[]
+  meetings     Meeting[]
+  defense      Defense?
+  journal      JournalSubmission[]
+  createdAt    DateTime            @default(now())
+}
+
+model GroupMember {
+  id      String       @id @default(cuid())
+  userId  String
+  groupId String
+  user    User         @relation(fields: [userId], references: [id])
+  group   ProjectGroup @relation(fields: [groupId], references: [id])
+
+  @@unique([userId, groupId])
+}
+
+model Proposal {
+  id                  String            @id @default(cuid())
+  groupId             String
+  group               ProjectGroup      @relation(fields: [groupId], references: [id])
+  preferredSupervisor String?
+  status              ProposalStatus    @default(SUBMITTED)
+  versions            ProposalVersion[]
+  createdAt           DateTime          @default(now())
+}
+
+// Every approval / revision request freezes the scope as an immutable version.
+model ProposalVersion {
+  id         String   @id @default(cuid())
+  proposalId String
+  proposal   Proposal @relation(fields: [proposalId], references: [id])
+  version    Int
+  title      String
+  abstract   String
+  scope      String
+  note       String?
+  createdBy  String
+  createdAt  DateTime @default(now())
+
+  @@unique([proposalId, version])
+}
+
+model Milestone {
+  id          String          @id @default(cuid())
+  groupId     String
+  group       ProjectGroup    @relation(fields: [groupId], references: [id])
+  title       String
+  dueDate     DateTime
+  status      MilestoneStatus @default(PENDING)
+  submissions Submission[]
+}
+
+// Append-only: submissions are never updated or deleted.
+model Submission {
+  id          String       @id @default(cuid())
+  milestoneId String
+  milestone   Milestone    @relation(fields: [milestoneId], references: [id])
+  fileUrl     String?
+  codeLink    String?
+  notes       String?
+  submittedBy String
+  createdAt   DateTime     @default(now())
+  feedback    Feedback[]
+}
+
+model Feedback {
+  id                String     @id @default(cuid())
+  submissionId      String
+  submission        Submission @relation(fields: [submissionId], references: [id])
+  authorId          String
+  comment           String
+  revisionRequested Boolean    @default(false)
+  createdAt         DateTime   @default(now())
+}
+
+model Message {
+  id        String       @id @default(cuid())
+  groupId   String
+  group     ProjectGroup @relation(fields: [groupId], references: [id])
+  senderId  String
+  sender    User         @relation(fields: [senderId], references: [id])
+  body      String
+  createdAt DateTime     @default(now())
+}
+
+model Meeting {
+  id          String       @id @default(cuid())
+  groupId     String
+  group       ProjectGroup @relation(fields: [groupId], references: [id])
+  scheduledAt DateTime
+  agenda      String?
+  minutes     String?
+  actionItems ActionItem[]
+}
+
+model ActionItem {
+  id        String    @id @default(cuid())
+  meetingId String
+  meeting   Meeting   @relation(fields: [meetingId], references: [id])
+  task      String
+  assignee  String
+  dueDate   DateTime?
+  done      Boolean   @default(false)
+}
+
+model Defense {
+  id                  String       @id @default(cuid())
+  groupId             String       @unique
+  group               ProjectGroup @relation(fields: [groupId], references: [id])
+  scheduledAt         DateTime
+  venue               String?
+  examinerIds         String[]     @default([])
+  plagiarismReportUrl String?
+  codeUrl             String?
+  posterUrl           String?
+  thesisUrl           String?
+  evaluations         Evaluation[]
+}
+
+model Evaluation {
+  id         String   @id @default(cuid())
+  defenseId  String
+  defense    Defense  @relation(fields: [defenseId], references: [id])
+  examinerId String
+  examiner   User     @relation(fields: [examinerId], references: [id])
+  rubric     Json     // { criterion: { max, score } }
+  total      Float
+  remarks    String?
+
+  @@unique([defenseId, examinerId])
+}
+
+model JournalSubmission {
+  id             String        @id @default(cuid())
+  groupId        String
+  group          ProjectGroup  @relation(fields: [groupId], references: [id])
+  abstract       String
+  thesisUrl      String
+  repoUrl        String?
+  paperUrl       String?
+  tags           String[]
+  status         JournalStatus @default(SUBMITTED)
+  supervisorNote String?
+  citationCode   String?       @unique // e.g. PUB-CSE-2026-TH-045
+  publishedAt    DateTime?
+  createdAt      DateTime      @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// Official faculty list. Account creation links a directory entry to a User exactly once.
+model FacultyDirectory {
+  id          String   @id @default(cuid())
+  name        String
+  designation String
+  department  String
+  email       String   // delivery address for credentials; editable by the coordinator
+  userId      String?  @unique
+  user        User?    @relation(fields: [userId], references: [id])
+
+  @@unique([name, department, designation])
+}
+
+model PasswordReset {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  otpHash   String
+  expiresAt DateTime
+  attempts  Int      @default(0)
+}
+
+// Uploaded files (up to 25 MB) are stored in the database so they travel with it.
+model UploadedFile {
+  id         String   @id @default(cuid())
+  name       String
+  mimeType   String
+  size       Int
+  data       Bytes
+  uploadedBy String
+  createdAt  DateTime @default(now())
+}

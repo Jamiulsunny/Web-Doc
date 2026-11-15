@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Model & Padding Practice</title>
+    <style>
+        /* বেসিক বক্স স্টাইল */
+        .box {
+            display: inline-block;
+            width: 140px;
+            height: 140px;
+            background: #ffe0e0;
+            margin: 10px;
+            text-align: center;
+            vertical-align: middle;
+            box-sizing: border-box;
+        }
+
+        /* প্যাডিং প্র্যাকটিস */
+        .pad-a { padding: 8px; }
+        .pad-b { padding: 20px; }
+        .pad-c { padding: 10px 40px; }
+        .pad-d { padding: 10px 20px 30px 40px; }
+
+        /* বর্ডার ও বর্ডার-রেডিয়াস প্র্যাকটিস */
+        .border-solid {
+            border: 3px solid #333;
+            line-height: 134px; /* টেক্সট সেন্টারে রাখার জন্য */
+        }
+
+        .border-dashed {
+            border: 3px dashed crimson;
+            border-radius: 12px; /* কোনা সামান্য গোল */
+            line-height: 134px;
+        }
+
+        .border-circle {
+            border: 4px dotted teal;
+            border-radius: 50%; /* পুরো গোল */
+            line-height: 132px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- প্যাডিং প্র্যাকটিস অংশ -->
+    <div class="box pad-a">padding: 8px</div>
+    <div class="box pad-b">padding: 20px</div>
+    <div class="box pad-c">padding: 10px 40px</div>
+    <div class="box pad-d">padding: 10px 20px 30px 40px</div>
+
+    <br><br>
+
+    <!-- বর্ডার প্র্যাকটিস অংশ -->
+    <div class="box border-solid">solid</div>
+    <div class="box border-dashed">dashed</div>
+    <div class="box border-circle">circle</div>
+
+</body>
+</html>

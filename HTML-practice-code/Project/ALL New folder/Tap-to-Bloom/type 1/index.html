@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tap to Bloom — Luminous Botanical Tulip Garden</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      overflow: hidden;
+      background-color: #000000;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      touch-action: none;
+    }
+
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 40%, #06090c 0%, #020304 60%, #000000 100%);
+      cursor: crosshair;
+    }
+
+    /* Discreet, elegant floating glass UI */
+    .ui-panel {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .counter-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(18, 22, 28, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 8px 16px;
+      color: #f0f4f8;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 12px rgba(255, 105, 180, 0.15);
+    }
+
+    .counter-badge .flower-icon {
+      font-size: 16px;
+      filter: drop-shadow(0 0 6px rgba(255, 77, 142, 0.8));
+    }
+
+    .counter-badge #count {
+      font-weight: 700;
+      color: #ff7bac;
+      text-shadow: 0 0 10px rgba(255, 123, 172, 0.6);
+      min-width: 18px;
+      display: inline-block;
+    }
+
+    .clear-btn {
+      pointer-events: auto;
+      align-self: flex-start;
+      background: rgba(18, 22, 28, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      padding: 7px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .clear-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      border-color: rgba(255, 105, 180, 0.4);
+      box-shadow: 0 0 14px rgba(255, 105, 180, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .clear-btn:active {
+      transform: translateY(1px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ui-panel">
+    <div class="counter-badge">
+      <span class="flower-icon">🌷</span>
+      <span>Tulips: <span id="count">0</span></span>
+    </div>
+    <button class="clear-btn" id="clearBtn">Clear</button>
+  </div>
+
+  <canvas id="canvas"></canvas>
+
+  <script>
+    /**
+     * TAP TO BLOOM — ULTRA-REALISTIC LUMINOUS BOTANICAL TULIP ENGINE
+     * High-fidelity Bézier petal morphology, depth layering, subsurface glow & organic growth.
+     */
+
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const countEl = document.getElementById("count");
+    const clearBtn = document.getElementById("clearBtn");
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let flowers = [];
+    let backgroundStars = [];
+    let globalTime = 0;
+
+    // Palette Configurations: Vibrant Neon Magenta, Radiant Rose, Blush Champagne & Luminous Soft White
+    const PALETTES = [
+      {
+        name: "Luminous Magenta",
+        base: "#ff9900",       // Warm glowing amber base
+        dark: "#b3003b",       // Deep velvet crimson interior
+        mid: "#ff1475",        // Vibrant neon magenta
+        light: "#ff80bf",      // Soft pink transition
+        edge: "#ffffff",       // Pure white crisp edge
+        glow: "rgba(255, 20, 117, 0.35)",
+        baseGlow: "rgba(255, 160, 20, 0.6)"
+      },
+      {
+        name: "Neon Fuchsia",
+        base: "#ff7700",
+        dark: "#990033",
+        mid: "#ff0055",
+        light: "#ff6699",
+        edge: "#ffecf2",
+        glow: "rgba(255, 0, 85, 0.38)",
+        baseGlow: "rgba(255, 140, 0, 0.55)"
+      },
+      {
+        name: "Electric Rose",
+        base: "#ffaa33",
+        dark: "#cc0052",
+        mid: "#ff3385",
+        light: "#ffa6cc",
+        edge: "#ffffff",
+        glow: "rgba(255, 51, 133, 0.32)",
+        baseGlow: "rgba(255, 180, 50, 0.5)"
+      },
+      {
+        name: "Porcelain & Blush",
+        base: "#ffbb44",
+        dark: "#d95382",
+        mid: "#fca5c6",
+        light: "#ffecf3",
+        edge: "#ffffff",
+        glow: "rgba(255, 180, 205, 0.28)",
+        baseGlow: "rgba(255, 190, 70, 0.45)"
+      },
+      {
+        name: "Luminous White Pearl",
+        base: "#ffcc44",
+        dark: "#c28ba3",
+        mid: "#f5e6ee",
+        light: "#ffffff",
+        edge: "#ffffff",
+        glow: "rgba(255, 240, 245, 0.35)",
+        baseGlow: "rgba(255, 200, 80, 0.55)"
+      }
+    ];
+
+    // Smooth cubic easing for lifelike biological growth
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+    function easeInOutQuad(t) {
+      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
+
+    // Static Starfield Initialization (Persistent, non-flickering)
+    function initStars() {
+      backgroundStars = [];
+      const numStars = Math.floor((width * height) / 10000);
+      for (let i = 0; i < numStars; i++) {
+        backgroundStars.push({
+          x: Math.random() * width,
+          y: Math.random() * height * 0.85,
+          radius: Math.random() * 0.9 + 0.3,
+          alpha: Math.random() * 0.4 + 0.1,
+          phase: Math.random() * Math.PI * 2,
+          speed: Math.random() * 0.6 + 0.3
+        });
+      }
+    }
+
+    function resize() {
+      dpr = window.devicePixelRatio || 1;
+      width = window.innerWidth;
+      height = window.innerHeight;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.resetTransform();
+      ctx.scale(dpr, dpr);
+
+      initStars();
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    /**
+     * DRAW INDIVIDUAL ORGANIC PETAL
+     * Generates a tapered, curved tulip petal with realistic contours,
+     * central vein, directional lighting, and luminous rim stroke.
+     */
+    function drawOrganicPetal(ctx, length, width, angle, curl, flare, palette, lightnessBoost, isRear) {
+      ctx.save();
+      ctx.rotate(angle);
+
+      // Gradient shading: Dark core -> Mid vibrance -> Soft highlight -> Translucent white tip
+      const grad = ctx.createLinearGradient(0, 0, 0, -length);
+      if (isRear) {
+        grad.addColorStop(0, palette.base);
+        grad.addColorStop(0.2, palette.dark);
+        grad.addColorStop(0.7, palette.mid);
+        grad.addColorStop(1, palette.light);
+      } else {
+        grad.addColorStop(0, palette.base);
+        grad.addColorStop(0.18, palette.dark);
+        grad.addColorStop(0.55, palette.mid);
+        grad.addColorStop(0.85, palette.light);
+        grad.addColorStop(1, palette.edge);
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+
+      // Left organic Bézier curve with gentle S-taper
+      ctx.bezierCurveTo(
+        -width * (0.65 + flare * 0.2), -length * 0.25,
+        -width * (1.05 + flare * 0.35) + curl * 6, -length * 0.72,
+        0, -length
+      );
+
+      // Right organic Bézier curve returning to narrow base
+      ctx.bezierCurveTo(
+        width * (1.05 + flare * 0.35) + curl * 6, -length * 0.72,
+        width * (0.65 + flare * 0.2), -length * 0.25,
+        0, 0
+      );
+
+      ctx.closePath();
+
+      // Base Petal Fill
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Subtle Central Vein / Midrib Highlight
+      ctx.beginPath();
+      ctx.moveTo(0, -length * 0.1);
+      ctx.quadraticCurveTo(curl * 4, -length * 0.55, 0, -length * 0.94);
+      ctx.strokeStyle = `rgba(255, 255, 255, ${isRear ? 0.08 : 0.25 + lightnessBoost * 0.15})`;
+      ctx.lineWidth = 1.0;
+      ctx.stroke();
+
+      // Edge Luminescence: Razor-sharp highlight along outer margins
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.bezierCurveTo(
+        -width * (0.65 + flare * 0.2), -length * 0.25,
+        -width * (1.05 + flare * 0.35) + curl * 6, -length * 0.72,
+        0, -length
+      );
+      ctx.bezierCurveTo(
+        width * (1.05 + flare * 0.35) + curl * 6, -length * 0.72,
+        width * (0.65 + flare * 0.2), -length * 0.25,
+        0, 0
+      );
+
+      ctx.strokeStyle = isRear
+        ? "rgba(255, 255, 255, 0.15)"
+        : `rgba(255, 255, 255, ${0.45 + lightnessBoost * 0.35})`;
+      ctx.lineWidth = isRear ? 0.6 : 1.1;
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    /**
+     * TULIP INSTANCE CLASS
+     * Controls organic development, Bézier stem generation, leaves, multi-layered petals,
+     * and idle swaying motion.
+     */
+    class TulipFlower {
+      constructor(originX, originY) {
+        this.originX = originX;
+        this.originY = originY;
+
+        // Individualized botanical metrics
+        this.stemHeight = 220 + Math.random() * 140;
+        this.flowerScale = 0.88 + Math.random() * 0.28;
+        this.stemBend = (Math.random() - 0.5) * 55;
+        this.stemThickness = 2.4 + Math.random() * 0.8;
+
+        this.palette = PALETTES[Math.floor(Math.random() * PALETTES.length)];
+        this.swaySpeed = 0.8 + Math.random() * 0.4;
+        this.swayOffset = Math.random() * Math.PI * 2;
+        this.swayAmplitude = 5 + Math.random() * 6;
+
+        // Growth lifecycle timers (0.0 -> 1.0)
+        this.growthProgress = 0;
+        this.growthSpeed = 0.009 + Math.random() * 0.004;
+        this.bloomProgress = 0;
+        this.bloomSpeed = 0.012 + Math.random() * 0.005;
+
+        // Leaf configurations: 2–3 elongated, tapered lanceolate leaves
+        this.leaves = [
+          {
+            side: -1,
+            attachPercent: 0.18 + Math.random() * 0.08,
+            length: 120 + Math.random() * 45,
+            width: 18 + Math.random() * 6,
+            angle: -0.45 - Math.random() * 0.2,
+            curve: -35 - Math.random() * 20
+          },
+          {
+            side: 1,
+            attachPercent: 0.32 + Math.random() * 0.08,
+            length: 135 + Math.random() * 50,
+            width: 20 + Math.random() * 6,
+            angle: 0.42 + Math.random() * 0.2,
+            curve: 35 + Math.random() * 20
+          }
+        ];
+
+        // 35% chance of a third high juvenile leaf
+        if (Math.random() > 0.65) {
+          this.leaves.push({
+            side: Math.random() > 0.5 ? 1 : -1,
+            attachPercent: 0.50 + Math.random() * 0.08,
+            length: 90 + Math.random() * 30,
+            width: 14 + Math.random() * 4,
+            angle: (Math.random() - 0.5) * 0.35,
+            curve: (Math.random() - 0.5) * 30
+          });
+        }
+      }
+
+      update(timeDelta) {
+        if (this.growthProgress < 1) {
+          this.growthProgress = Math.min(1, this.growthProgress + this.growthSpeed * timeDelta);
+        } else if (this.bloomProgress < 1) {
+          this.bloomProgress = Math.min(1, this.bloomProgress + this.bloomSpeed * timeDelta);
+        }
+      }
+
+      /**
+       * Calculates dynamic stem coordinates with progressive organic sway
+       */
+      getStemPoint(t, swayFactor) {
+        const easeGrowth = easeOutCubic(this.growthProgress);
+        const currentH = this.stemHeight * easeGrowth * t;
+
+        // Dynamic sway based on height
+        const sway = Math.sin(globalTime * this.swaySpeed + this.swayOffset) * this.swayAmplitude * swayFactor;
+        const bendOffset = this.stemBend * Math.pow(t, 1.6);
+
+        // Control point for smooth cubic curve
+        const x = this.originX + bendOffset + (sway * Math.pow(t, 2));
+        const y = this.originY - currentH;
+        return { x, y };
+      }
+
+      drawStem() {
+        const easeGrowth = easeOutCubic(this.growthProgress);
+        if (easeGrowth <= 0.01) return;
+
+        const base = this.getStemPoint(0, 0);
+        const mid = this.getStemPoint(0.5, 0.4);
+        const top = this.getStemPoint(1, 1);
+
+        ctx.save();
+
+        // 1. Soft green ambient stem glow
+        ctx.beginPath();
+        ctx.moveTo(base.x, base.y);
+        ctx.quadraticCurveTo(mid.x, mid.y, top.x, top.y);
+        ctx.strokeStyle = "rgba(46, 255, 112, 0.18)";
+        ctx.lineWidth = this.stemThickness * 3.5;
+        ctx.lineCap = "round";
+        ctx.stroke();
+
+        // 2. Core deep botanical stem gradient
+        const stemGrad = ctx.createLinearGradient(base.x, base.y, top.x, top.y);
+        stemGrad.addColorStop(0, "#0d4d22");
+        stemGrad.addColorStop(0.6, "#1dd15d");
+        stemGrad.addColorStop(1, "#4dff88");
+
+        ctx.beginPath();
+        ctx.moveTo(base.x, base.y);
+        ctx.quadraticCurveTo(mid.x, mid.y, top.x, top.y);
+        ctx.strokeStyle = stemGrad;
+        ctx.lineWidth = this.stemThickness;
+        ctx.stroke();
+
+        // 3. Ultra-fine luminous core highlight
+        ctx.beginPath();
+        ctx.moveTo(base.x, base.y);
+        ctx.quadraticCurveTo(mid.x, mid.y, top.x, top.y);
+        ctx.strokeStyle = "rgba(230, 255, 235, 0.75)";
+        ctx.lineWidth = Math.max(0.7, this.stemThickness * 0.32);
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      drawLeaves() {
+        const easeGrowth = easeOutCubic(this.growthProgress);
+
+        for (let leaf of this.leaves) {
+          if (easeGrowth < leaf.attachPercent) continue;
+
+          // Leaf growth unfolds progressively after stem passes attachment point
+          const leafGrowthNorm = Math.min(1, (easeGrowth - leaf.attachPercent) / (1 - leaf.attachPercent));
+          const currentLeafProg = easeOutCubic(leafGrowthNorm);
+          if (currentLeafProg <= 0.01) continue;
+
+          const attachPoint = this.getStemPoint(leaf.attachPercent, leaf.attachPercent);
+          const leafLen = leaf.length * currentLeafProg;
+          const leafW = leaf.width * currentLeafProg;
+
+          ctx.save();
+          ctx.translate(attachPoint.x, attachPoint.y);
+
+          // Subtle organic leaf oscillation
+          const leafSway = Math.sin(globalTime * this.swaySpeed + this.swayOffset + leaf.attachPercent) * 0.08;
+          ctx.rotate(leaf.angle + leafSway);
+
+          // Gradient: Translucent deep jade -> luminous neon emerald leaf margin
+          const leafGrad = ctx.createLinearGradient(0, 0, leaf.curve, -leafLen);
+          leafGrad.addColorStop(0, "rgba(10, 60, 26, 0.85)");
+          leafGrad.addColorStop(0.5, "rgba(28, 185, 78, 0.75)");
+          leafGrad.addColorStop(0.9, "rgba(80, 255, 140, 0.85)");
+          leafGrad.addColorStop(1, "rgba(220, 255, 230, 0.95)");
+
+          // Elongated tapered lanceolate leaf geometry
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.bezierCurveTo(
+            -leafW * 0.35 + leaf.curve * 0.3, -leafLen * 0.3,
+            -leafW * 0.85 + leaf.curve * 0.7, -leafLen * 0.7,
+            leaf.curve, -leafLen
+          );
+          ctx.bezierCurveTo(
+            leafW * 0.2 + leaf.curve * 0.7, -leafLen * 0.65,
+            leafW * 0.5 + leaf.curve * 0.25, -leafLen * 0.25,
+            0, 0
+          );
+          ctx.closePath();
+
+          ctx.fillStyle = leafGrad;
+          ctx.fill();
+
+          // Delicate luminous vein along leaf axis
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.quadraticCurveTo(leaf.curve * 0.5, -leafLen * 0.5, leaf.curve, -leafLen);
+          ctx.strokeStyle = "rgba(180, 255, 205, 0.65)";
+          ctx.lineWidth = 0.9;
+          ctx.stroke();
+
+          // Refined glowing edge rim
+          ctx.strokeStyle = "rgba(120, 255, 170, 0.4)";
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+
+          ctx.restore();
+        }
+      }
+
+      drawFlowerHead() {
+        if (this.growthProgress < 0.85) return;
+
+        const flowerProgress = easeOutCubic((this.growthProgress - 0.85) / 0.15);
+        const bloom = easeInOutQuad(this.bloomProgress);
+        const headPos = this.getStemPoint(1, 1);
+
+        ctx.save();
+        ctx.translate(headPos.x, headPos.y);
+
+        // Natural angle calculation from top stem tangent
+        const tangentPrev = this.getStemPoint(0.96, 1);
+        const stemAngle = Math.atan2(headPos.y - tangentPrev.y, headPos.x - tangentPrev.x) + Math.PI / 2;
+        ctx.rotate(stemAngle * 0.7);
+
+        // Overall scale animation as bud emerges and opens
+        const currentScale = this.flowerScale * (0.45 + flowerProgress * 0.55);
+        ctx.scale(currentScale, currentScale);
+
+        // 1. Atmospheric Ambient Backlight Halo
+        const glowRadius = 75;
+        const ambientGlow = ctx.createRadialGradient(0, -35, 5, 0, -35, glowRadius);
+        ambientGlow.addColorStop(0, this.palette.glow);
+        ambientGlow.addColorStop(0.55, this.palette.glow.replace(/[\d\.]+\)$/, "0.12)"));
+        ambientGlow.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = ambientGlow;
+        ctx.beginPath();
+        ctx.arc(0, -35, glowRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Standard tulip dimensions
+        const pLen = 82;
+        const pW = 28;
+
+        // 2. LAYER 1: BACK INTERIOR PETALS (Darker, inner cup depth)
+        const rearSpread = 0.22 + bloom * 0.22;
+        drawOrganicPetal(ctx, pLen * 0.94, pW * 0.92, -rearSpread, -0.2, 0.1, this.palette, -0.2, true);
+        drawOrganicPetal(ctx, pLen * 0.94, pW * 0.92, rearSpread, 0.2, 0.1, this.palette, -0.2, true);
+        drawOrganicPetal(ctx, pLen * 0.98, pW * 0.85, 0, 0, 0, this.palette, -0.15, true);
+
+        // 3. LAYER 2: INTERMEDIATE FLANKING PETALS (Defining the cup silhouette)
+        const sideSpread = 0.32 + bloom * 0.28;
+        drawOrganicPetal(ctx, pLen * 0.92, pW * 0.95, -sideSpread, -0.4, 0.15, this.palette, 0.05, false);
+        drawOrganicPetal(ctx, pLen * 0.92, pW * 0.95, sideSpread, 0.4, 0.15, this.palette, 0.05, false);
+
+        // 4. LAYER 3: FOREGROUND OVERLAPPING PETALS (Sculpted, luminous, tapered)
+        const frontSpread = 0.16 + bloom * 0.18;
+        drawOrganicPetal(ctx, pLen * 0.88, pW * 0.96, -frontSpread, -0.15, 0.2, this.palette, 0.15, false);
+        drawOrganicPetal(ctx, pLen * 0.88, pW * 0.96, frontSpread, 0.15, 0.2, this.palette, 0.15, false);
+
+        // 5. LAYER 4: CENTER FACING PETAL (Primary focal centerpiece)
+        drawOrganicPetal(ctx, pLen * 0.90, pW * 1.05, 0, 0, 0.25, this.palette, 0.3, false);
+
+        // 6. GOLDEN RECEPTACLE ILLUMINATION (Warm basal glow where stem meets blossom)
+        const baseGlow = ctx.createRadialGradient(0, 0, 0, 0, -8, 22);
+        baseGlow.addColorStop(0, "rgba(255, 235, 140, 0.95)");
+        baseGlow.addColorStop(0.35, this.palette.baseGlow);
+        baseGlow.addColorStop(1, "rgba(255, 120, 0, 0)");
+        ctx.fillStyle = baseGlow;
+        ctx.beginPath();
+        ctx.arc(0, -6, 22, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      drawReflection() {
+        const easeGrowth = easeOutCubic(this.growthProgress);
+        if (easeGrowth <= 0.05) return;
+
+        // Subtle dark-water reflection beneath stem base
+        ctx.save();
+        const base = this.getStemPoint(0, 0);
+        const refHeight = 45 * easeGrowth;
+
+        const refGrad = ctx.createLinearGradient(base.x, base.y, base.x, base.y + refHeight);
+        refGrad.addColorStop(0, "rgba(46, 255, 112, 0.28)");
+        refGrad.addColorStop(0.4, "rgba(20, 180, 80, 0.12)");
+        refGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+        ctx.beginPath();
+        ctx.ellipse(base.x, base.y + 4, 18, 5, 0, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(46, 255, 112, 0.25)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(base.x - 2, base.y);
+        ctx.lineTo(base.x + 2, base.y);
+        ctx.lineTo(base.x + (Math.sin(globalTime * 2) * 4), base.y + refHeight);
+        ctx.strokeStyle = refGrad;
+        ctx.lineWidth = this.stemThickness * 1.5;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      render() {
+        this.drawReflection();
+        this.drawStem();
+        this.drawLeaves();
+        this.drawFlowerHead();
+      }
+    }
+
+    // Static, slowly twinkling background stardust
+    function renderBackgroundStars() {
+      for (let star of backgroundStars) {
+        const twinkle = Math.sin(globalTime * star.speed + star.phase) * 0.25 + 0.75;
+        ctx.fillStyle = `rgba(220, 235, 255, ${star.alpha * twinkle})`;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Ground darkness vignette with soft horizon depth
+    function renderGroundAtmosphere() {
+      const groundGrad = ctx.createLinearGradient(0, height * 0.78, 0, height);
+      groundGrad.addColorStop(0, "rgba(0, 0, 0, 0)");
+      groundGrad.addColorStop(0.7, "rgba(1, 4, 3, 0.45)");
+      groundGrad.addColorStop(1, "rgba(0, 2, 1, 0.85)");
+      ctx.fillStyle = groundGrad;
+      ctx.fillRect(0, height * 0.75, width, height * 0.25);
+    }
+
+    // Flower Management
+    function addTulip(x, y) {
+      // Natural ground origin offset: tap defines planting area
+      const groundY = Math.min(height - 25, Math.max(height * 0.55, y + 100));
+      flowers.push(new TulipFlower(x, groundY));
+      countEl.textContent = flowers.length;
+    }
+
+    function clearAll() {
+      flowers = [];
+      countEl.textContent = "0";
+    }
+    clearBtn.addEventListener("click", clearAll);
+
+    // Event Handling: Pointer Events (Prevents Touch/Mouse Duplication)
+    let lastPointerTime = 0;
+    canvas.addEventListener("pointerdown", (e) => {
+      // Ignore clicks on top-left UI panel
+      if (e.clientX < 180 && e.clientY < 110) return;
+
+      const now = performance.now();
+      if (now - lastPointerTime < 80) return; // Debounce rapid multi-touch
+      lastPointerTime = now;
+
+      addTulip(e.clientX, e.clientY);
+    });
+
+    // Populate a balanced, photorealistic garden on first load matching Reference Image 2
+    function seedInitialGarden() {
+      const initialPositions = [
+        { x: 0.08, y: 0.68 },
+        { x: 0.15, y: 0.76 },
+        { x: 0.24, y: 0.70 },
+        { x: 0.35, y: 0.65 },
+        { x: 0.40, y: 0.78 },
+        { x: 0.47, y: 0.62 },
+        { x: 0.55, y: 0.80 },
+        { x: 0.61, y: 0.67 },
+        { x: 0.69, y: 0.72 },
+        { x: 0.76, y: 0.64 },
+        { x: 0.83, y: 0.77 },
+        { x: 0.92, y: 0.69 }
+      ];
+
+      initialPositions.forEach((pos, idx) => {
+        setTimeout(() => {
+          const flower = new TulipFlower(pos.x * width, pos.y * height);
+          // Set to fully blossomed state for instant aesthetic inspection
+          flower.growthProgress = 1;
+          flower.bloomProgress = 1;
+          flowers.push(flower);
+          countEl.textContent = flowers.length;
+        }, idx * 60);
+      });
+    }
+
+    // Seed when initial dimensions are set
+    setTimeout(seedInitialGarden, 100);
+
+    // Main 60FPS Render Loop
+    let lastTimestamp = performance.now();
+    function animate(now) {
+      const dt = Math.min(2.0, (now - lastTimestamp) / 16.666);
+      lastTimestamp = now;
+      globalTime = now * 0.0015;
+
+      // Deep obsidian clearing pass
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Subtle, stable stars
+      renderBackgroundStars();
+
+      // 2. Sort flowers by Y origin so foreground flowers naturally overlap background flowers
+      flowers.sort((a, b) => a.originY - b.originY);
+
+      // 3. Update & render each tulip
+      for (let i = 0; i < flowers.length; i++) {
+        flowers[i].update(dt);
+        flowers[i].render();
+      }
+
+      // 4. Atmospheric floor depth
+      renderGroundAtmosphere();
+
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  </script>
+</body>
+</html>

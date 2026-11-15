@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-pub-bg text-pub-text antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+.btn {
+  @apply inline-flex items-center justify-center font-bold px-4 py-2.5 rounded-xl transition-all duration-200;
+  @apply bg-pub-teal text-white shadow-sm hover:bg-pub-navy hover:shadow active:scale-[0.98];
+}
+
+.btn.alt {
+  @apply bg-pub-cyanSurface text-pub-teal border border-pub-cyan/40 hover:bg-pub-cyan/20;
+}

@@ -1,0 +1,17 @@
+#DB
+DATABASE_URL=postgresql://neondb_owner:npg_1LaXUWIqydY0@ep-shiny-art-b4ea4nkl-pooler.c-6.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+DIRECT_URL=postgresql://neondb_owner:npg_1LaXUWIqydY0@ep-shiny-art-b4ea4nkl.c-6.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+JWT_SECRET=fb4cd19cd9b04bd4584d9846029c9388c416b95ebfb699b3ec45e7da2c4c6593
+CHAT_ENCRYPTION_KEY=52b585109479bc8c5496895c7250e3bba704abbdc3da9c2ff0fdda4b37230dcd
+# Nodemailer SMTP
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_USER=nafi.pubcse@gmail.com
+SMTP_PASS=tfrunnxomvuaiumi
+MAIL_FROM="PubSupervise <nafi.pubcse@gmail.com>"
+# Seed for admin
+SEED_COORDINATOR_EMAIL="admin@pub.bd"
+SEED_COORDINATOR_PASSWORD="nafi1234"
+
+# Test mode:
+FACULTY_DEFAULT_EMAIL="nafiulsheak.pubcse@gmail.com"

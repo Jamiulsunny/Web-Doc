@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Color Palette</title>
   <style>
-    body { font-family: sans-serif; text-align: center; }
-    h1 { color: #333; }
-    .box { width: 120px; height: 120px; display: inline-block; margin: 8px; color: white; line-height: 120px; }
+    body { 
+      font-family: sans-serif; 
+      text-align: center; 
+      background-color: #f9f9f9;
+      padding-top: 30px;
+    }
+    h1 { color: #333; margin-bottom: 25px; }
+    .box { 
+      width: 120px; 
+      height: 120px; 
+      display: inline-block; 
+      margin: 8px; 
+      color: white; 
+      line-height: 120px; 
+      border-radius: 8px; /* কোনাগুলো একটু গোল করার জন্য */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* হালকা শ্যাডো */
+      font-weight: bold;
+    }
     #red { background: #e63946; }
     #blue { background: #457b9d; }
     #green { background: #2a9d8f; }
