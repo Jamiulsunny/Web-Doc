@@ -2,7 +2,7 @@
 
 An interactive, realistic-looking, and responsive 3D-shaded Solar System model built with **100% Pure HTML5 & CSS3** — absolutely **zero JavaScript**, **zero external images**, and **no third-party dependencies**.
 
----------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 🌌 Key Highlights
 
@@ -20,7 +20,7 @@ An interactive, realistic-looking, and responsive 3D-shaded Solar System model b
 - **Smooth 60 FPS Orbit Engine:** Independent orbit speeds paired with precise counter-rotation ensures planetary textures, shadows, and labels remain upright throughout full 360-degree sweeps.
 - **Accessibility:** Fully supports `@media (prefers-reduced-motion: reduce)` to disable high-frequency animations for motion-sensitive users.
 
-----------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 🎨 Color Palette & CSS Variables
 
