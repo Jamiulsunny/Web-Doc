@@ -272,7 +272,7 @@ function Index() {
         <div className="agri-container worker-grid">
           <div className="worker-copy">
             <p className="section-eyebrow">GREAT PEOPLE CREATE THE DIFFERENCE</p>
-            <h2>British, EU and non-EU workers</h2>
+            <h2>British, BANGLA and non-EU workers</h2>
             <p>Our recruitment teams work across Kazakhstan, Kyrgyzstan and Bulgaria to find candidates for seasonal agricultural work. We also select candidates for UK and European employers and recruit skilled staff, including tractor drivers, mechanics, spray operators and agronomy staff.</p>
             <a className="button-link" href="mailto:info@agri-hr.com">CONTACT US <ArrowRight size={16} /></a>
           </div>
