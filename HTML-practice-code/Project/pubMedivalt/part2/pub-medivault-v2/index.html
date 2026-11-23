@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PUB MediVault – Your Health. Your Records. Your Control.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1220;--sf:#111C2E;--sf2:#16243a;--tx:#F8FAFC;--mt:#9fb0c7;--bd:#22334d;--em:#10B981;--mint:#6EE7B7;--red:#EF4444;--amb:#F59E0B;--on:#04281c;--pb:#1d3c9a;--py:#F6D21C;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#F8FAFC;--sf:#fff;--sf2:#eef3f8;--tx:#0B1220;--mt:#51627a;--bd:#d6e0ec;--em:#0a8f64;--mint:#0a8f64;--on:#fff;color-scheme:light}}
+:root[data-theme="light"]{--bg:#F8FAFC;--sf:#fff;--sf2:#eef3f8;--tx:#0B1220;--mt:#51627a;--bd:#d6e0ec;--em:#0a8f64;--mint:#0a8f64;--on:#fff;color-scheme:light}
+:root[data-theme="dark"]{--bg:#0B1220;--sf:#111C2E;--sf2:#16243a;--tx:#F8FAFC;--mt:#9fb0c7;--bd:#22334d;--em:#10B981;--mint:#6EE7B7;--on:#04281c;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 "Hind Siliguri",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Hind Siliguri",sans-serif;line-height:1.12;margin:0}
+a{color:inherit}.wrap{max-width:1120px;margin:auto;padding:0 20px}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd)}
+nav{display:flex;align-items:center;gap:18px;height:62px}
+.logo{font:800 20px "Bricolage Grotesque",sans-serif;text-decoration:none;display:flex;gap:8px;align-items:center}
+.logo i{width:26px;height:26px;border-radius:7px;background:var(--em);display:grid;place-items:center;color:var(--on);font-style:normal;font-size:15px}
+.links{display:flex;gap:16px;margin-left:auto;font-size:14px;color:var(--mt)}.links a{text-decoration:none}.links a:hover{color:var(--tx)}
+.btn{border:0;border-radius:9px;padding:10px 18px;font:600 15px inherit;font-family:inherit;cursor:pointer;background:var(--em);color:var(--on);text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--tx);border:1px solid var(--bd)}.btn.sm{padding:6px 12px;font-size:13px}
+.btn:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+#menu{display:none}
+section{padding:72px 0}h2{font-size:clamp(28px,4vw,40px);margin-bottom:12px}.lead{color:var(--mt);max-width:60ch}
+.hero{display:grid;grid-template-columns:1fr 1.1fr;gap:36px;align-items:start;padding:56px 0 40px}
+.hero h1{font-size:clamp(38px,6vw,62px);font-weight:800;letter-spacing:-.02em}.hero p{color:var(--mt);margin:18px 0 24px;max-width:46ch}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.console{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden}
+.ch{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--bd);font-size:13px;color:var(--mt);gap:8px;flex-wrap:wrap}
+.tag{font-size:12px;padding:2px 8px;border-radius:99px;border:1px solid var(--amb);color:var(--amb)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 14px}
+.steps .btn{font-size:13px;padding:9px 6px;background:var(--sf2);color:var(--tx);border:1px solid var(--bd)}
+.steps .btn:not(:disabled):hover{border-color:var(--em)}
+.out{margin:0 14px 12px;padding:12px;border-radius:9px;background:var(--bg);border:1px solid var(--bd);font-size:14px;min-height:64px}
+.ok{color:var(--mint)}.no{color:var(--red)}.wn{color:var(--amb)}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;word-break:break-all}
+#log{list-style:none;margin:0;padding:0 14px 14px;max-height:190px;overflow:auto}
+#log li{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0;border-top:1px dashed var(--bd)}
+#log li:first-child{border-top:0}.st{white-space:nowrap}
+.grid{display:grid;gap:14px;margin-top:28px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:20px}
+.card h3{font-size:18px;margin-bottom:6px}.card p{margin:0;color:var(--mt);font-size:15px}
+.band{background:var(--sf);border-block:1px solid var(--bd)}
+ol.flow{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;counter-reset:s}
+ol.flow li{counter-increment:s;border-top:3px solid var(--em);padding-top:12px}
+ol.flow li:before{content:counter(s);font:800 28px "Bricolage Grotesque";color:var(--mint)}
+ol.flow b{display:block}ol.flow span{color:var(--mt);font-size:14px}
+details{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px 18px;margin-top:10px}summary{cursor:pointer;font-weight:600}details p{color:var(--mt);margin:8px 0 0}
+form{display:grid;gap:12px;max-width:520px;margin-top:20px}
+label{font-size:14px;color:var(--mt);display:grid;gap:4px}
+input,textarea{background:var(--sf);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:10px;font:inherit;width:100%}
+.err{color:var(--red);font-size:13px;min-height:1em}
+footer{border-top:1px solid var(--bd);padding:32px 0;color:var(--mt);font-size:14px}
+footer .wrap{display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap}
+#zb{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:30;border-radius:99px;padding:12px 18px;box-shadow:0 6px 24px #0006}
+#zp{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(70px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100vw - 32px));z-index:30;background:var(--sf);border:1px solid var(--bd);border-radius:14px;display:none;flex-direction:column;max-height:70vh;box-shadow:0 10px 40px #0007}
+#zp.open{display:flex}#zm{padding:12px;overflow:auto;flex:1;display:grid;gap:8px;align-content:start;min-height:180px}
+.m{padding:8px 11px;border-radius:10px;font-size:14px;max-width:88%}.m.u{background:var(--em);color:var(--on);justify-self:end}.m.a{background:var(--sf2)}
+#zf{display:flex;gap:6px;padding:10px;border-top:1px solid var(--bd);margin:0;max-width:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 8px}.chips button{font:inherit;font-size:12px;background:var(--sf2);color:var(--tx);border:1px solid var(--bd);border-radius:99px;padding:3px 10px;cursor:pointer}
+@media (max-width:900px){.hero{grid-template-columns:1fr}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}ol.flow{grid-template-columns:1fr 1fr}
+.links{display:none;position:absolute;top:62px;left:0;right:0;background:var(--sf);flex-direction:column;padding:14px 20px;border-bottom:1px solid var(--bd)}.links.open{display:flex}#menu{display:inline-block;margin-left:auto}.links{margin-left:0}}
+@media (max-width:560px){.g4,.g3,.g2,ol.flow{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}section{padding:52px 0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.topbar{background:var(--pb);color:#fff;font-size:13px}.topbar .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-block:6px}.topbar a{text-decoration:none;margin-right:14px;color:#fff}.topbar a:last-child{margin-right:0}
+.lg{width:36px;height:36px;border-radius:50%;object-fit:cover;background:#fff}
+.slider{position:relative;margin-top:22px;border-radius:14px;overflow:hidden;border:1px solid var(--bd);background:var(--sf)}
+.sl{display:none;position:relative}.sl.on{display:block}.sl img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.sl span{position:absolute;left:0;right:0;bottom:0;padding:26px 18px 12px;background:linear-gradient(transparent,#000c);color:#fff;font-weight:600}
+.dots{position:absolute;right:14px;top:12px;display:flex;gap:6px}.dots i{width:9px;height:9px;border-radius:50%;background:#fff8;cursor:pointer}.dots i.on{background:var(--py)}
+h2.ph:after{content:"";display:block;width:56px;height:4px;background:var(--py);margin-top:10px;border-radius:2px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}.split img{width:100%;border-radius:12px;border:1px solid var(--bd);display:block}
+.cnt{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.cnt b{display:block;font:800 30px "Bricolage Grotesque";color:var(--py)}
+.cnt div{background:var(--pb);color:#fff;border-radius:10px;padding:12px 18px;min-width:130px;font-size:14px}
+ul.tick{padding:0;list-style:none;margin:14px 0 0;display:grid;gap:8px}ul.tick li{padding-left:26px;position:relative;color:var(--mt)}ul.tick li:before{content:"✓";position:absolute;left:0;color:var(--py);font-weight:700}
+.msg{display:flex;gap:16px;align-items:flex-start}.msg img{width:96px;height:120px;object-fit:cover;border-radius:10px;border:2px solid var(--py)}
+.nt{display:grid;grid-template-columns:54px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--bd)}.nt b{background:var(--pb);color:#fff;border-radius:8px;text-align:center;font-size:12px;line-height:1.2;padding:6px 0}.nt b em{display:block;font:800 18px "Bricolage Grotesque";font-style:normal;color:var(--py)}
+.ev img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px;display:block;margin-bottom:10px}
+.chip{display:inline-block;margin:4px 6px 0 0;padding:3px 12px;border-radius:99px;border:1px solid var(--pb);background:color-mix(in srgb,var(--pb) 22%,transparent);font-size:14px}
+.cta{background:var(--pb);color:#fff;border-radius:14px;padding:26px;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}.cta .btn{background:var(--py);color:#1a1a1a}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap"><span>+880 1713 377 033 · admission@pundrauniversity.edu.bd</span><span><a href="https://students.pundrauniversity.ac.bd/">Students</a><a href="https://uims.pundrauniversity.ac.bd/">UIMS</a><a href="https://library.pundrauniversity.ac.bd/">Library</a><a href="https://journal.pundrauniversity.ac.bd/">Journals</a><a href="https://pundrauniversity.ac.bd/iqac">IQAC</a></span></div></div>
+<header><div class="wrap"><nav>
+<a class="logo" href="#home"><img class="lg" src="assets/logo.jpg" alt="Pundra University logo">PUB MediVault</a>
+<button class="btn ghost sm" id="menu" aria-label="Menu">Menu</button>
+<div class="links" id="links"><a href="#uni">University</a><a href="#about">About</a><a href="#how">How it works</a><a href="#features">Features</a><a href="#security">Security</a><a href="#roles">Patients &amp; Doctors</a><a href="#notices">Notices</a><a href="#contact">Contact</a></div>
+<button class="btn ghost sm" id="theme" aria-label="Toggle theme">Theme</button>
+<a class="btn sm" href="#demo">Login</a>
+</nav></div></header>
+
+<main id="home">
+<div class="wrap"><div class="slider" id="sld" aria-label="University highlights">
+<div class="sl on"><img src="assets/banner.png" alt="Admission open Spring-2027"><span>Admission Going On Spring-2027</span></div>
+<div class="sl"><img src="assets/ev-honor.webp" alt="Felicitation of HSC achievers" loading="lazy"><span>এইচএসসি পরীক্ষায় বগুড়া জেলার মেধাবী শিক্ষার্থীদের সংবর্ধনা-২০২৫</span></div>
+<div class="sl"><img src="assets/ev-shaheed.webp" alt="Language Martyrs Day" loading="lazy"><span>মহান শহীদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস-২০২৬</span></div>
+<div class="sl"><img src="assets/ev-boishakh.webp" alt="Pohela Boishakh" loading="lazy"><span>পহেলা বৈশাখ ১৪৩২</span></div>
+<div class="sl"><img src="assets/ev-pitha.webp" alt="Pitha festival" loading="lazy"><span>পুণ্ড্র ইউনিভার্সিটিতে পিঠা উৎসব ও বসন্তবরণ</span></div>
+<div class="dots" id="dts"></div></div></div>
+<div class="wrap hero">
+<div>
+<h1>Your Health. Your Records. Your Control.</h1>
+<p>One secure digital healthcare platform where patients manage medical records, control access, and build a trusted medical history.</p>
+<div class="row"><a class="btn" href="#demo">Get Started</a><a class="btn ghost" href="#features">Explore Features</a></div>
+<p style="font-size:13px;margin-top:22px">Secure your medical history. Control who sees it. Trust every access.</p>
+</div>
+<div class="console" id="demo">
+<div class="ch"><span>Live demo: patient vault (synthetic data)</span><span class="tag">Local mock chain</span></div>
+<div class="steps">
+<button class="btn" id="b1">1. Upload report</button>
+<button class="btn" id="b2" disabled>2. Grant doctor 7 days</button>
+<button class="btn" id="b3" disabled>3. Doctor opens</button>
+<button class="btn" id="b4" disabled>4. Revoke consent</button>
+<button class="btn" id="b5" disabled>5. Verify integrity</button>
+<button class="btn" id="b6" disabled>6. Verify tampered copy</button>
+</div>
+<div class="out" id="out">Start with step 1. The sample blood test report is encrypted with AES-256-GCM and hashed with SHA-256 in your browser.</div>
+<div class="ch" style="border-top:1px solid var(--bd)"><span>Audit trail</span><span>Blockchain events are simulated here</span></div>
+<ul id="log"><li style="color:var(--mt)">No events yet.</li></ul>
+</div>
+</div>
+
+<div class="band"><div class="wrap" style="padding-block:34px"><div class="grid g4" style="margin:0">
+<div><b>Patient-controlled access</b><p style="margin:4px 0 0;color:var(--mt);font-size:14px">You choose who sees what, and for how long.</p></div>
+<div><b>Encrypted medical records</b><p style="margin:4px 0 0;color:var(--mt);font-size:14px">Files are encrypted before storage.</p></div>
+<div><b>Blockchain audit trail</b><p style="margin:4px 0 0;color:var(--mt);font-size:14px">Only hashes and events, never health data.</p></div>
+<div><b>Verified professionals</b><p style="margin:4px 0 0;color:var(--mt);font-size:14px">Doctors and institutions are verified first.</p></div>
+</div></div></div>
+
+
+<section id="uni"><div class="wrap split">
+<div><h2 class="ph">About the University</h2><p class="lead" style="margin-top:18px">Pundra University of Science &amp; Technology is the first private university in North Bengal. It aims to provide high quality higher education at affordable cost, and was established under the Private University Act with approval from the Ministry of Education.</p>
+<div class="cnt"><div><b>12+</b>Programs</div><div><b>250+</b>Journal papers</div><div><b>100+</b>Conference papers</div></div>
+<p style="margin-top:18px;color:var(--mt)">PUB MediVault is a student project built by a PUB student team. It is not an official university service.</p></div>
+<img src="assets/building.webp" alt="PUB campus building" loading="lazy"></div></section>
+<section id="about"><div class="wrap">
+<h2>Paper records get lost. Shared records get misused.</h2>
+<p class="lead">Medical history is scattered across clinics, labs and folders at home. PUB MediVault keeps it in one vault the patient owns. Doctors request access, the patient approves specific records for a set time, and every access is written to an audit trail. A stored hash lets anyone check that a report was not altered.</p>
+</div></section>
+
+<section class="band" id="how"><div class="wrap">
+<h2>How it works</h2>
+<ol class="flow">
+<li><b>Create your account</b><span>Register as a patient, doctor or institution.</span></li>
+<li><b>Upload medical records</b><span>Each file is encrypted and hashed.</span></li>
+<li><b>Grant doctor access</b><span>Pick records and a duration.</span></li>
+<li><b>Verify record integrity</b><span>Compare today's hash with the registered one.</span></li>
+<li><b>Track every access</b><span>See who opened what, and when.</span></li>
+</ol></div></section>
+
+<section id="features"><div class="wrap">
+<h2>Features</h2>
+<div class="grid g3">
+<div class="card"><h3>Digital medical vault</h3><p>Prescriptions, lab, X-ray, MRI, CT, discharge and vaccination records in one place.</p></div>
+<div class="card"><h3>Consent management</h3><p>Approve, reject or revoke access by doctor, category or single record.</p></div>
+<div class="card"><h3>Blockchain verification</h3><p>Record hashes and access events anchored on Ethereum Sepolia.</p></div>
+<div class="card"><h3>Emergency health card</h3><p>A revocable QR token opens only the emergency profile, after doctor login.</p></div>
+<div class="card"><h3>Zenva AI assistant</h3><p>Ask about the platform or medical terms in Bangla or English.</p></div>
+<div class="card"><h3>Secure document sharing</h3><p>Time-limited links that you can cancel at any time.</p></div>
+</div></div></section>
+
+<section class="band" id="roles"><div class="wrap">
+<h2>Built for every role</h2>
+<div class="grid g4">
+<div class="card"><h3>Patients</h3><p>Own your records, approve requests, view your access history.</p></div>
+<div class="card"><h3>Doctors</h3><p>Request access and see only the records a patient approved.</p></div>
+<div class="card"><h3>Hospitals</h3><p>Upload verified reports and track upload status.</p></div>
+<div class="card"><h3>Administrators</h3><p>Verify accounts and monitor security, without reading medical files.</p></div>
+</div></div></section>
+
+
+<section class="band" id="why"><div class="wrap split">
+<img src="assets/students.webp" alt="Students working on laptops" loading="lazy">
+<div><h2 class="ph">Our campus has the best facilities for students</h2>
+<ul class="tick"><li>Highly qualified full-time faculty members</li><li>Adjunct faculties from public universities</li><li>English proficiency development program</li><li>Computing skill development program</li><li>Rich library collections with books, journals and online e-learning resources</li><li>Formal consulting and tutorial sessions, and make-up classes</li><li>Student counselling, career guidance and placement services</li></ul></div></div></section>
+<section id="choose"><div class="wrap"><h2 class="ph">Why choose PUB?</h2>
+<div class="grid g3"><div class="card"><h3>Academic programs</h3><p>A wide range of programs in science, technology, engineering and related fields, with an industry-aligned curriculum.</p></div>
+<div class="card"><h3>Research opportunities</h3><p>Emphasis on research and innovation, with undergraduate and graduate students working in research labs.</p></div>
+<div class="card"><h3>Faculty expertise</h3><p>Qualified professors, many with industry experience and publications, who mentor student projects.</p></div></div></div></section>
+<section class="band" id="messages"><div class="wrap"><h2 class="ph">Messages</h2>
+<div class="grid g2">
+<div class="card msg"><img src="assets/chairman.jpg" alt="Chairman, Board of Trustees"><div><h3>Chairman, Board of Trustees</h3><p>Edit this card with the message text from the official site.</p></div></div>
+<div class="card msg"><img src="assets/vc.png" alt="Vice-Chancellor"><div><h3>Prof. Dr. Chitta Ranjan Misra</h3><p>Vice-Chancellor. Edit this card with the message text from the official site.</p></div></div>
+</div></div></section>
+<section id="notices"><div class="wrap split" style="align-items:start">
+<div><h2 class="ph">Notices</h2>
+<div class="nt"><b><em>20</em>Nov 26</b><span>শিক্ষার্থীদের বকেয়া ফিস পরিশোধ করে সামার-2026 সেমিস্টার ফাইনাল পরীক্ষায় অংশগ্রহণ প্রসঙ্গে</span></div>
+<div class="nt"><b><em>13</em>Nov 26</b><span>Student Portal-এ প্রবেশ করে Teacher Evaluation কার্যক্রম সম্পন্ন করা প্রসঙ্গে</span></div>
+<div class="nt"><b><em>09</em>Nov 26</b><span>ইউজিসির প্রতিনিধি দল পুণ্ড্র ইউনিভার্সিটি পরিদর্শন প্রসঙ্গে</span></div>
+<div class="nt"><b><em>08</em>Nov 26</b><span>জাতীয় বিপ্লব ও সংহতি দিবস উপলক্ষে আলোচনা সভা প্রসঙ্গে</span></div>
+<a class="btn ghost sm" style="margin-top:12px" href="https://pundrauniversity.ac.bd/notice">View all notices</a></div>
+<div><h2 class="ph">Programs</h2><p style="margin:18px 0 4px;font-weight:600">Undergraduate</p>
+<span class="chip">BBA</span><span class="chip">CSE</span><span class="chip">EEE</span><span class="chip">Civil Engg.</span><span class="chip">English</span><span class="chip">Islamic Studies</span><span class="chip">LL.B</span><span class="chip">Bangla</span><span class="chip">B.Ed</span>
+<p style="margin:16px 0 4px;font-weight:600">Postgraduate</p>
+<span class="chip">MBA</span><span class="chip">EMBA</span><span class="chip">MPH</span><span class="chip">MA in Islamic Studies</span><span class="chip">M.Ed</span><span class="chip">MA in English</span><span class="chip">MDS</span></div></div></section>
+<section class="band" id="campus"><div class="wrap"><h2 class="ph">Campus life and alumni</h2>
+<div class="grid g4">
+<div class="ev"><img src="assets/ev-pitha.webp" alt="Pitha festival" loading="lazy"><b>Pitha festival and Boshonto Boron</b></div>
+<div class="ev"><img src="assets/ev-boishakh.webp" alt="Pohela Boishakh" loading="lazy"><b>Pohela Boishakh 1432</b></div>
+<div class="ev"><img src="assets/ev-shaheed.webp" alt="Language Martyrs Day" loading="lazy"><b>International Mother Language Day 2026</b></div>
+<div class="ev"><img src="assets/alumni.webp" alt="Alumni with project report" loading="lazy"><b>Our proud alumni</b></div>
+</div>
+<div class="cta" style="margin-top:28px"><div><b style="font-size:18px">Admission going on, Spring-2027</b><br>Call +88 01713 377 033</div><a class="btn" href="https://uims.pundrauniversity.ac.bd/Student/student_online_admission">Online admission</a></div>
+</div></section>
+<section id="security"><div class="wrap">
+<h2>Security and privacy</h2>
+<div class="grid g2">
+<div class="card"><h3>Encryption</h3><p>AES-256-GCM with a unique nonce per file. Keys stay on the server, never in the browser.</p></div>
+<div class="card"><h3>Access control</h3><p>Every request is checked on the server against your current consent. Revoking blocks all future access.</p></div>
+<div class="card"><h3>Revocation limits</h3><p>Revoking stops new access. It cannot erase a copy someone already downloaded.</p></div>
+<div class="card"><h3>Audit events</h3><p>The chain stores hashes, pseudonymous IDs and timestamps. No names, no diagnoses.</p></div>
+</div>
+<p class="lead" style="margin-top:18px;font-size:14px">This project is a demonstration with synthetic data. It is not security-audited or certified, and it is not an official Pundra University service.</p>
+</div></section>
+
+<section class="band" id="faq"><div class="wrap">
+<h2>Questions</h2>
+<details><summary>Can administrators read my medical files?</summary><p>No. Admins manage accounts, verification and security events, not document content.</p></details>
+<details><summary>Is my health data on the blockchain?</summary><p>No. Only a hash, a pseudonymous record ID, event type and timestamp are recorded.</p></details>
+<details><summary>Does Zenva AI diagnose diseases?</summary><p>No. It explains terms and platform features, and tells you to see a qualified professional.</p></details>
+<details><summary>Are the testimonials real?</summary><p>There are none on this page. Any shown in demo mode will be labelled as samples.</p></details>
+</div></section>
+
+<section id="contact"><div class="wrap">
+<h2>Contact</h2>
+<form id="cf" novalidate>
+<label>Name<input id="cn"><span class="err" id="en"></span></label>
+<label>Email<input id="ce" type="email"><span class="err" id="ee"></span></label>
+<label>Message<textarea id="cm" rows="4"></textarea><span class="err" id="em"></span></label>
+<button class="btn" type="submit">Send message</button><div id="cs" class="ok"></div>
+</form></div></section>
+</main>
+
+<footer><div class="wrap">
+<div><img class="lg" src="assets/logo.jpg" alt="Pundra University logo"><br><b style="color:var(--tx)">PUB MediVault</b><br>Your Health. Your Records. Your Control.</div>
+<div><b style="color:var(--tx)">Pundra University of Science &amp; Technology</b><br>Rangpur Road, Baghopara, Gokul, Bogura<br>+88 01713 377 037 · +88 01713 377 033<br>info@pundrauniversity.edu.bd</div><div>Security · Privacy · Terms<br><a href="https://pundrauniversity.ac.bd/">Official university website</a></div>
+<div>© 2026 PUB MediVault project team.<br>Demo with synthetic data.</div>
+</div></footer>
+
+<button class="btn" id="zb">Ask Zenva AI</button>
+<div id="zp" role="dialog" aria-label="Zenva AI">
+<div class="ch"><span>Zenva AI <span class="tag">demo answers</span></span><button class="btn ghost sm" id="zc">Clear</button></div>
+<div id="zm"><div class="m a">Hi, I'm Zenva. Ask about uploads, consent, hashes or QR cards in Bangla or English. আমি বাংলাতেও উত্তর দিতে পারি।</div></div>
+<div class="chips"><button>How do I revoke consent?</button><button>রিপোর্ট কীভাবে আপলোড করব?</button><button>What is AES-256-GCM?</button></div>
+<form id="zf"><input id="zi" placeholder="Type your question" aria-label="Question"><button class="btn sm">Send</button></form>
+</div>
+
+<script>
+const $=id=>document.getElementById(id),enc=new TextEncoder(),dec=new TextDecoder();
+const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+const sha=async t=>hex(await crypto.subtle.digest('SHA-256',enc.encode(t)));
+let R=null,consent=false;
+const SAMPLE="Synthetic Blood Test Report (demo patient)\nHemoglobin: 13.2 g/dL\nWBC: 6.8 x10^9/L\nPlatelets: 245 x10^9/L\nNote: reference ranges vary by lab.";
+function out(h){$('out').innerHTML=h}
+function en(b,v){['b1','b2','b3','b4','b5','b6'].forEach((k,i)=>{if(b[i]!==undefined)$(k).disabled=!b[i]})}
+function logEv(type,hash){
+ const ul=$('log');if(ul.firstChild&&!ul.firstChild.dataset.e)ul.innerHTML='';
+ const li=document.createElement('li');li.dataset.e=1;
+ li.innerHTML=`<span>${new Date().toLocaleTimeString()} · ${type}${hash?` · <span class="mono">${hash.slice(0,10)}…</span>`:''}</span><span class="st wn">Pending</span>`;
+ ul.prepend(li);
+ setTimeout(()=>{const s=li.querySelector('.st');s.className='st ok';s.textContent='Confirmed (mock)'},1300);
+}
+$('b1').onclick=async()=>{
+ const key=await crypto.subtle.generateKey({name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+ const iv=crypto.getRandomValues(new Uint8Array(12));
+ const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,enc.encode(SAMPLE));
+ R={key,iv,ct,hash:await sha(SAMPLE)};consent=false;
+ out(`<span class="ok">Encrypted and stored.</span><br>Ciphertext: <span class="mono">${hex(ct).slice(0,48)}…</span><br>SHA-256: <span class="mono">${R.hash}</span>`);
+ logEv('record.hash.registered',R.hash);en([1,1,0,0,1,1]);
+};
+$('b2').onclick=()=>{consent=true;out('<span class="ok">Consent active.</span> Dr. Rahman (verified, demo) can open the Blood Test Report for 7 days. No other records are shared.');logEv('consent.granted');en([1,0,1,1,1,1])};
+async function open_(){
+ if(!consent){out('<span class="no">Access denied.</span> No active consent for this record. The attempt was logged.');logEv('access.denied');return}
+ const pt=dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:R.iv},R.key,R.ct));
+ out(`<span class="ok">Access allowed.</span> Decrypted on the server after the consent check:<br><span class="mono">${pt.replace(/\n/g,'<br>')}</span>`);logEv('access.granted',R.hash);
+}
+$('b3').onclick=open_;
+$('b4').onclick=()=>{consent=false;out('<span class="wn">Consent revoked.</span> Try step 3 again: the server will refuse. A copy already downloaded cannot be recalled.');logEv('consent.revoked');en([1,1,1,0,1,1])};
+$('b5').onclick=async()=>{
+ const pt=dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:R.iv},R.key,R.ct)),h=await sha(pt);
+ out(h===R.hash?`<span class="ok">Verified.</span> Current hash matches the registered hash.<br><span class="mono">${h}</span>`:'<span class="no">Integrity warning.</span>');logEv('verify.success',h)};
+$('b6').onclick=async()=>{
+ const h=await sha(SAMPLE.replace('13.2','9.1'));
+ out(`<span class="no">Integrity warning: hash mismatch.</span> The demo copy was edited (Hemoglobin 13.2 → 9.1).<br>Registered: <span class="mono">${R.hash.slice(0,32)}…</span><br>Current: <span class="mono">${h.slice(0,32)}…</span>`);logEv('verify.mismatch',h)};
+
+// theme + menu
+$('theme').onclick=()=>{const r=document.documentElement,d=getComputedStyle(r).colorScheme==='dark';r.dataset.theme=d?'light':'dark'};
+$('menu').onclick=()=>$('links').classList.toggle('open');
+$('links').onclick=e=>{if(e.target.tagName==='A')$('links').classList.remove('open')};
+
+// contact
+$('cf').onsubmit=e=>{e.preventDefault();let ok=true;
+ const set=(id,m)=>{$(id).textContent=m;if(m)ok=false};
+ set('en',$('cn').value.trim().length<2?'Enter your name.':'');
+ set('ee',/^\S+@\S+\.\S+$/.test($('ce').value)?'':'Enter a valid email address.');
+ set('em',$('cm').value.trim().length<10?'Write at least 10 characters.':'');
+ $('cs').textContent=ok?'Demo mode: your message was validated but not sent anywhere.':'';
+};
+
+// Zenva (rule-based demo)
+const KB=[
+[/upload|আপলোড/i,'Open My Medical Vault, choose Upload, pick a file and a category. It is encrypted and hashed on upload.','মেডিকেল ভল্টে গিয়ে Upload বেছে নিন, ফাইল ও ক্যাটাগরি দিন। আপলোডের সময়ই ফাইল এনক্রিপ্ট হয়ে hash তৈরি হয়।'],
+[/revoke|বাতিল/i,'Go to Consent Management, find the active permission and choose Revoke. The server blocks all future access right away. Copies already downloaded cannot be recalled.','Consent Management-এ গিয়ে সক্রিয় অনুমতিটি Revoke করুন। এরপর সার্ভার সঙ্গে সঙ্গে নতুন access বন্ধ করে দেবে। আগে ডাউনলোড করা কপি ফেরত আনা যায় না।'],
+[/grant|access|অনুমতি|দিতে/i,'In Consent Management, approve a doctor\'s request, pick the records and set a duration such as 7 days.','Consent Management-এ ডাক্তারের অনুরোধ approve করুন, রেকর্ড বেছে নিন এবং ৭ দিনের মতো মেয়াদ দিন।'],
+[/aes|encrypt|এনক্রিপ/i,'AES-256-GCM encrypts a file with a 256-bit key and also detects tampering through an authentication tag. Each file gets a unique nonce.','AES-256-GCM ২৫৬-বিটের কী দিয়ে ফাইল এনক্রিপ্ট করে এবং authentication tag দিয়ে ফাইল বদলানো হয়েছে কি না ধরতে পারে। প্রতিটি ফাইলের nonce আলাদা।'],
+[/hash|blockchain|verify|ব্লকচেইন|যাচাই/i,'Verification recomputes the file\'s SHA-256 and compares it with the hash registered earlier. A match means the file is unchanged. Only the hash goes on-chain.','Verify করলে ফাইলের SHA-256 আবার হিসাব করে আগে রেজিস্টার করা hash-এর সঙ্গে মেলানো হয়। মিললে ফাইল অপরিবর্তিত। ব্লকচেইনে শুধু hash যায়।'],
+[/qr/i,'Open QR Health Card and choose Generate. The code holds only a revocable token; scanning it alone never unlocks your records.','QR Health Card-এ গিয়ে Generate করুন। কোডে শুধু বাতিলযোগ্য টোকেন থাকে; স্ক্যান করলেই রেকর্ড খোলে না।'],
+[/diagnos|prescribe|medicine|dose|রোগ|ওষুধ/i,'I can\'t diagnose or advise on medication. Please talk to a qualified doctor, and seek urgent care for severe symptoms.','আমি রোগ নির্ণয় বা ওষুধের পরামর্শ দিতে পারি না। দয়া করে যোগ্য ডাক্তারের সঙ্গে কথা বলুন, গুরুতর উপসর্গে জরুরি সেবা নিন।']];
+function say(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;$('zm').append(d);$('zm').scrollTop=1e5}
+function ask(q){if(!q.trim())return;say(q,'u');const bn=/[\u0980-\u09FF]/.test(q),k=KB.find(x=>x[0].test(q));
+ setTimeout(()=>say(k?k[bn?2:1]:(bn?'এ বিষয়ে আমি নির্ভরযোগ্য তথ্য খুঁজে পাইনি।':"I couldn't find reliable information to answer that question."),'a'),350)}
+$('zb').onclick=()=>$('zp').classList.toggle('open');
+$('zf').onsubmit=e=>{e.preventDefault();ask($('zi').value);$('zi').value=''};
+$('zc').onclick=()=>{$('zm').innerHTML=''};
+document.querySelector('.chips').onclick=e=>{if(e.target.tagName==='BUTTON')ask(e.target.textContent)};
+
+(function(){const sl=[...document.querySelectorAll('#sld .sl')],d=$('dts');let i=0,t;
+sl.forEach((_,k)=>{const e=document.createElement('i');e.onclick=()=>go(k);d.append(e)});
+function go(k){i=k;sl.forEach((x,j)=>x.classList.toggle('on',j===k));[...d.children].forEach((x,j)=>x.classList.toggle('on',j===k));clearInterval(t);if(!matchMedia('(prefers-reduced-motion:reduce)').matches)t=setInterval(()=>go((i+1)%sl.length),4800)}
+go(0)})();
+</script>
+</body>
+</html>
