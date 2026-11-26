@@ -1,0 +1,46 @@
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { THEME_KEY } from "@/lib/vault-store";
+
+export function ThemeToggle() {
+  const [dark, setDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
+    setMounted(true);
+  }, []);
+  function toggle() {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    try {
+      localStorage.setItem(THEME_KEY, next ? "dark" : "light");
+    } catch {
+      /* ignore */
+    }
+    window.dispatchEvent(new CustomEvent("themechange"));
+  }
+  return (
+    <button
+      onClick={toggle}
+      aria-label={`Switch to ${dark ? "light" : "dark"} theme`}
+      aria-pressed={dark}
+      title={dark ? "Light · Paper" : "Dark · Ink"}
+      className="glass relative grid h-9 w-16 grid-cols-2 place-items-center rounded-full px-1 transition-shadow hover:shadow-glow"
+    >
+      <motion.span
+        layout
+        transition={{ type: "spring", stiffness: 500, damping: 34 }}
+        className="absolute top-1 h-7 w-7 rounded-full bg-brand-gradient shadow-soft"
+        style={{ left: mounted && dark ? "calc(100% - 1.75rem - 0.25rem)" : "0.25rem" }}
+      />
+      <svg viewBox="0 0 24 24" className={`relative z-10 h-4 w-4 transition-colors ${dark ? "text-fg/40" : "text-bg"}`} fill="none">
+        <circle cx="12" cy="12" r="4" fill="currentColor" />
+        <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+      <svg viewBox="0 0 24 24" className={`relative z-10 h-4 w-4 transition-colors ${dark ? "text-bg" : "text-fg/40"}`} fill="none">
+        <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8Z" fill="currentColor" />
+      </svg>
+    </button>
+  );
+}
